@@ -18,6 +18,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "antd": "^5.13.3"
   }
 }
