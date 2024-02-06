@@ -5,7 +5,15 @@
   "exports": {
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./code": "./src/code.tsx",
+    "./ProgressBar":"./src/ProgressBar.tsx",
+    "./theme": "./src/theme/theme.ts",
+    "./Providers": "./src/providers.tsx",
+       "./Logo": "./src/components/Logo.tsx",
+          "./SomeThingWentWrong": "./src/error/SomeThingWentWrong.tsx",
+              "./NotFound ": "./src/error/NotFound.tsx"
+           
+
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
