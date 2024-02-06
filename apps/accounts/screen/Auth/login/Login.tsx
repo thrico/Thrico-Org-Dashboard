@@ -10,18 +10,6 @@ import { useQuery, gql } from "@apollo/client";
 const Login = () => {
   const { Title, Paragraph, Text } = Typography;
 
-  const GET_LOCATIONS = gql`
-    query Books {
-      books {
-        author
-        title
-      }
-    }
-  `;
-  const { loading, error, data } = useQuery(GET_LOCATIONS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
   return (
     <AuthLayout>
       <Flex style={{ width: "100%" }} justify="center" align="center">
