@@ -3,6 +3,7 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
+      "dotEnv": [".env"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
@@ -10,6 +11,7 @@
       "dependsOn": ["^lint"]
     },
     "dev": {
+      "dotEnv": [".env.local"],
       "cache": false,
       "persistent": true
     }

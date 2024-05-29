@@ -4,11 +4,9 @@ const theme = {
   components: {
     Button: {
       borderRadius: 7,
-      // Enable algorithm
     },
     Input: {
       borderRadius: 7,
-      // Enable algorithm
     },
   },
   token: {
@@ -20,6 +18,7 @@ const theme = {
     fontFamily: "'Work Sans', sans-serif;",
     // Alias Token
     colorBgContainer: "#ffffff",
+    borderRadiusSM: 10,
   },
 };
 

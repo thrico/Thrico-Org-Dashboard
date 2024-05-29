@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "../../apps/login/components/Redirect", "../../apps/accounts/components/hoc"],
   "exclude": ["node_modules", "dist"]
 }

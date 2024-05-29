@@ -1,15 +1,17 @@
 import { Image } from "antd";
 import React from "react";
 
-const Logo = () => {
+const Logo = ({ logo, name }) => {
   return (
-    <Image
-      alt="Alumni Thrive Logo"
-      width={100}
-      style={{ objectFit: "contain" }}
-      height={100}
-      src="/logo.png"
-    />
+    <>
+      <Image
+        alt={`https://cdn.thrico.network/${name}`}
+        width={70}
+        style={{ objectFit: "contain" }}
+        height={50}
+        src={`https://cdn.thrico.network/${logo}`}
+      />
+    </>
   );
 };
 

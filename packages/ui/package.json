@@ -9,11 +9,12 @@
     "./ProgressBar":"./src/ProgressBar.tsx",
     "./theme": "./src/theme/theme.ts",
     "./Providers": "./src/providers.tsx",
-       "./Logo": "./src/components/Logo.tsx",
-          "./SomeThingWentWrong": "./src/error/SomeThingWentWrong.tsx",
-              "./NotFound ": "./src/error/NotFound.tsx"
-           
-
+      "./Logo": "./src/components/Logo.tsx",
+    "./SomeThingWentWrong": "./src/error/SomeThingWentWrong.tsx",
+     "./NotFound ": "./src/error/NotFound.tsx",
+    "./Logout":"./src/logout/Logout.tsx",
+     "./store":"./src/store/store.ts",
+     "./AuthLayout": "./src/layout/AuthLayout"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
