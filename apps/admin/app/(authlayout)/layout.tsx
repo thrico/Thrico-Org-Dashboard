@@ -8,6 +8,7 @@ import {
   MoneyCollectOutlined,
   SettingOutlined,
   ShopOutlined,
+  UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 
@@ -413,6 +414,19 @@ const items: MenuProps["items"] = [
 
     icon: <MdPayment />,
   },
+
+  {
+    key: "coms",
+
+    label: (
+      <Link target="_blank" href={"http://localhost:20245"}>
+        <Typography style={{ color: "white" }}>Manage Website</Typography>
+      </Link>
+    ),
+
+    icon: <UnorderedListOutlined />,
+  },
+
   {
     key: "Logs",
     label: (
