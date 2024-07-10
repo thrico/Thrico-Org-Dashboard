@@ -1,29 +1,25 @@
 "use client";
 import {
-  DeploymentUnitOutlined,
-  HeartTwoTone,
   HomeOutlined,
+  InfoCircleOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
   SettingOutlined,
-  SlidersOutlined,
-  TeamOutlined,
-  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-
+import { FiLayout } from "react-icons/fi";
 import "antd/dist/reset.css";
-
+import { RiPagesLine } from "react-icons/ri";
 const { Sider, Content, Footer } = Layout;
-
+import { FaSearchDollar } from "react-icons/fa";
 import { Typography } from "antd";
 import NavLink from "../nav-link";
 import withAuth from "../../utils/withAuth";
 import { HeaderComponent } from "../../components/header";
 import { getGetUser } from "../../graphql/actions";
 import { useState } from "react";
+import { FaGlobe, FaSpider } from "react-icons/fa6";
 
 const { Link } = Typography;
 
@@ -86,6 +82,34 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                 },
 
                 {
+                  key: "theme",
+                  icon: <FiLayout />,
+                  label: <NavLink href="/theme">Theme</NavLink>,
+                },
+                {
+                  key: "about",
+                  icon: <InfoCircleOutlined />,
+                  label: <NavLink href="http://localhost:3001/">About</NavLink>,
+                },
+                {
+                  key: "pages",
+                  icon: <RiPagesLine />,
+                  label: <NavLink href="/pages">Pages</NavLink>,
+                },
+
+                {
+                  key: "domain",
+                  icon: <FaGlobe />,
+                  label: <NavLink href="/domain">Domain</NavLink>,
+                },
+
+                {
+                  key: "seo",
+                  icon: <FaSearchDollar />,
+                  label: <NavLink href="/seo">Seo</NavLink>,
+                },
+
+                {
                   key: "5",
                   icon: <SettingOutlined />,
                   label: <NavLink href="/settings">Settings</NavLink>,
@@ -101,7 +125,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
           </Sider>
           <Layout>
             <HeaderComponent />
-            <Content>{children}</Content>
+            <Content style={{ padding: 10 }}>{children}</Content>
             <Footer style={{ textAlign: "center" }}>
               ©{new Date().getFullYear()} | Thrico - The Modern Community
               Management Platform by PulsePlay Digital | All Rights Reserved

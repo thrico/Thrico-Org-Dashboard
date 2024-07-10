@@ -28,7 +28,13 @@ const beforeUpload = (file: FileType) => {
   return isJpgOrPng && isLt2M;
 };
 
-const Cover = ({ imageUrl, setImageUrl, setCover, buttonText }: cover) => {
+const Cover = ({
+  imageUrl,
+  setImageUrl,
+  setCover,
+  buttonText,
+  title,
+}: cover) => {
   const [loading, setLoading] = useState(false);
 
   const handleChange: UploadProps["onChange"] = (info) => {
@@ -64,11 +70,16 @@ const Cover = ({ imageUrl, setImageUrl, setCover, buttonText }: cover) => {
     <>
       <Card
         extra={
-          <Alert
-            type="warning"
-            showIcon={true}
-            message="Please update the image; otherwise, it will show the default image."
-          ></Alert>
+          <>
+            {title && (
+              <Alert
+                style={{ marginTop: 10 }}
+                type="warning"
+                showIcon={true}
+                message="Please update the image; otherwise, it will show the default image."
+              ></Alert>
+            )}
+          </>
         }
         actions={[
           <>

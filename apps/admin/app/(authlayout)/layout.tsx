@@ -13,7 +13,15 @@ import {
 } from "@ant-design/icons";
 
 import type { MenuProps } from "antd";
-import { Avatar, Flex, Layout, Menu, Typography, theme } from "antd";
+import {
+  Avatar,
+  Flex,
+  Layout,
+  Menu,
+  Typography,
+  notification,
+  theme,
+} from "antd";
 import Logo from "@repo/ui/Logo";
 const { Header, Content, Footer, Sider } = Layout;
 import { Button, Dropdown, message, Space, Tooltip } from "antd";
@@ -76,7 +84,7 @@ const items: MenuProps["items"] = [
   {
     key: "communities",
     label: (
-      <Link href={"/mentorship"}>
+      <Link href={"/communities"}>
         <Typography style={{ color: "white" }}>Communities</Typography>
       </Link>
     ),
@@ -457,7 +465,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   const { data, loading } = getOrganization();
   const check = data?.getOrganization?.organization;
   const pathName = usePathname();
-  console.log(pathName);
+
   return (
     <>
       {!loading && (

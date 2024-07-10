@@ -37,72 +37,137 @@ export const CHECK_DOMAIN = gql`
   }
 `;
 
-export const REGISTER_ORGANIZATION = gql`
-  mutation Mutation($input: registerOrganizationInput) {
-    registerOrganization(input: $input) {
-      success
-    }
-  }
-`;
-export const CHANGE_THEME_COLOR = gql`
-  mutation ChangeThemeColor($input: InputTheme) {
-    changeThemeColor(input: $input) {
-      borderRadius
-      colorBgContainer
-      colorPrimary
-    }
-  }
-`;
-
-export const CHECK_PAYMENTS = gql`
-  query CheckPaymentDetails {
-    checkPaymentDetails {
-      enabledRazorpay
-      enabledStripe
-      razorpayKeyId
-      razorpayKeySecret
-      stripeKeyId
-      stripeKeySecret
-    }
-  }
-`;
-export const ADD_PAYMENT_DETAILS = gql`
-  mutation AddPaymentDetails($input: paymentDetails) {
-    addPaymentDetails(input: $input) {
-      success
-    }
-  }
-`;
-
-export const GET_CURRENCY = gql`
-  query GetCurrency {
-    getCurrency {
+export const GET_HOME_PAGE_CAROUSEL = gql`
+  query GetHomePageCarousel {
+    getHomePageCarousel {
       id
-      name
-      symbol
-      cc
+      url
+      image
     }
   }
 `;
 
-export const GET_ORG_CURRENCY = gql`
-  query GetOrganizationCurrency {
-    getOrganizationCurrency {
+export const UPDATE_HOMEPAGE_CAROUSEL = gql`
+  mutation UpdateHomePageCarousel($input: [UploadImageGallery]) {
+    updateHomePageCarousel(input: $input) {
       id
-      name
-      symbol
-      cc
+      image
+      url
+    }
+  }
+`;
+export const GET_SOCIAL_MEDIA = gql`
+  query GetSocialMedia {
+    getSocialMedia {
+      twitter
+      linkedin
+      instagram
+      youtube
+    }
+  }
+`;
+export const UPDATE_SOCIAL_MEDIA = gql`
+  mutation UpdateSocialMedia($input: inputSocialMedia) {
+    updateSocialMedia(input: $input) {
+      twitter
+      linkedin
+      instagram
+      youtube
     }
   }
 `;
 
-export const UPDATE_CURRENCY = gql`
-  mutation UpdateCurrency($input: inputCurrency) {
-    updateCurrency(input: $input) {
+export const UPDATE_HEADER_LINKS = gql`
+  mutation UpdateHeaderLinks($input: [inputHeaderLinks]) {
+    updateHeaderLinks(input: $input) {
       id
+      link
       name
-      symbol
-      cc
+    }
+  }
+`;
+export const GET_HEADER_LINKS = gql`
+  query GetHeaderLinks {
+    getHeaderLinks {
+      id
+      link
+      name
+      subMenu {
+        id
+        link
+        name
+      }
+    }
+  }
+`;
+
+export const GET_CUSTOM_PAGES = gql`
+  query GetCustomPages {
+    getCustomPages {
+      title
+      id
+      slug
+      organization
+      metaDescription
+      metaTitle
+    }
+  }
+`;
+export const ADD_CUSTOM_PAGES = gql`
+  mutation AddCustomPages($input: inputCustomPages) {
+    addCustomPages(input: $input) {
+      id
+      title
+      slug
+      organization
+      metaDescription
+      metaTitle
+    }
+  }
+`;
+
+export const GET_CUSTOM_DOMAIN = gql`
+  query GetCustomDomain {
+    getCustomDomain {
+      domain
+      dnsConfig
+      ssl
+      status
+      organization
+    }
+  }
+`;
+export const UPDATE_DOMAIN = gql`
+  mutation UpdateDomain($input: inputDomain) {
+    updateDomain(input: $input) {
+      domain
+      dnsConfig
+      ssl
+      status
+      organization
+    }
+  }
+`;
+
+export const CHECK_DOMAIN_IS_VERIFIED = gql`
+  query CheckDomainIsVerified {
+    checkDomainIsVerified {
+      domain
+      dnsConfig
+      ssl
+      status
+      organization
+    }
+  }
+`;
+export const DELETE_DOMAIN = gql`
+  mutation DeleteDomain {
+    deleteDomain {
+      domain
+      dnsConfig
+      ssl
+      status
+      organization
     }
   }
 `;

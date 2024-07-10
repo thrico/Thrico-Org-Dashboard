@@ -1,14 +1,14 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
-  ADD_PAYMENT_DETAILS,
-  CHANGE_THEME_COLOR,
+  ADD_CUSTOM_PAGES,
   CHECK_DOMAIN,
-  CHECK_PAYMENTS,
-  GET_CURRENCY,
+  DELETE_DOMAIN,
+  GET_CUSTOM_PAGES,
+  GET_HEADER_LINKS,
+  GET_HOME_PAGE_CAROUSEL,
   GET_ORGANIZATION,
   GET_USER,
-  REGISTER_ORGANIZATION,
-  UPDATE_CURRENCY,
+  UPDATE_HOMEPAGE_CAROUSEL,
 } from "../quries";
 
 export const getGetUser = () => useQuery(GET_USER);
@@ -17,18 +17,16 @@ export const getOrganization = () => useQuery(GET_ORGANIZATION);
 
 export const checkDomain = (options: any) => useQuery(CHECK_DOMAIN, options);
 
-export const registerOrganization = (onCompleted: any) =>
-  useMutation(REGISTER_ORGANIZATION, onCompleted);
+export const getHomePageCarousel = () => useQuery(GET_HOME_PAGE_CAROUSEL);
 
-export const changeThemeColor = (onCompleted: any) =>
-  useMutation(CHANGE_THEME_COLOR, onCompleted);
+export const updateHomePageCarousel = (options: any) =>
+  useMutation(UPDATE_HOMEPAGE_CAROUSEL, options);
 
-export const checkPaymentDetails = () => useQuery(CHECK_PAYMENTS);
+export const getHeaderLinks = () => useQuery(GET_HEADER_LINKS);
 
-export const addPaymentDetails = (onCompleted: any) =>
-  useMutation(ADD_PAYMENT_DETAILS, onCompleted);
+export const getCustomPages = () => useQuery(GET_CUSTOM_PAGES);
 
-export const getCurrency = () => useQuery(GET_CURRENCY);
+export const addCustomPages = (options: any) =>
+  useMutation(ADD_CUSTOM_PAGES, options);
 
-export const updateCurrency = (onCompleted: any) =>
-  useMutation(UPDATE_CURRENCY, onCompleted);
+export const deleteDomain = () => useMutation(DELETE_DOMAIN);

@@ -1,7 +1,7 @@
 import { Card, Flex } from "antd";
 import Link from "next/link";
 import React from "react";
-
+import ThricoLogo from "@repo/ui/ThricoLogo";
 const AuthLayout = ({ children }: React.PropsWithChildren) => (
   <Flex
     style={{
@@ -40,6 +40,11 @@ const AuthLayout = ({ children }: React.PropsWithChildren) => (
         bordered={false}
         style={{ width: 550 }}
       >
+        <Flex style={{ width: "100%" }} justify="center">
+          <Flex vertical style={{ width: "95%", marginBottom: 20 }}>
+            {/* <ThricoLogo /> */}
+          </Flex>
+        </Flex>
         {children}
       </Card>
     </Flex>

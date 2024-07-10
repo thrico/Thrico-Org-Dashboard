@@ -15,6 +15,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
       return <></>;
     }
     if (!loading && (!getUser || error) && typeof window !== "undefined") {
+      // localStorage.removeItem("key");
       return (
         <>
           <Redirect

@@ -26,13 +26,6 @@ const User = () => {
       <AuthLayout>
         <Flex style={{ width: "100%" }} justify="center" align="center">
           <Flex vertical style={{ width: "95%" }}>
-            <Image
-              alt="Thrico Logo"
-              width={100}
-              style={{ objectFit: "contain" }}
-              height={100}
-              src="/thrico_logo.png"
-            />
             <Flex vertical>
               <Title level={2}>
                 Welcome, {profile?.userProfile.firstName}{" "}

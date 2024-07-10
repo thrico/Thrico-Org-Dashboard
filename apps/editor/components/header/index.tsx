@@ -1,12 +1,10 @@
 "use client";
-import { UserOutlined } from "@ant-design/icons";
+
 import { Dropdown, Flex, Layout, theme } from "antd";
 
 import "antd/dist/reset.css";
 
 const { Header } = Layout;
-
-import { Avatar } from "antd";
 import { getOrganization } from "../../graphql/actions";
 import Logo from "@repo/ui/Logo";
 export const HeaderComponent = () => {
