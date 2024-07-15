@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Redirect } from "../redirect/Redirect";
 import { getGetUser } from "../graphql/actions";
 
@@ -19,7 +19,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
       return (
         <>
           <Redirect
-            to={`http://localhost:20241/auth?path=http://localhost:20242${pathname}&&host=http://localhost:20242`}
+            to={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/auth?path=${process.env.NEXT_PUBLIC_DASHBOARD_URL}${pathname}&&host=${process.env.NEXT_PUBLIC_DASHBOARD_URL}`}
           />
         </>
       );

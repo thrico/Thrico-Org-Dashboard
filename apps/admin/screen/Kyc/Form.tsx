@@ -3,25 +3,16 @@
 import React, { useState } from "react";
 import type { CascaderProps } from "antd";
 import {
-  AutoComplete,
-  Button,
+ 
   Card,
-  Cascader,
-  Checkbox,
-  Col,
+ 
   Flex,
   Form,
-  Input,
-  InputNumber,
-  Row,
+
   Select,
   Steps,
 } from "antd";
-import PhoneNumber from "./PhoneNumber";
-import TimeZone from "./TimeZone";
-import Language from "./Language";
-import TextArea from "antd/es/input/TextArea";
-import Logo from "./Logo";
+
 import AuthLayout from "@repo/ui/AuthLayout";
 import Profile from "./profile/Profile";
 import Organization from "./organization/Organization";
@@ -78,21 +69,22 @@ const KycForm = ({ data }) => {
 
   const randomDomain = generateSlug();
   const [domain, setDomain] = useState(randomDomain);
-  const [logo, setLogo] = useState<File[]>([]);
-  const [logoPreview, setLogoPreview] = useState(null);
+  const [logo, setLogo] = useState(null);
+  const [logoPreview, setLogoPreview] = useState("https://cdn.thrico.network/Thrico_LogoMark_Color.png");
 
   const onSubmit = () => {
+    console.log(logo)
     register({
       variables: {
         input: {
           ...organization,
-          logo: logo[0],
+          logo: logo,
           domain,
           ...profile,
         },
       },
     });
-    // console.log({ ...organization, ...profile, domain });
+
   };
 
   return (

@@ -11,9 +11,7 @@ const PaymentKyc = ({ open, setOpen, refresh }) => {
   const [form] = Form.useForm<{ paymentMod: string }>();
   const [modalText, setModalText] = useState("Content of the modal");
 
-  const showModal = () => {
-    setOpen(true);
-  };
+  
 
   const handleOk = () => {
     setModalText("The modal will be closed after two seconds");

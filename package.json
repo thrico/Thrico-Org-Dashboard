@@ -45,6 +45,7 @@
     "apollo-upload-client": "^16.0.0",
     "chart.js": "^4.4.2",
     "classnames": "^2.5.1",
+    "dotenv": "^16.4.5",
     "error": "link:@apollo/client/link/error",
     "import": "^0.0.6",
     "is-valid-domain": "^0.1.6",

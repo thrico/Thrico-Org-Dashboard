@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <ApolloWrapper host={"http://localhost:1111"}>
+          <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
             {children}
           </ApolloWrapper>
         </Providers>

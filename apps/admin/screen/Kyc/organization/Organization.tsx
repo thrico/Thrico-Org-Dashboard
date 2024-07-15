@@ -10,6 +10,7 @@ import {
 import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
 import Logo from "../Logo";
+
 const { Option } = Select;
 const Organization = ({
   setCurrent,
@@ -19,7 +20,7 @@ const Organization = ({
   setLogo,
   logoPreview,
   setLogoPreview,
-}) => {
+}:any) => {
   const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
 
   const onWebsiteChange = (value: string) => {
@@ -105,11 +106,15 @@ const Organization = ({
         <TextArea />
       </Form.Item>
 
-      <Logo
+      {/* <Logo
         logo={logo}
         setLogo={setLogo}
         setLogoPreview={setLogoPreview}
         logoPreview={logoPreview}
+      /> */}
+      <Logo
+      setCover={setLogo}
+      imageUrl={logoPreview} setImageUrl={setLogoPreview}
       />
 
       <Form.Item

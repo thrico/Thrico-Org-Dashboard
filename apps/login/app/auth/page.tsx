@@ -18,7 +18,7 @@ const Auth = () => {
     if (token !== null) {
       router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
-      router.push(`http://localhost:20241/login/?path=${path}&&host=${host}`);
+      router.push(`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`);
     }
   }, [token, path]);
 

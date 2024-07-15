@@ -35,7 +35,7 @@ const OtpForm = () => {
       await toast.success("Login Success");
       await storeToken(data?.otpLogin?.token);
       await router.push(
-        `http://localhost:20242/auth/callback?code=${data?.otpLogin?.token}`
+        `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
       );
     },
   });
