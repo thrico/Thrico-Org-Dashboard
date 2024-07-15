@@ -9,9 +9,9 @@ import {
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import { onError } from "@apollo/client/link/error";
 import toast from "react-hot-toast";
-
-import { useTokenStore } from "../store/store";
-
+import { useTokenStore } from "@repo/ui/store";
+      //@ts-ignore
+import { createUploadLink } from "apollo-upload-client";
 interface props {
   children?: any;
   host: string | undefined;
@@ -20,6 +20,7 @@ export function ApolloWrapper({ children, host }: props) {
   const { token } = useTokenStore((state) => ({
     token: state.token,
   }));
+
   function makeClient() {
     const errorControl = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
@@ -31,11 +32,11 @@ export function ApolloWrapper({ children, host }: props) {
       }
     });
 
-    const httpLink = createHttpLink({
+    const uploadLink = createUploadLink({
       uri: host,
     });
-
-    const link = errorControl.concat(httpLink);
+51
+    const link = errorControl.concat(uploadLink);
 
     const authMiddleware = new ApolloLink((operation, forward) => {
       operation.setContext({
@@ -43,7 +44,9 @@ export function ApolloWrapper({ children, host }: props) {
           authorization:
             localStorage.getItem("token") === null
               ? null
+              //@ts-ignore
               : JSON.parse(localStorage?.getItem("token")).state.token,
+          "Apollo-Require-Preflight": "true",
         },
       });
 
@@ -51,17 +54,8 @@ export function ApolloWrapper({ children, host }: props) {
     });
 
     return new NextSSRApolloClient({
+      link: ApolloLink.from([authMiddleware, link]),
       cache: new NextSSRInMemoryCache(),
-      link:
-        typeof window === "undefined"
-          ? ApolloLink.from([
-              new SSRMultipartLink({
-                stripDefer: true,
-              }),
-              authMiddleware,
-              httpLink,
-            ])
-          : ApolloLink.from([authMiddleware, link]),
     });
   }
   return (
