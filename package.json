@@ -2,11 +2,11 @@
   "name": "thrico",
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "dotenv -- turbo build",
     "dev": "dotenv -- turbo dev",
+    "start": "dotenv -- turbo run start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "turbo start",
     "clean": "turbo clean && rm -rf node_modules"
   },
   "devDependencies": {

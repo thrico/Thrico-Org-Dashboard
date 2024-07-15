@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --port 20244",
     "build": "next build",
-    "start": "next start  --port 20243",
+    "start": "next start  --port 20244",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {

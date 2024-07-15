@@ -1,29 +1,39 @@
-"use client";
-import React, { useState, useRef, useMemo } from "react";
-import JoditEditor from "jodit-react";
+// "use client";
+// import React, { useState, useRef, useMemo } from "react";
+// import JoditEditor from "jodit-react";
 
-const Example = ({ placeholder }) => {
-  const editor = useRef(null);
-  const [content, setContent] = useState("");
+// const Example = ({ placeholder }) => {
+//   const editor = useRef(null);
+//   const [content, setContent] = useState("");
 
-  const config = useMemo(
-    () => ({
-      readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-      placeholder: placeholder || "Start typings...",
-    }),
-    [placeholder]
-  );
+//   const config = useMemo(
+//     () => ({
+//       readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+//       placeholder: placeholder || "Start typings...",
+//     }),
+//     [placeholder]
+//   );
 
+//   return (
+//     <JoditEditor
+//       ref={editor}
+//       value={content}
+//       config={config}
+//       tabIndex={1} // tabIndex of textarea
+//       onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+//       onChange={(newContent) => {}}
+//     />
+//   );
+// };
+
+// export default Example;
+
+import React from 'react'
+
+const page = () => {
   return (
-    <JoditEditor
-      ref={editor}
-      value={content}
-      config={config}
-      tabIndex={1} // tabIndex of textarea
-      onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-      onChange={(newContent) => {}}
-    />
-  );
-};
+    <div>page</div>
+  )
+}
 
-export default Example;
+export default page
