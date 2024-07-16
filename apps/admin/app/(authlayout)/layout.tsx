@@ -46,311 +46,311 @@ const items: MenuProps["items"] = [
     label: "Dashboard",
     icon: <MdDashboardCustomize />,
   },
-  {
-    key: "user",
-    label: "AllUser",
-    children: [
-      {
-        key: "/user",
-        type: "group",
-        label: (
-          <Link href={"/user"}>
-            <Typography style={{ color: "white" }}>All User</Typography>
-          </Link>
-        ),
-      },
+  // {
+  //   key: "user",
+  //   label: "AllUser",
+  //   children: [
+  //     {
+  //       key: "/user",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user"}>
+  //           <Typography style={{ color: "white" }}>All User</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "/user?value=approved-user",
-        type: "group",
-        label: (
-          <Link href={"/user?value=approved-user"}>
-            <Typography style={{ color: "white" }}>Approved</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}> Request</Typography>
-          </Link>
-        ),
-      },
-    ],
-    icon: <UserOutlined />,
-  },
-  {
-    key: "communities",
-    label: (
-      <Link href={"/communities"}>
-        <Typography style={{ color: "white" }}>Communities</Typography>
-      </Link>
-    ),
+  //     {
+  //       key: "/user?value=approved-user",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=approved-user"}>
+  //           <Typography style={{ color: "white" }}>Approved</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}> Request</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //   ],
+  //   icon: <UserOutlined />,
+  // },
+  // {
+  //   key: "communities",
+  //   label: (
+  //     <Link href={"/communities"}>
+  //       <Typography style={{ color: "white" }}>Communities</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdGroup />,
-  },
-  {
-    key: "Events",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography style={{ color: "white" }}>Events</Typography>
-      </Link>
-    ),
+  //   icon: <MdGroup />,
+  // },
+  // {
+  //   key: "Events",
+  //   label: (
+  //     <Link href={"/mentorship"}>
+  //       <Typography style={{ color: "white" }}>Events</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <CalendarOutlined />,
-  },
+  //   icon: <CalendarOutlined />,
+  // },
 
-  {
-    key: "MarketPlace",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography style={{ color: "white" }}>MarketPlace</Typography>
-      </Link>
-    ),
+  // {
+  //   key: "MarketPlace",
+  //   label: (
+  //     <Link href={"/mentorship"}>
+  //       <Typography style={{ color: "white" }}>MarketPlace</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <ShopOutlined />,
-  },
-  {
-    key: "Jobs",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography style={{ color: "white" }}>Jobs</Typography>
-      </Link>
-    ),
+  //   icon: <ShopOutlined />,
+  // },
+  // {
+  //   key: "Jobs",
+  //   label: (
+  //     <Link href={"/mentorship"}>
+  //       <Typography style={{ color: "white" }}>Jobs</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdWork />,
-  },
+  //   icon: <MdWork />,
+  // },
 
-  {
-    key: "Mentorship",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography style={{ color: "white" }}>Mentorship</Typography>
-      </Link>
-    ),
-    children: [
-      {
-        key: "Mentors",
-        type: "group",
-        label: (
-          <Link href={"/mentorship/mentors"}>
-            <Typography style={{ color: "white" }}>Mentors</Typography>
-          </Link>
-        ),
-      },
+  // {
+  //   key: "Mentorship",
+  //   label: (
+  //     <Link href={"/mentorship"}>
+  //       <Typography style={{ color: "white" }}>Mentorship</Typography>
+  //     </Link>
+  //   ),
+  //   children: [
+  //     {
+  //       key: "Mentors",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/mentorship/mentors"}>
+  //           <Typography style={{ color: "white" }}>Mentors</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "Mentees",
-        type: "group",
-        label: (
-          <Link href={"/mentorship/mentees"}>
-            <Typography style={{ color: "white" }}>Mentees</Typography>
-          </Link>
-        ),
-      },
-    ],
-    icon: <UserOutlined />,
-  },
+  //     {
+  //       key: "Mentees",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/mentorship/mentees"}>
+  //           <Typography style={{ color: "white" }}>Mentees</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //   ],
+  //   icon: <UserOutlined />,
+  // },
 
-  {
-    key: "alumni-stories",
-    label: (
-      <Link href={"/alumni-stories"}>
-        <Typography style={{ color: "white" }}>Alumni Stories</Typography>
-      </Link>
-    ),
-    children: [
-      {
-        key: "all",
-        type: "group",
-        label: (
-          <Link href={"/alumni-stories"}>
-            <Typography style={{ color: "white" }}>Stories</Typography>
-          </Link>
-        ),
-      },
+  // {
+  //   key: "alumni-stories",
+  //   label: (
+  //     <Link href={"/alumni-stories"}>
+  //       <Typography style={{ color: "white" }}>Alumni Stories</Typography>
+  //     </Link>
+  //   ),
+  //   children: [
+  //     {
+  //       key: "all",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/alumni-stories"}>
+  //           <Typography style={{ color: "white" }}>Stories</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "category",
-        type: "group",
-        label: (
-          <Link href={"/alumni-stories/category"}>
-            <Typography style={{ color: "white" }}>Category</Typography>
-          </Link>
-        ),
-      },
-    ],
-    icon: <UserOutlined />,
-  },
+  //     {
+  //       key: "category",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/alumni-stories/category"}>
+  //           <Typography style={{ color: "white" }}>Category</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //   ],
+  //   icon: <UserOutlined />,
+  // },
 
-  {
-    key: "giving",
-    label: (
-      <Link href={"/giving"}>
-        <Typography style={{ color: "white" }}>Giving</Typography>
-      </Link>
-    ),
-    children: [
-      {
-        key: "all",
-        type: "group",
-        label: (
-          <Link href={"/giving"}>
-            <Typography style={{ color: "white" }}>Giving</Typography>
-          </Link>
-        ),
-      },
+  // {
+  //   key: "giving",
+  //   label: (
+  //     <Link href={"/giving"}>
+  //       <Typography style={{ color: "white" }}>Giving</Typography>
+  //     </Link>
+  //   ),
+  //   children: [
+  //     {
+  //       key: "all",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/giving"}>
+  //           <Typography style={{ color: "white" }}>Giving</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "category",
-        type: "group",
-        label: (
-          <Link href={"/giving/category"}>
-            <Typography style={{ color: "white" }}>Category</Typography>
-          </Link>
-        ),
-      },
-    ],
-    icon: <UserOutlined />,
-  },
-  {
-    key: "Courses",
-    label: (
-      <Link href={"/courses"}>
-        <Typography style={{ color: "white" }}>Courses</Typography>
-      </Link>
-    ),
+  //     {
+  //       key: "category",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/giving/category"}>
+  //           <Typography style={{ color: "white" }}>Category</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //   ],
+  //   icon: <UserOutlined />,
+  // },
+  // {
+  //   key: "Courses",
+  //   label: (
+  //     <Link href={"/courses"}>
+  //       <Typography style={{ color: "white" }}>Courses</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <BsBookmarkCheck />,
-  },
+  //   icon: <BsBookmarkCheck />,
+  // },
 
-  {
-    key: "entrepreneurship",
-    label: "Entrepreneurship",
-    children: [
-      {
-        key: "/user",
-        type: "group",
-        label: (
-          <Link href={"/user"}>
-            <Typography style={{ color: "white" }}>Guide</Typography>
-          </Link>
-        ),
-      },
+  // {
+  //   key: "entrepreneurship",
+  //   label: "Entrepreneurship",
+  //   children: [
+  //     {
+  //       key: "/user",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user"}>
+  //           <Typography style={{ color: "white" }}>Guide</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "Challenges",
-        type: "group",
-        label: (
-          <Link href={"/entrepreneurship/challenges"}>
-            <Typography style={{ color: "white" }}>
-              Program and Challenges
-            </Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Startups</Typography>
-          </Link>
-        ),
-      },
+  //     {
+  //       key: "Challenges",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/entrepreneurship/challenges"}>
+  //           <Typography style={{ color: "white" }}>
+  //             Program and Challenges
+  //           </Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Startups</Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Mentors</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Investors</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Accelerators</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Coporates</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Partners</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>
-              Government Bodies
-            </Typography>
-          </Link>
-        ),
-      },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Mentors</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Investors</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Accelerators</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Coporates</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Partners</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>
+  //             Government Bodies
+  //           </Typography>
+  //         </Link>
+  //       ),
+  //     },
 
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>
-              Co Working Spaces
-            </Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Resources</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/user?value=requested",
-        type: "group",
-        label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}>Media</Typography>
-          </Link>
-        ),
-      },
-    ],
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>
+  //             Co Working Spaces
+  //           </Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Resources</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //     {
+  //       key: "/user?value=requested",
+  //       type: "group",
+  //       label: (
+  //         <Link href={"/user?value=requested"}>
+  //           <Typography style={{ color: "white" }}>Media</Typography>
+  //         </Link>
+  //       ),
+  //     },
+  //   ],
 
-    icon: <UserOutlined />,
-  },
+  //   icon: <UserOutlined />,
+  // },
   {
     key: "/settings/appearance",
     label: "Setting",
@@ -368,83 +368,83 @@ const items: MenuProps["items"] = [
     icon: <SettingOutlined />,
   },
 
-  {
-    key: "Media",
-    label: (
-      <Link href={"/media"}>
-        <Typography style={{ color: "white" }}>Wall of fame</Typography>
-      </Link>
-    ),
+  // {
+  //   key: "Media",
+  //   label: (
+  //     <Link href={"/media"}>
+  //       <Typography style={{ color: "white" }}>Wall of fame</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdFilterFrames />,
-  },
-  {
-    key: "Giving",
-    label: (
-      <Link href={"/media"}>
-        <Typography style={{ color: "white" }}>Giving</Typography>
-      </Link>
-    ),
+  //   icon: <MdFilterFrames />,
+  // },
+  // {
+  //   key: "Giving",
+  //   label: (
+  //     <Link href={"/media"}>
+  //       <Typography style={{ color: "white" }}>Giving</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MoneyCollectOutlined />,
-  },
+  //   icon: <MoneyCollectOutlined />,
+  // },
 
-  {
-    key: "Stories",
-    label: (
-      <Link href={"/media"}>
-        <Typography style={{ color: "white" }}>Stories</Typography>
-      </Link>
-    ),
+  // {
+  //   key: "Stories",
+  //   label: (
+  //     <Link href={"/media"}>
+  //       <Typography style={{ color: "white" }}>Stories</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdAmpStories />,
-  },
+  //   icon: <MdAmpStories />,
+  // },
 
-  {
-    key: "Media",
-    label: (
-      <Link href={"/media"}>
-        <Typography style={{ color: "white" }}>Media</Typography>
-      </Link>
-    ),
+  // {
+  //   key: "Media",
+  //   label: (
+  //     <Link href={"/media"}>
+  //       <Typography style={{ color: "white" }}>Media</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdArticle />,
-  },
+  //   icon: <MdArticle />,
+  // },
 
-  {
-    key: "payments",
+  // {
+  //   key: "payments",
 
-    label: (
-      <Link href={"http://localhost:20243"}>
-        <Typography style={{ color: "white" }}>Payments</Typography>
-      </Link>
-    ),
+  //   label: (
+  //     <Link href={"http://localhost:20243"}>
+  //       <Typography style={{ color: "white" }}>Payments</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <MdPayment />,
-  },
+  //   icon: <MdPayment />,
+  // },
 
-  {
-    key: "coms",
+  // {
+  //   key: "coms",
 
-    label: (
-      <Link target="_blank" href={"http://localhost:20245"}>
-        <Typography style={{ color: "white" }}>Manage Website</Typography>
-      </Link>
-    ),
+  //   label: (
+  //     <Link target="_blank" href={"http://localhost:20245"}>
+  //       <Typography style={{ color: "white" }}>Manage Website</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <UnorderedListOutlined />,
-  },
+  //   icon: <UnorderedListOutlined />,
+  // },
 
-  {
-    key: "Logs",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography style={{ color: "white" }}>Logs</Typography>
-      </Link>
-    ),
+  // {
+  //   key: "Logs",
+  //   label: (
+  //     <Link href={"/mentorship"}>
+  //       <Typography style={{ color: "white" }}>Logs</Typography>
+  //     </Link>
+  //   ),
 
-    icon: <BsActivity />,
-  },
+  //   icon: <BsActivity />,
+  // },
   { key: "Logout", label: "Logout", icon: <LogoutOutlined /> },
 ];
 
