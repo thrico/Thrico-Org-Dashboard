@@ -445,7 +445,7 @@ const items: MenuProps["items"] = [
 
   //   icon: <BsActivity />,
   // },
-  { key: "Logout", label: "Logout", icon: <LogoutOutlined /> },
+  { key: "Logout", label: <a  href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`} >Logout</a> , icon: <LogoutOutlined /> },
 ];
 
 const handleMenuClick: MenuProps["onClick"] = (e) => {
