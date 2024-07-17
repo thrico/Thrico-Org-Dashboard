@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getOrganization } from "../graphql/actions";
+
 
 // Route segment config
 export const runtime = "edge";

@@ -14,7 +14,8 @@
      "./NotFound ": "./src/error/NotFound.tsx",
     "./Logout":"./src/logout/Logout.tsx",
      "./store":"./src/store/store.ts",
-     "./AuthLayout": "./src/layout/AuthLayout"
+     "./AuthLayout": "./src/layout/AuthLayout",
+     "./ThricoLogo":"./src/ThricoLogo.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

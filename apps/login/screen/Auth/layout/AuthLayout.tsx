@@ -42,7 +42,7 @@ const AuthLayout = ({ children }: React.PropsWithChildren) => (
       >
         <Flex style={{ width: "100%" }} justify="center">
           <Flex vertical style={{ width: "95%", marginBottom: 20 }}>
-            {/* <ThricoLogo /> */}
+            <ThricoLogo />
           </Flex>
         </Flex>
         {children}
