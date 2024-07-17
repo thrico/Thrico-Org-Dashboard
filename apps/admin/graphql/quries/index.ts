@@ -24,6 +24,9 @@ export const GET_ORGANIZATION = gql`
         logo
         category
         address
+      domain  {
+          domain 
+        }
       }
     }
   }

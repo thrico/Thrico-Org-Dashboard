@@ -6,7 +6,7 @@ import {
   GET_USER,
   REGISTER_ORGANIZATION,
 } from "../quries";
-import { CHECK_PAYMENTS } from "../../../accounts/graphql/quries";
+import { CHECK_PAYMENTS } from "../../../payments/graphql/quries";
 
 export const getGetUser = () => useQuery(GET_USER);
 

@@ -86,16 +86,16 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                   icon: <FiLayout />,
                   label: <NavLink href="/theme">Theme</NavLink>,
                 },
-                {
-                  key: "about",
-                  icon: <InfoCircleOutlined />,
-                  label: <NavLink href="http://localhost:3001/">About</NavLink>,
-                },
-                {
-                  key: "pages",
-                  icon: <RiPagesLine />,
-                  label: <NavLink href="/pages">Pages</NavLink>,
-                },
+                // {
+                //   key: "about",
+                //   icon: <InfoCircleOutlined />,
+                //   label: <NavLink href="http://localhost:3001/">About</NavLink>,
+                // },
+                // {
+                //   key: "pages",
+                //   icon: <RiPagesLine />,
+                //   label: <NavLink href="/pages">Pages</NavLink>,
+                // },
 
                 {
                   key: "domain",
@@ -103,23 +103,19 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                   label: <NavLink href="/domain">Domain</NavLink>,
                 },
 
-                {
-                  key: "seo",
-                  icon: <FaSearchDollar />,
-                  label: <NavLink href="/seo">Seo</NavLink>,
-                },
+                // {
+                //   key: "seo",
+                //   icon: <FaSearchDollar />,
+                //   label: <NavLink href="/seo">Seo</NavLink>,
+                // },
 
-                {
-                  key: "5",
-                  icon: <SettingOutlined />,
-                  label: <NavLink href="/settings">Settings</NavLink>,
-                },
+                // {
+                //   key: "5",
+                //   icon: <SettingOutlined />,
+                //   label: <NavLink href="/settings">Settings</NavLink>,
+                // },
 
-                {
-                  key: "logout",
-                  icon: <LogoutOutlined />,
-                  label: <NavLink href="/logout">Logout</NavLink>,
-                },
+                { key: "Logout", label: <a  href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`} >Logout</a> , icon: <LogoutOutlined /> },
               ]}
             />
           </Sider>

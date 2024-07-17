@@ -8,7 +8,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
   function WithAuth(props: any) {
     const pathname = usePathname();
 
-    console.log(pathname);
+
     const { data: { getUser } = {}, loading, error } = getGetUser();
 
     if (loading) {

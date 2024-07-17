@@ -415,7 +415,7 @@ const items: MenuProps["items"] = [
   //   key: "payments",
 
   //   label: (
-  //     <Link href={"http://localhost:20243"}>
+  //     <Link href={process.env.NEXT_PUBLIC_PAYMENTS_URL ? process.env.NEXT_PUBLIC_PAYMENTS_URL : "/"}>
   //       <Typography style={{ color: "white" }}>Payments</Typography>
   //     </Link>
   //   ),
@@ -423,17 +423,17 @@ const items: MenuProps["items"] = [
   //   icon: <MdPayment />,
   // },
 
-  // {
-  //   key: "coms",
+  {
+    key: "cms",
 
-  //   label: (
-  //     <Link target="_blank" href={"http://localhost:20245"}>
-  //       <Typography style={{ color: "white" }}>Manage Website</Typography>
-  //     </Link>
-  //   ),
+    label: (
+      <Link target="_blank" href={process.env.NEXT_PUBLIC_EDITOR_URL ? process.env.NEXT_PUBLIC_EDITOR_URL :"/"}>
+        <Typography style={{ color: "white" }}>Manage Website</Typography>
+      </Link>
+    ),
 
-  //   icon: <UnorderedListOutlined />,
-  // },
+    icon: <UnorderedListOutlined />,
+  },
 
   // {
   //   key: "Logs",
@@ -522,16 +522,18 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                       />
                     </div>
                     <div style={{ margin: 20 }}>
+
+                      <Button target="_blank" href={ `https://${data?.getOrganization?.organization?.domain?.domain}.thrico.network`}  type="dashed" > Vist  </Button>
                       <Dropdown menu={{ items }}>
                         <Button style={{ height: "3rem" }} type="text">
                           <Avatar
                             shape="square"
                             style={{ backgroundColor: "#87d068" }}
                           >
-                            PV
+                            {data?.getOrganization.firstName}
                           </Avatar>
                           <Text style={{ marginLeft: "1rem" }}>
-                            Pankaj Verma
+                          {data?.getOrganization.firstName}    {data?.getOrganization.lastName}
                           </Text>
                         </Button>
                       </Dropdown>
