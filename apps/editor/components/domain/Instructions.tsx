@@ -26,7 +26,7 @@ const Instructions = () => {
   const data: DataType[] = [
     {
       name: "CNAME Record",
-      value: "thrico.network",
+      value: "thrico.community",
     },
   ];
   return (
