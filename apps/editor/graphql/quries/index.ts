@@ -10,15 +10,15 @@ export const GET_USER = gql`
 `;
 
 export const GET_ORGANIZATION = gql`
-  query GetOrganization {
-    getOrganization {
+  query getEntity {
+    getEntity {
       id
       firstName
       lastName
       email
-      organization {
+      entity {
         id
-        organizationName
+        name
         timeZone
         website
         logo
@@ -130,10 +130,11 @@ export const GET_CUSTOM_DOMAIN = gql`
   query GetCustomDomain {
     getCustomDomain {
       domain
-      dnsConfig
-      ssl
-      status
-      organization
+    dnsConfig
+    ssl
+    status
+    entity
+   
     }
   }
 `;
@@ -144,7 +145,7 @@ export const UPDATE_DOMAIN = gql`
       dnsConfig
       ssl
       status
-      organization
+   
     }
   }
 `;
@@ -156,7 +157,7 @@ export const CHECK_DOMAIN_IS_VERIFIED = gql`
       dnsConfig
       ssl
       status
-      organization
+    
     }
   }
 `;
@@ -167,7 +168,7 @@ export const DELETE_DOMAIN = gql`
       dnsConfig
       ssl
       status
-      organization
+   
     }
   }
 `;

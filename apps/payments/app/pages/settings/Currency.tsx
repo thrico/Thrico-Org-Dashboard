@@ -3,12 +3,12 @@ import Link from "next/link";
 import React from "react";
 
 import { getCurrency, updateCurrency } from "../../../graphql/actions";
-import { getOrganizationCurrency } from "../../../graphql/actions/user";
+import { getEntityCurrency } from "../../../graphql/actions/user";
 
 const Currency = () => {
   const { data, loading } = getCurrency();
 
-  const { data: currency, loading: load } = getOrganizationCurrency();
+  const { data: currency, loading: load } = getEntityCurrency();
 
   const [update, { loading: loadBtn }] = updateCurrency({});
 
@@ -53,7 +53,7 @@ const Currency = () => {
           >
             {!load && (
               <Form.Item
-                initialValue={currency?.getOrganizationCurrency?.id}
+                initialValue={currency?.getEntityCurrency?.id}
                 label="Select"
                 name="id"
               >

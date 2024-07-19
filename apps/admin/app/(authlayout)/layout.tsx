@@ -26,7 +26,7 @@ import Logo from "@repo/ui/Logo";
 const { Header, Content, Footer, Sider } = Layout;
 import { Button, Dropdown, message, Space, Tooltip } from "antd";
 import withAuth from "../../utils/withAuth";
-import { getOrganization } from "../../graphql/actions";
+import { getEntity } from "../../graphql/actions";
 import KycForm from "../../screen/Kyc/Form";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -427,7 +427,14 @@ const items: MenuProps["items"] = [
     key: "cms",
 
     label: (
-      <Link target="_blank" href={process.env.NEXT_PUBLIC_EDITOR_URL ? process.env.NEXT_PUBLIC_EDITOR_URL :"/"}>
+      <Link
+        target="_blank"
+        href={
+          process.env.NEXT_PUBLIC_EDITOR_URL
+            ? process.env.NEXT_PUBLIC_EDITOR_URL
+            : "/"
+        }
+      >
         <Typography style={{ color: "white" }}>Manage Website</Typography>
       </Link>
     ),
@@ -445,7 +452,13 @@ const items: MenuProps["items"] = [
 
   //   icon: <BsActivity />,
   // },
-  { key: "Logout", label: <a  href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`} >Logout</a> , icon: <LogoutOutlined /> },
+  {
+    key: "Logout",
+    label: (
+      <a href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`}>Logout</a>
+    ),
+    icon: <LogoutOutlined />,
+  },
 ];
 
 const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -462,8 +475,8 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const { data, loading } = getOrganization();
-  const check = data?.getOrganization?.organization;
+  const { data, loading } = getEntity();
+  const check = data?.getEntity?.entity;
   const pathName = usePathname();
 
   return (
@@ -515,25 +528,29 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                   >
                     <div style={{ margin: 20 }}>
                       <Logo
-                        name={
-                          data?.getOrganization?.organization.organizationName
-                        }
-                        logo={data?.getOrganization?.organization.logo}
+                        name={data?.getEntity?.entity.name}
+                        logo={data?.getEntity?.entity.logo}
                       />
                     </div>
                     <div style={{ margin: 20 }}>
-
-                      <Button target="_blank" href={ `https://${data?.getOrganization?.organization?.domain?.domain}.thrico.network`}  type="dashed" > Vist  </Button>
+                      <Button
+                        target="_blank"
+                        href={`https://${data?.getEntity?.entity?.domain?.domain}.thrico.community`}
+                        type="dashed"
+                      >
+                        Visit
+                      </Button>
                       <Dropdown menu={{ items }}>
                         <Button style={{ height: "3rem" }} type="text">
                           <Avatar
                             shape="square"
                             style={{ backgroundColor: "#87d068" }}
                           >
-                            {data?.getOrganization.firstName}
+                            {data?.getEntity.firstName}
                           </Avatar>
                           <Text style={{ marginLeft: "1rem" }}>
-                          {data?.getOrganization.firstName}    {data?.getOrganization.lastName}
+                            {data?.getEntity.firstName}
+                            {data?.getEntity.lastName}
                           </Text>
                         </Button>
                       </Dropdown>

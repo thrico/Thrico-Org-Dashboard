@@ -10,9 +10,10 @@ import {
 import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
 import Logo from "../Logo";
+import { entityKYC } from "../../../graphql/actions";
 
 const { Option } = Select;
-const Organization = ({
+const Entity = ({
   setCurrent,
   organization,
   setOrganization,
@@ -20,7 +21,8 @@ const Organization = ({
   setLogo,
   logoPreview,
   setLogoPreview,
-}:any) => {
+}: any) => {
+  const { data, loading } = entityKYC();
   const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
 
   const onWebsiteChange = (value: string) => {
@@ -63,23 +65,45 @@ const Organization = ({
       <Form.Item
         hasFeedback
         initialValue={organization.organizationName}
-        name="organizationName"
-        label="Organization Name"
-        rules={[{ required: true, message: "Please input Organization Name" }]}
+        name="name"
+        label="Entity Name"
+        rules={[{ required: true, message: "Please input Entity Name" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        name="category"
-        label="Organization Category"
+        name="entityType"
+        label="Entity Category"
         rules={[{ required: true }]}
-        initialValue={organization.category}
+        initialValue={organization.entityType}
       >
-        <Select placeholder="Organization Category (Select any one)" allowClear>
-          <Option value="Education">Education </Option>
-          <Option value="Corporate">Corporate</Option>
-          <Option value="Professional Community">Professional Community</Option>
-          <Option value="Not For Profit">Not For Profit</Option>
+        <Select
+          loading={loading}
+          showSearch
+          placeholder="Entity Category (Select any one)"
+          allowClear
+        >
+          {data?.getEntityType?.map((set) => (
+            <Option value={set?.id}>{set?.title}</Option>
+          ))}
+        </Select>
+      </Form.Item>
+
+      <Form.Item
+        name="industryType"
+        label="Entity Industry"
+        rules={[{ required: true }]}
+        initialValue={organization.industryType}
+      >
+        <Select
+          loading={loading}
+          showSearch
+          placeholder="Entity Industry (Select any one)"
+          allowClear
+        >
+          {data?.getIndustryType?.map((set) => (
+            <Option value={set?.id}>{set?.title}</Option>
+          ))}
         </Select>
       </Form.Item>
       <Form.Item
@@ -113,8 +137,9 @@ const Organization = ({
         logoPreview={logoPreview}
       /> */}
       <Logo
-      setCover={setLogo}
-      imageUrl={logoPreview} setImageUrl={setLogoPreview}
+        setCover={setLogo}
+        imageUrl={logoPreview}
+        setImageUrl={setLogoPreview}
       />
 
       <Form.Item
@@ -147,4 +172,4 @@ const Organization = ({
   );
 };
 
-export default Organization;
+export default Entity;

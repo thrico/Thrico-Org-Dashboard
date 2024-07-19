@@ -10,26 +10,25 @@ export const GET_USER = gql`
 `;
 
 export const GET_ORGANIZATION = gql`
-  query GetOrganization {
-    getOrganization {
-      id
-      firstName
-      lastName
-      email
-      organization {
-        id
-        organizationName
-        timeZone
-        website
-        logo
-        category
-        address
-      domain  {
-          domain 
-        }
+ 
+    query GetEntity {
+    getEntity {
+    email
+    firstName
+    lastName
+    entity {
+      address
+      domain {
+        domain
       }
+      logo
+      name
+      timeZone
+      website
+      id
     }
   }
+    }
 `;
 
 export const CHECK_DOMAIN = gql`
@@ -41,8 +40,8 @@ export const CHECK_DOMAIN = gql`
 `;
 
 export const REGISTER_ORGANIZATION = gql`
-  mutation Mutation($input: registerOrganizationInput) {
-    registerOrganization(input: $input) {
+  mutation Mutation($input: registerEntityInput) {
+    registerEntity(input: $input) {
       success
     }
   }
@@ -56,3 +55,35 @@ export const CHANGE_THEME_COLOR = gql`
     }
   }
 `;
+
+
+
+export const ENTITY_TYPE = gql`
+query GetEntityType {
+  getEntityType {
+    title
+    id
+  }
+}`
+export const INDUSTRY_TYPE = gql`
+query GetIndustryType {
+  getIndustryType {
+    title
+    id
+  }
+}`
+
+export const ENTITY_KYC = gql`
+query entityKYC {
+  getIndustryType {
+    id
+    title
+  }
+  getEntityType {
+    title
+    id
+  }
+}
+
+
+`

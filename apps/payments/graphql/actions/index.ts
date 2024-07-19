@@ -13,7 +13,7 @@ import {
 
 export const getGetUser = () => useQuery(GET_USER);
 
-export const getOrganization = () => useQuery(GET_ORGANIZATION);
+export const getEntity = () => useQuery(GET_ORGANIZATION);
 
 export const checkDomain = (options: any) => useQuery(CHECK_DOMAIN, options);
 

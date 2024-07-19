@@ -10,8 +10,8 @@ export const GET_USER = gql`
 `;
 
 export const GET_ORGANIZATION = gql`
-  query GetOrganization {
-    getOrganization {
+  query getEntity {
+    getEntity {
       id
       firstName
       lastName
@@ -86,8 +86,8 @@ export const GET_CURRENCY = gql`
 `;
 
 export const GET_ORG_CURRENCY = gql`
-  query GetOrganizationCurrency {
-    getOrganizationCurrency {
+  query getEntityCurrency {
+    getEntityCurrency {
       id
       name
       symbol

@@ -7,14 +7,14 @@ import "antd/dist/reset.css";
 const { Header } = Layout;
 
 import { Avatar } from "antd";
-import { getOrganization } from "../../graphql/actions";
+import { getEntity } from "../../graphql/actions";
 import Logo from "@repo/ui/Logo";
 export const HeaderComponent = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { data, loading } = getOrganization();
-  const check = data?.getOrganization?.organization;
+  const { data, loading } = getEntity();
+  const check = data?.getEntity?.organization;
   return (
     <>
       <Header
@@ -35,8 +35,8 @@ export const HeaderComponent = () => {
         <Flex style={{ width: "100%" }} justify="space-between" align="center">
           <div style={{ margin: 20 }}>
             <Logo
-              name={data?.getOrganization?.organization.organizationName}
-              logo={data?.getOrganization?.organization.logo}
+              name={data?.getEntity?.organization.organizationName}
+              logo={data?.getEntity?.organization.logo}
             />
           </div>
         </Flex>

@@ -68,11 +68,12 @@ const Organization = ({
       >
         <Input />
       </Form.Item>
+
       <Form.Item
-        name="category"
+        name="entityType"
         label="Organization Category"
         rules={[{ required: true }]}
-        initialValue={organization.category}
+        initialValue={organization}
       >
         <Select placeholder="Organization Category (Select any one)" allowClear>
           <Option value="Education">Education </Option>
@@ -95,7 +96,6 @@ const Organization = ({
           <Input />
         </AutoComplete>
       </Form.Item>
-
       <Form.Item
         initialValue={organization.address}
         name="address"
@@ -104,14 +104,12 @@ const Organization = ({
       >
         <TextArea />
       </Form.Item>
-
       <Logo
         logo={logo}
         setLogo={setLogo}
         setLogoPreview={setLogoPreview}
         logoPreview={logoPreview}
       />
-
       <Form.Item
         initialValue={organization.agreement}
         name="agreement"

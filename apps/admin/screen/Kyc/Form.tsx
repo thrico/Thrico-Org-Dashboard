@@ -1,45 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
-import type { CascaderProps } from "antd";
-import {
- 
-  Card,
- 
-  Flex,
-  Form,
 
-  Select,
-  Steps,
-} from "antd";
+import { Card, Flex, Form, Select, Steps } from "antd";
 
 import AuthLayout from "@repo/ui/AuthLayout";
 import Profile from "./profile/Profile";
-import Organization from "./organization/Organization";
-import { getOrganization, registerOrganization } from "../../graphql/actions";
+import Organization from "./entity/Entity";
+import { getEntity, registerOrganization } from "../../graphql/actions";
 import Domain from "./domian/Domain";
 import toast from "react-hot-toast";
 import { generateSlug } from "random-word-slugs";
 const { Option } = Select;
 
-interface DataNodeType {
-  value: string;
-  label: string;
-  children?: DataNodeType[];
-}
-
 const KycForm = ({ data }) => {
-  const { refetch } = getOrganization();
+  const { refetch } = getEntity();
   const [form] = Form.useForm();
-
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
 
   const [register, { loading }] = registerOrganization({
     onCompleted() {
@@ -53,13 +29,13 @@ const KycForm = ({ data }) => {
     phone: "",
     timeZone: "",
     language: "",
-    fullName:
-      data?.getOrganization?.firstName + " " + data?.getOrganization?.lastName,
-    email: data?.getOrganization?.email,
+    fullName: data?.getEntity?.firstName + " " + data?.getEntity?.lastName,
+    email: data?.getEntity?.email,
   });
   const [organization, setOrganization] = useState({
     organizationName: "",
-    category: "",
+    entityType: "",
+    industryType: "",
     website: "",
     address: "",
     language: "",
@@ -70,10 +46,11 @@ const KycForm = ({ data }) => {
   const randomDomain = generateSlug();
   const [domain, setDomain] = useState(randomDomain);
   const [logo, setLogo] = useState(null);
-  const [logoPreview, setLogoPreview] = useState("https://cdn.thrico.network/Thrico_LogoMark_Color.png");
+  const [logoPreview, setLogoPreview] = useState(
+    "https://cdn.thrico.network/Thrico_LogoMark_Color.png"
+  );
 
   const onSubmit = () => {
-    console.log(logo)
     register({
       variables: {
         input: {
@@ -84,7 +61,6 @@ const KycForm = ({ data }) => {
         },
       },
     });
-
   };
 
   return (
@@ -97,7 +73,7 @@ const KycForm = ({ data }) => {
               title: "Profile Info",
             },
             {
-              title: "Organization",
+              title: "Entity",
             },
             {
               title: "Choose Domain",

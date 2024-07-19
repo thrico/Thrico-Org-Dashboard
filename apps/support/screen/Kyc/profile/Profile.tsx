@@ -3,7 +3,7 @@ import React from "react";
 import PhoneNumber from "../PhoneNumber";
 import TimeZone from "../TimeZone";
 import Language from "../Language";
-import { getOrganization } from "../../../graphql/actions";
+import { getEntity } from "../../../graphql/actions";
 const { Option } = Select;
 const Profile = ({ profile, setProfile, setCurrent }) => {
   const [form] = Form.useForm();

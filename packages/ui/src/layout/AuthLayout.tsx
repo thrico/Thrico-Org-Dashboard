@@ -47,7 +47,7 @@ const AuthLayout = ({ children }: React.PropsWithChildren) => (
           </Typography.Link>,
         ]}
         bordered={false}
-        style={{ width: 650 }}
+        style={{ width: 800 }}
       >
         {children}
       </Card>

@@ -25,7 +25,7 @@ import Logo from "./Logo";
 import AuthLayout from "@repo/ui/AuthLayout";
 import Profile from "./profile/Profile";
 import Organization from "./organization/Organization";
-import { getOrganization, registerOrganization } from "../../graphql/actions";
+import { getEntity, registerOrganization } from "../../graphql/actions";
 import Domain from "./domian/Domain";
 import toast from "react-hot-toast";
 import { generateSlug } from "random-word-slugs";
@@ -38,7 +38,7 @@ interface DataNodeType {
 }
 
 const KycForm = ({ data }) => {
-  const { refetch } = getOrganization();
+  const { refetch } = getEntity();
   const [form] = Form.useForm();
 
   const suffixSelector = (
@@ -62,9 +62,8 @@ const KycForm = ({ data }) => {
     phone: "",
     timeZone: "",
     language: "",
-    fullName:
-      data?.getOrganization?.firstName + " " + data?.getOrganization?.lastName,
-    email: data?.getOrganization?.email,
+    fullName: data?.getEntity?.firstName + " " + data?.getEntity?.lastName,
+    email: data?.getEntity?.email,
   });
   const [organization, setOrganization] = useState({
     organizationName: "",

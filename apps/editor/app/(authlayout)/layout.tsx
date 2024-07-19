@@ -1,18 +1,16 @@
 "use client";
 import {
   HomeOutlined,
-  InfoCircleOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { FiLayout } from "react-icons/fi";
 import "antd/dist/reset.css";
-import { RiPagesLine } from "react-icons/ri";
+
 const { Sider, Content, Footer } = Layout;
-import { FaSearchDollar } from "react-icons/fa";
+
 import { Typography } from "antd";
 import NavLink from "../nav-link";
 import withAuth from "../../utils/withAuth";
@@ -115,7 +113,15 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                 //   label: <NavLink href="/settings">Settings</NavLink>,
                 // },
 
-                { key: "Logout", label: <a  href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`} >Logout</a> , icon: <LogoutOutlined /> },
+                {
+                  key: "Logout",
+                  label: (
+                    <a href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`}>
+                      Logout
+                    </a>
+                  ),
+                  icon: <LogoutOutlined />,
+                },
               ]}
             />
           </Sider>
