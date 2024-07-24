@@ -7,14 +7,7 @@ import { loginAsAdmin, otpLogin } from "../../../components/graphql/actions";
 import toast from "react-hot-toast";
 import { InputOTP } from "antd-input-otp";
 import { useTokenStore } from "../../../components/store/store";
-const tempEmailDomains = [
-  "mailinator.com",
-  "duck.com",
-  "gmail.com",
-  "outlook.com",
-  "yahoo.com",
-  // add more temp email domains here
-];
+
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);

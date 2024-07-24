@@ -38,7 +38,7 @@ const Domain = ({
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
           addonBefore="https://"
-          suffix=".thrico.com"
+          suffix=".thrico.community"
           loading={loading}
           status={error ? "error" : ""}
           enterKeyHint="go"
@@ -47,11 +47,11 @@ const Domain = ({
         <Flex style={{ marginTop: "1rem" }}>
           {error ? (
             <Typography.Text style={{ color: "red" }}>
-              {`https://${domain}.thrico.com`}
+              {`https://${domain}.thrico.community`}
             </Typography.Text>
           ) : (
             <Typography.Text style={{ color: "green" }} color="green">
-              {`https://${domain}.thrico.com`}
+              {`https://${domain}.thrico.community`}
             </Typography.Text>
           )}
         </Flex>

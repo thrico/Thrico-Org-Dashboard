@@ -7,7 +7,7 @@ export const GET_ALL_USER = gql`
         referralSource
         comment
       }
-      aboutAlumni {
+      aboutUser {
         currentPosition
         linkedin
         instagram

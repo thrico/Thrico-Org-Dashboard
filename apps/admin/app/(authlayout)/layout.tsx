@@ -46,41 +46,41 @@ const items: MenuProps["items"] = [
     label: "Dashboard",
     icon: <MdDashboardCustomize />,
   },
-  // {
-  //   key: "user",
-  //   label: "AllUser",
-  //   children: [
-  //     {
-  //       key: "/user",
-  //       type: "group",
-  //       label: (
-  //         <Link href={"/user"}>
-  //           <Typography style={{ color: "white" }}>All User</Typography>
-  //         </Link>
-  //       ),
-  //     },
+  {
+    key: "user",
+    label: "AllUser",
+    children: [
+      {
+        key: "/user",
+        type: "group",
+        label: (
+          <Link href={"/user"}>
+            <Typography style={{ color: "white" }}>All User</Typography>
+          </Link>
+        ),
+      },
 
-  //     {
-  //       key: "/user?value=approved-user",
-  //       type: "group",
-  //       label: (
-  //         <Link href={"/user?value=approved-user"}>
-  //           <Typography style={{ color: "white" }}>Approved</Typography>
-  //         </Link>
-  //       ),
-  //     },
-  //     {
-  //       key: "/user?value=requested",
-  //       type: "group",
-  //       label: (
-  //         <Link href={"/user?value=requested"}>
-  //           <Typography style={{ color: "white" }}> Request</Typography>
-  //         </Link>
-  //       ),
-  //     },
-  //   ],
-  //   icon: <UserOutlined />,
-  // },
+      {
+        key: "/user?value=approved-user",
+        type: "group",
+        label: (
+          <Link href={"/user?value=approved-user"}>
+            <Typography style={{ color: "white" }}>Approved</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/user?value=requested",
+        type: "group",
+        label: (
+          <Link href={"/user?value=requested"}>
+            <Typography style={{ color: "white" }}> Request</Typography>
+          </Link>
+        ),
+      },
+    ],
+    icon: <UserOutlined />,
+  },
   // {
   //   key: "communities",
   //   label: (
@@ -88,7 +88,6 @@ const items: MenuProps["items"] = [
   //       <Typography style={{ color: "white" }}>Communities</Typography>
   //     </Link>
   //   ),
-
   //   icon: <MdGroup />,
   // },
   // {
@@ -535,7 +534,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                     <div style={{ margin: 20 }}>
                       <Button
                         target="_blank"
-                        href={`https://${data?.getEntity?.entity?.domain?.domain}.thrico.community`}
+                        href={`http://${data?.getEntity?.entity?.domain?.domain}.${process.env.NEXT_PUBLIC_SITE_URL}`}
                         type="dashed"
                       >
                         Visit

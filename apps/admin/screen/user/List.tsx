@@ -1,31 +1,61 @@
 import React, { useState } from "react";
-import { Button, Table } from "antd";
+import { Avatar, Button, Space, Table, Tag, Typography } from "antd";
 import type { TableColumnsType } from "antd";
 import { list, userData } from "./ts-types";
-import ApproveDrawer from "./ApproveDrawer";
-import ApproveUser from "./ApproveDrawer";
+
+import ApproveUser from "./drawer/ApproveDrawer";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
+import Actions from "./drawer/Actions";
 
 const columns: TableColumnsType<userData> = [
   {
-    title: "FullName",
-    dataIndex: "alumni",
-    render: (props) => (
-      <>
-        {props?.firstName} {props?.lastName}
-      </>
+    title: "Status",
+    dataIndex: "status",
+    render: (props, record) => (
+      <Space>
+        <Avatar src={record?.user?.avatar} />
+        <Typography>
+          {record?.user?.firstName} {record?.user?.lastName}
+        </Typography>
+        {props === "APPROVED" && (
+          <Tag color="green" icon={<CheckCircleOutlined />}>
+            {props}
+          </Tag>
+        )}
+        {props === "BLOCKED" && (
+          <Tag color="red" icon={<StopOutlined />}>
+            {props}
+          </Tag>
+        )}
+        {props === "PENDING" && (
+          <Tag color="orange" icon={<StopOutlined />}>
+            {props}
+          </Tag>
+        )}
+        {props === "REJECTED" && (
+          <Tag color="red" icon={<CloseCircleOutlined />}>
+            {props}
+          </Tag>
+        )}
+      </Space>
     ),
   },
+
   {
     title: "Email",
-    dataIndex: "alumni",
+    dataIndex: "user",
     render: (props) => <>{props?.email}</>,
   },
   {
     title: "Action",
-    key: "action",
-    render: (text, record) => (
+    dataIndex: "user",
+    render: (props) => (
       <>
-        <ApproveUser />
+        <Actions id={props.id} />
       </>
     ),
   },

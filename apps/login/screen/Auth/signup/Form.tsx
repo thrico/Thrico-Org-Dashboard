@@ -57,7 +57,7 @@ const LoginForm = () => {
             validator(_, value) {
               const email = getFieldValue("email").split("@")[1];
 
-              const check = tempEmailDomains.includes(email);
+              const check = tempEmailDomains.includes(email.toLowerCase());
               if (!value || !check) {
                 return Promise.resolve();
               }

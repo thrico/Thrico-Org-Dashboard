@@ -2,7 +2,7 @@ export interface userData {
   alumni: name;
   alumniOrganizationProfile: alumniOrganizationProfile;
   alumniProfile: profile;
-  aboutAlumni: about;
+  aboutUser: about;
 }
 export interface name {
   firstName: String;

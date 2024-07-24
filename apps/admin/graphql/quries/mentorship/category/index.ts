@@ -64,7 +64,7 @@ export const GET_ALL_MENTOR = gql`
       whyDoWantBecomeMentor
       user {
         alumni {
-          aboutAlumni {
+          aboutUser {
             currentPosition
           }
 

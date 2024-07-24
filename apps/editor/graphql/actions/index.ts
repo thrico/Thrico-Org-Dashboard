@@ -4,10 +4,12 @@ import {
   CHECK_DOMAIN,
   DELETE_DOMAIN,
   GET_CUSTOM_PAGES,
+  GET_FAVICON,
   GET_HEADER_LINKS,
   GET_HOME_PAGE_CAROUSEL,
   GET_ORGANIZATION,
   GET_USER,
+  UPDATE_FAVICON,
   UPDATE_HOMEPAGE_CAROUSEL,
 } from "../quries";
 
@@ -30,3 +32,9 @@ export const addCustomPages = (options: any) =>
   useMutation(ADD_CUSTOM_PAGES, options);
 
 export const deleteDomain = () => useMutation(DELETE_DOMAIN);
+
+
+export const getFaviconIcon = () => useQuery(GET_FAVICON);
+
+export const updateFiviconIcon = (options: any) =>
+  useMutation(UPDATE_FAVICON, options);

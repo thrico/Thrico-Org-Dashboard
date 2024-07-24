@@ -1,9 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local" , ".env"],
+  "globalDependencies": [
+    ".env"
+  ],
   "tasks": {
     "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.local"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".env.local"
+      ],
       "dependsOn": [
         "^build"
       ],
@@ -13,17 +19,22 @@
       ]
     },
     "start": {
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.local"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".env.local"
+      ],
       "dependsOn": [
         "^build"
       ],
       "cache": false
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "dev": {
- 
       "cache": false,
       "persistent": true
     }

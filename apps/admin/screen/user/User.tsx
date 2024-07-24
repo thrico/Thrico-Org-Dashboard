@@ -1,22 +1,17 @@
 import React, { useEffect } from "react";
 import List from "./List";
 import { userData, userProps } from "./ts-types";
+import { getAllUser } from "../../graphql/actions/user";
 
-const User = ({ data, loading }: userProps) => {
-  const [dataSource, setDataSource] = React.useState<userData[]>([]);
-  const [loadData, setLoadData] = React.useState(true);
-  useEffect(() => {
-    setDataSource(data);
-    setLoadData(false);
-  }, [loading]);
-
-  return (
-    <List
-      loading={loadData}
-      dataSource={dataSource}
-      setDataSource={setDataSource}
-    />
-  );
+const User = ({ status }) => {
+  const { data, loading } = getAllUser({
+    variables: {
+      input: {
+        status: status,
+      },
+    },
+  });
+  return <List loading={loading} dataSource={data?.getAllUser} />;
 };
 
 export default User;

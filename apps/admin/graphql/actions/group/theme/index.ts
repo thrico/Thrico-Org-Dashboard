@@ -6,7 +6,6 @@ import {
   EDIT_GROUP_THEME,
   GROUP_THEME,
 } from "../../../quries/group/theme";
-import { GET_ALL_MENTOR } from "../../../quries/mentorship/category";
 
 export const getAllGroupTheme = (options: any) =>
   useQuery(GROUP_THEME, options);

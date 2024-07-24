@@ -1,6 +1,6 @@
 "use client";
 import { Button, Card, Form, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { CiInstagram, CiLinkedin, CiYoutube } from "react-icons/ci";
 import {
@@ -8,22 +8,22 @@ import {
   updateSocialMedia,
 } from "../../../../graphql/actions/user";
 import Cover from "../../../../screen/comman/Cover";
+import { getFaviconIcon, updateFiviconIcon } from "../../../../graphql/actions";
 
 const Customization = () => {
-  const [imageUrl, setImageUrl] = useState(
-    "https://cdn.thrico.network/20240612-aibxc%7D"
-  );
-  const [cover, setCover] = useState("");
-  const { data, loading } = getSocialMedia();
-  const [update, { loading: loadingBtn }] = updateSocialMedia();
+
+
+  const { data, loading } = getFaviconIcon();
+  const [update, { loading: loadingBtn }] = updateFiviconIcon({});
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
+
     console.log("Received values of form: ", values);
 
     update({
       variables: {
-        input: values,
+        input: { ...values, logo: coverLogo, favicon: coverFavicon },
       },
     });
   };
@@ -38,6 +38,20 @@ const Customization = () => {
     },
   };
 
+  const [coverLogo, setCoverLogo] = useState(null);
+  const [imageUrl, setImageUrl] = useState(
+    null
+  );
+
+  const [coverFavicon, setCoverFavicon] = useState("");
+  const [faviconUrl, setFaviconUrl] = useState(
+    ``
+  );
+  useEffect(() => {
+    setImageUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`)
+    setFaviconUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`)
+  }, [data?.getFaviconIcon])
+
   return (
     <Card loading={loading}>
       <Form
@@ -46,7 +60,7 @@ const Customization = () => {
         name="register"
         onFinish={onFinish}
         initialValues={{
-          ...data?.getSocialMedia,
+          ...data?.getFaviconIcon,
         }}
         style={{ maxWidth: "70%" }}
         scrollToFirstError
@@ -64,7 +78,7 @@ const Customization = () => {
               { type: "url", warningOnly: true },
               { type: "string", min: 6 },
             ]}
-            name="organizationWebsite"
+            name="website"
             label="Organization Website"
           >
             <Input />
@@ -74,7 +88,7 @@ const Customization = () => {
               title={false}
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
-              setCover={setCover}
+              setCover={setCoverLogo}
               buttonText="Update Image"
             />
           </Form.Item>
@@ -85,9 +99,9 @@ const Customization = () => {
           >
             <Cover
               title={false}
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
-              setCover={setCover}
+              imageUrl={faviconUrl}
+              setImageUrl={setFaviconUrl}
+              setCover={setCoverFavicon}
               buttonText="Update Image"
             />
           </Form.Item>

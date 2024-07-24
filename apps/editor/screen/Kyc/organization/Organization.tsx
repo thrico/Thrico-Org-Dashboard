@@ -124,7 +124,7 @@ const Organization = ({
         ]}
       >
         <Checkbox>
-          I have read the{" "}
+          I have read and accept{" "}
           <a target="_blank" href="https://thrico.com/privacy-policy/">
             agreement
           </a>

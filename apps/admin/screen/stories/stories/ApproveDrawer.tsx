@@ -13,6 +13,7 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   DownOutlined,
+  EllipsisOutlined,
   StopOutlined,
 } from "@ant-design/icons";
 import { mentorShipActions } from "../../../graphql/actions/mentorship/category";
@@ -37,7 +38,7 @@ const ApproveDrawer = ({ data, onClose, open }) => {
     {
       key: "1",
       label: "Current Position",
-      children: <p>{user?.alumni?.aboutAlumni?.currentPosition}</p>,
+      children: <p>{user?.alumni?.aboutUser?.currentPosition}</p>,
     },
   ];
 
@@ -76,10 +77,9 @@ const ApproveDrawer = ({ data, onClose, open }) => {
                       },
                     })
                   }
-                  icon={<CheckCircleOutlined />}
                   type="primary"
                 >
-                  Approve
+                  <EllipsisOutlined />
                 </Button>
               </>
             )}

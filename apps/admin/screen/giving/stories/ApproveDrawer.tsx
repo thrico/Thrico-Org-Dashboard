@@ -37,7 +37,7 @@ const ApproveDrawer = ({ data, onClose, open }) => {
     {
       key: "1",
       label: "Current Position",
-      children: <p>{user?.alumni?.aboutAlumni?.currentPosition}</p>,
+      children: <p>{user?.alumni?.aboutUser?.currentPosition}</p>,
     },
   ];
 

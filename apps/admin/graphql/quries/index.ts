@@ -10,25 +10,24 @@ export const GET_USER = gql`
 `;
 
 export const GET_ORGANIZATION = gql`
- 
-    query GetEntity {
+  query GetEntity {
     getEntity {
-    email
-    firstName
-    lastName
-    entity {
-      address
-      domain {
-        domain
+      email
+      firstName
+      lastName
+      entity {
+        address
+        domain {
+          domain
+        }
+        logo
+        name
+        timeZone
+        website
+        id
       }
-      logo
-      name
-      timeZone
-      website
-      id
     }
   }
-    }
 `;
 
 export const CHECK_DOMAIN = gql`
@@ -56,34 +55,32 @@ export const CHANGE_THEME_COLOR = gql`
   }
 `;
 
-
-
 export const ENTITY_TYPE = gql`
-query GetEntityType {
-  getEntityType {
-    title
-    id
+  query GetEntityType {
+    getEntityType {
+      title
+      id
+    }
   }
-}`
+`;
 export const INDUSTRY_TYPE = gql`
-query GetIndustryType {
-  getIndustryType {
-    title
-    id
+  query GetIndustryType {
+    getIndustryType {
+      title
+      id
+    }
   }
-}`
+`;
 
 export const ENTITY_KYC = gql`
-query entityKYC {
-  getIndustryType {
-    id
-    title
+  query entityKYC {
+    getIndustryType {
+      id
+      title
+    }
+    getEntityType {
+      title
+      id
+    }
   }
-  getEntityType {
-    title
-    id
-  }
-}
-
-
-`
+`;

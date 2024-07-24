@@ -172,3 +172,20 @@ export const DELETE_DOMAIN = gql`
     }
   }
 `;
+
+export const GET_FAVICON = gql`
+query getFaviconIcon {
+  getFaviconIcon {
+    website
+    logo
+    favicon
+  }
+}`
+export const UPDATE_FAVICON = gql`
+mutation UpdateFiviconIcon($input: inputUpdateFiviconIcon) {
+  updateFiviconIcon(input: $input) {
+    website
+    logo
+    favicon
+  }
+}`

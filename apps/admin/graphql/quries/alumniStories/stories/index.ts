@@ -20,7 +20,7 @@ export const GET_ALL_ALUMNI_STORIES = gql`
           avatar
           firstName
           lastName
-          aboutAlumni {
+          aboutUser {
             currentPosition
           }
         }
@@ -48,7 +48,7 @@ export const GET_ALL_ALUMNI_STORIES_APPROVED = gql`
           avatar
           firstName
           lastName
-          aboutAlumni {
+          aboutUser {
             currentPosition
           }
         }
@@ -76,7 +76,7 @@ export const GET_ALL_ALUMNI_STORIES_REQUESTED = gql`
           avatar
           firstName
           lastName
-          aboutAlumni {
+          aboutUser {
             currentPosition
           }
         }
