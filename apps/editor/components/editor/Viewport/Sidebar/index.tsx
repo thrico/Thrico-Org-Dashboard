@@ -1,13 +1,13 @@
-import { useEditor } from '@craftjs/core';
-import { Layers } from '@craftjs/layers';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useEditor } from "@craftjs/core";
+import { Layers } from "@craftjs/layers";
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { SidebarItem } from './SidebarItem';
+import { SidebarItem } from "./SidebarItem";
 
-import CustomizeIcon from '../../../../public/icons/customize.svg';
-import LayerIcon from '../../../../public/icons/layers.svg';
-import { Toolbar } from '../../Toolbar';
+import CustomizeIcon from "../../../../public/icons/customize.svg";
+import LayerIcon from "../../../../public/icons/layers.svg";
+import { Toolbar } from "../../Toolbar";
 
 export const SidebarDiv = styled.div<{ enabled: boolean }>`
   width: 280px;
@@ -26,8 +26,8 @@ const CarbonAdsContainer = styled.div`
   }
 
   #carbonads {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
       sans-serif;
 
     padding: 10px 0.5rem;
@@ -83,7 +83,7 @@ const CarbonAdsContainer = styled.div`
   #carbonads .carbon-poweredby {
     display: block;
     padding: 6px 8px;
-    text-align: center;
+
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
@@ -109,7 +109,7 @@ export const Sidebar = () => {
         <SidebarItem
           icon={CustomizeIcon}
           title="Customize"
-          height={!layersVisible ? 'full' : '55%'}
+          height={!layersVisible ? "full" : "55%"}
           visible={toolbarVisible}
           onChange={(val) => setToolbarVisible(val)}
         >
@@ -118,7 +118,7 @@ export const Sidebar = () => {
         <SidebarItem
           icon={LayerIcon}
           title="Layers"
-          height={!toolbarVisible ? 'full' : '45%'}
+          height={!toolbarVisible ? "full" : "45%"}
           visible={layersVisible}
           onChange={(val) => setLayerVisible(val)}
         >

@@ -18,6 +18,7 @@ const columns: TableColumnsType<userData> = [
     render: (props, record) => (
       <Space>
         <Avatar src={record?.user?.avatar} />
+
         <Typography>
           {record?.user?.firstName} {record?.user?.lastName}
         </Typography>
@@ -75,6 +76,7 @@ const List = ({ dataSource, setDataSource, loading }: list) => {
   };
   const hasSelected = selectedRowKeys.length > 0;
 
+  console.log(dataSource);
   return (
     <div>
       <div style={{ marginBottom: 16 }}>

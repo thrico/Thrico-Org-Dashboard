@@ -9,7 +9,7 @@ import moment from "moment";
 import React from "react";
 
 const UserInfo = ({ data }) => {
-  const columns: TableColumnsType = [
+  const columnsEducation: TableColumnsType = [
     {
       title: "Degree",
       dataIndex: "degree",
@@ -32,18 +32,33 @@ const UserInfo = ({ data }) => {
       ),
     },
   ];
-  const dataSource = [
+
+  const columnsExperience: TableColumnsType = [
     {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
+      title: "Company Name",
+      dataIndex: "companyName",
+      key: "companyName",
     },
     {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
+    },
+    {
+      title: "Employment Type",
+      dataIndex: "employmentType",
+      key: "employmentType",
+    },
+    {
+      title: "Duration",
+      dataIndex: "duration",
+      key: "duration",
+      render: (props) => (
+        <>
+          {moment(props[0]).format("MMMM Do YYYY")} -{" "}
+          {moment(props[1]).format("MMMM Do YYYY")}
+        </>
+      ),
     },
   ];
 
@@ -86,8 +101,7 @@ const UserInfo = ({ data }) => {
     },
     {
       key: "5",
-      label:
-        "What, in your opinion, has been your greatest achievements so far? (Not publicly visible)",
+      label: "About ",
       children: (
         <p>No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</p>
       ),
@@ -100,7 +114,7 @@ const UserInfo = ({ data }) => {
       children: (
         <Table
           dataSource={profile.education}
-          columns={columns}
+          columns={columnsEducation}
           pagination={false}
         />
       ),
@@ -112,7 +126,7 @@ const UserInfo = ({ data }) => {
       children: (
         <Table
           dataSource={profile?.experience}
-          columns={columns}
+          columns={columnsExperience}
           pagination={false}
         />
       ),

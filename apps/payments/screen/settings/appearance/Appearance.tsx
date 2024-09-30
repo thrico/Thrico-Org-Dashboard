@@ -19,25 +19,25 @@ const Appearance = () => {
 
   const theme = [
     {
-      img: "https://cdn.thrico.network/ae669a89-0c65-46db-b14b-72d1c7dd46d6.svg",
+      img: "https://thrico.blr1.cdn.digitaloceanspaces.com/ae669a89-0c65-46db-b14b-72d1c7dd46d6.svg",
       color: "#1677FF",
     },
 
     {
-      img: "https://cdn.thrico.network/3e899b2b-4eb4-4771-a7fc-14c7ff078aed.svg",
+      img: "https://thrico.blr1.cdn.digitaloceanspaces.com/3e899b2b-4eb4-4771-a7fc-14c7ff078aed.svg",
       color: "#00B96B",
     },
 
     {
-      img: "https://cdn.thrico.network/ed9b04e8-9b8d-4945-8f8a-c8fc025e846f.svg",
+      img: "https://thrico.blr1.cdn.digitaloceanspaces.com/ed9b04e8-9b8d-4945-8f8a-c8fc025e846f.svg",
       color: "#ED4192",
     },
     {
-      img: "https://cdn.thrico.network/original.svg",
+      img: "https://thrico.blr1.cdn.digitaloceanspaces.com/original.svg",
       color: "#1890ff",
     },
     {
-      img: "https://cdn.thrico.network/0f93c777-5320-446b-9bb7-4d4b499f346d.svg",
+      img: "https://thrico.blr1.cdn.digitaloceanspaces.com/0f93c777-5320-446b-9bb7-4d4b499f346d.svg",
       color: "#dddddd",
     },
   ];

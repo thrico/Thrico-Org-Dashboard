@@ -85,7 +85,7 @@ const ApproveUser = ({ id, onClose, open }: { id: string }) => {
                       danger
                       icon={<StopOutlined />}
                     >
-                      Blocked
+                      Block
                     </Button>
                   </>
                 )}
@@ -118,7 +118,7 @@ const ApproveUser = ({ id, onClose, open }: { id: string }) => {
                       icon={<CheckCircleOutlined />}
                       type="primary"
                     >
-                      APPROVE
+                      Re-Approve
                     </Button>
                   </>
                 )}
@@ -132,9 +132,8 @@ const ApproveUser = ({ id, onClose, open }: { id: string }) => {
         open={open}
       >
         <Space direction="vertical" style={{ gap: 20 }}>
-          <UserInfo data={data?.getUserDetailsById?.user} />
-
           <UserKyc data={data?.getUserDetailsById?.userKyc} />
+          <UserInfo data={data?.getUserDetailsById?.user} />
         </Space>
       </Drawer>
     </>

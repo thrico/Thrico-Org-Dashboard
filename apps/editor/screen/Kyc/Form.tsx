@@ -91,7 +91,6 @@ const KycForm = ({ data }) => {
         },
       },
     });
-    // console.log({ ...organization, ...profile, domain });
   };
 
   return (

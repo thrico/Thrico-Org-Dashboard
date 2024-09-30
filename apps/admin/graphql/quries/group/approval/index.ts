@@ -1,32 +1,23 @@
 import { gql } from "@apollo/client";
 
 export const ALL_GROUP = gql`
-  query GetAllGroupStatus($input: groupStatus!) {
+  query GetAllGroupStatus($input: allStatusInput) {
     getAllGroupStatus(input: $input) {
       id
-      about
-      cover
-      createdAt
+      slug
+      title
       creator
-      interest {
-        title
-      }
-      isActive
-      isApproved
-      isBlocked
-      isPaused
-      organization
+      entity
+      cover
+      status
+      about
+      createdAt
+      updatedAt
       setting {
         groupType
         joiningCondition
         privacy
       }
-      slug
-      theme {
-        title
-      }
-      title
-      updatedAt
     }
   }
 `;
@@ -38,15 +29,6 @@ export const ADD_FEATURED_GROUP = gql`
       slug
       title
       creator
-      organization
-      cover
-      isApproved
-      isBlocked
-      isPaused
-      isActive
-      about
-      createdAt
-      updatedAt
     }
   }
 `;

@@ -1,6 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
+  COMMUNITY_GUIDELINE,
+  COMMUNITY_TERMS_AND_CONDITIONS,
   GROUP_SETTINGS,
+  UPDATE_COMMUNITY_GUIDELINE,
+  UPDATE_COMMUNITY_TERMS_AND_CONDITIONS,
   UPDATE_SETTINGS,
 } from "../../../quries/group/settings";
 
@@ -24,3 +28,14 @@ export const updateGroupSettings = (options: any) =>
       }
     },
   });
+
+export const getCommunityTermAndConditions = () =>
+  useQuery(COMMUNITY_TERMS_AND_CONDITIONS);
+
+export const updateCommunityTermAndConditions = () =>
+  useMutation(UPDATE_COMMUNITY_TERMS_AND_CONDITIONS);
+
+export const getCommunityGuidelines = () => useQuery(COMMUNITY_GUIDELINE);
+
+export const updateCommunityGuidelines = () =>
+  useMutation(UPDATE_COMMUNITY_GUIDELINE);

@@ -8,39 +8,42 @@ import IconView from "../../../../screen/comman/IconView";
 import { MdBlockFlipped } from "react-icons/md";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { FaRegCircleStop } from "react-icons/fa6";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  StopOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
     {
       key: "all",
       label: "All",
-      icon: <IconView icon={FaList} />,
-    },
-    {
-      key: "approved",
-      label: "Approved",
-      icon: <IconView icon={FaRegCheckCircle} />,
+      icon: <UnorderedListOutlined />,
     },
     {
       key: "pending",
       label: "Pending",
-      icon: <IconView icon={FaRegClock} />,
-    },
-    {
-      key: "rejected",
-      label: "Rejected",
-      icon: <IconView icon={IoMdCloseCircleOutline} />,
-    },
-    {
-      key: "paused",
-      label: "Paused",
-      icon: <IconView icon={FaRegCircleStop} />,
+      icon: <ClockCircleOutlined />,
     },
 
     {
+      key: "approved",
+      label: "Approved",
+      icon: <CheckCircleOutlined />,
+    },
+
+    {
+      key: "rejected",
+      label: "Rejected",
+      icon: <CloseCircleOutlined />,
+    },
+    {
       key: "blocked",
       label: "Blocked",
-      icon: <IconView icon={MdBlockFlipped} />,
+      icon: <StopOutlined />,
     },
   ];
   const router = useRouter();

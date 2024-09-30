@@ -1,39 +1,37 @@
-// "use client";
-// import React, { useState, useRef, useMemo } from "react";
-// import JoditEditor from "jodit-react";
-
-// const Example = ({ placeholder }) => {
-//   const editor = useRef(null);
-//   const [content, setContent] = useState("");
-
-//   const config = useMemo(
-//     () => ({
-//       readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-//       placeholder: placeholder || "Start typings...",
-//     }),
-//     [placeholder]
-//   );
-
-//   return (
-//     <JoditEditor
-//       ref={editor}
-//       value={content}
-//       config={config}
-//       tabIndex={1} // tabIndex of textarea
-//       onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-//       onChange={(newContent) => {}}
-//     />
-//   );
-// };
-
-// export default Example;
-
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
+import { PopupEditor } from "../../../../../screen/comman/Editor";
+import { Button, Card } from "antd";
+import {
+  getCommunityTermAndConditions,
+  updateCommunityTermAndConditions,
+} from "../../../../../graphql/actions/group/setting";
 
 const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+  const [update, { loading }] = updateCommunityTermAndConditions();
+  const { data, loading: loadContent } = getCommunityTermAndConditions();
+  const [content, setContent] = useState("");
 
-export default page
+  useEffect(() => {
+    setContent(data?.getCommunityTermAndConditions);
+  }, [data]);
+
+  return (
+    <Card
+      extra={
+        <Button type="primary" loading={loading}>
+          Save
+        </Button>
+      }
+    >
+      {!loadContent && (
+        <PopupEditor
+          update={update}
+          content={data?.getCommunityTermAndConditions}
+        />
+      )}
+    </Card>
+  );
+};
+
+export default page;

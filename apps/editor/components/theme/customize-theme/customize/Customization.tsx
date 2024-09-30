@@ -11,14 +11,11 @@ import Cover from "../../../../screen/comman/Cover";
 import { getFaviconIcon, updateFiviconIcon } from "../../../../graphql/actions";
 
 const Customization = () => {
-
-
   const { data, loading } = getFaviconIcon();
   const [update, { loading: loadingBtn }] = updateFiviconIcon({});
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-
     console.log("Received values of form: ", values);
 
     update({
@@ -39,18 +36,18 @@ const Customization = () => {
   };
 
   const [coverLogo, setCoverLogo] = useState(null);
-  const [imageUrl, setImageUrl] = useState(
-    null
-  );
+  const [imageUrl, setImageUrl] = useState(null);
 
   const [coverFavicon, setCoverFavicon] = useState("");
-  const [faviconUrl, setFaviconUrl] = useState(
-    ``
-  );
+  const [faviconUrl, setFaviconUrl] = useState(``);
   useEffect(() => {
-    setImageUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`)
-    setFaviconUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`)
-  }, [data?.getFaviconIcon])
+    setImageUrl(
+      `https://thrico.blr1.cdn.digitaloceanspaces.com/${data?.getFaviconIcon?.logo}`
+    );
+    setFaviconUrl(
+      `https://thrico.blr1.cdn.digitaloceanspaces.com/${data?.getFaviconIcon?.logo}`
+    );
+  }, [data?.getFaviconIcon]);
 
   return (
     <Card loading={loading}>

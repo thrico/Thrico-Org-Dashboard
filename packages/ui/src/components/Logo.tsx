@@ -5,11 +5,11 @@ const Logo = ({ logo, name }) => {
   return (
     <>
       <Image
-        alt={`https://cdn.thrico.network/${name}`}
+        alt={`https://thrico.blr1.cdn.digitaloceanspaces.com/${name}`}
         width={70}
         style={{ objectFit: "contain" }}
         height={50}
-        src={`https://cdn.thrico.network/${logo}`}
+        src={`https://thrico.blr1.cdn.digitaloceanspaces.com/${logo}`}
       />
     </>
   );

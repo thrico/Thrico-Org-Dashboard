@@ -25,7 +25,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     },
 
     {
-      key: "customization/dropdown",
+      key: "customization/sort",
       label: "Customization",
       icon: <IconView icon={RiEditCircleFill} />,
     },

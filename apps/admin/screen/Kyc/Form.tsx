@@ -47,7 +47,7 @@ const KycForm = ({ data }) => {
   const [domain, setDomain] = useState(randomDomain);
   const [logo, setLogo] = useState(null);
   const [logoPreview, setLogoPreview] = useState(
-    "https://cdn.thrico.network/Thrico_LogoMark_Color.png"
+    "https://thrico.blr1.cdn.digitaloceanspaces.com/Thrico_LogoMark_Color.png"
   );
 
   const onSubmit = () => {

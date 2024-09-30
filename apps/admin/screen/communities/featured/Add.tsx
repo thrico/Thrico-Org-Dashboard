@@ -7,9 +7,7 @@ const Add = () => {
   const { data, loading, refetch } = getAllGroup({
     variables: {
       input: {
-        all: true,
-        isApproved: false,
-        isBlocked: false,
+        status: "ALL",
       },
     },
   });

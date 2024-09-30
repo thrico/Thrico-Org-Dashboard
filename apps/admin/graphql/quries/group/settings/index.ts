@@ -21,3 +21,26 @@ export const UPDATE_SETTINGS = gql`
     }
   }
 `;
+export const COMMUNITY_TERMS_AND_CONDITIONS = gql`
+  query Query {
+    getCommunityTermAndConditions
+  }
+`;
+
+export const UPDATE_COMMUNITY_TERMS_AND_CONDITIONS = gql`
+  mutation UpdateCommunityTermAndConditions($input: updateTermAndConditions) {
+    updateCommunityTermAndConditions(input: $input)
+  }
+`;
+
+export const COMMUNITY_GUIDELINE = gql`
+  query Query {
+    getCommunityGuidelines
+  }
+`;
+
+export const UPDATE_COMMUNITY_GUIDELINE = gql`
+  mutation updateCommunityGuidelines($input: updateTermAndConditions) {
+    updateCommunityGuidelines(input: $input)
+  }
+`;

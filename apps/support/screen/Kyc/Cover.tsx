@@ -93,7 +93,7 @@ const Cover = ({ imageUrl, setImageUrl, setCover, buttonText }: cover) => {
             src={
               imageUrl
                 ? imageUrl
-                : "https://cdn.thrico.network/defaultEventCover.png"
+                : "https://thrico.blr1.cdn.digitaloceanspaces.com/defaultEventCover.png"
             }
             alt="alt"
             width={"100%"}

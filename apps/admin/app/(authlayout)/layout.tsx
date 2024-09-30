@@ -48,58 +48,123 @@ const items: MenuProps["items"] = [
   },
   {
     key: "user",
-    label: "AllUser",
-    children: [
-      {
-        key: "/user",
-        type: "group",
-        label: (
-          <Link href={"/user"}>
-            <Typography style={{ color: "white" }}>All User</Typography>
-          </Link>
-        ),
-      },
 
+    label: (
+      <Link href={"/user"}>
+        <Typography style={{ color: "white" }}>Manage User</Typography>
+      </Link>
+    ),
+    children: [
       {
         key: "/user?value=approved-user",
         type: "group",
         label: (
-          <Link href={"/user?value=approved-user"}>
+          <Link href={"/user/approved"}>
             <Typography style={{ color: "white" }}>Approved</Typography>
           </Link>
         ),
       },
       {
-        key: "/user?value=requested",
+        key: "/user?value=approved-user",
         type: "group",
         label: (
-          <Link href={"/user?value=requested"}>
-            <Typography style={{ color: "white" }}> Request</Typography>
+          <Link href={"/user/pending"}>
+            <Typography style={{ color: "white" }}>Pending</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/user?value=approved-user",
+        type: "group",
+        label: (
+          <Link href={"/user/pending"}>
+            <Typography style={{ color: "white" }}>Rejected</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/user?value=approved-user",
+        type: "group",
+        label: (
+          <Link href={"/user/blocked"}>
+            <Typography style={{ color: "white" }}>Blocked</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/user?value=approved-user",
+        type: "group",
+        label: (
+          <Link href={"/user/settings"}>
+            <Typography style={{ color: "white" }}>Settings</Typography>
           </Link>
         ),
       },
     ],
     icon: <UserOutlined />,
   },
-  // {
-  //   key: "communities",
-  //   label: (
-  //     <Link href={"/communities"}>
-  //       <Typography style={{ color: "white" }}>Communities</Typography>
-  //     </Link>
-  //   ),
-  //   icon: <MdGroup />,
-  // },
-  // {
-  //   key: "Events",
-  //   label: (
-  //     <Link href={"/mentorship"}>
-  //       <Typography style={{ color: "white" }}>Events</Typography>
-  //     </Link>
-  //   ),
+  {
+    key: "communities",
+    label: (
+      <Link href={"/communities"}>
+        <Typography style={{ color: "white" }}>Communities</Typography>
+      </Link>
+    ),
+    children: [
+      {
+        key: "/communities/approval",
+        type: "group",
+        label: (
+          <Link href={"/user/approved"}>
+            <Typography style={{ color: "white" }}>Manage Approvals</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/communities/customization",
+        type: "group",
+        label: (
+          <Link href={"/user/pending"}>
+            <Typography style={{ color: "white" }}>Customization</Typography>
+          </Link>
+        ),
+      },
+      {
+        key: "/communities/settings",
+        type: "group",
+        label: (
+          <Link href={"/communities/settings"}>
+            <Typography style={{ color: "white" }}>Setting</Typography>
+          </Link>
+        ),
+      },
+      ,
+    ],
+    icon: <MdGroup />,
+  },
+  {
+    key: "Events",
+    label: (
+      <Link href={"/mentorship"}>
+        <Typography style={{ color: "white" }}>Events</Typography>
+      </Link>
+    ),
 
-  //   icon: <CalendarOutlined />,
-  // },
+    icon: <CalendarOutlined />,
+  },
+
+  {
+    key: "announcements",
+    label: (
+      <Link href={"/announcements"}>
+        <Typography style={{ color: "white" }}>
+          Announcements & Highlights
+        </Typography>
+      </Link>
+    ),
+
+    icon: <CalendarOutlined />,
+  },
 
   // {
   //   key: "MarketPlace",

@@ -8,9 +8,7 @@ const page = () => {
   const { data, loading } = getAllGroup({
     variables: {
       input: {
-        all: false,
-        isApproved: false,
-        isBlocked: false,
+        status: "PENDING",
       },
     },
   });

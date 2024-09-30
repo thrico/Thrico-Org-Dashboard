@@ -34,7 +34,6 @@ export function ApolloWrapper({ children, host }: props) {
     const uploadLink = createUploadLink({
       uri: host,
     });
-51
     const link = errorControl.concat(uploadLink);
 
     const authMiddleware = new ApolloLink((operation, forward) => {

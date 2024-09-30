@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
-import { Badge, Image, Space, Table, Tag } from "antd";
+import { Avatar, Badge, Image, Space, Table, Tag, Typography } from "antd";
 import type { TableProps } from "antd";
 import Actions from "./Actions";
 import moment from "moment";
 import { DataType } from "./ts-types";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
 
 const columns: TableProps<DataType>["columns"] = [
   {
@@ -13,13 +18,35 @@ const columns: TableProps<DataType>["columns"] = [
     title: "Cover",
     dataIndex: "cover",
     key: "cover",
-    render: (_, { cover }) => (
-      <Image
-        width={100}
-        height={100}
-        style={{ objectFit: "cover" }}
-        src={`https://cdn.thrico.network/${cover}`}
-      />
+    render: (_, { cover, status }) => (
+      <>
+        <Space>
+          <Avatar
+            src={`https://thrico.blr1.cdn.digitaloceanspaces.com/${cover}`}
+          />
+
+          {status === "APPROVED" && (
+            <Tag color="green" icon={<CheckCircleOutlined />}>
+              {status}
+            </Tag>
+          )}
+          {status === "BLOCKED" && (
+            <Tag color="red" icon={<StopOutlined />}>
+              {status}
+            </Tag>
+          )}
+          {status === "PENDING" && (
+            <Tag color="orange" icon={<StopOutlined />}>
+              {status}
+            </Tag>
+          )}
+          {status === "REJECTED" && (
+            <Tag color="red" icon={<CloseCircleOutlined />}>
+              {status}
+            </Tag>
+          )}
+        </Space>
+      </>
     ),
   },
   {
@@ -35,28 +62,7 @@ const columns: TableProps<DataType>["columns"] = [
     dataIndex: "createdAt",
     render: (_, { createdAt }) => <>{moment(createdAt).fromNow()}</>,
   },
-  {
-    width: 150,
-    title: "Status",
-    dataIndex: "name",
-    key: "name",
-    render: (text, { isActive, isBlocked, isApproved }) => (
-      <>
-        {isBlocked && <Badge status="processing" />}
-        {!isApproved && (
-          <Tag color="blue" icon={<Badge status="processing" />}>
-            Pending
-          </Tag>
-        )}
 
-        {isApproved && (
-          <Tag color="green" icon={<Badge status="success" />}>
-            Approved
-          </Tag>
-        )}
-      </>
-    ),
-  },
   {
     title: "Action",
     key: "action",

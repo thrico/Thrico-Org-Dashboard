@@ -6,6 +6,8 @@ import {
   GET_USER_DETIALS,
 } from "../../quries/user";
 
+export const getUser = () => useQuery(GET_ALL_USER);
+
 export const getAllUser = (options: any) => useQuery(GET_ALL_USER, options);
 
 export const getUserDetailsById = (options: any) =>
