@@ -41,12 +41,8 @@ const Customization = () => {
   const [coverFavicon, setCoverFavicon] = useState("");
   const [faviconUrl, setFaviconUrl] = useState(``);
   useEffect(() => {
-    setImageUrl(
-      `https://thrico.blr1.cdn.digitaloceanspaces.com/${data?.getFaviconIcon?.logo}`
-    );
-    setFaviconUrl(
-      `https://thrico.blr1.cdn.digitaloceanspaces.com/${data?.getFaviconIcon?.logo}`
-    );
+    setImageUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`);
+    setFaviconUrl(`https://cdn.thrico.network/${data?.getFaviconIcon?.logo}`);
   }, [data?.getFaviconIcon]);
 
   return (

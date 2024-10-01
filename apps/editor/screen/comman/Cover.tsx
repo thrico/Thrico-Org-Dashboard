@@ -100,7 +100,7 @@ const Cover = ({
             src={
               imageUrl
                 ? imageUrl
-                : "https://thrico.blr1.cdn.digitaloceanspaces.com/defaultLogo.webp"
+                : "https://cdn.thrico.network/defaultLogo.webp"
             }
             alt="alt"
             width={"100%"}

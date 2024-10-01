@@ -21,9 +21,7 @@ const columns: TableProps<DataType>["columns"] = [
     render: (_, { cover, status }) => (
       <>
         <Space>
-          <Avatar
-            src={`https://thrico.blr1.cdn.digitaloceanspaces.com/${cover}`}
-          />
+          <Avatar src={`https://cdn.thrico.network/${cover}`} />
 
           {status === "APPROVED" && (
             <Tag color="green" icon={<CheckCircleOutlined />}>

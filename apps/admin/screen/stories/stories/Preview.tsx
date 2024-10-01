@@ -13,8 +13,8 @@ const Preview = ({ data }) => {
         <Image
           src={
             data?.cover
-              ? `https://thrico.blr1.cdn.digitaloceanspaces.com/${data?.cover}`
-              : "https://thrico.blr1.cdn.digitaloceanspaces.com/defaultEventCover.png"
+              ? `https://cdn.thrico.network/${data?.cover}`
+              : "https://cdn.thrico.network/defaultEventCover.png"
           }
           alt="alt"
           layout="fill"

@@ -47,7 +47,7 @@ const Actions = ({ data }: { data: DataType }) => {
           width={100}
           height={100}
           style={{ objectFit: "cover" }}
-          src={`https://thrico.blr1.cdn.digitaloceanspaces.com/${data.cover}`}
+          src={`https://cdn.thrico.network/${data.cover}`}
         />
       ),
     },
