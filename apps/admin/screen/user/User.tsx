@@ -11,7 +11,7 @@ const User = ({ status }) => {
       },
     },
   });
-  console.log(data);
+
   return <List loading={loading} dataSource={data?.getAllUser} />;
 };
 

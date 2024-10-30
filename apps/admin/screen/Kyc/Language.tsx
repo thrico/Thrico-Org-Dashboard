@@ -15,7 +15,7 @@ const Language = ({ initialValue }) => {
       initialValue={initialValue}
       rules={[{ required: true, message: "Please input your phone number!" }]}
     >
-      <Select>
+      <Select showSearch>
         {data.map((set, key) => (
           <Option key={key} value={set.code}>
             {set.name}({set.nativeName})

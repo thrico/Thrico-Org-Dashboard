@@ -72,7 +72,7 @@ const Logo = ({ imageUrl, setImageUrl, setCover, buttonText }: cover) => {
   return (
     <>
       <Form.Item name="logo" label="Upload Logo">
-        <ImgCrop rotationSlider aspectSlider>
+        <ImgCrop rotationSlider aspect={10 / 3} showGrid showReset aspectSlider>
           <Upload
             style={{ width: "100%" }}
             showUploadList={false}
@@ -81,7 +81,11 @@ const Logo = ({ imageUrl, setImageUrl, setCover, buttonText }: cover) => {
             onChange={handleChange}
           >
             {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: "100%" , height: 100 }} />
+              <img
+                src={imageUrl}
+                alt="avatar"
+                style={{ width: "100%", height: 100 }}
+              />
             ) : (
               uploadButton
             )}

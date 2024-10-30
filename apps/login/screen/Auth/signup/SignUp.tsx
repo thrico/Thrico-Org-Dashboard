@@ -4,7 +4,7 @@ import React from "react";
 import AuthLayout from "../layout/AuthLayout";
 import { Card, Flex, Typography } from "antd";
 import Link from "next/link";
-import Image from "next/image";
+
 import LoginForm from "./Form";
 
 const SignUp = () => {
