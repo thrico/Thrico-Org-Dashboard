@@ -9,6 +9,7 @@ const Footer = () => {
   return (
     <Flex
       style={{
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
         background: colorBgContainer,
         padding: 10,
         width: "100%",

@@ -4,6 +4,8 @@ import React from "react";
 import { useTokenStore } from "@repo/ui/store";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { useLazyQuery } from "@apollo/client";
+import { getCheckUser } from "../../components/graphql/actions";
 const Auth = () => {
   const searchParams = useSearchParams();
   const { token } = useTokenStore((state) => ({
@@ -14,11 +16,16 @@ const Auth = () => {
   const host = searchParams.get("host");
   const router = useRouter();
 
+  const [search, { data }] = getCheckUser();
+
   React.useEffect(() => {
     if (token !== null) {
-      router.push(`${host}/auth/callback?code=${token}&path=${path}`);
+      search();
+      // router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`);
+      router.push(
+        `${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`
+      );
     }
   }, [token, path]);
 

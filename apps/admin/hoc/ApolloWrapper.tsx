@@ -10,7 +10,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import toast from "react-hot-toast";
 import { useTokenStore } from "@repo/ui/store";
-      //@ts-ignore
+//@ts-ignore
 import { createUploadLink } from "apollo-upload-client";
 interface props {
   children?: any;
@@ -35,7 +35,7 @@ export function ApolloWrapper({ children, host }: props) {
     const uploadLink = createUploadLink({
       uri: host,
     });
-51
+
     const link = errorControl.concat(uploadLink);
 
     const authMiddleware = new ApolloLink((operation, forward) => {
@@ -44,8 +44,8 @@ export function ApolloWrapper({ children, host }: props) {
           authorization:
             localStorage.getItem("token") === null
               ? null
-              //@ts-ignore
-              : JSON.parse(localStorage?.getItem("token")).state.token,
+              : //@ts-ignore
+                JSON.parse(localStorage?.getItem("token")).state.token,
           "Apollo-Require-Preflight": "true",
         },
       });

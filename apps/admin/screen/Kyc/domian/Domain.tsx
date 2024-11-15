@@ -20,11 +20,13 @@ const Domain = ({
   });
 
   React.useEffect(() => {
-    refetch({
-      input: {
-        domain: domain,
-      },
-    });
+    if (domain !== "") {
+      refetch({
+        input: {
+          domain: domain,
+        },
+      });
+    }
   }, [domain]);
 
   return (

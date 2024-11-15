@@ -12,7 +12,7 @@ const theme = {
   token: {
     borderRadiusLG: 10,
     // Seed Token
-    colorPrimary: "#013DC4",
+    colorPrimary: "#0866FF",
     borderRadius: 2,
     fontSize: 14,
     fontFamily: "'Work Sans', sans-serif;",

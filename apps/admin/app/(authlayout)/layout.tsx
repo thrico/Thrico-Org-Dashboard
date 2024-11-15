@@ -24,7 +24,9 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const { data, loading } = getEntity();
+  console.log(data);
   const check = data?.getEntity?.entity;
+  console.log(check);
   return (
     <>
       {!loading && (

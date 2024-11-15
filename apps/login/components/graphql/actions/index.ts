@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import {
-
   GET_PROFILE,
   GET_USER,
   LOGIN,
@@ -25,4 +24,4 @@ export const userProfile = () => useQuery(GET_PROFILE);
 export const logoutUser = (onCompleted: any) =>
   useMutation(LOGOUT, onCompleted);
 
-
+export const getCheckUser = () => useLazyQuery(GET_USER);

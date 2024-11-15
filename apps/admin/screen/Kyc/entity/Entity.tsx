@@ -84,7 +84,7 @@ const Entity = ({
           allowClear
         >
           {data?.getEntityType?.map((set) => (
-            <Option value={set?.id}>{set?.title}</Option>
+            <Option value={set?.title}>{set?.title}</Option>
           ))}
         </Select>
       </Form.Item>
@@ -102,7 +102,7 @@ const Entity = ({
           allowClear
         >
           {data?.getIndustryType?.map((set) => (
-            <Option value={set?.id}>{set?.title}</Option>
+            <Option value={set?.title}>{set?.title}</Option>
           ))}
         </Select>
       </Form.Item>

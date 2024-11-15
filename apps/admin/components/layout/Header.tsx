@@ -24,6 +24,7 @@ export const Navbar = () => {
   return (
     <Header
       style={{
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
         padding: 0,
         background: colorBgContainer,
         overflow: "auto",

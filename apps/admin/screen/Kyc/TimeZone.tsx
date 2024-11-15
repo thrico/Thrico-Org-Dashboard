@@ -12,6 +12,10 @@ const country = [
     label: "USA",
     value: "US",
   },
+  {
+    label: "UAE",
+    value: "UAE",
+  },
 ];
 const TimeZone = ({ initialValue }) => {
   return (

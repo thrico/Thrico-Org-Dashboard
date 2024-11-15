@@ -27,7 +27,7 @@ const KycForm = ({ data }) => {
   const [profile, setProfile] = useState({
     designation: "",
     phone: "",
-    timeZone: "",
+    country: "",
     language: "",
     fullName: data?.getEntity?.firstName + " " + data?.getEntity?.lastName,
     email: data?.getEntity?.email,

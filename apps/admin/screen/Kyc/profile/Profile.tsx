@@ -67,7 +67,7 @@ const Profile = ({ profile, setProfile, setCurrent }) => {
         </Form.Item>
 
         <PhoneNumber initialValue={profile?.phone} />
-        <TimeZone initialValue={profile?.timeZone} />
+        <TimeZone initialValue={profile?.country} />
         <Language initialValue={profile?.language} />
         <Flex style={{ width: "100%" }} justify="center" align="center">
           <Form.Item>
