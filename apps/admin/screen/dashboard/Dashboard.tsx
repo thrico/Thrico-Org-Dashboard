@@ -11,7 +11,7 @@ const Dashboard = () => {
     >
       <Card
         extra={
-          <>
+        <>
             <a target="_blank" href="https://thrico.com/privacy-policy/">
               Agreement
             </a>

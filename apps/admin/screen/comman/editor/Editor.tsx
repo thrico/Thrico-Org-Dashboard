@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 // => Tiptap packages
-import { useEditor, EditorContent, Editor, BubbleMenu } from "@tiptap/react";
+import { EditorContent, Editor, BubbleMenu } from "@tiptap/react";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
@@ -13,6 +13,8 @@ import Strike from "@tiptap/extension-strike";
 import Code from "@tiptap/extension-code";
 import History from "@tiptap/extension-history";
 import TextAlign from "@tiptap/extension-text-align";
+import CharacterCount from "@tiptap/extension-character-count";
+import Placeholder from "@tiptap/extension-placeholder";
 // Custom
 let content = `
 <p>With the History extension the Editor will keep track of your changes. And if you think you made a mistake, you can redo your changes. Try it out, change the content and hit the undo button!</p>
@@ -27,9 +29,16 @@ let content = `
 `;
 
 import * as Icons from "./Icons";
+import Count from "./Count";
+const limit = 1000;
 
-export function PopupEditor({ content, update }) {
-  const editor = useEditor({
+interface PopupEditorProps {
+  content: string;
+  update: (args: { variables: { input: { content: string } } }) => void;
+}
+
+export function PopupEditor({ content, update }: PopupEditorProps) {
+  const editor = new Editor({
     extensions: [
       Document,
       History,
@@ -45,6 +54,13 @@ export function PopupEditor({ content, update }) {
       Code,
       TextAlign.configure({
         types: ["heading", "paragraph"],
+      }),
+      CharacterCount.configure({
+        limit,
+      }),
+      Placeholder.configure({
+        // Use a placeholder:
+        placeholder: "Write something …",
       }),
     ],
     content,
@@ -64,19 +80,19 @@ export function PopupEditor({ content, update }) {
   const [url, setUrl] = useState<string>("");
 
   const toggleBold = useCallback(() => {
-    editor.chain().focus().toggleBold().run();
+    editor.chain().focus().toggleMark("bold").run();
   }, [editor]);
 
   const toggleUnderline = useCallback(() => {
-    editor.chain().focus().toggleUnderline().run();
+    editor.chain().focus().toggleMark("underline").run();
   }, [editor]);
 
   const toggleItalic = useCallback(() => {
-    editor.chain().focus().toggleItalic().run();
+    editor.chain().focus().toggleMark("italic").run();
   }, [editor]);
 
   const toggleStrike = useCallback(() => {
-    editor.chain().focus().toggleStrike().run();
+    editor.chain().focus().toggleMark("strike").run();
   }, [editor]);
 
   const toggleCode = useCallback(() => {
@@ -184,19 +200,9 @@ export function PopupEditor({ content, update }) {
           Justify
         </button>
       </BubbleMenu>
+      <Count editor={editor} limit={limit} />
 
       <EditorContent editor={editor} />
-
-      {/* <LinkModal
-        url={url}
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Edit Link Modal"
-        closeModal={closeModal}
-        onChangeUrl={(e) => setUrl(e.target.value)}
-        onSaveLink={saveLink}
-        onRemoveLink={removeLink}
-      /> */}
     </div>
   );
 }

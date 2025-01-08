@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 
-import { Table, Divider, Tag, Pagination, Avatar } from "antd";
+import { Table, Pagination, Avatar } from "antd";
 
-import Delete from "../category/Delete";
 import { getAllMentor } from "../../../graphql/actions/mentorship/category";
-import {
-  BlockOutlined,
-  CheckCircleOutlined,
-  PauseCircleOutlined,
-} from "@ant-design/icons";
+import { CheckCircleOutlined, PauseCircleOutlined } from "@ant-design/icons";
 import Actions from "./Actions";
+import { MentorStatus } from "../../../components/layout/constants/ts-types";
 
 const columns = [
   {
@@ -32,7 +28,9 @@ const columns = [
     title: "Avatar",
     dataIndex: "user",
     key: "user",
-    render: (text) => <Avatar src={text?.alumni?.avatar} />,
+    render: (text) => (
+      <Avatar src={`https://cdn.thrico.network/${text?.user?.avatar}`} />
+    ),
   },
 
   {
@@ -41,7 +39,7 @@ const columns = [
     key: "name",
     render: (text, record) => (
       <>
-        {text?.alumni?.firstName} {text?.alumni?.lastName}
+        {text?.user?.firstName} {text?.user?.lastName}
       </>
     ),
   },
@@ -68,27 +66,18 @@ const columns = [
   },
 ];
 
-const pageSize = 2;
+interface AllMentorProps {
+  status: MentorStatus;
+}
 
-const getData = (current, pageSize) => {
-  // Normally you should get the data from the server
-  return data.slice((current - 1) * pageSize, current * pageSize);
-};
-
-// Custom pagination component
-const MyPagination = ({ total, onChange, current }) => {
-  return (
-    <Pagination
-      onChange={onChange}
-      total={total}
-      current={current}
-      pageSize={pageSize}
-    />
-  );
-};
-
-const AllMentor = () => {
-  const { loading, data } = getAllMentor({});
+const AllMentor = ({ status }: AllMentorProps) => {
+  const { loading, data } = getAllMentor({
+    variables: {
+      input: {
+        status,
+      },
+    },
+  });
   const [current, setCurrent] = useState(1);
 
   return (
@@ -99,11 +88,6 @@ const AllMentor = () => {
         dataSource={data?.getAllMentor}
         pagination={false}
       />
-      {/* <MyPagination
-        total={data.length}
-        current={current}
-        onChange={setCurrent}
-      /> */}
     </>
   );
 };

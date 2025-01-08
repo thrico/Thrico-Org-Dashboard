@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 // import { Card, List, Tabs, TabsProps } from "antd";
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -105,14 +105,20 @@
 
 // export default RootLayout;
 
+import React from "react";
 
-
-import React from 'react'
+import { Button, Card } from "antd";
+import { PopupEditor } from "../../../../screen/comman/editor/Editor";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <Card
+      title="Mentoring Guides"
+      extra={<Button loading={true}>Update</Button>}
+    >
+      <PopupEditor content="Initial content" update={() => {}} />
+    </Card>
+  );
+};
 
-export default page
+export default page;

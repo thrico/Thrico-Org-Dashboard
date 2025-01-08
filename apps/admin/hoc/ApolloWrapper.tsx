@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import { ApolloLink, HttpLink, createHttpLink } from "@apollo/client";
 import {
@@ -12,10 +13,12 @@ import toast from "react-hot-toast";
 import { useTokenStore } from "@repo/ui/store";
 //@ts-ignore
 import { createUploadLink } from "apollo-upload-client";
+
 interface props {
   children?: any;
   host: string | undefined;
 }
+
 export function ApolloWrapper({ children, host }: props) {
   const { token } = useTokenStore((state) => ({
     token: state.token,
@@ -42,11 +45,13 @@ export function ApolloWrapper({ children, host }: props) {
       operation.setContext({
         headers: {
           authorization:
+            typeof window !== "undefined" &&
             localStorage.getItem("token") === null
               ? null
-              : //@ts-ignore
-                JSON.parse(localStorage?.getItem("token")).state.token,
+              : typeof window !== "undefined" &&
+                JSON.parse(localStorage?.getItem("token") || "{}").state?.token,
           "Apollo-Require-Preflight": "true",
+          // Add the IP to headers
         },
       });
 
@@ -58,6 +63,7 @@ export function ApolloWrapper({ children, host }: props) {
       cache: new NextSSRInMemoryCache(),
     });
   }
+
   return (
     <ApolloNextAppProvider makeClient={makeClient}>
       {children}

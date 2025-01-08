@@ -28,7 +28,7 @@ const User = () => {
           <Flex vertical style={{ width: "95%" }}>
             <Flex vertical>
               <Title level={2}>
-                Welcome, {profile?.userProfile.firstName}{" "}
+                Welcome, {profile?.userProfile?.firstName}{" "}
               </Title>
               <Flex
                 style={{ width: "100%", marginTop: "1rem" }}

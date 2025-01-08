@@ -2,9 +2,11 @@
 
 import React from "react";
 import AllMentor from "../../../../../screen/mentorship/mentors/AllMentors";
+import { MentorStatus } from "../../../../../components/layout/constants/ts-types";
+// Adjust the import path as necessary
 
 const page = () => {
-  return <AllMentor />;
+  return <AllMentor status={MentorStatus.ALL} />;
 };
 
 export default page;

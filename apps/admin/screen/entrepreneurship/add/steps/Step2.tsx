@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input, Segmented, Space } from "antd";
 import React from "react";
-import Editor from "../../../comman/Editor";
+// import Editor from "../../../comman/Editor";
 import { step2Props } from "../../ts-type";
 
 interface props {
@@ -27,7 +27,7 @@ const Step2 = ({ next, prev, step2Data, setStep2Data }: props) => {
     >
       <Flex style={{ width: "100%" }} gap={10} wrap="wrap">
         <Form.Item style={{ width: "100%" }} hasFeedback label="Description">
-          <Editor />
+          {/* <Editor /> */}
         </Form.Item>
 
         <Form.Item

@@ -4,6 +4,7 @@ import {
   Divider,
   Dropdown,
   Flex,
+  Popover,
   theme,
   Typography,
 } from "antd";
@@ -14,6 +15,7 @@ import { getEntity } from "../../graphql/actions";
 import { AppstoreOutlined } from "@ant-design/icons";
 import Search, { SearchProps } from "antd/es/input/Search";
 import GlobalSearch from "./Search";
+import MenuNavigation from "./MenuPop";
 export const Navbar = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -48,7 +50,9 @@ export const Navbar = () => {
           <Divider type="vertical" />
 
           <Flex gap={20} style={{ width: "70%" }}>
-            <Button icon={<AppstoreOutlined />}>Modules</Button>
+            <Popover content={<MenuNavigation />} title="Title" trigger="click">
+              <Button icon={<AppstoreOutlined />}>Modules</Button>
+            </Popover>
             <GlobalSearch />
           </Flex>
         </Flex>

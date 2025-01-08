@@ -31,12 +31,25 @@ const Actions = ({ data }) => {
 
   const items: MenuProps["items"] = [
     {
-      label: "Actions",
-      key: "7",
+      label: "View Details",
+      key: "1",
       onClick: () => showDrawer(),
     },
     {
       type: "divider",
+    },
+    {
+      label: "View  Services",
+      key: "2",
+      onClick: () => showDrawer(),
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: "View  Log",
+      key: "3",
+      onClick: () => showDrawer(),
     },
   ];
 

@@ -13,8 +13,23 @@ import {
 } from "@ant-design/icons";
 import { MdDashboardCustomize, MdGroup } from "react-icons/md";
 import Link from "next/link";
+import { SiCodementor } from "react-icons/si";
+import LogoutModal from "../../../../packages/ui/src/logout/Logout";
+interface SidebarProps {
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
+}
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
+  const [open, setOpen] = useState(false);
+  const handleOk = () => {
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
   const items: MenuProps["items"] = [
     {
       key: "General",
@@ -115,9 +130,49 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             </Link>
           ),
         },
-        ,
       ],
       icon: <MdGroup />,
+    },
+
+    {
+      key: "mentorship",
+      label: (
+        <Link href={"/mentorship"}>
+          <Typography style={{ color: "white" }}>Mentorship</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/mentorship",
+          type: "group",
+          label: (
+            <Link href={"/mentorship/"}>
+              <Typography style={{ color: "white" }}>
+                Manage Approvals
+              </Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/mentorship/customization",
+          type: "group",
+          label: (
+            <Link href={"/mentorship/customization"}>
+              <Typography style={{ color: "white" }}>Customization</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/mentorship/settings",
+          type: "group",
+          label: (
+            <Link href={"/mentorship/settings"}>
+              <Typography style={{ color: "white" }}>Setting</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <SiCodementor />,
     },
     {
       key: "Events",
@@ -143,255 +198,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       icon: <CalendarOutlined />,
     },
 
-    // {
-    //   key: "MarketPlace",
-    //   label: (
-    //     <Link href={"/mentorship"}>
-    //       <Typography style={{ color: "white" }}>MarketPlace</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <ShopOutlined />,
-    // },
-    // {
-    //   key: "Jobs",
-    //   label: (
-    //     <Link href={"/mentorship"}>
-    //       <Typography style={{ color: "white" }}>Jobs</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MdWork />,
-    // },
-
-    // {
-    //   key: "Mentorship",
-    //   label: (
-    //     <Link href={"/mentorship"}>
-    //       <Typography style={{ color: "white" }}>Mentorship</Typography>
-    //     </Link>
-    //   ),
-    //   children: [
-    //     {
-    //       key: "Mentors",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/mentorship/mentors"}>
-    //           <Typography style={{ color: "white" }}>Mentors</Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "Mentees",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/mentorship/mentees"}>
-    //           <Typography style={{ color: "white" }}>Mentees</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //   ],
-    //   icon: <UserOutlined />,
-    // },
-
-    // {
-    //   key: "alumni-stories",
-    //   label: (
-    //     <Link href={"/alumni-stories"}>
-    //       <Typography style={{ color: "white" }}>Alumni Stories</Typography>
-    //     </Link>
-    //   ),
-    //   children: [
-    //     {
-    //       key: "all",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/alumni-stories"}>
-    //           <Typography style={{ color: "white" }}>Stories</Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "category",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/alumni-stories/category"}>
-    //           <Typography style={{ color: "white" }}>Category</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //   ],
-    //   icon: <UserOutlined />,
-    // },
-
-    // {
-    //   key: "giving",
-    //   label: (
-    //     <Link href={"/giving"}>
-    //       <Typography style={{ color: "white" }}>Giving</Typography>
-    //     </Link>
-    //   ),
-    //   children: [
-    //     {
-    //       key: "all",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/giving"}>
-    //           <Typography style={{ color: "white" }}>Giving</Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "category",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/giving/category"}>
-    //           <Typography style={{ color: "white" }}>Category</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //   ],
-    //   icon: <UserOutlined />,
-    // },
-    // {
-    //   key: "Courses",
-    //   label: (
-    //     <Link href={"/courses"}>
-    //       <Typography style={{ color: "white" }}>Courses</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <BsBookmarkCheck />,
-    // },
-
-    // {
-    //   key: "entrepreneurship",
-    //   label: "Entrepreneurship",
-    //   children: [
-    //     {
-    //       key: "/user",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user"}>
-    //           <Typography style={{ color: "white" }}>Guide</Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "Challenges",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/entrepreneurship/challenges"}>
-    //           <Typography style={{ color: "white" }}>
-    //             Program and Challenges
-    //           </Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Startups</Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Mentors</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Investors</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Accelerators</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Coporates</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Partners</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>
-    //             Government Bodies
-    //           </Typography>
-    //         </Link>
-    //       ),
-    //     },
-
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>
-    //             Co Working Spaces
-    //           </Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Resources</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //     {
-    //       key: "/user?value=requested",
-    //       type: "group",
-    //       label: (
-    //         <Link href={"/user?value=requested"}>
-    //           <Typography style={{ color: "white" }}>Media</Typography>
-    //         </Link>
-    //       ),
-    //     },
-    //   ],
-
-    //   icon: <UserOutlined />,
-    // },
     {
       key: "/settings/appearance",
       label: "Setting",
@@ -408,61 +214,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       ],
       icon: <SettingOutlined />,
     },
-
-    // {
-    //   key: "Media",
-    //   label: (
-    //     <Link href={"/media"}>
-    //       <Typography style={{ color: "white" }}>Wall of fame</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MdFilterFrames />,
-    // },
-    // {
-    //   key: "Giving",
-    //   label: (
-    //     <Link href={"/media"}>
-    //       <Typography style={{ color: "white" }}>Giving</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MoneyCollectOutlined />,
-    // },
-
-    // {
-    //   key: "Stories",
-    //   label: (
-    //     <Link href={"/media"}>
-    //       <Typography style={{ color: "white" }}>Stories</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MdAmpStories />,
-    // },
-
-    // {
-    //   key: "Media",
-    //   label: (
-    //     <Link href={"/media"}>
-    //       <Typography style={{ color: "white" }}>Media</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MdArticle />,
-    // },
-
-    // {
-    //   key: "payments",
-
-    //   label: (
-    //     <Link href={process.env.NEXT_PUBLIC_PAYMENTS_URL ? process.env.NEXT_PUBLIC_PAYMENTS_URL : "/"}>
-    //       <Typography style={{ color: "white" }}>Payments</Typography>
-    //     </Link>
-    //   ),
-
-    //   icon: <MdPayment />,
-    // },
 
     {
       key: "cms",
@@ -486,7 +237,9 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
     {
       key: "Logout",
       label: (
-        <a href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`}>Logout</a>
+        <Typography onClick={() => handleOk()} style={{ color: "white" }}>
+          Logout
+        </Typography>
       ),
       icon: <LogoutOutlined />,
     },
@@ -494,51 +247,58 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 
   const pathName = usePathname();
   return (
-    <Sider
-      trigger={null}
-      style={{
-        overflow: "auto",
-        height: "100vh",
-        position: "fixed",
-        left: 0,
-        top: 0,
-        bottom: 0,
-      }}
-      collapsible
-      collapsed={collapsed}
-    >
-      <div className="demo-logo-vertical" />
-      <div
+    <>
+      <Sider
+        trigger={null}
         style={{
-          position: "absolute",
-          top: 20,
-
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+          top: 0,
+          bottom: 0,
         }}
+        collapsible
+        collapsed={collapsed}
       >
-        <Button
-          type="text"
-          icon={
-            collapsed ? (
-              <MenuUnfoldOutlined size={40} style={{ color: "white" }} />
-            ) : (
-              <MenuFoldOutlined size={40} style={{ color: "white" }} />
-            )
-          }
-          onClick={() => setCollapsed(!collapsed)}
+        <div className="demo-logo-vertical" />
+        <div
+          style={{
+            position: "absolute",
+            top: 20,
+
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            type="text"
+            icon={
+              collapsed ? (
+                <MenuUnfoldOutlined size={40} style={{ color: "white" }} />
+              ) : (
+                <MenuFoldOutlined size={40} style={{ color: "white" }} />
+              )
+            }
+            onClick={() => setCollapsed(!collapsed)}
+          />
+        </div>
+        <Menu
+          selectedKeys={[pathName]}
+          style={{ marginTop: "5rem" }}
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["4"]}
+          items={items}
         />
-      </div>
-      <Menu
-        selectedKeys={[pathName]}
-        style={{ marginTop: "5rem" }}
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={["4"]}
-        items={items}
-      />
-    </Sider>
+        <LogoutModal
+          open={open}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
+      </Sider>
+    </>
   );
 };
 

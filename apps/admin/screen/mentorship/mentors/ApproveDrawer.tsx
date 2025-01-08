@@ -37,7 +37,7 @@ const ApproveDrawer = ({ data, onClose, open }) => {
       label: "Name",
       children: (
         <p>
-          {user?.alumni?.firstName} {user?.alumni?.lastName}
+          {user?.user?.firstName} {user?.user?.lastName}
         </p>
       ),
     },
@@ -65,7 +65,8 @@ const ApproveDrawer = ({ data, onClose, open }) => {
       span: 3,
 
       key: "4",
-      label: "Add Youtube and vimeo  video for your future mentees",
+      label:
+        " Intro Video Url  (Add Youtube and vimeo  video for your future mentees)",
       children: <p>{introVideo}</p>,
     },
     {
@@ -80,6 +81,12 @@ const ApproveDrawer = ({ data, onClose, open }) => {
       label:
         "What, in your opinion, has been your greatest achievements so far? (Not publicly visible)",
       children: <p>{greatestAchievement}</p>,
+    },
+    {
+      span: 1,
+      key: "5",
+      label: "Featured Article",
+      children: <p>{featuredArticle}</p>,
     },
   ];
 

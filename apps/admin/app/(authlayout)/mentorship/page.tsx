@@ -1,14 +1,15 @@
 "use client";
 
 import React from "react";
-import AllMentor from "../../../screen/mentorship/mentors/AllMentors";
+import dynamic from "next/dynamic";
+
+const Dashboard = dynamic(
+  () => import("../../../screen/mentorship/dashboard/Dashboard"),
+  { ssr: false }
+);
 
 const page = () => {
-  return (
-    <div>
-      <AllMentor />
-    </div>
-  );
+  return <Dashboard />;
 };
 
 export default page;

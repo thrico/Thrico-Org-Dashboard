@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import { Button, Flex, Modal, Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 
-const Logout = ({ open, handleOk, handleCancel }) => {
+import { useRouter } from "next/navigation";
+interface LogoutProps {
+  open: boolean;
+  handleOk: () => void;
+  handleCancel: () => void;
+}
+
+const LogoutModal: React.FC<LogoutProps> = ({
+  open,
+  handleOk,
+  handleCancel,
+}) => {
+  const router = useRouter();
   const { Title, Paragraph, Text } = Typography;
   return (
     <>
       <Modal
         open={open}
         title=""
-        onOk={handleOk}
+        onOk={() =>
+          router.push(`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`)
+        }
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
@@ -35,4 +49,4 @@ const Logout = ({ open, handleOk, handleCancel }) => {
   );
 };
 
-export default Logout;
+export default LogoutModal;

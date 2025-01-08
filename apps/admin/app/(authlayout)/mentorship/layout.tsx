@@ -6,8 +6,8 @@ import MainBreadcrumb from "../../../screen/comman/BreadCrumb";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
+    { key: "dashboard", label: "Dashboard" },
     { key: "mentors", label: "Mentors" },
-    { key: "mentees", label: "Mentees" },
 
     { key: "category", label: "Category" },
     { key: "skills", label: "Skills" },
@@ -19,7 +19,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   ];
   const router = useRouter();
   const onChange = (key: string) => {
-    if (key === "all") router.push(`/mentorship`);
+    if (key === "dashboard") router.push(`/mentorship/`);
     else router.push(`/mentorship/${key}`);
   };
   const pathname = usePathname();

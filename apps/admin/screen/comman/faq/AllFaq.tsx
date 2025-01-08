@@ -9,7 +9,13 @@ interface DataType {
   description: string;
 }
 
-const AllFaq = ({ type, loading, data }) => {
+interface AllFaqProps {
+  type: string;
+  loading: boolean;
+  data: DataType[];
+}
+
+const AllFaq: React.FC<AllFaqProps> = ({ type, loading, data }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {

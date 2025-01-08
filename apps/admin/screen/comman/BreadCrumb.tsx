@@ -3,7 +3,11 @@ import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { usePathname } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { HomeOutlined, LeftCircleTwoTone } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  LeftCircleOutlined,
+  LeftCircleTwoTone,
+} from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 
 const MainBreadcrumb = () => {
@@ -22,8 +26,8 @@ const MainBreadcrumb = () => {
     <Breadcrumb style={{ margin: "16px 0" }}>
       {path.length !== 0 && (
         <>
-          <LeftCircleTwoTone
-            twoToneColor={colorPrimary}
+          <LeftCircleOutlined
+            color={colorPrimary}
             onClick={() => router.back()}
             style={{
               fontSize: "1.3rem",

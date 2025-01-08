@@ -7,7 +7,11 @@ import {
   ArrowDownOutlined,
   SwapOutlined,
 } from "@ant-design/icons";
-import { Area } from "@ant-design/plots";
+import Kpis from "../../comman/Kpis";
+import { faker } from "@faker-js/faker";
+const Area = React.lazy(() =>
+  import("@ant-design/plots").then((module) => ({ default: module.Area }))
+);
 
 const { Text, Title } = Typography;
 
@@ -49,47 +53,71 @@ export default function Component() {
 
   const activities = [
     {
-      avatar: "/placeholder.svg",
+      avatar: faker.image.avatar(),
       name: "Cheyenne Kenter",
-      action: "moved",
-      task: "Cloud Functionality",
-      target: "Completed",
+      action: "added",
+
       time: "5 minutes ago",
-      status: "🎉",
+      status: "feed 🎉",
     },
     {
-      avatar: "/placeholder.svg",
+      avatar: faker.image.avatar(),
       name: "Sterling Cooper",
-      action: "billed quote",
+      action: "added",
       amount: "$16,850.00",
       time: "3 hours ago",
       logo: "/placeholder.svg",
+      status: "feed 🎉",
     },
     {
-      avatar: "/placeholder.svg",
+      avatar: faker.image.avatar(),
       name: "Chance Philips",
-      action: "moved",
-      task: "Enterprise Planning",
-      target: "Completed",
+      action: "added",
+      feed: "Enterprise Planning",
       time: "5 minutes ago",
-      status: "🎉",
+      status: "Marketplace Listing 🎉",
     },
     {
-      avatar: "/placeholder.svg",
+      avatar: faker.image.avatar(),
       name: "Mira Bothman",
-      action: "moved the",
-      task: "DB Audit",
+      action: "added the",
+      feed: "DB Audit",
       deal: "Initech",
-      target: "Won",
       time: "Yesterday at 4:35pm",
+      status: "feed",
     },
     {
-      avatar: "/placeholder.svg",
+      avatar: faker.image.avatar(),
       name: "James Stanton",
       action: "added",
-      task: "Market Research",
-      target: "Backlog",
+      feed: "Market Research",
       time: "August 14 at 11:24am",
+      status: "news",
+    },
+  ];
+
+  const metricData = [
+    {
+      title: "Number of Users",
+      value: 58,
+      badge: "Last 28 days",
+      change: {
+        value: "10%",
+        label: "increase",
+        type: "positive" as "positive",
+      },
+    },
+    {
+      title: "Number of feed",
+      value: "1200",
+      badge: "Last 28 days",
+      change: { value: 90, label: "increase", type: "positive" as "positive" },
+    },
+    {
+      title: "Active",
+      value: 20,
+      badge: "Last 28 days",
+      change: { value: 2, label: "decrease", type: "negative" as "negative" },
     },
   ];
 
@@ -120,71 +148,11 @@ export default function Component() {
   return (
     <div style={{ padding: 24, maxWidth: 1200, margin: "0 auto" }}>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={8}>
-          <Card bodyStyle={{ backgroundColor: "rgba(24, 144, 255, 0.05)" }}>
-            <Space direction="vertical" size="small">
-              <Text type="secondary">Number of Users</Text>
-              <Space align="baseline">
-                <Title level={2} style={{ margin: 0 }}>
-                  58
-                </Title>
-                <Space>
-                  <SwapOutlined style={{ color: "#1677ff" }} />
-                  <Text type="secondary">
-                    18% <span style={{ fontSize: 12 }}>/month</span>
-                  </Text>
-                </Space>
-              </Space>
-            </Space>
-            <div style={{ marginTop: 8 }}>
-              <SparklineChart data={sparklineData.companies} color="#1677ff" />
-            </div>
-          </Card>
-        </Col>
-
-        <Col xs={24} md={8}>
-          <Card bodyStyle={{ backgroundColor: "rgba(82, 196, 26, 0.05)" }}>
-            <Space direction="vertical" size="small">
-              <Text type="secondary">Number of Feed</Text>
-              <Space align="baseline">
-                <Title level={2} style={{ margin: 0 }}>
-                  1.286
-                </Title>
-                <Space>
-                  <ArrowUpOutlined style={{ color: "#52c41a" }} />
-                  <Text type="secondary">
-                    22% <span style={{ fontSize: 12 }}>/month</span>
-                  </Text>
-                </Space>
-              </Space>
-            </Space>
-            <div style={{ marginTop: 8 }}>
-              <SparklineChart data={sparklineData.contacts} color="#52c41a" />
-            </div>
-          </Card>
-        </Col>
-
-        <Col xs={24} md={8}>
-          <Card bodyStyle={{ backgroundColor: "rgba(255, 77, 79, 0.05)" }}>
-            <Space direction="vertical" size="small">
-              <Text type="secondary">Total deals in pipeline</Text>
-              <Space align="baseline">
-                <Title level={2} style={{ margin: 0 }}>
-                  34
-                </Title>
-                <Space>
-                  <ArrowDownOutlined style={{ color: "#ff4d4f" }} />
-                  <Text type="secondary">
-                    8% <span style={{ fontSize: 12 }}>/month</span>
-                  </Text>
-                </Space>
-              </Space>
-            </Space>
-            <div style={{ marginTop: 8 }}>
-              <SparklineChart data={sparklineData.deals} color="#ff4d4f" />
-            </div>
-          </Card>
-        </Col>
+        {metricData.map((metric, index) => (
+          <Col xs={24} sm={12} lg={6} key={index}>
+            <Kpis metric={metric} />
+          </Col>
+        ))}
       </Row>
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
@@ -276,22 +244,7 @@ export default function Component() {
                     description={
                       <Space size={4}>
                         <Text>{item.action}</Text>
-                        {"amount" in item ? (
-                          <Text strong>{item.amount}</Text>
-                        ) : (
-                          <>
-                            <Text strong>{item.task}</Text>
-                            {item.deal && (
-                              <>
-                                <Text>deal for</Text>
-                                <Text strong>{item.deal}</Text>
-                              </>
-                            )}
-                            <Text>to</Text>
-                            <Text type="success">{item.target}</Text>
-                            {item.status && <Text>{item.status}</Text>}
-                          </>
-                        )}
+                        <Text>{item.status}</Text>
                       </Space>
                     }
                   />

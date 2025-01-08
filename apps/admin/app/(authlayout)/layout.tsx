@@ -1,13 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+
 import { Button, Layout, Menu, theme } from "antd";
 import { Navbar } from "../../components/layout/Header";
 import Sidebar from "../../components/layout/Sidebar";
@@ -15,6 +9,7 @@ import Footer from "../../components/layout/Footer";
 import withAuth from "../../utils/withAuth";
 import { getEntity } from "../../graphql/actions";
 import KycForm from "../../screen/Kyc/Form";
+import MainBreadcrumb from "../../screen/comman/BreadCrumb";
 const { Header, Sider, Content } = Layout;
 
 function RootLayout({ children }: { children: React.ReactNode }) {

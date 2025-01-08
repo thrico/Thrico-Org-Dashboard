@@ -43,35 +43,33 @@ export const DUPLICATE_MENTOR_CATEGORY = gql`
 `;
 
 export const GET_ALL_MENTOR = gql`
-  query GetAllMentor {
-    getAllMentor {
-      about
-      agreement
-      category {
-        createdAt
-        id
-        title
-      }
-      displayName
-      featuredArticle
-      greatestAchievement
+  query GetAllMentor($input: allStatusInput) {
+    getAllMentor(input: $input) {
       id
-      intro
-      introVideo
       isApproved
       isRequested
+      displayName
       slug
+      about
+      featuredArticle
+      greatestAchievement
+      intro
+      introVideo
       whyDoWantBecomeMentor
+      agreement
       user {
-        alumni {
+        user {
+          avatar
+          lastName
+          firstName
           aboutUser {
             currentPosition
           }
-
-          avatar
-          firstName
-          lastName
         }
+      }
+      category {
+        id
+        title
       }
     }
   }

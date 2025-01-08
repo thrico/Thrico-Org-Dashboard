@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { PopupEditor } from "../../../../../screen/comman/Editor";
+
 import { Button, Card } from "antd";
 import {
   getCommunityGuidelines,
   updateCommunityGuidelines,
 } from "../../../../../graphql/actions/group/setting";
+import { PopupEditor } from "../../../../../screen/comman/editor/Editor";
 
 const page = () => {
   const [update, { loading }] = updateCommunityGuidelines();
