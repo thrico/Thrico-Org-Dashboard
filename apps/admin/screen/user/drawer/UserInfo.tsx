@@ -9,6 +9,7 @@ import moment from "moment";
 import React from "react";
 
 const UserInfo = ({ data }) => {
+
   const columnsEducation: TableColumnsType = [
     {
       title: "Degree",
@@ -62,13 +63,13 @@ const UserInfo = ({ data }) => {
     },
   ];
 
-  const { profile, firstName, lastName, avatar, email } = data;
+  const { profile, firstName, lastName, avatar, email, location } = data;
 
   const items: DescriptionsProps["items"] = [
     {
       key: "1",
       label: "Avatar",
-      children: <Avatar src={avatar} />,
+      children: <Avatar src={`https://cdn.thrico.network/${avatar}`} />,
     },
     {
       key: "1",
@@ -101,36 +102,36 @@ const UserInfo = ({ data }) => {
     },
     {
       key: "5",
-      label: "About ",
+      label: "Location",
       children: (
-        <p>No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</p>
+        <p>{location?.name}</p>
       ),
     },
 
-    {
-      span: 3,
-      key: "4",
-      label: "Education",
-      children: (
-        <Table
-          dataSource={profile.education}
-          columns={columnsEducation}
-          pagination={false}
-        />
-      ),
-    },
-    {
-      span: 3,
-      key: "4",
-      label: "Experience",
-      children: (
-        <Table
-          dataSource={profile?.experience}
-          columns={columnsExperience}
-          pagination={false}
-        />
-      ),
-    },
+    // {
+    //   span: 3,
+    //   key: "4",
+    //   label: "Education",
+    //   children: (
+    //     <Table
+    //       dataSource={profile.education}
+    //       columns={columnsEducation}
+    //       pagination={false}
+    //     />
+    //   ),
+    // },
+    // {
+    //   span: 3,
+    //   key: "4",
+    //   label: "Experience",
+    //   children: (
+    //     <Table
+    //       dataSource={profile?.experience}
+    //       columns={columnsExperience}
+    //       pagination={false}
+    //     />
+    //   ),
+    // },
   ];
   return (
     <Descriptions bordered layout="vertical" title="User Info" items={items} />

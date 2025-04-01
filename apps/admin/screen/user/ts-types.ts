@@ -1,7 +1,13 @@
 export interface userData {
   alumni: name;
-  alumniOrganizationProfile: alumniOrganizationProfile;
-  alumniProfile: profile;
+  alumniOrganizationProfile: alumniOrganizationProfile & { status: string };
+  alumniProfile: profile & {
+    gender?: string;
+    pronouns?: string;
+    headline?: string;
+    categories?: string[];
+    skills?: string[];
+  };
   aboutUser: about;
 }
 export interface name {

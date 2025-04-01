@@ -27,10 +27,17 @@ export function ApolloWrapper({ children, host }: props) {
   function makeClient() {
     const errorControl = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        graphQLErrors.map(({ message }) => {
-          toast.error(message, {
-            id: "12",
-          });
+        graphQLErrors.map(({ message, extensions }) => {
+          console.log(extensions, "sdsdsd");
+          if (extensions?.code === "INTERNAL_SERVER_ERROR") {
+            toast.error("Something went wrong", {
+              id: "12",
+            });
+          } else {
+            toast.error(message, {
+              id: "12",
+            });
+          }
         });
       }
     });

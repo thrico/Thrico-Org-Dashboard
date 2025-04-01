@@ -3,6 +3,8 @@ import { gql } from "@apollo/client";
 export const GET_ALL_USER = gql`
   query GetAllUser($input: allStatusInput) {
     getAllUser(input: $input) {
+      isApproved
+      isRequested
       status
       user {
         id
@@ -10,6 +12,23 @@ export const GET_ALL_USER = gql`
         lastName
         email
         avatar
+        location
+        profile {
+          country
+          language
+          phone {
+            areaCode
+            countryCode
+            isoCode
+            phoneNumber
+          }
+          timeZone
+          DOB
+          gender
+          pronouns
+          headline
+          currentPosition
+        }
       }
     }
   }
@@ -18,48 +37,36 @@ export const CHANGE_USER_STATUS = gql`
   mutation ChangeUserStatus($input: statusInput) {
     changeUserStatus(input: $input) {
       isApproved
-      status
       isRequested
+      status
+      userKyc {
+        referralSource
+        comment
+        affliction
+      }
       user {
         id
         firstName
         lastName
-        avatar
         email
+        avatar
+        location
         profile {
           country
           language
-          education {
-            id
-            school
-            degree
-            grade
-            activities
-            description
-            duration
-          }
-          experience {
-            id
-            companyName
-            duration
-            employmentType
-            location
-            locationType
-            title
-          }
-          DOB
           phone {
             areaCode
             countryCode
             isoCode
             phoneNumber
           }
+          timeZone
+          DOB
+          gender
+          pronouns
+          headline
+          currentPosition
         }
-      }
-      userKyc {
-        referralSource
-        comment
-        affliction
       }
     }
   }
@@ -68,48 +75,36 @@ export const GET_USER_DETIALS = gql`
   query GetUserDetailsById($input: inputId) {
     getUserDetailsById(input: $input) {
       isApproved
-      status
       isRequested
+      status
+      userKyc {
+        referralSource
+        comment
+        affliction
+      }
       user {
         id
         firstName
         lastName
-        avatar
         email
+        avatar
+        location
         profile {
           country
           language
-          education {
-            id
-            school
-            degree
-            grade
-            activities
-            description
-            duration
-          }
-          experience {
-            id
-            companyName
-            duration
-            employmentType
-            location
-            locationType
-            title
-          }
-          DOB
           phone {
             areaCode
             countryCode
             isoCode
             phoneNumber
           }
+          timeZone
+          DOB
+          gender
+          pronouns
+          headline
+          currentPosition
         }
-      }
-      userKyc {
-        referralSource
-        comment
-        affliction
       }
     }
   }

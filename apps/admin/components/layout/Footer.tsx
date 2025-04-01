@@ -35,7 +35,10 @@ const Footer = () => {
 
         <Paragraph>
           ©{new Date().getFullYear()} | Thrico - The Modern Community
-          Management Platform by PulsePlay Digital
+          Management Platform by{" "}
+          <a target="_blank" href="https://pulseplaydigital.com">
+            PulsePlay Digital
+          </a>
         </Paragraph>
       </Flex>
     </Flex>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Button, Space, Table, Tag, Typography } from "antd";
 import type { TableColumnsType } from "antd";
-import { list, userData } from "./ts-types";
+
 
 import ApproveUser from "./drawer/ApproveDrawer";
 import {
@@ -11,13 +11,24 @@ import {
 } from "@ant-design/icons";
 import Actions from "./drawer/Actions";
 
+interface userData {
+  status: string;
+  user: {
+    avatar: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    id: string;
+  };
+}
+
 const columns: TableColumnsType<userData> = [
   {
     title: "Status",
     dataIndex: "status",
     render: (props, record) => (
       <Space>
-        <Avatar src={record?.user?.avatar} />
+        <Avatar src={`https://cdn.thrico.network/${record?.user?.avatar}`} />
 
         <Typography>
           {record?.user?.firstName} {record?.user?.lastName}

@@ -11,10 +11,19 @@ import {
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { MdDashboardCustomize, MdGroup } from "react-icons/md";
+import {
+  MdDashboardCustomize,
+  MdGroup,
+  MdLocalOffer,
+  MdWorkOutline,
+} from "react-icons/md";
 import Link from "next/link";
 import { SiCodementor } from "react-icons/si";
 import LogoutModal from "../../../../packages/ui/src/logout/Logout";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { GrUserWorker } from "react-icons/gr";
+import { BsPersonWorkspace } from "react-icons/bs";
+
 interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
@@ -105,7 +114,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           key: "/communities/approval",
           type: "group",
           label: (
-            <Link href={"/user/approved"}>
+            <Link href={"/communities/approval"}>
               <Typography style={{ color: "white" }}>
                 Manage Approvals
               </Typography>
@@ -116,7 +125,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           key: "/communities/customization",
           type: "group",
           label: (
-            <Link href={"/user/pending"}>
+            <Link href={"/communities/customization"}>
               <Typography style={{ color: "white" }}>Customization</Typography>
             </Link>
           ),
@@ -185,6 +194,167 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
       icon: <CalendarOutlined />,
     },
 
+    {
+      key: "Listing",
+      label: (
+        <Link href={"/mentorship"}>
+          <Typography style={{ color: "white" }}>Listing</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/listing",
+          type: "group",
+          label: (
+            <Link href={"/listing/"}>
+              <Typography style={{ color: "white" }}>
+                Manage Approvals
+              </Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/listing/customization",
+          type: "group",
+          label: (
+            <Link href={"/listing/customization"}>
+              <Typography style={{ color: "white" }}>Customization</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/listing/settings",
+          type: "group",
+          label: (
+            <Link href={"/listing/settings"}>
+              <Typography style={{ color: "white" }}>Setting</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <HiOutlineShoppingBag />,
+    },
+
+    {
+      key: "Job",
+      label: (
+        <Link href={"/job"}>
+          <Typography style={{ color: "white" }}>Job</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/job",
+          type: "group",
+          label: (
+            <Link href={"/job/"}>
+              <Typography style={{ color: "white" }}>
+                Manage Approvals
+              </Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/job/customization",
+          type: "group",
+          label: (
+            <Link href={"/job/customization"}>
+              <Typography style={{ color: "white" }}>Customization</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/job/settings",
+          type: "group",
+          label: (
+            <Link href={"/job/settings"}>
+              <Typography style={{ color: "white" }}>Setting</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <GrUserWorker />,
+    },
+
+    {
+      key: "offers",
+      label: (
+        <Link href={"/offers"}>
+          <Typography style={{ color: "white" }}>Offers</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/job",
+          type: "group",
+          label: (
+            <Link href={"/job/"}>
+              <Typography style={{ color: "white" }}>View Offers</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/offers/customization",
+          type: "group",
+          label: (
+            <Link href={"/job/customization"}>
+              <Typography style={{ color: "white" }}>Customization</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/offers/settings",
+          type: "group",
+          label: (
+            <Link href={"/job/settings"}>
+              <Typography style={{ color: "white" }}>Setting</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <MdLocalOffer />,
+    },
+
+    {
+      key: "career-centre",
+      label: (
+        <Link href={"/career-centre"}>
+          <Typography style={{ color: "white" }}>Career Centre</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/career-centre",
+          type: "group",
+          label: (
+            <Link href={"/job/"}>
+              <Typography style={{ color: "white" }}>
+                View Career Centre
+              </Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/career-centre/customization",
+          type: "group",
+          label: (
+            <Link href={"/job/customization"}>
+              <Typography style={{ color: "white" }}>Customization</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/career-centre/settings",
+          type: "group",
+          label: (
+            <Link href={"/job/settings"}>
+              <Typography style={{ color: "white" }}>Setting</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <BsPersonWorkspace />,
+    },
     {
       key: "announcements",
       label: (
