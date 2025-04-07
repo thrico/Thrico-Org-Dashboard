@@ -9,7 +9,7 @@ import Footer from "../../components/layout/Footer";
 import withAuth from "../../utils/withAuth";
 import { getEntity } from "../../graphql/actions";
 import KycForm from "../../screen/Kyc/Form";
-import MainBreadcrumb from "../../screen/comman/BreadCrumb";
+
 const { Header, Sider, Content } = Layout;
 
 function RootLayout({ children }: { children: React.ReactNode }) {

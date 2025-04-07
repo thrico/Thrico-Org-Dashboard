@@ -15,7 +15,7 @@ import {
   MdDashboardCustomize,
   MdGroup,
   MdLocalOffer,
-  MdWorkOutline,
+
 } from "react-icons/md";
 import Link from "next/link";
 import { SiCodementor } from "react-icons/si";
@@ -95,6 +95,57 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           type: "group",
           label: (
             <Link href={"/user/settings"}>
+              <Typography style={{ color: "white" }}>Settings</Typography>
+            </Link>
+          ),
+        },
+      ],
+      icon: <UserOutlined />,
+    },
+    {
+      key: "feed",
+
+      label: (
+        <Link href={"/feed"}>
+          <Typography style={{ color: "white" }}>Feed</Typography>
+        </Link>
+      ),
+      children: [
+        {
+          key: "/feed",
+          type: "feed",
+          label: (
+            <Link href={"/feed/"}>
+              <Typography style={{ color: "white" }}>Feed</Typography>
+            </Link>
+          ),
+
+        },
+
+        {
+          key: "/feed/",
+
+          label: (
+            <Link href={"/feed/"}>
+              <Typography style={{ color: "white" }}>Dashboard</Typography>
+            </Link>
+          ),
+        },
+        {
+          key: "/feed/all",
+
+          label: (
+            <Link href={"/feed/all"}>
+              <Typography style={{ color: "white" }}>All</Typography>
+            </Link>
+          ),
+        },
+
+        {
+          key: "/feed",
+
+          label: (
+            <Link href={"/feed/settings"}>
               <Typography style={{ color: "white" }}>Settings</Typography>
             </Link>
           ),

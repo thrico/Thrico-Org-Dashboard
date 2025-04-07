@@ -13,7 +13,15 @@ import toast from "react-hot-toast";
 import { generateSlug } from "random-word-slugs";
 const { Option } = Select;
 
-const KycForm = ({ data }) => {
+interface KycFormData {
+  getEntity?: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+  };
+}
+
+const KycForm = ({ data }: { data: KycFormData }) => {
   const { refetch } = getEntity();
   const [form] = Form.useForm();
 
@@ -30,7 +38,7 @@ const KycForm = ({ data }) => {
     country: "",
     language: "",
     fullName: data?.getEntity?.firstName + " " + data?.getEntity?.lastName,
-    email: data?.getEntity?.email,
+    email: data?.getEntity?.email || "",
   });
   const [organization, setOrganization] = useState({
     organizationName: "",
@@ -86,6 +94,7 @@ const KycForm = ({ data }) => {
 
           {current === 0 && (
             <Profile
+              data={data.getEntity}
               setProfile={setProfile}
               profile={profile}
               setCurrent={setCurrent}

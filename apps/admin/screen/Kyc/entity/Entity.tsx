@@ -48,6 +48,49 @@ const Entity = ({
     setCurrent(2);
   };
 
+  const entity = data?.getIndustryType.length > 0 ? data?.getIndustryType : [
+    {
+      title: "Enterprise"
+    },
+    {
+      title: "Creator"
+    },
+    {
+      title: "Association"
+    },
+    {
+      title: "Public Enterprise"
+    },
+    {
+      title: "Professional"
+    },
+
+
+  ];
+  const industry = data?.getIndustryType.length > 0 ? data?.getIndustryType : [
+
+    {
+      title: "Technology"
+    },
+    {
+      title: "Retail"
+    },
+
+    {
+      title: "Education"
+    },
+    {
+      title: "FMCG"
+    },
+    {
+      title: "Electronics"
+    },
+    {
+      title: "Telecommunications"
+    },
+
+  ];
+
   return (
     <Form
       form={form}
@@ -83,7 +126,7 @@ const Entity = ({
           placeholder="Entity Category (Select any one)"
           allowClear
         >
-          {data?.getEntityType?.map((set) => (
+          {entity?.map((set: { title: string }) => (
             <Option value={set?.title}>{set?.title}</Option>
           ))}
         </Select>
@@ -101,7 +144,7 @@ const Entity = ({
           placeholder="Entity Industry (Select any one)"
           allowClear
         >
-          {data?.getIndustryType?.map((set) => (
+          {industry.map((set: { title: string }) => (
             <Option value={set?.title}>{set?.title}</Option>
           ))}
         </Select>

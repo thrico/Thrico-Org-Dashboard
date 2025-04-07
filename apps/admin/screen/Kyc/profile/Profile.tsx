@@ -5,7 +5,26 @@ import TimeZone from "../TimeZone";
 import Language from "../Language";
 import { getEntity } from "../../../graphql/actions";
 const { Option } = Select;
-const Profile = ({ profile, setProfile, setCurrent }) => {
+interface ProfileProps {
+  profile: {
+    fullName: string;
+    email: string;
+    designation?: string;
+    phone?: string;
+    country?: string;
+    language?: string;
+  };
+  setProfile: (values: any) => void;
+  setCurrent: (step: number) => void;
+  data?: {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+  };
+}
+
+const Profile: React.FC<ProfileProps> = ({ profile, setProfile, setCurrent, data }) => {
+  const fullName = data?.firstName + " " + data?.lastName;
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
@@ -51,10 +70,10 @@ const Profile = ({ profile, setProfile, setCurrent }) => {
         scrollToFirstError
       >
         <Form.Item label="Full Name" rules={[{ required: true }]} hasFeedback>
-          <Input value={profile?.fullName} disabled style={{ width: "100%" }} />
+          <Input value={fullName} disabled style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item label="Email" rules={[{ required: true }]} hasFeedback>
-          <Input value={profile?.email} disabled style={{ width: "100%" }} />
+          <Input value={data?.email} disabled style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item
           hasFeedback
@@ -66,7 +85,7 @@ const Profile = ({ profile, setProfile, setCurrent }) => {
           <Input style={{ width: "100%" }} />
         </Form.Item>
 
-        <PhoneNumber initialValue={profile?.phone} />
+        <PhoneNumber initialValue={profile?.phone || ""} />
         <TimeZone initialValue={profile?.country} />
         <Language initialValue={profile?.language} />
         <Flex style={{ width: "100%" }} justify="center" align="center">
