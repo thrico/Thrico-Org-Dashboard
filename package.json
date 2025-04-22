@@ -68,6 +68,7 @@
     "classnames": "^2.5.1",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
+    "emoji-picker-react": "^4.12.2",
     "error": "link:@apollo/client/link/error",
     "extension-drag-handle-react": "link:@tiptap-pro/@tiptap-pro/extension-drag-handle-react",
     "import": "^0.0.6",

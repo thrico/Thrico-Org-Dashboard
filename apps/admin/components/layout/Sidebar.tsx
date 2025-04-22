@@ -11,12 +11,7 @@ import {
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {
-  MdDashboardCustomize,
-  MdGroup,
-  MdLocalOffer,
-
-} from "react-icons/md";
+import { MdDashboardCustomize, MdGroup, MdLocalOffer } from "react-icons/md";
 import Link from "next/link";
 import { SiCodementor } from "react-icons/si";
 import LogoutModal from "../../../../packages/ui/src/logout/Logout";
@@ -119,7 +114,6 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
               <Typography style={{ color: "white" }}>Feed</Typography>
             </Link>
           ),
-
         },
 
         {
@@ -420,8 +414,13 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
     },
 
     {
-      key: "/settings/appearance",
-      label: "Setting",
+      key: "/settings",
+      label: (
+        <Link href={"/settings"}>
+          <Typography style={{ color: "white" }}>Settings</Typography>
+        </Link>
+      ),
+
       children: [
         {
           key: "/settings/appearance",
@@ -440,14 +439,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
       key: "cms",
 
       label: (
-        <Link
-          target="_blank"
-          href={
-            process.env.NEXT_PUBLIC_EDITOR_URL
-              ? process.env.NEXT_PUBLIC_EDITOR_URL
-              : "/"
-          }
-        >
+        <Link href={"/website"}>
           <Typography style={{ color: "white" }}>Manage Website</Typography>
         </Link>
       ),

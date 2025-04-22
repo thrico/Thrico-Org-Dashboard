@@ -13,7 +13,7 @@ import React from "react";
 import Logo from "@repo/ui/Logo";
 import { getEntity } from "../../graphql/actions";
 import { AppstoreOutlined } from "@ant-design/icons";
-import Search, { SearchProps } from "antd/es/input/Search";
+
 import GlobalSearch from "./Search";
 import MenuNavigation from "./MenuPop";
 export const Navbar = () => {

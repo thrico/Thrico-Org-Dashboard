@@ -31,7 +31,7 @@ const Entity = ({
     } else {
       setAutoCompleteResult(
         [".com", ".org", ".net", ".tech", ".in", "edu.in"].map(
-          (domain) => `${value}${domain}`
+          (domain) => `${value.toLowerCase()}${domain}`
         )
       );
     }
@@ -153,9 +153,11 @@ const Entity = ({
         initialValue={organization.website}
         name="website"
         label="Website"
+
         rules={[{ required: true, message: "Please input website!" }]}
       >
         <AutoComplete
+
           options={websiteOptions}
           onChange={onWebsiteChange}
           placeholder="website"

@@ -68,23 +68,23 @@ export function ApolloWrapper({ children, host }: props) {
     return new ApolloClient({
       link: ApolloLink.from([authMiddleware, link]),
       cache: new InMemoryCache({
-        typePolicies: {
-          Query: {
-            fields: {
-              getAllFeed: {
-                // Don't cache separate results based on
-                // any of this field's arguments.
-                keyArgs: false,
+        // typePolicies: {
+        //   Query: {
+        //     fields: {
+        //       getAllFeed: {
+        //         // Don't cache separate results based on
+        //         // any of this field's arguments.
+        //         keyArgs: false,
 
-                // Concatenate the incoming list items with
-                // the existing list items.
-                merge(existing: any[] = [], incoming: any[]) {
-                  return [...existing, ...incoming];
-                },
-              }
-            }
-          }
-        }
+        //         // Concatenate the incoming list items with
+        //         // the existing list items.
+        //         merge(existing: any[] = [], incoming: any[]) {
+        //           return [...existing, ...incoming];
+        //         },
+        //       }
+        //     }
+        //   }
+        // }
       })
 
     });

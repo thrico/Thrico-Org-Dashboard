@@ -4,6 +4,9 @@ import "react-quill/dist/quill.snow.css";
 import "./global.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import { ConfigProvider } from "antd";
+import { workSans } from "./font";
+
 export default function RootLayout({
   children,
 }: {
@@ -11,10 +14,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={workSans.className}>
         <Providers>
           <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
-            {children}
+            <ConfigProvider
+              theme={{
+                components: {
+                  Card: {
+                    headerFontSize: 30,
+                    headerHeight: 70,
+                  },
+                  Menu: {
+                    colorItemBgSelected: "#eeeeee",
+                  },
+                  Modal: {
+                    titleFontSize: 30,
+                  },
+                },
+
+                token: {
+                  colorPrimary: "#000000",
+                  borderRadius: 2,
+                },
+              }}
+            >
+              {children}
+            </ConfigProvider>
           </ApolloWrapper>
         </Providers>
       </body>
