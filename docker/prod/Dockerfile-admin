@@ -34,8 +34,8 @@ COPY --from=builder-app --chown=nextjs:nodejs /app/apps/admin/.next/static ./app
 COPY --from=builder-app --chown=nextjs:nodejs /app/apps/admin/public ./apps/admin/public
 
 USER nextjs
-EXPOSE 20241
-ENV PORT 20241
+EXPOSE 20242
+ENV PORT 20242
 ENV HOSTNAME 0.0.0.0
 
 CMD ["node", "apps/admin/server.js"]
