@@ -31,11 +31,9 @@ jobs:
       # Step 4: Install dependencies for /web-app using pnpm
       - name: Install dependencies
         run: |
-          cd web-app
           pnpm install
 
       # Step 7: Build the app for /web-app
       - name: Build the app
         run: |
-          cd web-app
           pnpm run build
