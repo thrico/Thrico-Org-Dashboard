@@ -16,9 +16,9 @@ const Login = () => {
         <Flex vertical style={{ width: "90%" }}>
           <Flex vertical>
             <Title level={2}>Log In</Title>
-          
 
-            <Text>Continue to Thrico</Text>
+            <Text>Continue to Thrico </Text>
+            {console.log(process.env)}
           </Flex>
           <Flex style={{ width: "100%", marginTop: "1rem" }}>
             <LoginForm />

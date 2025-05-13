@@ -11,9 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.className}>
         <Providers>
-          <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
-            {children}
-          </ApolloWrapper>
+          <ApolloWrapper host={process.env.API_URL}>{children}</ApolloWrapper>
         </Providers>
       </body>
     </html>

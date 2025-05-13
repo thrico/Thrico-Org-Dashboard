@@ -19,7 +19,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
       return (
         <>
           <Redirect
-            to={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/auth?path=http://localhost:20243${pathname}&&host=http://localhost:20243`}
+            to={`${process.env.ACCOUNTS_URL}/auth?path=http://localhost:20243${pathname}&&host=http://localhost:20243`}
           />
         </>
       );

@@ -116,9 +116,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                 {
                   key: "Logout",
                   label: (
-                    <a href={`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`}>
-                      Logout
-                    </a>
+                    <a href={`${process.env.ACCOUNTS_URL}/logout`}>Logout</a>
                   ),
                   icon: <LogoutOutlined />,
                 },

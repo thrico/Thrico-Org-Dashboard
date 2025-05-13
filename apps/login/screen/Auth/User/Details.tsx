@@ -12,7 +12,7 @@ import Link from "next/link";
 import Logout from "@repo/ui/Logout";
 import { useRouter } from "next/navigation";
 
-const Details = ({ }) => {
+const Details = ({}) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const showModal = () => {
@@ -32,7 +32,9 @@ const Details = ({ }) => {
     <Flex gap={"1rem"} vertical style={{ width: "100%" }}>
       <Card>
         {process.env.DASHBOARD_URL}
-        <Link href={process.env.NEXT_PUBLIC_DASHBOARD_URL ? process.env.NEXT_PUBLIC_DASHBOARD_URL : "/"}>
+        <Link
+          href={process.env.DASHBOARD_URL ? process.env.DASHBOARD_URL : "/"}
+        >
           <Flex align="center">
             <AppstoreAddOutlined style={{ fontSize: 20 }} />
             <Typography style={{ marginLeft: 20, marginBottom: 0 }}>

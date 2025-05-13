@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { InputOTP } from "antd-input-otp";
 import { useTokenStore } from "../../../components/store/store";
 
-
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
@@ -28,7 +27,7 @@ const OtpForm = () => {
       await toast.success("Login Success");
       await storeToken(data?.otpLogin?.token);
       await router.push(
-        `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
+        `${process.env.DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
       );
     },
   });

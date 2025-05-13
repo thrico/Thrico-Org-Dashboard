@@ -24,7 +24,7 @@ const Auth = () => {
       // router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
       router.push(
-        `${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`
+        `${process.env.ACCOUNTS_URL}/login/?path=${path}&&host=${host}`
       );
     }
   }, [token, path]);

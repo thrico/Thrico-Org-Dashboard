@@ -21,9 +21,7 @@ const LogoutModal: React.FC<LogoutProps> = ({
       <Modal
         open={open}
         title=""
-        onOk={() =>
-          router.push(`${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/logout`)
-        }
+        onOk={() => router.push(`${process.env.ACCOUNTS_URL}/logout`)}
         onCancel={handleCancel}
         footer={[
           <Button key="back" onClick={handleCancel}>
