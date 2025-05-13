@@ -19,7 +19,7 @@ const Login = () => {
               {process.env.API_URL} Log In {}
             </Title>
 
-            <Text>Continue to Thrico {process.env.API_URL} </Text>
+            <Text>Continue to Thricosd {process.env.API_URL} </Text>
             {console.log(process.env.API_URL)}
           </Flex>
           <Flex style={{ width: "100%", marginTop: "1rem" }}>
