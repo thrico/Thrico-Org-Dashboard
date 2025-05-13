@@ -18,7 +18,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
       return (
         <>
           <Redirect
-            to={`${process.env.ACCOUNTS_URL}/auth?path=${process.env.DASHBOARD_URL}${pathname}&&host=${process.env.DASHBOARD_URL}`}
+            to={`${process.env.ACCOUNTS_URL}/auth?path=${process.env.NEXT_PUBLIC_DASHBOARD_URL}${pathname}&&host=${process.env.NEXT_PUBLIC_DASHBOARD_URL}`}
           />
         </>
       );

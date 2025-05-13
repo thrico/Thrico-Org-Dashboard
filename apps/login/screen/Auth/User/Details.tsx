@@ -31,9 +31,13 @@ const Details = ({}) => {
   return (
     <Flex gap={"1rem"} vertical style={{ width: "100%" }}>
       <Card>
-        {process.env.DASHBOARD_URL}
+        {process.env.NEXT_PUBLIC_DASHBOARD_URL}
         <Link
-          href={process.env.DASHBOARD_URL ? process.env.DASHBOARD_URL : "/"}
+          href={
+            process.env.NEXT_PUBLIC_DASHBOARD_URL
+              ? process.env.NEXT_PUBLIC_DASHBOARD_URL
+              : "/"
+          }
         >
           <Flex align="center">
             <AppstoreAddOutlined style={{ fontSize: 20 }} />

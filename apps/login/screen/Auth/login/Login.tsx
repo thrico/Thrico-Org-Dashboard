@@ -16,11 +16,11 @@ const Login = () => {
         <Flex vertical style={{ width: "90%" }}>
           <Flex vertical>
             <Title level={2}>
-              {process.env.API_URL} Log In {}
+              {process.env.NEXT_PUBLIC_API_URL} Log In {}
             </Title>
 
-            <Text>Continue to Thrico {process.env.API_URL} </Text>
-            {console.log(process.env.API_URL)}
+            <Text>Continue to Thrico {process.env.NEXT_PUBLIC_API_URL} </Text>
+            {console.log(process.env.NEXT_PUBLIC_API_URL)}
           </Flex>
           <Flex style={{ width: "100%", marginTop: "1rem" }}>
             <LoginForm />

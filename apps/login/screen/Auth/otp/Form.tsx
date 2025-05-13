@@ -27,7 +27,7 @@ const OtpForm = () => {
       await toast.success("Login Success");
       await storeToken(data?.otpLogin?.token);
       await router.push(
-        `${process.env.DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
+        `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
       );
     },
   });
@@ -62,7 +62,7 @@ const OtpForm = () => {
       layout="vertical"
       size="large"
     >
-      {process.env.DASHBOARD_URL}
+      {process.env.NEXT_PUBLIC_DASHBOARD_URL}
       <Form.Item
         style={{ marginTop: 20 }}
         name="otp"
