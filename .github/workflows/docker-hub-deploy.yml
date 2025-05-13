@@ -43,8 +43,8 @@ jobs:
         working-directory: .
         run: |
           pnpm install --frozen-lockfile
-          docker-compose build entity-login
-          docker-compose build entity-admin
+          docker-compose build thrico-entity-login
+          docker-compose build thrico-entity-admin
 
       - name: List Docker images (for debug)
         run: docker images

@@ -1,6 +1,6 @@
 services:
   thrico-entity-login:
-    container_name: entity-login
+    container_name: thrico-entity-login
     image: thrico-entity-login:latest
     build:
       context: .
@@ -12,7 +12,7 @@ services:
       - web
 
   thrico-entity-admin:
-    container_name: entity-admin
+    container_name: thrico-entity-admin
     image: thrico-entity-admin:latest
     build:
       context: .
