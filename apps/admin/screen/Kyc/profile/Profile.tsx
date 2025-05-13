@@ -23,7 +23,12 @@ interface ProfileProps {
   };
 }
 
-const Profile: React.FC<ProfileProps> = ({ profile, setProfile, setCurrent, data }) => {
+const Profile: React.FC<ProfileProps> = ({
+  profile,
+  setProfile,
+  setCurrent,
+  data,
+}) => {
   const fullName = data?.firstName + " " + data?.lastName;
   const [form] = Form.useForm();
 

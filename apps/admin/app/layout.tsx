@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.className}>
         <Providers>
-          <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
+          <ApolloWrapper host={"http://localhost:1111/graphql"}>
             <ConfigProvider
               theme={{
                 components: {
@@ -28,7 +28,7 @@ export default function RootLayout({
                     colorItemBgSelected: "#eeeeee",
                   },
                   Modal: {
-                    titleFontSize: 30,
+                    titleFontSize: 20,
                   },
                 },
 

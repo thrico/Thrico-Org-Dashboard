@@ -101,6 +101,11 @@ const LoginForm = () => {
             required: true,
             message: "Please input your password!",
           },
+          {
+            min: 6,
+            max: 12,
+            message: "Password must be between 6 and 12 characters!",
+          },
         ]}
         hasFeedback
       >
@@ -128,6 +133,11 @@ const LoginForm = () => {
               );
             },
           }),
+          {
+            min: 6,
+            max: 12,
+            message: "Password must be between 6 and 12 characters!",
+          },
         ]}
       >
         <Input.Password />

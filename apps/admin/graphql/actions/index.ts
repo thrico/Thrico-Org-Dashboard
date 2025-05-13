@@ -7,7 +7,7 @@ import {
   GET_USER,
   REGISTER_ORGANIZATION,
 } from "../quries";
-import { CHECK_PAYMENTS } from "../../../payments/graphql/quries";
+// import { CHECK_PAYMENTS } from "../../../payments/graphql/quries";
 
 export const getGetUser = () => useQuery(GET_USER);
 
@@ -21,7 +21,6 @@ export const registerOrganization = (onCompleted: any) =>
 export const changeThemeColor = (onCompleted: any) =>
   useMutation(CHANGE_THEME_COLOR, onCompleted);
 
-export const checkPaymentKyc = () => useQuery(CHECK_PAYMENTS);
-
+// export const checkPaymentKyc = () => useQuery(CHECK_PAYMENTS);
 
 export const entityKYC = () => useQuery(ENTITY_KYC);

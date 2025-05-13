@@ -1,192 +1,201 @@
 "use client";
+import {
+  Card,
+  Row,
+  Col,
+  Typography,
+  Statistic,
+  Progress,
+  List,
+  Tag,
+  Space,
+} from "antd";
+import {
+  FileTextOutlined,
+  CheckCircleOutlined,
+  UserOutlined,
+  BarChartOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+} from "@ant-design/icons";
 
-import React from "react";
-import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
-import "survey-core/defaultV2.css";
-import "survey-creator-core/survey-creator-core.css";
-import "survey-core/survey.i18n.js";
-import "survey-creator-core/survey-creator-core.i18n.js";
-function SurveyCreatorRenderComponent() {
-  const options = {
-    showLogicTab: true,
-  };
-  const creator = new SurveyCreator(options);
-  creator.JSON = surveyJSON;
-  return <SurveyCreatorComponent creator={creator} />;
+const { Title, Text } = Typography;
+
+// Mock data for the dashboard
+const stats = [
+  {
+    title: "Total Forms",
+    value: 24,
+    icon: <FileTextOutlined />,
+    change: 12,
+    trend: "up",
+  },
+  {
+    title: "Total Submissions",
+    value: 1254,
+    icon: <CheckCircleOutlined />,
+    change: 8.5,
+    trend: "up",
+  },
+  {
+    title: "Active Users",
+    value: 342,
+    icon: <UserOutlined />,
+    change: 2.1,
+    trend: "down",
+  },
+  {
+    title: "Completion Rate",
+    value: 78,
+    suffix: "%",
+    icon: <BarChartOutlined />,
+    change: 5.3,
+    trend: "up",
+  },
+];
+
+// Mock data for recent forms
+const recentForms = [
+  { id: 1, name: "Customer Feedback", submissions: 124, status: "Published" },
+  { id: 2, name: "Event Registration", submissions: 87, status: "Published" },
+  { id: 3, name: "Product Survey", submissions: 56, status: "Draft" },
+  { id: 4, name: "Employee Satisfaction", submissions: 0, status: "Draft" },
+];
+
+export default function Dashboard() {
+  return (
+    <div style={{ marginTop: 30 }}>
+      <div
+        style={{
+          marginBottom: 24,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Title level={2} style={{ margin: 0 }}>
+          Dashboard
+        </Title>
+        <Text type="secondary">
+          Last updated: {new Date().toLocaleDateString()}
+        </Text>
+      </div>
+
+      <Row gutter={[16, 16]}>
+        {stats.map((stat, index) => (
+          <Col xs={24} sm={12} lg={6} key={index}>
+            <Card>
+              <Statistic
+                title={stat.title}
+                value={stat.value}
+                suffix={stat.suffix}
+                prefix={
+                  <div
+                    style={{ marginRight: 8, color: "#1677ff", fontSize: 24 }}
+                  >
+                    {stat.icon}
+                  </div>
+                }
+              />
+              <div
+                style={{ marginTop: 8, display: "flex", alignItems: "center" }}
+              >
+                {stat.trend === "up" ? (
+                  <ArrowUpOutlined style={{ color: "#52c41a" }} />
+                ) : (
+                  <ArrowDownOutlined style={{ color: "#ff4d4f" }} />
+                )}
+                <Text
+                  style={{
+                    marginLeft: 4,
+                    color: stat.trend === "up" ? "#52c41a" : "#ff4d4f",
+                  }}
+                >
+                  {stat.change}%
+                </Text>
+                <Text type="secondary" style={{ marginLeft: 4 }}>
+                  from last month
+                </Text>
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      <Row gutter={[16, 16]} style={{ marginTop: 24 }}>
+        <Col xs={24} md={12}>
+          <Card title="Recent Forms">
+            <List
+              dataSource={recentForms}
+              renderItem={(form) => (
+                <List.Item
+                  actions={[
+                    <Tag
+                      color={
+                        form.status === "Published" ? "success" : "warning"
+                      }
+                      key="status"
+                    >
+                      {form.status}
+                    </Tag>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    title={form.name}
+                    description={`${form.submissions} submissions`}
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
+
+        <Col xs={24} md={12}>
+          <Card title="Form Completion Rates">
+            <Space direction="vertical" style={{ width: "100%" }}>
+              <div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Text>Customer Feedback</Text>
+                  <Text strong>85%</Text>
+                </div>
+                <Progress percent={85} showInfo={false} />
+              </div>
+
+              <div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Text>Event Registration</Text>
+                  <Text strong>72%</Text>
+                </div>
+                <Progress percent={72} showInfo={false} />
+              </div>
+
+              <div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Text>Product Survey</Text>
+                  <Text strong>64%</Text>
+                </div>
+                <Progress percent={64} showInfo={false} />
+              </div>
+
+              <div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Text>Employee Satisfaction</Text>
+                  <Text strong>91%</Text>
+                </div>
+                <Progress percent={91} showInfo={false} />
+              </div>
+            </Space>
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
 }
-
-export default SurveyCreatorRenderComponent;
-
-const surveyJSON = {
-  title: "Product Feedback Survey",
-  description: "Your opinion matters to us!",
-  logo: "https://api.surveyjs.io/private/Surveys/files?name=df89f942-7e47-48e0-9fc0-b64608584b4c",
-  logoFit: "cover",
-  logoPosition: "right",
-  logoHeight: "100px",
-  elements: [
-    {
-      type: "radiogroup",
-      name: "discovery-source",
-      title: "How did you first hear about us?",
-      choices: [
-        "Search engine (Google, Bing, etc.)",
-        "Online newsletter",
-        "Blog post",
-        "Word of mouth",
-        "Social media",
-      ],
-      showOtherItem: true,
-      otherPlaceholder: "Please specify...",
-      otherText: "Other",
-    },
-    {
-      type: "radiogroup",
-      name: "social-media-platform",
-      visibleIf: "{discovery-source} = 'Social media'",
-      title: "Which platform?",
-      choices: ["YouTube", "Facebook", "Instagram", "TikTok", "LinkedIn"],
-      showOtherItem: true,
-      otherPlaceholder: "Please specify...",
-      otherText: "Other",
-    },
-    {
-      type: "matrix",
-      name: "quality",
-      title: "To what extent do you agree with the following statements?",
-      columns: null,
-      columns: [
-        {
-          value: 1,
-          text: "Strongly disagree",
-        },
-        {
-          value: 2,
-          text: "Disagree",
-        },
-        {
-          value: 3,
-          text: "Undecided",
-        },
-        {
-          value: 4,
-          text: "Agree",
-        },
-        {
-          value: 5,
-          text: "Strongly agree",
-        },
-      ],
-      rows: [
-        {
-          text: "The product meets my needs",
-          value: "needs-are-met",
-        },
-        {
-          text: "Overall, I am satisfied with the product",
-          value: "satisfaction",
-        },
-        {
-          text: "Some product features require improvement",
-          value: "improvements-required",
-        },
-      ],
-      columnMinWidth: "40px",
-      rowTitleWidth: "300px",
-    },
-    {
-      type: "rating",
-      name: "buying-experience",
-      title: "How would you rate the buying experience?",
-      minRateDescription: "Hated it!",
-      maxRateDescription: "Loved it!",
-    },
-    {
-      type: "comment",
-      name: "low-score-reason",
-      visibleIf: "{buying-experience} <= 3",
-      titleLocation: "hidden",
-      hideNumber: true,
-      placeholder: "What's the main reason for your score?",
-      maxLength: 500,
-    },
-    {
-      type: "boolean",
-      name: "have-used-similar-products",
-      title: "Have you used similar products before?",
-    },
-    {
-      type: "text",
-      name: "similar-products",
-      visibleIf: "{have-used-similar-products} = true",
-      titleLocation: "hidden",
-      hideNumber: true,
-      placeholder: "Please specify the similar products...",
-    },
-    {
-      type: "ranking",
-      name: "product-aspects-ranked",
-      title:
-        "These are some important aspects of the product. Rank them in terms of your priority.",
-      description:
-        "From the highest (the most important) to the lowest (the least important).",
-      choices: [
-        "Technical support",
-        "Price",
-        "Delivery option",
-        "Quality",
-        "Ease of use",
-        "Product warranties",
-      ],
-    },
-    {
-      type: "text",
-      name: "missing-feature",
-      title: "What's the ONE thing our product is missing?",
-    },
-    {
-      type: "dropdown",
-      name: "price-accuracy",
-      title: "Do you feel our product is worth the cost?",
-      choices: [
-        {
-          value: 5,
-          text: "Definitely",
-        },
-        {
-          value: 4,
-          text: "Probably",
-        },
-        {
-          value: 3,
-          text: "Maybe",
-        },
-        {
-          value: 2,
-          text: "Probably not",
-        },
-        {
-          value: 1,
-          text: "Definitely not",
-        },
-      ],
-      allowClear: false,
-    },
-    {
-      type: "boolean",
-      name: "have-additional-thoughts",
-      title: "Is there anything you'd like to add?",
-    },
-    {
-      type: "comment",
-      name: "additional-thoughts",
-      visibleIf: "{have-additional-thoughts} = true",
-      titleLocation: "hidden",
-      placeholder: "Please share your thoughts...",
-    },
-  ],
-  showProgressBar: "top",
-  progressBarType: "questions",
-  widthMode: "static",
-  width: "864px",
-};

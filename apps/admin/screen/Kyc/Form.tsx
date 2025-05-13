@@ -14,16 +14,17 @@ import { generateSlug } from "random-word-slugs";
 const { Option } = Select;
 
 interface KycFormData {
-  getEntity?: {
+  user?: {
     firstName?: string;
     lastName?: string;
     email?: string;
   };
 }
 
-const KycForm = ({ data }: { data: KycFormData }) => {
+const KycForm = ({ user, entity }: { data: KycFormData }) => {
   const { refetch } = getEntity();
   const [form] = Form.useForm();
+  console.log(user);
 
   const [register, { loading }] = registerOrganization({
     onCompleted() {
@@ -37,8 +38,8 @@ const KycForm = ({ data }: { data: KycFormData }) => {
     phone: "",
     country: "",
     language: "",
-    fullName: data?.getEntity?.firstName + " " + data?.getEntity?.lastName,
-    email: data?.getEntity?.email || "",
+    fullName: user?.firstName + " " + user?.lastName,
+    email: user?.email || "",
   });
   const [organization, setOrganization] = useState({
     organizationName: "",
@@ -94,7 +95,7 @@ const KycForm = ({ data }: { data: KycFormData }) => {
 
           {current === 0 && (
             <Profile
-              data={data.getEntity}
+              data={user}
               setProfile={setProfile}
               profile={profile}
               setCurrent={setCurrent}

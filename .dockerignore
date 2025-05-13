@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+.pnpm
+
+# Build output
+dist
+apps/*/.next
+apps/*/dist
+apps/*/build
+apps/*/coverage
+
+# Turborepo cache
+turbo
+.cache
+out
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+logs
+
+# Env files
+.env
+.env.local
+.env.production
+.env.development
+!env.example
+
+# Docker config (except your Dockerfile-login)
+Dockerfile
+docker-compose.yml

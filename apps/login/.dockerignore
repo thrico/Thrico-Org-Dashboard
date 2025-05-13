@@ -1,0 +1,38 @@
+# Ignore dependencies
+node_modules
+.pnpm
+
+# Build output
+dist
+.next
+apps/*/.next
+apps/*/dist
+apps/*/build
+apps/*/coverage
+
+# Turborepo cache
+turbo
+.cache
+out
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+logs
+
+# Env and config
+.env
+.env.local
+.env.production
+.env.development
+
+# Docker
+Dockerfile*
+docker-compose*

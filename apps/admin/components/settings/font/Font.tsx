@@ -16,9 +16,11 @@ const { Title, Text, Paragraph } = Typography;
 const { Header, Content } = Layout;
 const { Option } = Select;
 import fontData from "../../../json/font.json"; // Adjust the path as necessary
+import { updateFont } from "../../../graphql/actions/settings/font";
 // Sample font data - in a real app, this would be fetched from an API
 
 export function FontDashboard() {
+  const [update, { loading }] = updateFont({});
   const [selectedFont, setSelectedFont] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -57,7 +59,28 @@ export function FontDashboard() {
 
   return (
     <Card
-      extra={<Button type="primary">Update</Button>}
+      extra={
+        <Button
+          disabled={!selectedFont || loading}
+          onClick={() => {
+            if (!selectedFont) return;
+            const data = {
+              name: selectedFont,
+              styles: fontData[selectedFont as keyof typeof fontData].styles,
+              subsets: fontData[selectedFont as keyof typeof fontData].subsets,
+              weights: fontData[selectedFont as keyof typeof fontData].weights,
+            };
+            update({
+              variables: {
+                input: data,
+              },
+            });
+          }}
+          type="primary"
+        >
+          Update
+        </Button>
+      }
       title="Font Dashboard"
       style={{ width: "100%", margin: "24px" }}
     >
@@ -90,6 +113,8 @@ export function FontDashboard() {
         {/* Font Details Panel */}
         <Card>
           <Title level={4}>Font Details</Title>
+
+          {console.log("Selected Font:", fontData[selectedFont])}
           {selectedFont ? (
             <Space direction="vertical" size="large" style={{ width: "100%" }}>
               <div>

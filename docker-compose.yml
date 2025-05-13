@@ -1,0 +1,28 @@
+services:
+  thrico-entity-login:
+    container_name: entity-login
+    image: thrico-entity-login:latest
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile-login
+    # assuming your app runs on port 3000 inside the container
+    environment:
+      - NODE_ENV=production
+    networks:
+      - web
+
+  thrico-entity-admin:
+    container_name: entity-admin
+    image: thrico-entity-admin:latest
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile-admin
+    # assuming your app runs on port 3000 inside the container
+    environment:
+      - NODE_ENV=production
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge

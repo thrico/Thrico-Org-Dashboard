@@ -242,7 +242,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
     {
       key: "Listing",
       label: (
-        <Link href={"/mentorship"}>
+        <Link href={"/listing"}>
           <Typography style={{ color: "white" }}>Listing</Typography>
         </Link>
       ),
@@ -500,8 +500,8 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
         <Menu
           selectedKeys={[pathName]}
           style={{ marginTop: "5rem" }}
-          theme="dark"
           mode="inline"
+          theme="dark"
           defaultSelectedKeys={["4"]}
           items={items}
         />

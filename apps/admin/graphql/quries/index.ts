@@ -5,6 +5,9 @@ export const GET_USER = gql`
     getUser {
       id
       status
+      email
+      firstName
+      lastName
     }
   }
 `;
@@ -12,20 +15,14 @@ export const GET_USER = gql`
 export const GET_ORGANIZATION = gql`
   query GetEntity {
     getEntity {
-      email
-      firstName
-      lastName
-      entity {
-        address
-        domain {
-          domain
-        }
-        logo
-        name
-        timeZone
-        website
-        id
-      }
+      id
+      name
+      isTrialActive
+      isPaid
+      trailEndDate
+      trailStartDate
+      trailsDays
+      logo
     }
   }
 `;

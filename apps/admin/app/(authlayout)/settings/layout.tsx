@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   HomeOutlined,
   DollarOutlined,
@@ -14,19 +14,37 @@ import {
   TranslationOutlined,
   LockOutlined,
   FileTextOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  CustomerServiceTwoTone,
 } from "@ant-design/icons";
 
 import Sider from "antd/es/layout/Sider";
-import { Layout, Menu, MenuProps } from "antd";
+import { Button, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { FaFont } from "react-icons/fa";
+import { MdOutlineViewModule } from "react-icons/md";
 function SettingsLayout({ children }: { children: React.ReactNode }) {
   const menuItems = [
-    { key: "general", icon: <HomeOutlined />, label: "General" },
+    { key: "/settings", icon: <HomeOutlined />, label: "General" },
+    {
+      key: "/settings/appearance",
+      icon: <CustomerServiceTwoTone />,
+      label: "appearance",
+    },
     { key: "/settings/domains", icon: <LinkOutlined />, label: "Domains" },
     { key: "/settings/font", icon: <FaFont />, label: "Fonts" },
-    { key: "plan", icon: <DollarOutlined />, label: "Plan" },
-    { key: "billing", icon: <CreditCardOutlined />, label: "Billing" },
+    { key: "/settings/plan", icon: <DollarOutlined />, label: "Plan" },
+    {
+      key: "/settings/modules",
+      icon: <MdOutlineViewModule />,
+      label: "Module",
+    },
+    {
+      key: "/settings/billing",
+      icon: <CreditCardOutlined />,
+      label: "Billing",
+    },
     { key: "users", icon: <TeamOutlined />, label: "Users and permissions" },
     { key: "payments", icon: <CreditCardOutlined />, label: "Payments" },
     { key: "checkout", icon: <ShoppingCartOutlined />, label: "Checkout" },
@@ -48,31 +66,57 @@ function SettingsLayout({ children }: { children: React.ReactNode }) {
     router.push(e.key);
   };
 
+  const [collapsed, setCollapsed] = useState(true);
   return (
-    <Layout style={{ minHeight: "100%", width: "100%" }}>
-      <Sider theme="light" width={"20%"}>
-        <div style={{ padding: "16px" }}></div>
-
+    <Layout style={{ minHeight: "100vh", width: "100%" }}>
+      <Sider
+        style={{ position: "sticky", top: 10 }}
+        theme="light"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
+        <div
+          style={{
+            height: 64,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 20,
+            fontWeight: "bold",
+          }}
+        >
+          <Button
+            type="text"
+            icon={
+              collapsed ? (
+                <MenuUnfoldOutlined size={40} />
+              ) : (
+                <MenuFoldOutlined size={40} />
+              )
+            }
+            onClick={() => setCollapsed(!collapsed)}
+          />
+        </div>
         <Menu
+          theme="light"
           onClick={onClick}
           mode="inline"
           selectedKeys={[pathName]}
           style={{ borderRight: 0 }}
           items={menuItems}
         />
-
-        <div
-          style={{
-            padding: "16px",
-            position: "absolute",
-            bottom: 0,
-            width: "100%",
-            borderTop: "1px solid #f0f0f0",
-          }}
-        ></div>
       </Sider>
 
-      <Layout style={{ width: "80%" }}>{children}</Layout>
+      <Layout
+        style={{
+          width: "80%",
+
+          paddingLeft: 20,
+        }}
+      >
+        {children}
+      </Layout>
     </Layout>
   );
 }

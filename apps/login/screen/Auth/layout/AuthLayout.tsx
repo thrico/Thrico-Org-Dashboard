@@ -5,7 +5,7 @@ import ThricoLogo from "@repo/ui/ThricoLogo";
 const AuthLayout = ({ children }: React.PropsWithChildren) => (
   <Flex
     style={{
-      backgroundImage: `url("https://cdn.alumnithrive.com/loginbg.png")`,
+      backgroundImage: `url("https://cdn.thrico.network/l@3000x3000@1x.webp")`,
       backgroundPosition: "center",
       backgroundRepeat: "repeat",
       height: "100vh",

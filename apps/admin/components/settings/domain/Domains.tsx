@@ -32,12 +32,7 @@ const Domains = () => {
 
   const { data: domain } = getCustomDomain();
   return (
-    <Card
-      style={{
-        margin: "24px",
-      }}
-      title={"Domains"}
-    >
+    <Card title={"Domains"}>
       {!domain?.getCustomDomain?.id && (
         <Card style={{ marginBottom: "24px" }}>
           <Title level={4}>Buy or connect a domain</Title>
