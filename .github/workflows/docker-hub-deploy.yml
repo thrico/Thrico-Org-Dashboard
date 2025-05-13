@@ -45,7 +45,7 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           docker-compose build entity-login
-           docker-compose build entity-admin
+          docker-compose build entity-admin
 
       - name: List Docker images (for debug)
         run: docker images
