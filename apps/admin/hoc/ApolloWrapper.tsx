@@ -28,7 +28,6 @@ export function ApolloWrapper({ children, host }: props) {
     const errorControl = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, extensions }) => {
-          console.log(extensions, "sdsdsd");
           if (extensions?.code === "INTERNAL_SERVER_ERROR") {
             toast.error("Something went wrong", {
               id: "12",
@@ -48,22 +47,25 @@ export function ApolloWrapper({ children, host }: props) {
 
     const link = errorControl.concat(uploadLink);
 
-    const authMiddleware = new ApolloLink((operation: import("@apollo/client").Operation, forward) => {
-      operation.setContext({
-        headers: {
-          authorization:
-            typeof window !== "undefined" &&
+    const authMiddleware = new ApolloLink(
+      (operation: import("@apollo/client").Operation, forward) => {
+        operation.setContext({
+          headers: {
+            authorization:
+              typeof window !== "undefined" &&
               localStorage.getItem("token") === null
-              ? null
-              : typeof window !== "undefined" &&
-              JSON.parse(localStorage?.getItem("token") || "{}").state?.token,
-          "Apollo-Require-Preflight": "true",
-          // Add the IP to headers
-        },
-      });
+                ? null
+                : typeof window !== "undefined" &&
+                  JSON.parse(localStorage?.getItem("token") || "{}").state
+                    ?.token,
+            "Apollo-Require-Preflight": "true",
+            // Add the IP to headers
+          },
+        });
 
-      return forward(operation);
-    });
+        return forward(operation);
+      }
+    );
 
     return new ApolloClient({
       link: ApolloLink.from([authMiddleware, link]),
@@ -75,7 +77,6 @@ export function ApolloWrapper({ children, host }: props) {
         //         // Don't cache separate results based on
         //         // any of this field's arguments.
         //         keyArgs: false,
-
         //         // Concatenate the incoming list items with
         //         // the existing list items.
         //         merge(existing: any[] = [], incoming: any[]) {
@@ -85,8 +86,7 @@ export function ApolloWrapper({ children, host }: props) {
         //     }
         //   }
         // }
-      })
-
+      }),
     });
   }
 
