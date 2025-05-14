@@ -8,6 +8,8 @@ services:
     # assuming your app runs on port 3000 inside the container
     environment:
       - NODE_ENV=production
+    expose:
+      - "3000"
     networks:
       - web
 
@@ -17,6 +19,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile-admin
+    expose:
+      - "4001"
     # assuming your app runs on port 3000 inside the container
     environment:
       - NODE_ENV=production
@@ -25,4 +29,4 @@ services:
 
 networks:
   web:
-    driver: bridge
+    external: true
