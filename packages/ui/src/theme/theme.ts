@@ -11,7 +11,6 @@ const theme = {
   },
   token: {
     borderRadiusLG: 10,
-
     colorPrimary: "rgb(38 38 39)",
     borderRadius: 2,
     fontSize: 14,
