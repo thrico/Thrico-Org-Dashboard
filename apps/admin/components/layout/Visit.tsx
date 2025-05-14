@@ -7,6 +7,9 @@ import { GlobalOutlined } from "@ant-design/icons";
 const Visit = () => {
   const { data } = getThricoDomain();
   const { data: custom } = getCustomDomain();
+  const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : "thrico.community";
   return (
     <Dropdown
       menu={{
@@ -17,10 +20,9 @@ const Visit = () => {
               <a
                 target="_blank"
                 href={`http://${data?.getThricoDomain?.domain}.
-                ${process.env.NEXT_PUBLIC_SITE_URL}`}
+                ${NEXT_PUBLIC_SITE_URL}`}
               >
-                http://{data?.getThricoDomain?.domain}.
-                {process.env.NEXT_PUBLIC_SITE_URL}
+                http://{data?.getThricoDomain?.domain}.{NEXT_PUBLIC_SITE_URL}
               </a>
             ),
 
