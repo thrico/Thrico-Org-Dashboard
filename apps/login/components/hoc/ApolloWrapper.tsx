@@ -21,6 +21,8 @@ export function ApolloWrapper({ children, host }: props) {
     token: state.token,
   }));
 
+  console.log(host, "host");
+
   function makeClient() {
     const errorControl = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
