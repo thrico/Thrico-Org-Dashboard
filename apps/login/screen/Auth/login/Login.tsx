@@ -10,6 +10,7 @@ import LoginForm from "./Form";
 const Login = () => {
   const { Title, Paragraph, Text } = Typography;
 
+  console.log(process.env);
   return (
     <AuthLayout>
       <Flex style={{ width: "100%" }} justify="center" align="center">
