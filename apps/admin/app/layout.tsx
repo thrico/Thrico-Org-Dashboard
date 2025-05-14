@@ -6,7 +6,8 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { ConfigProvider } from "antd";
 import { workSans } from "./font";
-
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "antd/dist/reset.css";
 export default function RootLayout({
   children,
 }: {
@@ -14,34 +15,37 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={workSans.className}>
-        <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
-          <ConfigProvider
-            theme={{
-              components: {
-                Card: {
-                  headerFontSize: 30,
-                  headerHeight: 70,
+      <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
+        <body className={workSans.className}>
+          <AntdRegistry>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Card: {
+                    headerFontSize: 30,
+                    headerHeight: 70,
+                  },
+                  Menu: {
+                    colorItemBgSelected: "#eeeeee",
+                  },
+                  Modal: {
+                    titleFontSize: 20,
+                  },
                 },
-                Menu: {
-                  colorItemBgSelected: "#eeeeee",
-                },
-                Modal: {
-                  titleFontSize: 20,
-                },
-              },
 
-              token: {
-                colorPrimary: "#000000",
-                borderRadius: 2,
-                fontFamily: "'Work Sans', sans-serif;",
-              },
-            }}
-          >
-            {children}
-          </ConfigProvider>
-        </ApolloWrapper>
-      </body>
+                token: {
+                  // Ensuring font className usage
+
+                  borderRadius: 20,
+                  colorPrimary: "#000000",
+                },
+              }}
+            >
+              <Providers>{children}</Providers>
+            </ConfigProvider>
+          </AntdRegistry>
+        </body>
+      </ApolloWrapper>
     </html>
   );
 }
