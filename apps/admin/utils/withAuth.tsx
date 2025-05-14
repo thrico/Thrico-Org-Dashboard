@@ -6,6 +6,12 @@ import { getGetUser } from "../graphql/actions";
 
 export default (WrappedComponent: any, options = { ssr: false }) => {
   function WithAuth(props: any) {
+    const ACCOUNTS_URL = process.env.ACCOUNTS_URL
+      ? process.env.ACCOUNTS_URL
+      : "https://accounts.thrico.com/login";
+    const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL
+      ? process.env.NEXT_PUBLIC_DASHBOARD_URL
+      : "https://dashboard.thrico.com/";
     const pathname = usePathname();
 
     const { data: { getUser } = {}, loading, error } = getGetUser();
@@ -18,7 +24,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
       return (
         <>
           <Redirect
-            to={`${process.env.ACCOUNTS_URL}/auth?path=${process.env.NEXT_PUBLIC_DASHBOARD_URL}${pathname}&&host=${process.env.NEXT_PUBLIC_DASHBOARD_URL}`}
+            to={`${ACCOUNTS_URL}/auth?path=${process.env.DASHBOARD_URL}${pathname}&&host=${process.env.DASHBOARD_URL}`}
           />
         </>
       );
