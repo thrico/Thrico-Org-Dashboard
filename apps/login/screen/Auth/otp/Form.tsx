@@ -19,6 +19,9 @@ type FieldType = {
 };
 
 const OtpForm = () => {
+  const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL
+    ? process.env.NEXT_PUBLIC_DASHBOARD_URL
+    : "https://dashboard.thrico.com/";
   const storeToken = useTokenStore((state) => state.storeToken);
   const { id } = useParams();
   const router = useRouter();
@@ -27,7 +30,7 @@ const OtpForm = () => {
       await toast.success("Login Success");
       await storeToken(data?.otpLogin?.token);
       await router.push(
-        `${process.env.NEXT_PUBLIC_DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
+        `${DASHBOARD_URL}/auth/callback?code=${data?.otpLogin?.token}`
       );
     },
   });

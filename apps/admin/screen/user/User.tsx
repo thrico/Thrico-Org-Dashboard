@@ -12,12 +12,17 @@ const User = ({ status }) => {
     },
   });
 
-
   const setDataSource = (about: userData[]) => {
     console.log("Setting data source:", about);
   };
 
-  return <List loading={loading} dataSource={data?.getAllUser} setDataSource={setDataSource} />;
+  return (
+    <List
+      loading={loading}
+      dataSource={data?.getAllUser}
+      setDataSource={setDataSource}
+    />
+  );
 };
 
 export default User;
