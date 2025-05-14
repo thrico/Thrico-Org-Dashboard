@@ -15,34 +15,32 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={workSans.className}>
-        <Providers>
-          <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
-            <ConfigProvider
-              theme={{
-                components: {
-                  Card: {
-                    headerFontSize: 30,
-                    headerHeight: 70,
-                  },
-                  Menu: {
-                    colorItemBgSelected: "#eeeeee",
-                  },
-                  Modal: {
-                    titleFontSize: 20,
-                  },
+        <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
+          <ConfigProvider
+            theme={{
+              components: {
+                Card: {
+                  headerFontSize: 30,
+                  headerHeight: 70,
                 },
+                Menu: {
+                  colorItemBgSelected: "#eeeeee",
+                },
+                Modal: {
+                  titleFontSize: 20,
+                },
+              },
 
-                token: {
-                  colorPrimary: "#000000",
-                  borderRadius: 2,
-                  fontFamily: "'Work Sans', sans-serif;",
-                },
-              }}
-            >
-              {children}
-            </ConfigProvider>
-          </ApolloWrapper>
-        </Providers>
+              token: {
+                colorPrimary: "#000000",
+                borderRadius: 2,
+                fontFamily: "'Work Sans', sans-serif;",
+              },
+            }}
+          >
+            {children}
+          </ConfigProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );
