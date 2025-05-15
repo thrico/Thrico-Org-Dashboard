@@ -65,7 +65,6 @@ const OtpForm = () => {
       layout="vertical"
       size="large"
     >
-      {process.env.NEXT_PUBLIC_DASHBOARD_URL}
       <Form.Item
         style={{ marginTop: 20 }}
         name="otp"

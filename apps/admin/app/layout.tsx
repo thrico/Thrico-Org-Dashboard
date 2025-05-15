@@ -22,8 +22,8 @@ export default function RootLayout({
               theme={{
                 components: {
                   Card: {
-                    headerFontSize: 30,
-                    headerHeight: 70,
+                    headerFontSize: 18,
+                    headerHeight: 50,
                   },
                   Menu: {
                     colorItemBgSelected: "#eeeeee",
@@ -31,13 +31,23 @@ export default function RootLayout({
                   Modal: {
                     titleFontSize: 20,
                   },
+                  Tooltip: {
+                    /* here is your component tokens */
+                  },
                 },
 
                 token: {
                   // Ensuring font className usage
 
                   borderRadius: 20,
-                  colorPrimary: "#000000",
+                  colorPrimary: "#303030",
+                  fontSize: 12,
+                  fontSizeHeading1: 30,
+                  fontSizeHeading2: 24,
+                  fontSizeHeading3: 20,
+
+                  fontSizeHeading4: 16,
+                  fontSizeHeading5: 14,
                 },
               }}
             >

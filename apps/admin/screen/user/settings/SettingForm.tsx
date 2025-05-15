@@ -36,18 +36,28 @@ const SettingForm = ({ loading, update, data }) => {
       <Card
         extra={
           <Button loading={loading} type="primary" htmlType="submit">
-            Update
+            Save
           </Button>
         }
         title="Settings"
       >
-        <Flex vertical gap={30}>
+        <Divider orientation="left">Listing Approval</Divider>
+        <Flex vertical>
           <Form.Item
             name="autoApprove"
-            label="Auto Approve"
-            help="Auto Approve Users"
+            label="Auto Approve New User"
+            tooltip="Auto Approve Users"
           >
             <Switch checkedChildren={"Yes"} unCheckedChildren="No" />
+          </Form.Item>
+
+          <Form.Item
+            name="allowNewUser"
+            label="Allow New User"
+            valuePropName="checked"
+            tooltip="Turn off temporarily if you need to pause new User"
+          >
+            <Switch />
           </Form.Item>
         </Flex>
       </Card>

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { Card, Flex, Form, Select, Steps } from "antd";
+import { Card, Flex, Form, Select, Steps, Typography } from "antd";
 
 import AuthLayout from "@repo/ui/AuthLayout";
 import Profile from "./profile/Profile";
@@ -11,8 +11,9 @@ import { getEntity, registerOrganization } from "../../graphql/actions";
 import Domain from "./domian/Domain";
 import toast from "react-hot-toast";
 import { generateSlug } from "random-word-slugs";
-const { Option } = Select;
 
+const { Option } = Select;
+const { Title, Paragraph, Text } = Typography;
 interface KycFormData {
   user?: {
     firstName?: string;

@@ -55,7 +55,7 @@ const LoginForm = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
       layout="vertical"
-      size="large"
+      size="middle"
     >
       <Form.Item
         label="Email"

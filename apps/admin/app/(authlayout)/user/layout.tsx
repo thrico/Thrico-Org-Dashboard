@@ -20,13 +20,9 @@ import {
   ToolOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
+import MenuItemsLayout from "../../../screen/comman/MenuItemsLayout";
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
-    {
-      key: "dashboard",
-      label: "Dashboard",
-      icon: <AppstoreOutlined />,
-    },
     {
       key: "all",
       label: "All User",
@@ -54,26 +50,13 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       label: "Blocked",
       icon: <StopOutlined />,
     },
-    {
-      key: "settings",
-      label: "Settings",
-      icon: <ToolOutlined />,
-    },
   ];
-  const router = useRouter();
-  const onChange = (key: string) => {
-    if (key === "dashboard") router.push(`/user`);
-    else router.push(`/user/${key}`);
-  };
-  const pathname = usePathname();
-  const activeTab = pathname.replace("/user/", "");
+
   return (
     <>
-      <MainBreadcrumb />
-      <Card extra="">
-        <Tabs defaultActiveKey={activeTab} items={items} onChange={onChange} />
+      <MenuItemsLayout active={"user"} items={items}>
         {children}
-      </Card>
+      </MenuItemsLayout>
     </>
   );
 }

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Button, Layout, Menu, theme } from "antd";
 import { Navbar } from "../../components/layout/Header";
-import Sidebar from "../../components/layout/Sidebar";
+import Sidebar from "../../components/layout/sidebar/Sidebar";
 import Footer from "../../components/layout/Footer";
 import withAuth from "../../utils/withAuth";
 import { getEntity, getGetUser } from "../../graphql/actions";
@@ -17,7 +17,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(true);
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
   const { data, loading } = getEntity();
   const {
@@ -43,7 +43,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
 
                   <Content
                     style={{
-                      margin: "24px 16px",
                       padding: 24,
                       minHeight: 280,
                       borderRadius: borderRadiusLG,

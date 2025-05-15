@@ -73,6 +73,7 @@ const Profile: React.FC<ProfileProps> = ({
           flexDirection: "column",
         }}
         scrollToFirstError
+        size="middle"
       >
         <Form.Item label="Full Name" rules={[{ required: true }]} hasFeedback>
           <Input value={fullName} disabled style={{ width: "100%" }} />

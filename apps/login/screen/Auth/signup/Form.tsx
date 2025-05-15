@@ -118,27 +118,6 @@ const LoginForm = () => {
         label="Confirm Password"
         dependencies={["password"]}
         hasFeedback
-        rules={[
-          {
-            required: true,
-            message: "Please confirm your password!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error("The new password that you entered do not match!")
-              );
-            },
-          }),
-          {
-            min: 6,
-            max: 12,
-            message: "Password must be between 6 and 12 characters!",
-          },
-        ]}
       >
         <Input.Password />
       </Form.Item>
