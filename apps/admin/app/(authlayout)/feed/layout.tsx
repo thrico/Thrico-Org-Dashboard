@@ -1,52 +1,23 @@
 "use client";
+import * as React from "react";
+import { TabsProps } from "antd";
 
-import { Breadcrumb, Card, Tabs, TabsProps } from "antd";
-import { usePathname, useRouter } from "next/navigation";
-import MainBreadcrumb from "../../../screen/comman/BreadCrumb";
-import { MdDashboard } from "react-icons/md";
-
-import { IoSettingsOutline } from "react-icons/io5";
-import IconView from "../../../screen/comman/IconView";
-import { FaRegCheckCircle } from "react-icons/fa";
-
+import { UnorderedListOutlined } from "@ant-design/icons";
+import MenuItemsLayout from "../../../screen/comman/MenuItemsLayout";
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
     {
-      key: "dashboard",
-      label: "Dashboard",
-      icon: <IconView icon={MdDashboard} />,
-    },
-    {
       key: "all",
-      label: "Feeds",
-      icon: <IconView icon={FaRegCheckCircle} />,
-    },
-
-    {
-      key: "settings",
-      label: "Settings",
-      icon: <IconView icon={IoSettingsOutline} />,
-    },
-    {
-      key: "report",
-      label: "Report",
-      icon: <IconView icon={IoSettingsOutline} />,
+      label: "feed",
+      icon: <UnorderedListOutlined />,
     },
   ];
-  const router = useRouter();
-  const onChange = (key: string) => {
-    if (key === "dashboard") router.push(`/feed`);
-    else router.push(`/feed/${key}`);
-  };
-  const pathname = usePathname();
-  const activeTab = pathname.replace("/feed/", "");
+
   return (
     <>
-      <MainBreadcrumb />
-      <Card extra="">
-        <Tabs defaultActiveKey={activeTab} items={items} onChange={onChange} />
+      <MenuItemsLayout active={"feed"} items={items}>
         {children}
-      </Card>
+      </MenuItemsLayout>
     </>
   );
 }
