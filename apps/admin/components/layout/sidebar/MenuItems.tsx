@@ -24,28 +24,28 @@ export const items: MenuProps["items"] = [
     icon: <MdDashboardCustomize />,
   },
   {
-    key: "user",
+    key: "members",
 
     label: (
-      <Link href={"/user"}>
-        <Typography>Manage User</Typography>
+      <Link href={"/members"}>
+        <Typography>Manage Members</Typography>
       </Link>
     ),
     children: [
       {
-        key: "/user",
+        key: "/members",
         type: "group",
         label: (
-          <Link href={"/user/approved"}>
+          <Link href={"/members/approved"}>
             <Typography>Manage Approval</Typography>
           </Link>
         ),
       },
       {
-        key: "/user",
+        key: "/members",
         type: "group",
         label: (
-          <Link href={"/user/settings"}>
+          <Link href={"/member/settings"}>
             <Typography>Settings</Typography>
           </Link>
         ),

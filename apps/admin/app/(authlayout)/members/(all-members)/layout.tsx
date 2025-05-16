@@ -1,16 +1,7 @@
 "use client";
 import * as React from "react";
 import { Card, Tabs, TabsProps } from "antd";
-import { usePathname, useRouter } from "next/navigation";
-import MainBreadcrumb from "../../../screen/comman/BreadCrumb";
-import { MdDashboard } from "react-icons/md";
 
-import { RiEditCircleFill } from "react-icons/ri";
-import { IoSettingsOutline } from "react-icons/io5";
-
-import { FcFeedback } from "react-icons/fc";
-import { FaListOl, FaRegCheckCircle } from "react-icons/fa";
-import IconView from "../../../screen/comman/IconView";
 import {
   AppstoreOutlined,
   CheckCircleOutlined,
@@ -20,12 +11,13 @@ import {
   ToolOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-import MenuItemsLayout from "../../../screen/comman/MenuItemsLayout";
+import { usePathname, useRouter } from "next/navigation";
+
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
     {
       key: "all",
-      label: "All User",
+      label: "All",
       icon: <UnorderedListOutlined />,
     },
     {
@@ -51,12 +43,17 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       icon: <StopOutlined />,
     },
   ];
-
+  const router = useRouter();
+  const onChange = (key: string) => {
+    if (key === "all") router.push(`/members/all`);
+    else router.push(`/members/${key}`);
+  };
+  const pathname = usePathname();
+  const activeTab = pathname.replace("/members/", "");
   return (
     <>
-      <MenuItemsLayout active={"user"} items={items}>
-        {children}
-      </MenuItemsLayout>
+      <Tabs defaultActiveKey={activeTab} items={items} onChange={onChange} />
+      {children}
     </>
   );
 }

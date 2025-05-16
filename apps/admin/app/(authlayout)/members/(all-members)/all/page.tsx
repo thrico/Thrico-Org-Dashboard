@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import User from "../../../../screen/user/User";
+import User from "../../../../../screen/user/User";
 
 const page = () => {
   return <User status={"ALL"} />;
