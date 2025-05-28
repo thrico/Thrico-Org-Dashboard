@@ -2,8 +2,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../../quries";
 import {
   CHANGE_USER_STATUS,
+  CHANGE_USER_VERIFICATION,
   GET_ALL_USER,
   GET_USER_DETIALS,
+  UPDATE_MEMBERS_TERMS_AND_CONDITIONS,
 } from "../../quries/user";
 
 export const getUser = () => useQuery(GET_ALL_USER);
@@ -15,48 +17,92 @@ export const getUserDetailsById = (options: any) =>
 
 export const changeUserStatus = (options: any) =>
   useMutation(CHANGE_USER_STATUS, {
-    update(cache, { data: { changeUserStatus } }) {
-      try {
-        cache.writeQuery({
-          query: GET_USER_DETIALS,
-          data: {
-            getUserDetailsById: options.id,
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "ALL",
           },
-          variables: {
-            input: {
-              id: options?.id,
-            },
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "PENDING",
           },
-        });
-
-        alert(options.status.toUpperCase());
-
-        const { getAllUser }: any = cache.readQuery({
-          query: GET_ALL_USER,
-          variables: {
-            input: {
-              status: options.status.toUpperCase(),
-            },
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "APPROVED",
           },
-        });
-
-        const newValues = getAllUser?.map((p: any) =>
-          p?.user?.id === changeUserStatus?.user?.id ? changeUserStatus : p
-        );
-
-        cache.writeQuery({
-          query: GET_ALL_USER,
-          data: {
-            getAllUser: newValues,
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "BLOCKED",
           },
-          variables: {
-            input: {
-              status: "all",
-            },
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "REJECTED",
           },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "FLAGGED",
+          },
+        },
+      },
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "DISABLED",
+          },
+        },
+      },
+    ],
+    awaitRefetchQueries: true, // ensures mutation waits until refetch is complete
   });
+
+export const changeUserVerification = (options: any) =>
+  useMutation(CHANGE_USER_VERIFICATION, {
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "ALL",
+          },
+        },
+      },
+
+      {
+        query: GET_ALL_USER,
+        variables: {
+          input: {
+            status: "APPROVED",
+          },
+        },
+      },
+    ],
+    awaitRefetchQueries: true, // ensures mutation waits until refetch is complete
+  });
+
+export const updateMemberTermsAndConditions = (options: any) =>
+  useMutation(UPDATE_MEMBERS_TERMS_AND_CONDITIONS, {});

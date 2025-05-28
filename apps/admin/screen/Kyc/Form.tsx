@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Card, Flex, Form, Select, Steps, Typography } from "antd";
 
-import AuthLayout from "@repo/ui/AuthLayout";
+import AuthLayout from "@thrico/ui/AuthLayout";
 import Profile from "./profile/Profile";
 import Organization from "./entity/Entity";
 import { getEntity, registerOrganization } from "../../graphql/actions";

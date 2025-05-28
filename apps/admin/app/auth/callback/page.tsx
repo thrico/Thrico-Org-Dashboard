@@ -1,6 +1,6 @@
 "use client";
 
-import { useTokenStore } from "@repo/ui/store";
+import { useTokenStore } from "@thrico/ui/store";
 import React from "react";
 
 import {

@@ -575,7 +575,7 @@ export default function ModuleManagement() {
                 >
                   <div>
                     <Card
-                      title="Fixed Navigation Items"
+                      title=" Navigation Items"
                       style={{ marginBottom: "16px" }}
                     >
                       <div
@@ -584,44 +584,7 @@ export default function ModuleManagement() {
                           flexDirection: "column",
                           gap: "16px",
                         }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              width: "40px",
-                              height: "40px",
-                              borderRadius: "8px",
-                              backgroundColor: "#e6f7ff",
-                              color: "#1890ff",
-                              marginRight: "12px",
-                            }}
-                          >
-                            <HomeOutlined style={{ fontSize: 20 }} />
-                          </div>
-                          <span>Home</span>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              width: "40px",
-                              height: "40px",
-                              borderRadius: "8px",
-                              backgroundColor: "#e6f7ff",
-                              color: "#1890ff",
-                              marginRight: "12px",
-                            }}
-                          >
-                            <UserOutlined style={{ fontSize: 20 }} />
-                          </div>
-                          <span>Profile</span>
-                        </div>
-                      </div>
+                      ></div>
 
                       <div
                         style={{

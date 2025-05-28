@@ -1,6 +1,6 @@
 "use client"; // Error components must be Client Components
 
-import SomeThingWentWrong from "@repo/ui/SomeThingWentWrong";
+import SomeThingWentWrong from "@thrico/ui/SomeThingWentWrong";
 import { useEffect } from "react";
 
 export default function Error({

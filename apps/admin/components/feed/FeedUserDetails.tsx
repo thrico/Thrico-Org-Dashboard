@@ -35,7 +35,7 @@ const FeedUserDetails: React.FC<FeedProps> = ({
               </Text>
             )}
             {addedBy === "ENTITY" && (
-              <Text strong>{data?.getEntity?.entity?.name}</Text>
+              <Text strong>{data?.getEntity?.name}</Text>
             )}
           </Space>
         }

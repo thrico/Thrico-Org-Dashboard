@@ -1,4 +1,4 @@
-import NotFound from "@repo/ui/NotFound ";
+import NotFound from "@thrico/ui/NotFound ";
 
 function NotFoundPage() {
   return <NotFound />;

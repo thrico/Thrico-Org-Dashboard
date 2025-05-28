@@ -1,4 +1,4 @@
-import Providers from "@repo/ui/Providers";
+import Providers from "@thrico/ui/Providers";
 import { ApolloWrapper } from "../components/hoc/ApolloWrapper";
 import { workSans } from "./font";
 

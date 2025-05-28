@@ -24,15 +24,14 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       icon: <UnorderedListOutlined />,
     },
     {
-      key: "pending",
-      label: "Pending",
-      icon: <ClockCircleOutlined />,
-    },
-
-    {
       key: "approved",
       label: "Approved",
       icon: <CheckCircleOutlined />,
+    },
+    {
+      key: "pending",
+      label: "Pending",
+      icon: <ClockCircleOutlined />,
     },
 
     {

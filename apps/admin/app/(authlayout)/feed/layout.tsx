@@ -4,12 +4,13 @@ import { TabsProps } from "antd";
 
 import { UnorderedListOutlined } from "@ant-design/icons";
 import MenuItemsLayout from "../../../screen/comman/MenuItemsLayout";
+import { MdOutlineFeed } from "react-icons/md";
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
     {
       key: "all",
-      label: "feed",
-      icon: <UnorderedListOutlined />,
+      label: "Feed",
+      icon: <MdOutlineFeed />,
     },
   ];
 

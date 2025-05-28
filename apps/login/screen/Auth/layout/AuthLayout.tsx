@@ -1,7 +1,7 @@
 import { Card, Flex } from "antd";
 import Link from "next/link";
 import React from "react";
-import ThricoLogo from "@repo/ui/ThricoLogo";
+import ThricoLogo from "@thrico/ui/ThricoLogo";
 const AuthLayout = ({ children }: React.PropsWithChildren) => (
   <Flex
     style={{

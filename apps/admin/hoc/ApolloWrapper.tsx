@@ -10,7 +10,7 @@ import {
 } from "@apollo/client-integration-nextjs";
 import { onError } from "@apollo/client/link/error";
 import toast from "react-hot-toast";
-import { useTokenStore } from "@repo/ui/store";
+import { useTokenStore } from "@thrico/ui/store";
 //@ts-ignore
 import { createUploadLink } from "apollo-upload-client";
 

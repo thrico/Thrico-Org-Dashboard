@@ -7,6 +7,8 @@ import FeedUserDetails from "./FeedUserDetails";
 import { FeedProps } from "./types";
 import Like from "./Action/Like";
 import Analytics from "./Analytics";
+import Comments from "./comment/Comment";
+import Poll from "./Poll";
 
 const { Text, Paragraph } = Typography;
 
@@ -43,9 +45,15 @@ export default function Feed({ feed }: { feed: FeedProps }) {
           </Dropdown>
         </div>
 
-        <div style={{ margin: "16px 0" }}>
-          <Paragraph>{feed?.description}</Paragraph>
-        </div>
+        {feed?.source === "dashboard" && (
+          <div style={{ margin: "16px 0" }}>
+            <Paragraph>{feed?.description}</Paragraph>
+          </div>
+        )}
+
+        {feed?.source === "poll" && feed?.poll?.id && (
+          <Poll id={feed?.poll?.id} />
+        )}
 
         <div
           style={{
@@ -68,9 +76,8 @@ export default function Feed({ feed }: { feed: FeedProps }) {
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Like item={feed} />
-          <Button type="text" icon={<FaRegCommentAlt size={17} />}>
-            Comment
-          </Button>
+          <Comments id={feed.id} />
+
           <Button type="text" icon={<MdOutlineRepeat size={17} />}>
             Share
           </Button>

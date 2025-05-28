@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   output: 'standalone',
-  transpilePackages: ["@repo/ui"],
+  transpilePackages: ["@thrico/ui"],
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

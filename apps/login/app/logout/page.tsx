@@ -7,7 +7,7 @@ import { logoutUser } from "../../components/graphql/actions";
 import toast from "react-hot-toast";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
-import { useTokenStore } from "@repo/ui/store";
+import { useTokenStore } from "@thrico/ui/store";
 
 const page = () => {
   const router = useRouter();

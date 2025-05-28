@@ -1,7 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
+  ADD_COMMENT,
   ADD_FEED,
+  DELETE_COMMENT_FEED,
   GET_ALL_FEED,
+  GET_FEED_COMMENTS,
   LIKE_FEED,
   NUMBER_OF_FEED,
 } from "../../quries/feed";
@@ -44,3 +47,71 @@ export const addFeed = (options: any) =>
   });
 
 export const likeFeed = (options: any) => useMutation(LIKE_FEED, {});
+
+export const addComment = (options: any) =>
+  useMutation(ADD_COMMENT, {
+    onCompleted(data) {
+      options.onCompleted();
+    },
+    update(cache, { data: { addComment } }) {
+      try {
+        const { getFeedComment }: any = cache.readQuery({
+          query: GET_FEED_COMMENTS,
+          variables: {
+            input: {
+              id: addComment?.feedId, // Match the limit in your Following screen
+            },
+          },
+        });
+
+        cache.writeQuery({
+          query: GET_FEED_COMMENTS,
+          data: { getFeedComment: [addComment, ...getFeedComment] },
+          variables: {
+            input: {
+              id: addComment?.feedId, // Match the limit in your Following screen
+            },
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+export const deleteCommentFeed = (options: any) =>
+  useMutation(DELETE_COMMENT_FEED, {
+    update(cache, { data: { deleteCommentFeed } }) {
+      try {
+        const { getFeedComment }: any = cache.readQuery({
+          query: GET_FEED_COMMENTS,
+          variables: {
+            input: {
+              id: deleteCommentFeed?.feedId, // Match the limit in your Following screen
+            },
+          },
+        });
+        if (!getFeedComment) return;
+        const updatedComments = getFeedComment.filter(
+          (comment: any) => comment.id !== deleteCommentFeed.id
+        );
+
+        cache.writeQuery({
+          query: GET_FEED_COMMENTS,
+          variables: {
+            input: {
+              id: deleteCommentFeed?.feedId,
+            },
+          },
+          data: {
+            getFeedComment: updatedComments,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+export const getFeedComment = (options: any) =>
+  useQuery(GET_FEED_COMMENTS, options);

@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { Header } from "antd/es/layout/layout";
 import React from "react";
-import Logo from "@repo/ui/Logo";
+import Logo from "@thrico/ui/Logo";
 import { getEntity, getGetUser } from "../../graphql/actions";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 

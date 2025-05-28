@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
-import LogoutModal from "@repo/ui/Logout";
+import LogoutModal from "@thrico/ui/Logout";
 import { items } from "./MenuItems";
 
 interface SidebarProps {
@@ -44,8 +44,8 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           style={{
             position: "absolute",
             top: 20,
-
             width: "100%",
+
             display: "flex",
             justifyContent: "center",
           }}

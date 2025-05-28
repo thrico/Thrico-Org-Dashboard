@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { useTokenStore } from "@repo/ui/store";
-import { useRouter } from "next/navigation";
+import { useTokenStore } from "@thrico/ui/store";
+import { redirect, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useLazyQuery } from "@apollo/client";
 import { getCheckUser } from "../../components/graphql/actions";
@@ -23,13 +23,11 @@ const Auth = () => {
       search();
       // router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
-      router.push(
-        `${process.env.ACCOUNTS_URL}/login/?path=${path}&&host=${host}`
-      );
+      window.location.href = `${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`;
     }
   }, [token, path]);
 
-  return <div>{}</div>;
+  return <div>{process.env.NEXT_PUBLIC_ACCOUNTS_URL}</div>;
 };
 
 export default Auth;

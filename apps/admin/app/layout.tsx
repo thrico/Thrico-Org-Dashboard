@@ -1,4 +1,4 @@
-import Providers from "@repo/ui/Providers";
+import Providers from "@thrico/ui/Providers";
 import { ApolloWrapper } from "../hoc/ApolloWrapper";
 import "react-quill/dist/quill.snow.css";
 import "./global.css";

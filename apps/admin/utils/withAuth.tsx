@@ -6,8 +6,8 @@ import { getGetUser } from "../graphql/actions";
 
 export default (WrappedComponent: any, options = { ssr: false }) => {
   function WithAuth(props: any) {
-    const ACCOUNTS_URL = process.env.ACCOUNTS_URL
-      ? process.env.ACCOUNTS_URL
+    const ACCOUNTS_URL = process.env.NEXT_PUBLIC_ACCOUNTS_URL
+      ? process.env.NEXT_PUBLIC_ACCOUNTS_URL
       : "https://accounts.thrico.com";
     const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL
       ? process.env.NEXT_PUBLIC_DASHBOARD_URL

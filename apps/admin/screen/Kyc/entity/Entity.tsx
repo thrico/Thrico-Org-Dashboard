@@ -48,48 +48,50 @@ const Entity = ({
     setCurrent(2);
   };
 
-  const entity = data?.getIndustryType.length > 0 ? data?.getIndustryType : [
-    {
-      title: "Enterprise"
-    },
-    {
-      title: "Creator"
-    },
-    {
-      title: "Association"
-    },
-    {
-      title: "Public Enterprise"
-    },
-    {
-      title: "Professional"
-    },
+  const entity =
+    data?.getIndustryType.length > 0
+      ? data?.getIndustryType
+      : [
+          {
+            title: "Enterprise",
+          },
+          {
+            title: "Creator",
+          },
+          {
+            title: "Association",
+          },
+          {
+            title: "Public Enterprise",
+          },
+          {
+            title: "Professional",
+          },
+        ];
+  const industry =
+    data?.getIndustryType.length > 0
+      ? data?.getIndustryType
+      : [
+          {
+            title: "Technology",
+          },
+          {
+            title: "Retail",
+          },
 
-
-  ];
-  const industry = data?.getIndustryType.length > 0 ? data?.getIndustryType : [
-
-    {
-      title: "Technology"
-    },
-    {
-      title: "Retail"
-    },
-
-    {
-      title: "Education"
-    },
-    {
-      title: "FMCG"
-    },
-    {
-      title: "Electronics"
-    },
-    {
-      title: "Telecommunications"
-    },
-
-  ];
+          {
+            title: "Education",
+          },
+          {
+            title: "FMCG",
+          },
+          {
+            title: "Electronics",
+          },
+          {
+            title: "Telecommunications",
+          },
+        ];
 
   return (
     <Form
@@ -153,11 +155,9 @@ const Entity = ({
         initialValue={organization.website}
         name="website"
         label="Website"
-
         rules={[{ required: true, message: "Please input website!" }]}
       >
         <AutoComplete
-
           options={websiteOptions}
           onChange={onWebsiteChange}
           placeholder="website"

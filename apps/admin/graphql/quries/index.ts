@@ -81,3 +81,35 @@ export const ENTITY_KYC = gql`
     }
   }
 `;
+
+export const GET_ENTITY_SETTINGS = gql`
+  query GetEntitySettings {
+    getEntitySettings {
+      id
+      autoApproveUser
+      autoApproveGroup
+      autoApproveEvents
+      autoApproveJobs
+      autoApproveMarketPlace
+      allowNewUser
+      autoApproveDiscussionForum
+      allowDiscussionForum
+    }
+  }
+`;
+export const UPDATE_ENTITY_SETTINGS = gql`
+  mutation UpdateEntitySettings($input: EntityAutoApprovalSettingsInput) {
+    updateEntitySettings(input: $input) {
+      id
+      autoApproveUser
+      autoApproveGroup
+      autoApproveEvents
+      autoApproveJobs
+      autoApproveMarketPlace
+      entity
+      allowNewUser
+      autoApproveDiscussionForum
+      allowDiscussionForum
+    }
+  }
+`;

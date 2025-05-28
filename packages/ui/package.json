@@ -1,21 +1,21 @@
 {
-  "name": "@repo/ui",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@thrico/ui",
+  "version": "0.0.1",
+  "private": false,
   "exports": {
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
-    "./ProgressBar":"./src/ProgressBar.tsx",
+    "./ProgressBar": "./src/ProgressBar.tsx",
     "./theme": "./src/theme/theme.ts",
     "./Providers": "./src/providers.tsx",
-      "./Logo": "./src/components/Logo.tsx",
+    "./Logo": "./src/components/Logo.tsx",
     "./SomeThingWentWrong": "./src/error/SomeThingWentWrong.tsx",
-     "./NotFound ": "./src/error/NotFound.tsx",
-    "./Logout":"./src/logout/Logout.tsx",
-     "./store":"./src/store/store.ts",
-     "./AuthLayout": "./src/layout/AuthLayout",
-     "./ThricoLogo":"./src/ThricoLogo.tsx"
+    "./NotFound ": "./src/error/NotFound.tsx",
+    "./Logout": "./src/logout/Logout.tsx",
+    "./store": "./src/store/store.ts",
+    "./AuthLayout": "./src/layout/AuthLayout",
+    "./ThricoLogo": "./src/ThricoLogo.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

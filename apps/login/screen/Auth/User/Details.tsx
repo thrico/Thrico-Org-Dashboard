@@ -9,7 +9,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import Logout from "@repo/ui/Logout";
+import Logout from "@thrico/ui/Logout";
 import { useRouter } from "next/navigation";
 
 const Details = ({}) => {
@@ -36,7 +36,7 @@ const Details = ({}) => {
           href={
             process.env.NEXT_PUBLIC_DASHBOARD_URL
               ? process.env.NEXT_PUBLIC_DASHBOARD_URL
-              : "/"
+              : "https://dashboard.thrico.com/"
           }
         >
           <Flex align="center">

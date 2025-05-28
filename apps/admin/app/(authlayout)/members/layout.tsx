@@ -1,9 +1,10 @@
 "use client";
 import * as React from "react";
-import { TabsProps } from "antd";
+import { Card, TabsProps } from "antd";
 
 import { UnorderedListOutlined } from "@ant-design/icons";
 import MenuItemsLayout from "../../../screen/comman/MenuItemsLayout";
+import Stats from "../../../screen/user/Stats";
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
     {
@@ -16,7 +17,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <MenuItemsLayout active={"members"} items={items}>
-        {children}
+        <Card>{children}</Card>
       </MenuItemsLayout>
     </>
   );

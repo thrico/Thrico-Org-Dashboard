@@ -1,17 +1,21 @@
 "use client";
 import * as React from "react";
-import { Card, Tabs, TabsProps } from "antd";
+import { Button, Card, Tabs, TabsProps } from "antd";
 
 import {
   AppstoreOutlined,
   CheckCircleOutlined,
   ClockCircleOutlined,
   CloseCircleOutlined,
+  FlagOutlined,
+  PauseCircleFilled,
+  PauseCircleOutlined,
   StopOutlined,
   ToolOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
 import { usePathname, useRouter } from "next/navigation";
+import Stats from "../../../../screen/user/Stats";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
@@ -19,11 +23,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       key: "all",
       label: "All",
       icon: <UnorderedListOutlined />,
-    },
-    {
-      key: "pending",
-      label: "Pending",
-      icon: <ClockCircleOutlined />,
     },
 
     {
@@ -33,9 +32,25 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     },
 
     {
+      key: "pending",
+      label: "Pending",
+      icon: <ClockCircleOutlined />,
+    },
+    {
+      key: "disabled",
+      label: "Disabled",
+      icon: <PauseCircleOutlined />,
+    },
+
+    {
       key: "rejected",
       label: "Rejected",
       icon: <CloseCircleOutlined />,
+    },
+    {
+      key: "flagged",
+      label: "Flagged",
+      icon: <FlagOutlined />,
     },
     {
       key: "blocked",
@@ -50,8 +65,10 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   };
   const pathname = usePathname();
   const activeTab = pathname.replace("/members/", "");
+
   return (
     <>
+      <Stats />
       <Tabs defaultActiveKey={activeTab} items={items} onChange={onChange} />
       {children}
     </>

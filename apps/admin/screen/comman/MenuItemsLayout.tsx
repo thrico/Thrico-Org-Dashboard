@@ -5,12 +5,13 @@ import {
   UnorderedListOutlined,
   WarningOutlined,
 } from "@ant-design/icons";
-import { Card, Tabs, TabsProps } from "antd";
+import { Card, Layout, Tabs, TabsProps } from "antd";
 
 import React from "react";
 import MainBreadcrumb from "./BreadCrumb";
 import { usePathname, useRouter } from "next/navigation";
 import { TbLogs } from "react-icons/tb";
+import { Content } from "antd/lib/layout/layout";
 
 const MenuItemsLayout = ({
   children,
@@ -23,7 +24,7 @@ const MenuItemsLayout = ({
 }) => {
   const router = useRouter();
   const onChange = (key: string) => {
-    if (key === "dashboard") router.push(`/user`);
+    if (key === "dashboard") router.push(`/${active}`);
     else router.push(`/${active}/${key}`);
   };
   const pathname = usePathname();
@@ -62,14 +63,16 @@ const MenuItemsLayout = ({
   return (
     <>
       <MainBreadcrumb />
-      <Card extra="">
-        <Tabs
-          defaultActiveKey={activeTab}
-          items={menuitems}
-          onChange={onChange}
-        />
-        {children}
-      </Card>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Content style={{ padding: "24px" }}>
+          <Tabs
+            defaultActiveKey={activeTab}
+            items={menuitems}
+            onChange={onChange}
+          />
+          {children}
+        </Content>
+      </Layout>
     </>
   );
 };

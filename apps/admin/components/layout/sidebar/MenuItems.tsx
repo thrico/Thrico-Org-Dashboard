@@ -6,12 +6,19 @@ import {
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { MdDashboardCustomize, MdGroup, MdLocalOffer } from "react-icons/md";
+import {
+  MdDashboardCustomize,
+  MdGroup,
+  MdLocalOffer,
+  MdOutlineFeed,
+} from "react-icons/md";
 import { SiCodementor } from "react-icons/si";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { GrUserWorker } from "react-icons/gr";
 import { BsPersonWorkspace } from "react-icons/bs";
 import Link from "next/link";
+import { LuMessagesSquare } from "react-icons/lu";
+import { LiaPollSolid } from "react-icons/lia";
 export const items: MenuProps["items"] = [
   {
     key: "General",
@@ -36,7 +43,7 @@ export const items: MenuProps["items"] = [
         key: "/members",
         type: "group",
         label: (
-          <Link href={"/members/approved"}>
+          <Link href={"/members/all"}>
             <Typography>Manage Approval</Typography>
           </Link>
         ),
@@ -45,7 +52,7 @@ export const items: MenuProps["items"] = [
         key: "/members",
         type: "group",
         label: (
-          <Link href={"/member/settings"}>
+          <Link href={"/members/settings"}>
             <Typography>Settings</Typography>
           </Link>
         ),
@@ -82,7 +89,81 @@ export const items: MenuProps["items"] = [
         ),
       },
     ],
-    icon: <UserOutlined />,
+    icon: <MdOutlineFeed size={18} />,
+  },
+
+  {
+    key: "discussionForum",
+
+    label: (
+      <Link href={"/discussion-forum"}>
+        <Typography>Discussion Forum</Typography>
+      </Link>
+    ),
+    children: [
+      {
+        key: "/discussion-forum",
+
+        label: (
+          <Link href={"/discussion-forum"}>
+            <Typography>Discussion Forum</Typography>
+          </Link>
+        ),
+      },
+
+      {
+        key: "/discussion-forum",
+
+        label: (
+          <Link href={"/discussion-forum/settings"}>
+            <Typography>Settings</Typography>
+          </Link>
+        ),
+      },
+    ],
+    icon: <LuMessagesSquare size={18} />,
+  },
+
+  {
+    key: "feedback",
+
+    label: (
+      <Link href={"Feedback & Surveys"}>
+        <Typography>Feedback & Surveys</Typography>
+      </Link>
+    ),
+    children: [
+      {
+        key: "/forms/feedback",
+
+        label: (
+          <Link href={"/forms/feedback"}>
+            <Typography>Feedback</Typography>
+          </Link>
+        ),
+      },
+
+      {
+        key: "/forms/polls",
+
+        label: (
+          <Link href={"/forms/polls"}>
+            <Typography>Polls</Typography>
+          </Link>
+        ),
+      },
+
+      {
+        key: "/settings",
+
+        label: (
+          <Link href={"/feedback/settings"}>
+            <Typography>Settings</Typography>
+          </Link>
+        ),
+      },
+    ],
+    icon: <LiaPollSolid size={18} />,
   },
   {
     key: "communities",
@@ -374,7 +455,7 @@ export const items: MenuProps["items"] = [
 
   {
     key: "Logout",
-    label: <Typography onClick={() => handleOk()}>Logout</Typography>,
+    label: <Typography>Logout</Typography>,
     icon: <LogoutOutlined />,
   },
 ];

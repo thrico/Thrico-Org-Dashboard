@@ -1,3 +1,5 @@
+import { Table } from "antd";
+
 export default function Loading() {
-  return null
+  return <Table loading={true} />; // Loading state for the table
 }
