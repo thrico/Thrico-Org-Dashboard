@@ -339,9 +339,6 @@ importers:
 
   apps/admin:
     dependencies:
-      '@thrico/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
       '@thrico/ui':
         specifier: workspace:*
         version: link:../../packages/ui
