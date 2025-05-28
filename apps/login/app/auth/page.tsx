@@ -23,7 +23,7 @@ const Auth = () => {
       search();
       // router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
-      window.location.href = `${process.env.NEXT_PUBLIC_ACCOUNTS_URL}/login/?path=${path}&&host=${host}`;
+      window.location.href = `/login/?path=${path}&&host=${host}`;
     }
   }, [token, path]);
 
