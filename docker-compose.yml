@@ -10,8 +10,6 @@ services:
       - NODE_ENV=production
     expose:
       - "3000"
-    networks:
-      - web
 
   thrico-entity-admin:
     container_name: thrico-entity-admin
@@ -24,9 +22,3 @@ services:
     # assuming your app runs on port 3000 inside the container
     environment:
       - NODE_ENV=production
-    networks:
-      - web
-
-networks:
-  web:
-    external: true

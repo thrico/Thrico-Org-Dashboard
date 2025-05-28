@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   output: 'standalone',
-  transpilePackages: ["@repo/ui", "@repo/shared"],
+  transpilePackages: ["@repo/ui"],
   images: {
     remotePatterns: [
       {
