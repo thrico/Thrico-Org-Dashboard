@@ -46,13 +46,17 @@ export default function Edit({
     "What's your favorite option?"
   );
 
+  const [resultVisibility, setResultVisibility] = useState(
+    poll?.resultVisibility
+  );
+
   const [activeTab, setActiveTab] = useState("edit");
 
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     edit({
       variables: {
-        input: { ...values, id: poll?.id },
+        input: { ...values, id: poll?.id, resultVisibility },
       },
     });
   };
@@ -300,12 +304,13 @@ export default function Edit({
                         <DatePicker style={{ width: "100%" }} />
                       </Form.Item>
 
-                      <Form.Item
-                        name="resultVisibility"
-                        label="Results Visibility"
-                      >
+                      <Form.Item label="Results Visibility">
                         <Select
                           style={{ width: "100%" }}
+                          value={resultVisibility}
+                          onChange={(value) => {
+                            setResultVisibility(value);
+                          }}
                           options={[
                             { value: "ALWAYS", label: "Always visible" },
                             { value: "AFTER_VOTE", label: "After voting" },
