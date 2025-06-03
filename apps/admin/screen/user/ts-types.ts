@@ -19,7 +19,7 @@ export interface userStatus {
 }
 
 // User Object
-interface verification {
+export interface verification {
   id: string;
   isVerifiedAt: Date;
   isVerified: boolean;

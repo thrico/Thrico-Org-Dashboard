@@ -51,7 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           }}
         >
           <Button
-            type="text"
             icon={
               collapsed ? (
                 <MenuUnfoldOutlined size={40} />

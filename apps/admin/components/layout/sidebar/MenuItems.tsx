@@ -35,12 +35,12 @@ export const items: MenuProps["items"] = [
 
     label: (
       <Link href={"/members"}>
-        <Typography>Manage Members</Typography>
+        <Typography>Memberships</Typography>
       </Link>
     ),
     children: [
       {
-        key: "/members",
+        key: "/members/all",
         type: "group",
         label: (
           <Link href={"/members/all"}>
@@ -49,7 +49,7 @@ export const items: MenuProps["items"] = [
         ),
       },
       {
-        key: "/members",
+        key: "/members/settings",
         type: "group",
         label: (
           <Link href={"/members/settings"}>
@@ -70,17 +70,17 @@ export const items: MenuProps["items"] = [
     ),
     children: [
       {
-        key: "/feed",
+        key: "/feed/all",
 
         label: (
-          <Link href={"/feed/"}>
+          <Link href={"/feed/all"}>
             <Typography>Feed</Typography>
           </Link>
         ),
       },
 
       {
-        key: "/feed",
+        key: "/feed/settings",
 
         label: (
           <Link href={"/feed/settings"}>
@@ -97,15 +97,15 @@ export const items: MenuProps["items"] = [
 
     label: (
       <Link href={"/discussion-forum"}>
-        <Typography>Discussion Forum</Typography>
+        <Typography>Forum</Typography>
       </Link>
     ),
     children: [
       {
-        key: "/discussion-forum",
+        key: "/discussion-forum/all",
 
         label: (
-          <Link href={"/discussion-forum"}>
+          <Link href={"/discussion-forum/all"}>
             <Typography>Discussion Forum</Typography>
           </Link>
         ),
@@ -128,8 +128,8 @@ export const items: MenuProps["items"] = [
     key: "feedback",
 
     label: (
-      <Link href={"Feedback & Surveys"}>
-        <Typography>Feedback & Surveys</Typography>
+      <Link href={"#"}>
+        <Typography>Forms</Typography>
       </Link>
     ),
     children: [
@@ -174,7 +174,7 @@ export const items: MenuProps["items"] = [
     ),
     children: [
       {
-        key: "/communities/approval",
+        key: "/communities/all",
         type: "group",
         label: (
           <Link href={"/communities/approval"}>

@@ -1,8 +1,8 @@
 import React from "react";
-import Dashboard from "../../../screen/communities/dashboard/Dashboard";
+import Analytics from "../../../components/communities/dashboard/Analytics";
 
 const page = () => {
-  return <Dashboard />;
+  return <Analytics />;
 };
 
 export default page;

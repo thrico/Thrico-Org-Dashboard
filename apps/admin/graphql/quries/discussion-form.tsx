@@ -17,7 +17,7 @@ const forum = `
       category {
         name
         id
-      }
+    }
       upVotes
       downVotes
       status

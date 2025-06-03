@@ -76,7 +76,7 @@ const Cover = ({
                 style={{ marginTop: 10 }}
                 type="warning"
                 showIcon={true}
-                message="Please update the image; otherwise, it will show the default image."
+                message="No custom cover image selected. The default image will be displayed until you upload a new one."
               ></Alert>
             )}
           </>

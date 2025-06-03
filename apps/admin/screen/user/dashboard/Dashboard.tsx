@@ -1,255 +1,462 @@
 "use client";
-
-import React from "react";
-import { Card, Avatar, List, Typography, Space, Row, Col } from "antd";
+import React, { useState } from "react";
 import {
-  ArrowUpOutlined,
-  ArrowDownOutlined,
-  SwapOutlined,
+  Typography,
+  Card,
+  Row,
+  Col,
+  Space,
+  Button,
+  Avatar,
+  Dropdown,
+  DatePicker,
+  Table,
+  Tooltip,
+  Statistic,
+  Menu,
+  Divider,
+} from "antd";
+import {
+  DownloadOutlined,
+  UserOutlined,
+  TeamOutlined,
+  SafetyCertificateOutlined,
+  AppstoreOutlined,
+  DownOutlined,
+  CalendarOutlined,
+  LogoutOutlined,
+  SettingOutlined,
+  UserSwitchOutlined,
 } from "@ant-design/icons";
-import Kpis from "../../comman/Kpis";
-import { faker } from "@faker-js/faker";
-const Area = React.lazy(() =>
-  import("@ant-design/plots").then((module) => ({ default: module.Area }))
-);
 
-const { Text, Title } = Typography;
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip as RechartsTooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
-export default function Component() {
-  // Sample data for sparkline charts
-  const sparklineData = {
-    companies: [30, 35, 40, 45, 50, 58],
-    contacts: [1000, 1100, 1150, 1200, 1250, 1286],
-    deals: [40, 38, 36, 35, 33, 34],
+const { Title, Text } = Typography;
+const { RangePicker } = DatePicker;
+
+// Sample data for charts
+const weeklySignupsData = [
+  { day: "Mon", signups: 120 },
+  { day: "Tue", signups: 132 },
+  { day: "Wed", signups: 101 },
+  { day: "Thu", signups: 134 },
+  { day: "Fri", signups: 190 },
+  { day: "Sat", signups: 230 },
+  { day: "Sun", signups: 210 },
+];
+
+const topCommunitiesData = [
+  { name: "Photography Enthusiasts", members: 12500 },
+  { name: "Tech Innovators", members: 9800 },
+  { name: "Fitness & Health", members: 8700 },
+  { name: "Book Lovers", members: 7600 },
+  { name: "Travel Adventures", members: 6500 },
+];
+
+const membersByInterestData = [
+  { name: "Technology", value: 35 },
+  { name: "Arts", value: 25 },
+  { name: "Finance", value: 15 },
+  { name: "Health", value: 15 },
+  { name: "Other", value: 10 },
+];
+
+const communityPerformanceData = [
+  {
+    key: "1",
+    name: "Photography Enthusiasts",
+    slug: "photography-enthusiasts",
+    members: 12500,
+    activePercentage: 78,
+    lastActivity: "2 hours ago",
+  },
+  {
+    key: "2",
+    name: "Tech Innovators",
+    slug: "tech-innovators",
+    members: 9800,
+    activePercentage: 82,
+    lastActivity: "1 hour ago",
+  },
+  {
+    key: "3",
+    name: "Fitness & Health",
+    slug: "fitness-health",
+    members: 8700,
+    activePercentage: 65,
+    lastActivity: "3 hours ago",
+  },
+  {
+    key: "4",
+    name: "Book Lovers",
+    slug: "book-lovers",
+    members: 7600,
+    activePercentage: 58,
+    lastActivity: "5 hours ago",
+  },
+  {
+    key: "5",
+    name: "Travel Adventures",
+    slug: "travel-adventures",
+    members: 6500,
+    activePercentage: 72,
+    lastActivity: "4 hours ago",
+  },
+  {
+    key: "6",
+    name: "Cooking Masters",
+    slug: "cooking-masters",
+    members: 5400,
+    activePercentage: 67,
+    lastActivity: "6 hours ago",
+  },
+  {
+    key: "7",
+    name: "Gaming Community",
+    slug: "gaming-community",
+    members: 11200,
+    activePercentage: 88,
+    lastActivity: "30 minutes ago",
+  },
+];
+
+const columns = [
+  {
+    title: "Community Name",
+    dataIndex: "name",
+    key: "name",
+    render: (text: string) => <a href="#">{text}</a>,
+  },
+  {
+    title: "Slug",
+    dataIndex: "slug",
+    key: "slug",
+  },
+  {
+    title: "Members",
+    dataIndex: "members",
+    key: "members",
+    sorter: (a: any, b: any) => a.members - b.members,
+    render: (members: number) => members.toLocaleString(),
+  },
+  {
+    title: "Active %",
+    dataIndex: "activePercentage",
+    key: "activePercentage",
+    sorter: (a: any, b: any) => a.activePercentage - b.activePercentage,
+    render: (percentage: number) => (
+      <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: `${percentage}%`,
+            height: "8px",
+            backgroundColor: getActivityColor(percentage),
+            borderRadius: "4px",
+            marginRight: "8px",
+          }}
+        />
+        <span>{percentage}%</span>
+      </div>
+    ),
+  },
+  {
+    title: "Last Activity",
+    dataIndex: "lastActivity",
+    key: "lastActivity",
+  },
+];
+
+// Helper function to get color based on activity percentage
+function getActivityColor(percentage: number) {
+  if (percentage >= 80) return "#52c41a";
+  if (percentage >= 60) return "#1890ff";
+  if (percentage >= 40) return "#faad14";
+  return "#ff4d4f";
+}
+
+// Colors for pie chart
+const COLORS = ["#1890ff", "#52c41a", "#faad14", "#eb2f96", "#722ed1"];
+
+export default function Membership() {
+  const [dateRange, setDateRange] = useState<string>("7days");
+
+  const handleDateRangeChange = (value: string) => {
+    setDateRange(value);
   };
 
-  const upcomingEvents = [
-    {
-      time: "Today, 5pm - 6pm",
-      title: "Team Meeting",
-      color: "#1677ff",
-    },
-    {
-      time: "Tomorrow, All Day",
-      title: "Product Demonstration Webinar",
-      color: "#722ed1",
-    },
-    {
-      time: "August 28, 8am - 11am",
-      title: "Evaluation Meeting",
-      color: "#13c2c2",
-    },
-    {
-      time: "August 28, 8am - 11am",
-      title: "Sales Pitch Presentation",
-      color: "#fa8c16",
-    },
-    {
-      time: "August 30 - September 7",
-      title: "Conference Week",
-      color: "#f5222d",
-    },
-  ];
-
-  const activities = [
-    {
-      avatar: faker.image.avatar(),
-      name: "Cheyenne Kenter",
-      action: "added",
-
-      time: "5 minutes ago",
-      status: "feed 🎉",
-    },
-    {
-      avatar: faker.image.avatar(),
-      name: "Sterling Cooper",
-      action: "added",
-      amount: "$16,850.00",
-      time: "3 hours ago",
-      logo: "/placeholder.svg",
-      status: "feed 🎉",
-    },
-    {
-      avatar: faker.image.avatar(),
-      name: "Chance Philips",
-      action: "added",
-      feed: "Enterprise Planning",
-      time: "5 minutes ago",
-      status: "Marketplace Listing 🎉",
-    },
-    {
-      avatar: faker.image.avatar(),
-      name: "Mira Bothman",
-      action: "added the",
-      feed: "DB Audit",
-      deal: "Initech",
-      time: "Yesterday at 4:35pm",
-      status: "feed",
-    },
-    {
-      avatar: faker.image.avatar(),
-      name: "James Stanton",
-      action: "added",
-      feed: "Market Research",
-      time: "August 14 at 11:24am",
-      status: "news",
-    },
-  ];
-
-  const metricData = [
-    {
-      title: "Number of Users",
-      value: 58,
-      badge: "Last 28 days",
-      change: {
-        value: "10%",
-        label: "increase",
-        type: "positive" as "positive",
-      },
-    },
-    {
-      title: "Number of feed",
-      value: "1200",
-      badge: "Last 28 days",
-      change: { value: 90, label: "increase", type: "positive" as "positive" },
-    },
-    {
-      title: "Active",
-      value: 20,
-      badge: "Last 28 days",
-      change: { value: 2, label: "decrease", type: "negative" as "negative" },
-    },
-  ];
-
-  const SparklineChart = ({
-    data,
-    color,
-  }: {
-    data: number[];
-    color: string;
-  }) => (
-    <Area
-      data={data.map((value, idx) => ({ x: idx, y: value }))}
-      height={50}
-      autoFit
-      smooth
-      xAxis={false}
-      yAxis={false}
-      tooltip={false}
-      line={{
-        color: color,
-      }}
-      areaStyle={{
-        fill: `l(270) 0:${color}00 1:${color}20`,
-      }}
-    />
+  const dateRangeMenu = (
+    <Menu
+      selectedKeys={[dateRange]}
+      onClick={({ key }) => handleDateRangeChange(key as string)}
+    >
+      <Menu.Item key="today">Today</Menu.Item>
+      <Menu.Item key="7days">Last 7 Days</Menu.Item>
+      <Menu.Item key="30days">Last 30 Days</Menu.Item>
+      <Menu.Item key="custom">Custom Range</Menu.Item>
+    </Menu>
   );
 
   return (
-    <div style={{ padding: 24, maxWidth: 1200, margin: "0 auto" }}>
-      <Row gutter={[16, 16]}>
-        {metricData.map((metric, index) => (
-          <Col xs={24} sm={12} lg={6} key={index}>
-            <Kpis metric={metric} />
+    <div
+      style={{
+        padding: "10px",
+        minHeight: "100vh",
+      }}
+    >
+      {/* Top Navigation Bar */}
+      <Card
+        style={{
+          marginBottom: "24px",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+          borderRadius: "8px",
+        }}
+      >
+        <Row justify="space-between" align="middle">
+          <Col>
+            <Title level={3} style={{ margin: 0 }}>
+              Membership
+            </Title>
           </Col>
-        ))}
-      </Row>
+          <Col>
+            <Space size="large">
+              <Dropdown overlay={dateRangeMenu} trigger={["click"]}>
+                <Button icon={<CalendarOutlined />}>
+                  {dateRange === "today"
+                    ? "Today"
+                    : dateRange === "7days"
+                      ? "Last 7 Days"
+                      : dateRange === "30days"
+                        ? "Last 30 Days"
+                        : "Custom Range"}{" "}
+                  <DownOutlined />
+                </Button>
+              </Dropdown>
+              <Button icon={<DownloadOutlined />}>Download CSV</Button>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
 
-      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
-        <Col xs={24} md={12}>
+      {/* Metric Cards */}
+      <Row gutter={[24, 24]} style={{ marginBottom: "24px" }}>
+        <Col xs={24} sm={12} lg={6}>
           <Card
-            title={
-              <Space>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                Upcoming events
-              </Space>
-            }
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+            hoverable
           >
-            <List
-              itemLayout="horizontal"
-              dataSource={upcomingEvents}
-              renderItem={(item) => (
-                <List.Item>
-                  <Space>
-                    <div
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        backgroundColor: item.color,
-                      }}
-                    />
-                    <Space direction="vertical" size={0}>
-                      <Text type="secondary">{item.time}</Text>
-                      <Text strong>{item.title}</Text>
-                    </Space>
-                  </Space>
-                </List.Item>
-              )}
+            <Statistic
+              title="Total Members"
+              value={248756}
+              prefix={<TeamOutlined style={{ color: "#52c41a" }} />}
+              valueStyle={{ color: "#52c41a" }}
             />
+            <Text
+              type="secondary"
+              style={{ display: "block", marginTop: "8px" }}
+            >
+              +1,248 this week
+            </Text>
           </Card>
         </Col>
-
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12} lg={6}>
           <Card
-            title={
-              <Space>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                  <polyline points="10 9 9 9 8 9" />
-                </svg>
-                Latest activities
-              </Space>
-            }
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+            hoverable
           >
-            <List
-              itemLayout="horizontal"
-              dataSource={activities}
-              renderItem={(item) => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.avatar} />}
-                    title={
-                      <Space size={4}>
-                        <Text strong>{item.name}</Text>
-                        <Text type="secondary">{item.time}</Text>
-                      </Space>
-                    }
-                    description={
-                      <Space size={4}>
-                        <Text>{item.action}</Text>
-                        <Text>{item.status}</Text>
-                      </Space>
-                    }
+            <Statistic
+              title="Verified Members"
+              value={142587}
+              prefix={
+                <SafetyCertificateOutlined style={{ color: "#faad14" }} />
+              }
+              valueStyle={{ color: "#faad14" }}
+            />
+            <Text
+              type="secondary"
+              style={{ display: "block", marginTop: "8px" }}
+            >
+              57.3% of total
+            </Text>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <Card
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+            hoverable
+          >
+            <Statistic
+              title="Active Members"
+              value={198000}
+              prefix={<UserSwitchOutlined style={{ color: "#1890ff" }} />}
+              valueStyle={{ color: "#1890ff" }}
+            />
+            <Text
+              type="secondary"
+              style={{ display: "block", marginTop: "8px" }}
+            >
+              79.6% of total
+            </Text>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <Card
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+            hoverable
+          >
+            <Statistic
+              title="New Members (This Month)"
+              value={5240}
+              prefix={<UserOutlined style={{ color: "#eb2f96" }} />}
+              valueStyle={{ color: "#eb2f96" }}
+            />
+            <Text
+              type="secondary"
+              style={{ display: "block", marginTop: "8px" }}
+            >
+              +5240 this month
+            </Text>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Charts - Second Row */}
+      <Row gutter={[24, 24]} style={{ marginBottom: "24px" }}>
+        <Col xs={24} lg={12}>
+          <Card
+            title="Weekly Member Signups"
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+          >
+            <div style={{ height: "300px", width: "100%" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={weeklySignupsData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient
+                      id="colorSignups"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop offset="5%" stopColor="#1890ff" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#1890ff" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="day" />
+                  <YAxis />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <RechartsTooltip />
+                  <Area
+                    type="monotone"
+                    dataKey="signups"
+                    stroke="#1890ff"
+                    fillOpacity={1}
+                    fill="url(#colorSignups)"
                   />
-                </List.Item>
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Card
+            title="Members by Interest"
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+              height: "100%",
+            }}
+          >
+            <div style={{ height: "300px", width: "100%" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={membersByInterestData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percent }) =>
+                      `${name}: ${(percent * 100).toFixed(0)}%`
+                    }
+                  >
+                    {membersByInterestData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <RechartsTooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Charts - Third Row */}
+      <Row gutter={[24, 24]} style={{ marginBottom: "24px" }}>
+        <Col xs={24}>
+          <Card
+            title="Community Membership Performance"
+            style={{
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+              borderRadius: "8px",
+            }}
+          >
+            <Table
+              dataSource={communityPerformanceData}
+              columns={columns.filter(
+                (col) =>
+                  col.key === "name" ||
+                  col.key === "slug" ||
+                  col.key === "members" ||
+                  col.key === "activePercentage"
               )}
+              pagination={{ pageSize: 7 }}
+              size="middle"
             />
           </Card>
         </Col>

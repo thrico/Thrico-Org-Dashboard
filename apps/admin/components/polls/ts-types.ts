@@ -31,7 +31,7 @@ export interface poll {
   endDate?: Date;
   status: Status;
   totalVotes: number;
-  isVoted: Boolean;
+  isVoted: boolean;
   votedOptionId: string;
 }
 export interface userVoted {

@@ -82,3 +82,33 @@ export interface RemoveQuestionFn {
 export interface AnswerMapFn {
   (questionId: string | number, value: any): any;
 }
+
+export type ButtonTheme = {
+  colorPrimary?: string;
+  colorText?: string;
+  colorBorder?: string;
+  borderRadius?: number;
+  defaultBg?: string;
+  defaultColor?: string;
+  defaultBorderColor?: string;
+  fontSize?: number;
+};
+
+export type EntityTheme = {
+  primaryColor?: string;
+  secondaryColor?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  buttonColor?: string;
+  borderRadius?: number;
+  borderWidth?: number;
+  borderStyle?: string;
+  borderColor?: string;
+  inputBackground?: string;
+  inputBorderColor?: string;
+  fontSize?: number;
+  fontWeight?: string;
+  boxShadow?: string;
+  hoverEffect?: string;
+  Button?: ButtonTheme;
+};
