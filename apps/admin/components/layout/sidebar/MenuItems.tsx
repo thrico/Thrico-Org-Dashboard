@@ -177,20 +177,20 @@ export const items: MenuProps["items"] = [
         key: "/communities/all",
         type: "group",
         label: (
-          <Link href={"/communities/approval"}>
+          <Link href={"/communities/all"}>
             <Typography>Manage Approvals</Typography>
           </Link>
         ),
       },
-      {
-        key: "/communities/customization",
-        type: "group",
-        label: (
-          <Link href={"/communities/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
-      },
+      // {
+      //   key: "/communities/customization",
+      //   type: "group",
+      //   label: (
+      //     <Link href={"/communities/customization"}>
+      //       <Typography>Customization</Typography>
+      //     </Link>
+      //   ),
+      // },
       {
         key: "/communities/settings",
         type: "group",
