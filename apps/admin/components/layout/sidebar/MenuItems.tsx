@@ -19,6 +19,7 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import Link from "next/link";
 import { LuMessagesSquare } from "react-icons/lu";
 import { LiaPollSolid } from "react-icons/lia";
+import { Gamepad2 } from "lucide-react";
 export const items: MenuProps["items"] = [
   {
     key: "General",
@@ -417,6 +418,17 @@ export const items: MenuProps["items"] = [
     ),
 
     icon: <CalendarOutlined />,
+  },
+
+  {
+    key: "gamification",
+    label: (
+      <Link href={"/gamification"}>
+        <Typography>Gamification</Typography>
+      </Link>
+    ),
+
+    icon: <Gamepad2 size={14} />,
   },
 
   {
