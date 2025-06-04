@@ -49,8 +49,8 @@ const Entity = ({
   };
 
   const entity =
-    data?.getIndustryType.length > 0
-      ? data?.getIndustryType
+    data?.getEntityType.length > 0
+      ? data?.getEntityType
       : [
           {
             title: "Enterprise",
