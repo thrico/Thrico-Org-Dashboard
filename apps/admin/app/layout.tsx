@@ -38,9 +38,9 @@ export default function RootLayout({
                   Modal: {
                     titleFontSize: 20,
                   },
-                  Button: {
-                    ...Button,
-                  },
+                  // Button: {
+                  //   ...Button,
+                  // },
                 },
                 token: {
                   colorPrimary: primaryColor,
