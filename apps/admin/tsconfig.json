@@ -12,7 +12,9 @@
     "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "../payments/utils/CheckKyc.tsx"  ],
+    ".next/types/**/*.ts",
+    "../payments/utils/CheckKyc.tsx",
+    "app/(authlayout)/communities/[id]/(view)/discussion/page"
+  ],
   "exclude": ["node_modules"]
 }

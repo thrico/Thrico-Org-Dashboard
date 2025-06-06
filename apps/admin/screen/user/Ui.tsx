@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Avatar, Layout, Space, Table, Tabs, Tag, Typography } from "antd";
+import {
+  Avatar,
+  Layout,
+  List,
+  Space,
+  Table,
+  Tabs,
+  Tag,
+  Typography,
+} from "antd";
 
 import type { TableProps } from "antd";
 
@@ -33,12 +42,22 @@ export default function UsersPage({ users }: { users: userStatus[] }) {
       title: "User",
       dataIndex: "user",
       key: "name",
+      width: 200,
       render: (_, record) => (
-        <Space>
-          <Avatar src={`https://cdn.thrico.network/${record?.user?.avatar}`} />
-          {record.user?.firstName}
-          {record.user?.lastName}
-        </Space>
+        <List>
+          <List.Item>
+            <List.Item.Meta
+              avatar={
+                <Avatar
+                  size={60}
+                  src={`https://cdn.thrico.network/${record?.user?.avatar}`}
+                />
+              }
+              title={record.user?.firstName + " " + record.user?.lastName}
+              description={record.user?.about?.currentPosition}
+            />
+          </List.Item>
+        </List>
       ),
     },
     {
@@ -101,6 +120,7 @@ export default function UsersPage({ users }: { users: userStatus[] }) {
     <Layout style={{ minHeight: "100vh" }}>
       <Content style={{ padding: "24px" }}>
         <Table
+          size="small"
           columns={columns}
           dataSource={users}
           rowKey="id"

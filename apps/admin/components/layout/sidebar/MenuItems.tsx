@@ -19,455 +19,255 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import Link from "next/link";
 import { LuMessagesSquare } from "react-icons/lu";
 import { LiaPollSolid } from "react-icons/lia";
-import { Gamepad2 } from "lucide-react";
-export const items: MenuProps["items"] = [
-  {
-    key: "General",
+import { Gamepad2, Wallpaper } from "lucide-react";
 
-    label: (
-      <Link href={"/"}>
-        <Typography>Dashboard</Typography>
-      </Link>
-    ),
+type MenuItem = Required<MenuProps>["items"][number];
+
+const menuLink = (href: string, text: string) => (
+  <Link href={href}>
+    <Typography.Text>{text}</Typography.Text>
+  </Link>
+);
+
+export const items: MenuItem[] = [
+  {
+    key: "dashboard",
+    label: menuLink("/", "Dashboard"),
     icon: <MdDashboardCustomize />,
   },
   {
     key: "members",
-
-    label: (
-      <Link href={"/members"}>
-        <Typography>Memberships</Typography>
-      </Link>
-    ),
+    label: menuLink("/members", "Memberships"),
+    icon: <UserOutlined />,
     children: [
       {
-        key: "/members/all",
+        key: "members-approval",
         type: "group",
-        label: (
-          <Link href={"/members/all"}>
-            <Typography>Manage Approval</Typography>
-          </Link>
-        ),
+        label: menuLink("/members/all", "Manage Approval"),
       },
       {
-        key: "/members/settings",
+        key: "members-settings",
         type: "group",
-        label: (
-          <Link href={"/members/settings"}>
-            <Typography>Settings</Typography>
-          </Link>
-        ),
+        label: menuLink("/members/settings", "Settings"),
       },
     ],
-    icon: <UserOutlined />,
   },
   {
     key: "feed",
-
-    label: (
-      <Link href={"/feed"}>
-        <Typography>Feed</Typography>
-      </Link>
-    ),
-    children: [
-      {
-        key: "/feed/all",
-
-        label: (
-          <Link href={"/feed/all"}>
-            <Typography>Feed</Typography>
-          </Link>
-        ),
-      },
-
-      {
-        key: "/feed/settings",
-
-        label: (
-          <Link href={"/feed/settings"}>
-            <Typography>Settings</Typography>
-          </Link>
-        ),
-      },
-    ],
+    label: menuLink("/feed", "Feed"),
     icon: <MdOutlineFeed size={18} />,
-  },
-
-  {
-    key: "discussionForum",
-
-    label: (
-      <Link href={"/discussion-forum"}>
-        <Typography>Forum</Typography>
-      </Link>
-    ),
     children: [
       {
-        key: "/discussion-forum/all",
-
-        label: (
-          <Link href={"/discussion-forum/all"}>
-            <Typography>Discussion Forum</Typography>
-          </Link>
-        ),
+        key: "feed-all",
+        label: menuLink("/feed/all", "Feed"),
       },
-
       {
-        key: "/discussion-forum",
-
-        label: (
-          <Link href={"/discussion-forum/settings"}>
-            <Typography>Settings</Typography>
-          </Link>
-        ),
+        key: "feed-settings",
+        label: menuLink("/feed/settings", "Settings"),
       },
     ],
-    icon: <LuMessagesSquare size={18} />,
   },
-
+  {
+    key: "discussion-forum",
+    label: menuLink("/discussion-forum", "Forum"),
+    icon: <LuMessagesSquare size={18} />,
+    children: [
+      {
+        key: "discussion-forum-all",
+        label: menuLink("/discussion-forum/all", "Discussion Forum"),
+      },
+      {
+        key: "discussion-forum-settings",
+        label: menuLink("/discussion-forum/settings", "Settings"),
+      },
+    ],
+  },
   {
     key: "feedback",
-
-    label: (
-      <Link href={"#"}>
-        <Typography>Forms</Typography>
-      </Link>
-    ),
+    label: menuLink("#", "Polls & Surveys"),
+    icon: <LiaPollSolid size={18} />,
     children: [
       {
-        key: "/forms/feedback",
-
-        label: (
-          <Link href={"/forms/feedback"}>
-            <Typography>Feedback</Typography>
-          </Link>
-        ),
+        key: "feedback-surveys",
+        label: menuLink("/forms/feedback", "Surveys"),
       },
-
       {
-        key: "/forms/polls",
-
-        label: (
-          <Link href={"/forms/polls"}>
-            <Typography>Polls</Typography>
-          </Link>
-        ),
+        key: "feedback-polls",
+        label: menuLink("/forms/polls", "Polls"),
       },
-
       {
-        key: "/settings",
-
-        label: (
-          <Link href={"/feedback/settings"}>
-            <Typography>Settings</Typography>
-          </Link>
-        ),
+        key: "feedback-settings",
+        label: menuLink("/feedback/settings", "Settings"),
       },
     ],
-    icon: <LiaPollSolid size={18} />,
   },
   {
     key: "communities",
-    label: (
-      <Link href={"/communities"}>
-        <Typography>Communities</Typography>
-      </Link>
-    ),
+    label: menuLink("/communities", "Communities"),
+    icon: <MdGroup />,
     children: [
       {
-        key: "/communities/all",
+        key: "communities-approval",
         type: "group",
-        label: (
-          <Link href={"/communities/all"}>
-            <Typography>Manage Approvals</Typography>
-          </Link>
-        ),
+        label: menuLink("/communities/all", "Manage Approvals"),
       },
-      // {
-      //   key: "/communities/customization",
-      //   type: "group",
-      //   label: (
-      //     <Link href={"/communities/customization"}>
-      //       <Typography>Customization</Typography>
-      //     </Link>
-      //   ),
-      // },
       {
-        key: "/communities/settings",
+        key: "communities-settings",
         type: "group",
-        label: (
-          <Link href={"/communities/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
+        label: menuLink("/communities/settings", "Setting"),
       },
     ],
-    icon: <MdGroup />,
   },
-
   {
     key: "mentorship",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography>Mentorship</Typography>
-      </Link>
-    ),
+    label: menuLink("/mentorship", "Mentorship"),
+    icon: <SiCodementor />,
     children: [
       {
-        key: "/mentorship",
+        key: "mentorship-approval",
         type: "group",
-        label: (
-          <Link href={"/mentorship/"}>
-            <Typography>Manage Approvals</Typography>
-          </Link>
-        ),
+        label: menuLink("/mentorship/", "Manage Approvals"),
       },
       {
-        key: "/mentorship/customization",
+        key: "mentorship-customization",
         type: "group",
-        label: (
-          <Link href={"/mentorship/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
+        label: menuLink("/mentorship/customization", "Customization"),
       },
       {
-        key: "/mentorship/settings",
+        key: "mentorship-settings",
         type: "group",
-        label: (
-          <Link href={"/mentorship/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
+        label: menuLink("/mentorship/settings", "Setting"),
       },
     ],
-    icon: <SiCodementor />,
   },
   {
-    key: "Events",
-    label: (
-      <Link href={"/mentorship"}>
-        <Typography>Events</Typography>
-      </Link>
-    ),
-
+    key: "events",
+    label: menuLink("/events", "Events"),
     icon: <CalendarOutlined />,
   },
-
   {
-    key: "Listing",
-    label: (
-      <Link href={"/listing"}>
-        <Typography>Listing</Typography>
-      </Link>
-    ),
-    children: [
-      {
-        key: "/listing",
-        type: "group",
-        label: (
-          <Link href={"/listing/"}>
-            <Typography>Manage Approvals</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/listing/customization",
-        type: "group",
-        label: (
-          <Link href={"/listing/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
-      },
-      {
-        key: "/listing/settings",
-        type: "group",
-        label: (
-          <Link href={"/listing/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
-      },
-    ],
+    key: "listing",
+    label: menuLink("/listing", "Listing"),
     icon: <HiOutlineShoppingBag />,
-  },
-
-  {
-    key: "Job",
-    label: (
-      <Link href={"/job"}>
-        <Typography>Job</Typography>
-      </Link>
-    ),
     children: [
       {
-        key: "/job",
+        key: "listing-approval",
         type: "group",
-        label: (
-          <Link href={"/job/"}>
-            <Typography>Manage Approvals</Typography>
-          </Link>
-        ),
+        label: menuLink("/listing/", "Manage Approvals"),
       },
       {
-        key: "/job/customization",
+        key: "listing-customization",
         type: "group",
-        label: (
-          <Link href={"/job/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
+        label: menuLink("/listing/customization", "Customization"),
       },
       {
-        key: "/job/settings",
+        key: "listing-settings",
         type: "group",
-        label: (
-          <Link href={"/job/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
+        label: menuLink("/listing/settings", "Setting"),
       },
     ],
-    icon: <GrUserWorker />,
   },
-
+  {
+    key: "job",
+    label: menuLink("/job", "Job"),
+    icon: <GrUserWorker />,
+    children: [
+      {
+        key: "job-approval",
+        type: "group",
+        label: menuLink("/job/", "Manage Approvals"),
+      },
+      {
+        key: "job-customization",
+        type: "group",
+        label: menuLink("/job/customization", "Customization"),
+      },
+      {
+        key: "job-settings",
+        type: "group",
+        label: menuLink("/job/settings", "Setting"),
+      },
+    ],
+  },
   {
     key: "offers",
-    label: (
-      <Link href={"/offers"}>
-        <Typography>Offers</Typography>
-      </Link>
-    ),
+    label: menuLink("/offers", "Offers"),
+    icon: <MdLocalOffer />,
     children: [
       {
-        key: "/job",
+        key: "offers-view",
         type: "group",
-        label: (
-          <Link href={"/job/"}>
-            <Typography>View Offers</Typography>
-          </Link>
-        ),
+        label: menuLink("/offers/", "View Offers"),
       },
       {
-        key: "/offers/customization",
+        key: "offers-customization",
         type: "group",
-        label: (
-          <Link href={"/job/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
+        label: menuLink("/offers/customization", "Customization"),
       },
       {
-        key: "/offers/settings",
+        key: "offers-settings",
         type: "group",
-        label: (
-          <Link href={"/job/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
+        label: menuLink("/offers/settings", "Setting"),
       },
     ],
-    icon: <MdLocalOffer />,
   },
-
   {
     key: "career-centre",
-    label: (
-      <Link href={"/career-centre"}>
-        <Typography>Career Centre</Typography>
-      </Link>
-    ),
+    label: menuLink("/career-centre", "Career Centre"),
+    icon: <BsPersonWorkspace />,
     children: [
       {
-        key: "/career-centre",
+        key: "career-centre-view",
         type: "group",
-        label: (
-          <Link href={"/job/"}>
-            <Typography>View Career Centre</Typography>
-          </Link>
-        ),
+        label: menuLink("/career-centre/", "View Career Centre"),
       },
       {
-        key: "/career-centre/customization",
+        key: "career-centre-customization",
         type: "group",
-        label: (
-          <Link href={"/job/customization"}>
-            <Typography>Customization</Typography>
-          </Link>
-        ),
+        label: menuLink("/career-centre/customization", "Customization"),
       },
       {
-        key: "/career-centre/settings",
+        key: "career-centre-settings",
         type: "group",
-        label: (
-          <Link href={"/job/settings"}>
-            <Typography>Setting</Typography>
-          </Link>
-        ),
+        label: menuLink("/career-centre/settings", "Setting"),
       },
     ],
-    icon: <BsPersonWorkspace />,
   },
   {
     key: "announcements",
-    label: (
-      <Link href={"/announcements"}>
-        <Typography>Announcements & Highlights</Typography>
-      </Link>
-    ),
-
+    label: menuLink("/announcements", "Announcements & Highlights"),
     icon: <CalendarOutlined />,
   },
-
+  {
+    key: "wall-of-fame",
+    label: menuLink("/wall-of-fame", "Wall of Fame"),
+    icon: <Wallpaper />,
+  },
   {
     key: "gamification",
-    label: (
-      <Link href={"/gamification"}>
-        <Typography>Gamification</Typography>
-      </Link>
-    ),
-
+    label: menuLink("/gamification", "Gamification"),
     icon: <Gamepad2 size={14} />,
   },
-
   {
-    key: "/settings",
-    label: (
-      <Link href={"/settings"}>
-        <Typography>Settings</Typography>
-      </Link>
-    ),
-
+    key: "settings",
+    label: menuLink("/settings", "Settings"),
+    icon: <SettingOutlined />,
     children: [
       {
-        key: "/settings/appearance",
+        key: "settings-appearance",
         type: "group",
-        label: (
-          <Link href={"/settings/appearance"}>
-            <Typography>Appearance</Typography>
-          </Link>
-        ),
+        label: menuLink("/settings/appearance", "Appearance"),
       },
     ],
-    icon: <SettingOutlined />,
   },
-
   {
     key: "cms",
-
-    label: (
-      <Link href={"/website"}>
-        <Typography>Manage Website</Typography>
-      </Link>
-    ),
-
+    label: menuLink("/website", "Manage Website"),
     icon: <UnorderedListOutlined />,
   },
-
   {
-    key: "Logout",
-    label: <Typography>Logout</Typography>,
+    key: "logout",
+    label: <Typography.Text>Logout</Typography.Text>,
     icon: <LogoutOutlined />,
   },
 ];

@@ -18,6 +18,7 @@ const details = `
   categories
   numberOfUser
   numberOfLikes
+   tagline
   numberOfPost
   numberOfViews
   tag
@@ -47,6 +48,7 @@ export const ALL_GROUP = gql`
       entity
       cover
       status
+      tagline
       about
       createdAt
       updatedAt
@@ -91,7 +93,7 @@ export const GET_COMMUNITIES = gql`
       description
       createdAt
       updatedAt
-
+      tagline
       location
       requireAdminApprovalForPosts
       verification {
@@ -143,3 +145,21 @@ mutation ChangeDiscussionCommunityVerification($input: ChangeDiscussionCommunity
       ${details}
   }
 }`;
+
+export const GET_COMMUNITY_REQUEST = gql`
+  query GetCommunityRequest($input: inputGetCommunityRequest!) {
+    getCommunityRequest(input: $input) {
+      id
+      notes
+      createdAt
+      user {
+        avatar
+        about {
+          currentPosition
+        }
+        firstName
+        lastName
+      }
+    }
+  }
+`;

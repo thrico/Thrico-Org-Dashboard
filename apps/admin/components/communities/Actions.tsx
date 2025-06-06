@@ -207,7 +207,7 @@ const Actions = (record: communityEntity) => {
 
   return (
     <>
-      <Dropdown menu={{ items }} placement="bottomRight">
+      <Dropdown size menu={{ items }} placement="bottomRight">
         <Button type="dashed" icon={<MoreOutlined />} />
       </Dropdown>
       <Modal

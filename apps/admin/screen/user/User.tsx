@@ -14,10 +14,6 @@ const User = ({ status }: any) => {
     },
   });
 
-  const setDataSource = (about) => {
-    console.log("Setting data source:", about);
-  };
-
   return (
     <>
       {loading && <TableLoading />}

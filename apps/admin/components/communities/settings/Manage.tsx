@@ -40,37 +40,11 @@ import BasicInfo from "./BasicInfo";
 import Rules from "./Rules";
 import Permission from "./Permission";
 import { communityEntity } from "../ts-types";
+import Requests from "./Requests";
 
 const { TextArea } = Input;
 const { Title, Text, Paragraph } = Typography;
 const { TabPane } = Tabs;
-
-const mockJoinRequests = [
-  {
-    id: 1,
-    name: "Emma Thompson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    requestDate: "2 days ago",
-    message:
-      "I'm a professional photographer and would love to share my work and learn from the community.",
-  },
-  {
-    id: 2,
-    name: "David Rodriguez",
-    avatar: "/placeholder.svg?height=40&width=40",
-    requestDate: "1 day ago",
-    message:
-      "Amateur photographer looking to improve my skills and get feedback on my photos.",
-  },
-  {
-    id: 3,
-    name: "Lisa Chen",
-    avatar: "/placeholder.svg?height=40&width=40",
-    requestDate: "3 hours ago",
-    message:
-      "I specialize in landscape photography and would like to connect with other nature photographers.",
-  },
-];
 
 const mockMembers = [
   {
@@ -127,22 +101,7 @@ export default function Manage({ data }: { data: communityEntity }) {
       "1. Be respectful and constructive in your feedback\n2. Only post your own original work\n3. No spam or promotional content\n4. Keep discussions photography-related",
   });
 
-  const [joinRequests, setJoinRequests] = useState(mockJoinRequests);
   const [members, setMembers] = useState(mockMembers);
-
-  const handleApproveRequest = (requestId: number) => {
-    setJoinRequests((requests) =>
-      requests.filter((req) => req.id !== requestId)
-    );
-    message.success("Join request approved successfully");
-  };
-
-  const handleRejectRequest = (requestId: number) => {
-    setJoinRequests((requests) =>
-      requests.filter((req) => req.id !== requestId)
-    );
-    message.success("Join request rejected");
-  };
 
   const handlePromoteMember = (memberId: number) => {
     setMembers(
@@ -311,79 +270,9 @@ export default function Manage({ data }: { data: communityEntity }) {
           },
           {
             key: "requests",
-            label: (
-              <Space>
-                Join Requests
-                {joinRequests.length > 0 && (
-                  <Badge count={joinRequests.length} />
-                )}
-              </Space>
-            ),
+            label: <Space>Join Requests</Space>,
             icon: <UserAddOutlined />,
-            children: (
-              <Card title={`Join Requests (${joinRequests.length})`}>
-                {joinRequests.length === 0 ? (
-                  <div style={{ textAlign: "center", padding: "48px 0" }}>
-                    <UserAddOutlined
-                      style={{
-                        fontSize: 48,
-                        color: "#d9d9d9",
-                        marginBottom: 16,
-                      }}
-                    />
-                    <Text type="secondary">No pending join requests</Text>
-                  </div>
-                ) : (
-                  <List
-                    itemLayout="vertical"
-                    dataSource={joinRequests}
-                    renderItem={(request) => (
-                      <List.Item
-                        actions={[
-                          <Button
-                            key="approve"
-                            type="primary"
-                            icon={<CheckCircleOutlined />}
-                            onClick={() => handleApproveRequest(request.id)}
-                          >
-                            Approve
-                          </Button>,
-                          <Button
-                            key="reject"
-                            danger
-                            icon={<CloseCircleOutlined />}
-                            onClick={() => handleRejectRequest(request.id)}
-                          >
-                            Reject
-                          </Button>,
-                        ]}
-                      >
-                        <List.Item.Meta
-                          avatar={
-                            <Avatar src={request.avatar} size={48}>
-                              {request.name[0]}
-                            </Avatar>
-                          }
-                          title={<Text strong>{request.name}</Text>}
-                          description={`Requested ${request.requestDate}`}
-                        />
-                        {request.message && (
-                          <Card
-                            size="small"
-                            style={{
-                              backgroundColor: "#fafafa",
-                              marginTop: 8,
-                            }}
-                          >
-                            <Text italic>"{request.message}"</Text>
-                          </Card>
-                        )}
-                      </List.Item>
-                    )}
-                  />
-                )}
-              </Card>
-            ),
+            children: <Requests />,
           },
         ]}
       />

@@ -38,6 +38,9 @@ export default function RootLayout({
                   Modal: {
                     titleFontSize: 20,
                   },
+                  Table: {
+                    cellFontSizeSM: 13,
+                  },
                   // Button: {
                   //   ...Button,
                   // },

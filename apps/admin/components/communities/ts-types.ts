@@ -57,4 +57,19 @@ export interface communityEntity {
   joiningTerms: string;
   rules: string;
   verification: verification;
+  tagline: string;
+}
+
+export interface requests {
+  id: string;
+  notes: string;
+  createdAt: string; // or `Date` if it's a Date object
+  user: {
+    avatar: string;
+    about: {
+      currentPosition: string;
+    };
+    firstName: string;
+    lastName: string;
+  };
 }

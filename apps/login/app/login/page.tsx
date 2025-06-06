@@ -5,7 +5,6 @@ import Login from "../../screen/Auth/login/Login";
 export const metadata: Metadata = {
   title: "Welcome - Thrico",
   description: "",
-
 };
 const page = () => {
   return <Login />;

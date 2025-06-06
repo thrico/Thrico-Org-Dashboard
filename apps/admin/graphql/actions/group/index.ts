@@ -5,6 +5,7 @@ import {
   CHANGE_DISCUSSION_COMMUNITY_VERIFICATION,
   GET_COMMUNITIES,
   GET_COMMUNITY_BY_ID,
+  GET_COMMUNITY_REQUEST,
   UPDATE_COMMUNITY_BASIC_INFO,
   UPDATE_COMMUNITY_PERMISSIONS,
   UPDATE_COMMUNITY_RULES,
@@ -279,3 +280,6 @@ export const changeDiscussionCommunityVerification = (options: any) =>
     ],
     awaitRefetchQueries: true, // ensures mutation waits until refetch is complete
   });
+
+export const getCommunityRequest = (options: any) =>
+  useQuery(GET_COMMUNITY_REQUEST, options);
