@@ -10,6 +10,7 @@ import withAuth from "../../utils/withAuth";
 import { getEntity, getGetUser } from "../../graphql/actions";
 import KycForm from "../../screen/Kyc/Form";
 import TrialBanner from "../../components/trail-banner/TrialBanner";
+import NoSubscription from "../../screen/subscription/NoSubscription";
 
 const { Header, Sider, Content } = Layout;
 
@@ -25,7 +26,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     loading: loadingUser,
   } = getGetUser();
   const check = data?.getEntity;
-  console.log(check);
+
   return (
     <>
       {!loading && !loadingUser && (
@@ -41,15 +42,21 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                 <Layout>
                   <Navbar />
 
-                  <Content
-                    style={{
-                      padding: 24,
-                      minHeight: 280,
-                      borderRadius: borderRadiusLG,
-                    }}
-                  >
-                    {children}
-                  </Content>
+                  {!data?.getEntity?.subscription && (
+                    <NoSubscription status="pending" />
+                  )}
+
+                  {data?.getEntity?.subscription?.status === "active" && (
+                    <Content
+                      style={{
+                        padding: 24,
+                        minHeight: 280,
+                        borderRadius: borderRadiusLG,
+                      }}
+                    >
+                      {children}
+                    </Content>
+                  )}
                 </Layout>
               </Layout>
             </>

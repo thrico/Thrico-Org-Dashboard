@@ -4,11 +4,12 @@ import PhoneNumber from "../PhoneNumber";
 import TimeZone from "../TimeZone";
 import Language from "../Language";
 import { getEntity } from "../../../graphql/actions";
+import { country } from "../types";
 const { Option } = Select;
 interface ProfileProps {
+  fullName: string;
+  email: string;
   profile: {
-    fullName: string;
-    email: string;
     designation?: string;
     phone?: string;
     country?: string;
@@ -21,6 +22,7 @@ interface ProfileProps {
     firstName?: string;
     lastName?: string;
   };
+  countries: country[];
 }
 
 const Profile: React.FC<ProfileProps> = ({
@@ -28,6 +30,7 @@ const Profile: React.FC<ProfileProps> = ({
   setProfile,
   setCurrent,
   data,
+  countries,
 }) => {
   const fullName = data?.firstName + " " + data?.lastName;
   const [form] = Form.useForm();
@@ -36,29 +39,7 @@ const Profile: React.FC<ProfileProps> = ({
     setProfile(values);
     setCurrent(1);
   };
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  };
 
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
   return (
     <>
       <Form
@@ -92,7 +73,24 @@ const Profile: React.FC<ProfileProps> = ({
         </Form.Item>
 
         <PhoneNumber initialValue={profile?.phone || ""} />
-        <TimeZone initialValue={profile?.country} />
+        <Form.Item
+          initialValue={profile?.country}
+          hasFeedback
+          name="country"
+          label="Country"
+          style={{ width: "100%" }}
+          rules={[
+            { required: true, message: "Please input your phone number!" },
+          ]}
+        >
+          <Select>
+            {countries?.map((set, key) => (
+              <Option key={set.code} value={set.code}>
+                {set.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
         <Language initialValue={profile?.language} />
         <Flex style={{ width: "100%" }} justify="center" align="center">
           <Form.Item>

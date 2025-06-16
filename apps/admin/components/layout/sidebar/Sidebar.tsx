@@ -23,6 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
   };
 
   const pathName = usePathname();
+
   return (
     <>
       <Sider

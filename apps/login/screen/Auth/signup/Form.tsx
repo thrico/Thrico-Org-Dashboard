@@ -118,6 +118,17 @@ const LoginForm = () => {
         label="Confirm Password"
         dependencies={["password"]}
         hasFeedback
+        rules={[
+          { required: true, message: "Please confirm your password" },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error("Passwords do not match"));
+            },
+          }),
+        ]}
       >
         <Input.Password />
       </Form.Item>

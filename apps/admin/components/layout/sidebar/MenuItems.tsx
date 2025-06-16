@@ -118,6 +118,29 @@ export const items: MenuItem[] = [
       },
     ],
   },
+
+  {
+    key: "listing",
+    label: menuLink("/listing", "Listing"),
+    icon: <HiOutlineShoppingBag />,
+    children: [
+      {
+        key: "listing-approval",
+        type: "group",
+        label: menuLink("/listing/", "Manage Approvals"),
+      },
+      {
+        key: "listing-customization",
+        type: "group",
+        label: menuLink("/listing/customization", "Customization"),
+      },
+      {
+        key: "listing-settings",
+        type: "group",
+        label: menuLink("/listing/settings", "Setting"),
+      },
+    ],
+  },
   {
     key: "mentorship",
     label: menuLink("/mentorship", "Mentorship"),
@@ -145,28 +168,7 @@ export const items: MenuItem[] = [
     label: menuLink("/events", "Events"),
     icon: <CalendarOutlined />,
   },
-  {
-    key: "listing",
-    label: menuLink("/listing", "Listing"),
-    icon: <HiOutlineShoppingBag />,
-    children: [
-      {
-        key: "listing-approval",
-        type: "group",
-        label: menuLink("/listing/", "Manage Approvals"),
-      },
-      {
-        key: "listing-customization",
-        type: "group",
-        label: menuLink("/listing/customization", "Customization"),
-      },
-      {
-        key: "listing-settings",
-        type: "group",
-        label: menuLink("/listing/settings", "Setting"),
-      },
-    ],
-  },
+
   {
     key: "job",
     label: menuLink("/job", "Job"),

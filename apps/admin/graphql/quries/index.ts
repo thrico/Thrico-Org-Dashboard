@@ -17,12 +17,19 @@ export const GET_ORGANIZATION = gql`
     getEntity {
       id
       name
-      isTrialActive
-      isPaid
-      trailEndDate
-      trailStartDate
-      trailsDays
       logo
+      subscription {
+        subscriptionId
+        packageId
+        planName
+        planType
+        billingCycle
+        startDate
+        endDate
+        status
+        subscriptionType
+        graceUntil
+      }
     }
   }
 `;
@@ -110,6 +117,32 @@ export const UPDATE_ENTITY_SETTINGS = gql`
       allowNewUser
       autoApproveDiscussionForum
       allowDiscussionForum
+    }
+  }
+`;
+
+export const GET_KYC_COUNTRIES = gql`
+  query GetKycCountries {
+    getKycCountries {
+      code
+      name
+    }
+  }
+`;
+
+export const CHECK_ENTITY_SUBSCRIPTIONS = gql`
+  query CheckEntitySubscription {
+    checkEntitySubscription {
+      subscriptionId
+      packageId
+      planName
+      planType
+      billingCycle
+      startDate
+      endDate
+      status
+      subscriptionType
+      graceUntil
     }
   }
 `;

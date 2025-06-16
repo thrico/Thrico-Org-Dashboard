@@ -34,6 +34,8 @@ export default function RootLayout({
                   },
                   Menu: {
                     colorItemBgSelected: "#eeeeee",
+                    itemHeight: 34,
+                    fontSize: 13,
                   },
                   Modal: {
                     titleFontSize: 20,
@@ -41,6 +43,7 @@ export default function RootLayout({
                   Table: {
                     cellFontSizeSM: 13,
                   },
+
                   // Button: {
                   //   ...Button,
                   // },

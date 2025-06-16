@@ -109,7 +109,7 @@ const Entity = ({
     >
       <Form.Item
         hasFeedback
-        initialValue={organization.organizationName}
+        initialValue={organization?.name}
         name="name"
         label="Entity Name"
         rules={[{ required: true, message: "Please input Entity Name" }]}
@@ -120,7 +120,7 @@ const Entity = ({
         name="entityType"
         label="Entity Category"
         rules={[{ required: true }]}
-        initialValue={organization.entityType}
+        initialValue={organization?.entityType}
       >
         <Select
           loading={loading}
@@ -138,7 +138,7 @@ const Entity = ({
         name="industryType"
         label="Entity Industry"
         rules={[{ required: true }]}
-        initialValue={organization.industryType}
+        initialValue={organization?.industryType}
       >
         <Select
           loading={loading}

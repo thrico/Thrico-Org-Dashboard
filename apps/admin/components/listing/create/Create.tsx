@@ -1,4 +1,17 @@
-import { Button, Card, Checkbox, Divider, Drawer, Form, Space } from "antd";
+import {
+  Button,
+  Card,
+  Checkbox,
+  Divider,
+  Drawer,
+  Flex,
+  Form,
+  Input,
+  Radio,
+  Segmented,
+  Space,
+  theme,
+} from "antd";
 import React, { useState } from "react";
 // import Container from "../../Layout/Container";
 
@@ -10,9 +23,10 @@ import { useRouter } from "next/navigation";
 
 import { CloseCircleTwoTone } from "@ant-design/icons";
 
-import { FormValues } from "../ts-types";
 import { addCommunity } from "../../../graphql/actions/group";
-import { CommunityCreationForm } from "./community-creation-form";
+import { FormValues } from "../../communities/ts-types";
+import { ListingCreationForm } from "./ListingCreationForm";
+
 const Create = ({}) => {
   const [form] = Form.useForm<FormValues>();
   const router = useRouter();
@@ -54,7 +68,7 @@ const Create = ({}) => {
         height={"100vh"}
         placement="bottom"
         style={{ height: "100vh" }}
-        title="Create Community"
+        title="Create Listing"
         onClose={onClose}
         open={open}
         extra={
@@ -70,7 +84,7 @@ const Create = ({}) => {
           </Space>
         }
       >
-        <CommunityCreationForm
+        <ListingCreationForm
           initialValues={{
             requireAdminApprovalForPosts: false,
             allowMemberInvites: false,

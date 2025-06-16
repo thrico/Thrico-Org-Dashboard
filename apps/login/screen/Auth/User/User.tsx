@@ -3,8 +3,7 @@
 import React from "react";
 import AuthLayout from "../layout/AuthLayout";
 import { Card, Flex, Spin, Typography } from "antd";
-import Link from "next/link";
-import Image from "next/image";
+
 import { useTokenStore } from "../../../components/store/store";
 import Details from "./Details";
 import { getUser, userProfile } from "../../../components/graphql/actions";
@@ -21,6 +20,7 @@ const User = () => {
     removeToken();
     router.push("/login");
   }
+
   return (
     <>
       <AuthLayout>

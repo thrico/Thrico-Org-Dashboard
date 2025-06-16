@@ -11,3 +11,8 @@ export interface EventFormProps {
   currency: string;
   eventType: string;
 }
+
+export interface country {
+  name: string;
+  code: string;
+}
