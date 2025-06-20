@@ -15,8 +15,11 @@ const Otp = () => {
       <Flex style={{ width: "100%" }} justify="center" align="center">
         <Flex vertical style={{ width: "90%" }}>
           <Flex vertical>
-            <Title level={2}>Verification code</Title>
-            <Text>Please enter the OTP sent to your email address:</Text>
+            <Title level={2}>Check your email</Title>
+            <Text>
+              Please enter the 4-digit verification code sent to your email
+              address
+            </Text>
           </Flex>
           <Flex style={{ width: "100%", marginTop: "1rem" }}>
             <OtpForm />

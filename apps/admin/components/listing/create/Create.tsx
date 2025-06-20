@@ -7,6 +7,7 @@ import {
   Flex,
   Form,
   Input,
+  message,
   Radio,
   Segmented,
   Space,
@@ -24,12 +25,21 @@ import { useRouter } from "next/navigation";
 import { CloseCircleTwoTone } from "@ant-design/icons";
 
 import { addCommunity } from "../../../graphql/actions/group";
-import { FormValues } from "../../communities/ts-types";
+
 import { ListingCreationForm } from "./ListingCreationForm";
+import { PhotoUploadFile } from "../ts-types";
+import { useAddListing } from "../../../graphql/actions/listing";
 
 const Create = ({}) => {
-  const [form] = Form.useForm<FormValues>();
+  const [fileList, setFileList] = useState<PhotoUploadFile[]>([]);
+  const [form] = Form.useForm();
   const router = useRouter();
+
+  const [add, { loading }] = useAddListing({
+    onCompleted: (data) => {
+      onClose();
+    },
+  });
 
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -44,19 +54,28 @@ const Create = ({}) => {
     onClose();
     form.resetFields();
   };
-  const [add, { loading }] = addCommunity({
-    onCompleted,
-  });
+
   const onFinish = (values: any) => {
+    if (fileList.length === 0) {
+      message.error("Please upload at least one image.");
+      return;
+    }
+    const data = {
+      ...values,
+      media: fileList.map((file) => file.originFileObj),
+      lat,
+      lng,
+    };
+
     add({
       variables: {
-        input: { ...values, cover },
+        input: data,
       },
     });
   };
 
-  const data = Form.useWatch([], form);
-
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   return (
     <>
       <Button type="primary" onClick={showDrawer}>
@@ -74,17 +93,21 @@ const Create = ({}) => {
         extra={
           <Space>
             <Button
-              loading={loading}
               onClick={() => form.submit()}
               type="primary"
+              loading={loading}
             >
               Create
             </Button>
-            <Button>Cancel</Button>
+            <Button onClick={onClose}>Cancel</Button>
           </Space>
         }
       >
         <ListingCreationForm
+          setLat={setLat}
+          setLng={setLng}
+          fileList={fileList}
+          setFileList={setFileList}
           initialValues={{
             requireAdminApprovalForPosts: false,
             allowMemberInvites: false,

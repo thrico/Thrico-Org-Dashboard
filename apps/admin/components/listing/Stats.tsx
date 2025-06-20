@@ -11,76 +11,65 @@ import {
 import { Card, Col, Row, Statistic, Typography } from "antd";
 import { Content } from "next/font/google";
 import React from "react";
+import { useGetListingStats } from "../../graphql/actions/listing";
 
 const Stats = () => {
+  const { data } = useGetListingStats();
   const { Text } = Typography;
+  const stats = data?.getListingStats;
   return (
-    <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
-      <Col xs={24} sm={12} lg={4}>
+    <Row gutter={[16, 24]} style={{ marginBottom: "24px" }}>
+      <Col xs={24} sm={12} lg={6}>
         <Card>
           <Statistic
             title="Total Listings"
-            value={24}
+            value={stats?.totalListings || 0}
             prefix={<ShoppingOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                +2 from last month
+                +{stats?.listingsDiff} from last month
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={4}>
+      <Col xs={24} sm={12} lg={6}>
         <Card>
           <Statistic
             title="Active Listings"
-            value={18}
+            value={stats?.activeListings || 0}
             prefix={<RiseOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                75% of total
+                {stats?.listingsDiff} of total
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={4}>
+      <Col xs={24} sm={12} lg={6}>
         <Card>
           <Statistic
             title="Verified Listings"
-            value={12}
+            value={stats?.verifiedListings || 0}
             prefix={""}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                67% rate
+                {stats?.verifiedPercent}% rate
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={4}>
+      <Col xs={24} sm={12} lg={6}>
         <Card>
           <Statistic
             title="Total Views"
-            value={1247}
+            value={stats?.totalViews || 0}
             prefix={<EyeOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                +15% this week
-              </Text>
-            }
-          />
-        </Card>
-      </Col>
-      <Col xs={24} sm={12} lg={4}>
-        <Card>
-          <Statistic
-            title="Total Likes"
-            value={89}
-            prefix={<StarOutlined />}
-            suffix={
-              <Text type="secondary" style={{ fontSize: "12px" }}>
-                +8 this week
+                +{stats?.viewsPercent}% this week
               </Text>
             }
           />

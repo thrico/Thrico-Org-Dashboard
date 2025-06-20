@@ -4,6 +4,7 @@ import {
   CHECK_DOMAIN,
   CHECK_ENTITY_SUBSCRIPTIONS,
   ENTITY_KYC,
+  GET_CURRENCY,
   GET_ENTITY_SETTINGS,
   GET_KYC_COUNTRIES,
   GET_ORGANIZATION,
@@ -105,3 +106,5 @@ export interface SubscriptionDetails {
 export interface CheckEntitySubscriptionQuery {
   checkEntitySubscription: SubscriptionDetails | null;
 }
+
+export const getEntityCurrency = () => useQuery(GET_CURRENCY);

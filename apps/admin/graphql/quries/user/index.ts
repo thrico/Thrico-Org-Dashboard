@@ -169,3 +169,16 @@ export const GET_MEMBERS_TERMS_AND_CONDITIONS = gql`
     }
   }
 `;
+
+export const GET_USER_ANALYTICS = gql`
+  query GetUserAnalytics {
+    getUserAnalytics {
+      totalMembers
+      verifiedMembers
+      verifiedPercent
+      activeMembers
+      activePercent
+      newMembersThisMonth
+    }
+  }
+`;

@@ -43,11 +43,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       label: "Rejected",
       icon: <CloseCircleOutlined />,
     },
-    {
-      key: "paused",
-      label: "Paused",
-      icon: <StopOutlined />,
-    },
   ];
   const router = useRouter();
   const onChange = (key: string) => {

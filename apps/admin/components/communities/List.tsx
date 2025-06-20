@@ -36,13 +36,6 @@ const { TabPane } = Tabs;
 
 export default function List({ data }: { data: communityEntity[] }) {
   const columns: TableProps<communityEntity>["columns"] = [
-    // {
-    //   title: "Vote",
-    //   dataIndex: "vote",
-    //   key: "title",
-    //   render: (_, record) => <Vote id={record.id} />,
-    // },
-
     {
       title: "Community",
       dataIndex: "cover",

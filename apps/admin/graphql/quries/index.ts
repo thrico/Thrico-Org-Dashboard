@@ -146,3 +146,9 @@ export const CHECK_ENTITY_SUBSCRIPTIONS = gql`
     }
   }
 `;
+
+export const GET_CURRENCY = gql`
+  query GetEntityCurrency {
+    getEntityCurrency
+  }
+`;

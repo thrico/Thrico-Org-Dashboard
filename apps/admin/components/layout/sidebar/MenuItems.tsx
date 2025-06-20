@@ -170,24 +170,24 @@ export const items: MenuItem[] = [
   },
 
   {
-    key: "job",
+    key: "jobs",
     label: menuLink("/job", "Job"),
     icon: <GrUserWorker />,
     children: [
       {
         key: "job-approval",
         type: "group",
-        label: menuLink("/job/", "Manage Approvals"),
+        label: menuLink("/jobs/", "Manage Approvals"),
       },
       {
         key: "job-customization",
         type: "group",
-        label: menuLink("/job/customization", "Customization"),
+        label: menuLink("/jobs/customization", "Customization"),
       },
       {
         key: "job-settings",
         type: "group",
-        label: menuLink("/job/settings", "Setting"),
+        label: menuLink("/jobs/settings", "Setting"),
       },
     ],
   },

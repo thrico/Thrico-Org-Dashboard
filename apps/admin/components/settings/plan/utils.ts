@@ -20,7 +20,7 @@ export const getYearlySavings = (
   const savings = monthlyTotal - yearly;
   if (savings < 0) return "";
   const percentage = Math.round((savings / monthlyTotal) * 100);
-  return `${currency}${savings.toFixed(2)} (${percentage}%)`;
+  return `${currency }${savings.toFixed(2)} (${percentage}%)`;
 };
 
 export const allPlanPercentage = (

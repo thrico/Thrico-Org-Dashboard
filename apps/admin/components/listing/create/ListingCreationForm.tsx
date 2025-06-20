@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import {
   Form,
@@ -17,12 +17,21 @@ import {
   message,
   Select,
 } from "antd";
-import { CameraOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import {
+  CameraOutlined,
+  EnvironmentOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 import type { UploadProps } from "antd";
 // import { CommunityPreview } from "./community-preview";
 
 import { ImageCropper } from "../../communities/add/image-cropper";
 import PhotoUpload from "./UploadImage";
+import { GetCurrency } from "../../../screen/Currency";
+import { PhotoUploadFile } from "../ts-types";
+import { GooglePlacesAutoComplete } from "./Location";
+import Preview from "./Preview";
+import GooglePlacesInput from "../../comman/location/Google-places-autocomplete";
 
 const { TextArea } = Input;
 const { Title, Text } = Typography;
@@ -48,27 +57,31 @@ const categories = [
   "Industrial Goods",
   "Agriculture",
 ];
+interface ListingCreationFormProps {
+  initialValues?: Record<string, any>;
+  loading?: boolean;
+  onFinish: (values: any) => void;
+  form: any;
+  cover: any;
+  setCover: (cover: any) => void;
+  fileList: PhotoUploadFile[] | null;
+  setFileList: Dispatch<SetStateAction<PhotoUploadFile[]>>;
+  setLat: (lat: number) => void;
+  setLng: (lng: number) => void;
+}
+
 export function ListingCreationForm({
-  initialValues,
-  loading,
   onFinish,
   form,
-  cover,
   setCover,
-}) {
+  fileList,
+  setFileList,
+  setLat,
+  setLng,
+}: ListingCreationFormProps) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [cropModalVisible, setCropModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const handleImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setSelectedImage(e.target?.result as string);
-      setCropModalVisible(true);
-    };
-    reader.readAsDataURL(file);
-    return false; // Prevent auto upload
-  };
 
   const handleCropComplete = (croppedImage: any, croppedUrl: string) => {
     setCover(croppedImage);
@@ -78,21 +91,13 @@ export function ListingCreationForm({
     message.success("Cover image updated successfully!");
   };
 
-  const uploadProps: UploadProps = {
-    name: "file",
-    multiple: false,
-    showUploadList: false,
-    beforeUpload: handleImageUpload,
-    accept: "image/*",
-  };
-
-  const formData = form?.getFieldsValue();
-
+  const values = Form.useWatch([], form);
   return (
     <>
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={16}>
           <Form
+            scrollToFirstError
             form={form}
             layout="vertical"
             onFinish={onFinish}
@@ -105,16 +110,12 @@ export function ListingCreationForm({
                 style={{ width: "100%" }}
               >
                 {/* Cover Image Section */}
-                <PhotoUpload />
+                <PhotoUpload fileList={fileList} setFileList={setFileList} />
 
                 {/* Name Field */}
                 <Form.Item
                   name="title"
-                  label={
-                    <span>
-                      Listing Title <span style={{ color: "#ff4d4f" }}>*</span>
-                    </span>
-                  }
+                  label={"Listing Title"}
                   rules={[
                     {
                       required: true,
@@ -132,11 +133,29 @@ export function ListingCreationForm({
                   />
                 </Form.Item>
 
+                <Form.Item
+                  name="location"
+                  label={"Location"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select a location",
+                    },
+                  ]}
+                  extra="Select the location"
+                >
+                  <GooglePlacesInput
+                    onChange={(value) =>
+                      form.setFieldsValue({ location: value })
+                    }
+                  />
+                </Form.Item>
+
                 {/* Headline Field */}
 
                 {/* Description Field */}
                 <Form.Item
-                  name="about"
+                  name="description"
                   label="Listing Description"
                   extra="Describe your listing in detail. Include features, condition, and any other relevant information to attract buyers."
                   rules={[
@@ -194,7 +213,7 @@ export function ListingCreationForm({
                             </Text>
                           </div>
                         </Radio>
-                        <Radio value="USED-LIKE NEW">
+                        <Radio value="USED_LIKE_NEW">
                           <div>
                             <div style={{ fontWeight: 500 }}>
                               Used - Like New
@@ -204,7 +223,7 @@ export function ListingCreationForm({
                             </Text>
                           </div>
                         </Radio>
-                        <Radio value="USED-LIKE GOOD">
+                        <Radio value="USED_LIKE_GOOD">
                           <div>
                             <div style={{ fontWeight: 500 }}>Used - Good</div>
                             <Text type="secondary" style={{ fontSize: 14 }}>
@@ -212,7 +231,7 @@ export function ListingCreationForm({
                             </Text>
                           </div>
                         </Radio>
-                        <Radio value="USED-LIKE FAIR">
+                        <Radio value="USED_LIKE_FAIR">
                           <div>
                             <div style={{ fontWeight: 500 }}>Used - Fair</div>
                             <Text type="secondary" style={{ fontSize: 14 }}>
@@ -272,7 +291,7 @@ export function ListingCreationForm({
                     ]}
                   >
                     <Input
-                      prefix="₹"
+                      prefix={GetCurrency()}
                       placeholder="Enter price"
                       style={{ width: "100%" }}
                       type="number"
@@ -291,12 +310,10 @@ export function ListingCreationForm({
         </Col>
 
         <Col xs={24} lg={8}>
-          <div style={{ position: "sticky", top: 32 }}>
-            <Title level={3} style={{ marginBottom: 16 }}>
-              Preview
-            </Title>
+          <div style={{ position: "sticky", top: 0 }}>
             {/* <CommunityPreview imageUrl={imageUrl} formData={formData} /> */}
 
+            <Preview fileList={fileList} values={values} />
             <Card style={{ marginTop: 24 }}>
               <Title level={4} style={{ marginBottom: 16 }}>
                 <InfoCircleOutlined style={{ marginRight: 8 }} />

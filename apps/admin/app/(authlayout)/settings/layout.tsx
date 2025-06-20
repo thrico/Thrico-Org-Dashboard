@@ -24,6 +24,7 @@ import { Button, Drawer, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { FaFont } from "react-icons/fa";
 import { MdOutlineViewModule } from "react-icons/md";
+
 function SettingsLayout({ children }: { children: React.ReactNode }) {
   const menuItems = [
     { key: "/settings", icon: <HomeOutlined />, label: "General" },
