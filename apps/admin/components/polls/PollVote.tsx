@@ -75,8 +75,7 @@ function PollComponent({
   totalVotes?: number;
 }) {
   const client = useApolloClient();
-  r;
-
+  const [vote, { loading }] = voteOnPoll({});
   const [selectedOption, setSelectedOption] = useState<string>(
     votedOptionId ?? ""
   );
