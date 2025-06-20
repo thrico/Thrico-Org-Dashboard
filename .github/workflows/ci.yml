@@ -3,10 +3,10 @@ name: CI Pipeline (Test)
 on:
   push:
     branches:
-      - main # Trigger on push to the main branch
+      - prod # Trigger on push to the prod branch
   pull_request:
     branches:
-      - main # Trigger on PR creation against main branch
+      - pord # Trigger on PR creation against main branch
 
 jobs:
   build-and-test:
