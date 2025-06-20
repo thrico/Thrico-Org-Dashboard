@@ -12,92 +12,82 @@ import { Card, Col, Row, Statistic, Typography } from "antd";
 import { Content } from "next/font/google";
 import React from "react";
 import { useGetListingStats } from "../../graphql/actions/listing";
+import { useJobStats } from "../../graphql/actions/jobs";
 
 const Stats = () => {
-  const { data } = useGetListingStats();
   const { Text } = Typography;
-  const dummyStats = {
-    totalJobs: 3,
-    jobsDiff: 2,
-    activeJobs: 2,
-    activeJobsPercent: 67,
-    totalApplications: 159,
-    applicationsDiff: 23,
-    totalViews: 835,
-    viewsPercent: 15,
-    avgApplications: 53,
-  };
-  const displayStats = dummyStats;
 
   // Dummy data fallback
 
+  const { data } = useJobStats();
+  const stats = data?.getJobStats;
   return (
     <Row gutter={[16, 24]} style={{ marginBottom: "24px" }}>
-      <Col xs={24} sm={12} lg={5}>
+      <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
             title="Total Jobs"
-            value={displayStats.totalJobs}
+            value={stats?.totalJobs}
             prefix={<ShoppingOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                +{displayStats.jobsDiff} this month
+                +{stats?.applicationsLastWeek} this month
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={5}>
+      <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
             title="Active Jobs"
-            value={displayStats.activeJobs}
+            value={stats?.activeJobs}
             prefix={<RiseOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                {displayStats.activeJobsPercent}% of total jobs
+                {stats?.totalJobs}% of total jobs
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={5}>
+      <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
             title="Total Applications"
-            value={displayStats.totalApplications}
+            value={stats?.totalApplications}
             prefix={<UserOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                +{displayStats.applicationsDiff} this week
+                +{stats?.applicationsThisWeek} this week
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={5}>
+      <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
             title="Total Views"
-            value={displayStats.totalViews}
+            value={stats?.totalViews}
             prefix={<EyeOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                +{displayStats.viewsPercent}% from last week
+                +{stats?.viewsLastWeek}% from last week
               </Text>
             }
           />
         </Card>
       </Col>
-      <Col xs={24} sm={12} lg={5}>
+      <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
             title="Avg. Applications"
-            value={displayStats.avgApplications}
+            value={stats?.totalApplications}
             prefix={<StarOutlined />}
             suffix={
               <Text type="secondary" style={{ fontSize: "12px" }}>
-                per job posting
+                {stats?.avgApplications} per job posting
               </Text>
             }
           />

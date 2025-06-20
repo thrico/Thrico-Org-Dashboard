@@ -76,10 +76,9 @@ export default function Jobs({ data }: { data: Job[] | undefined }) {
     },
 
     {
-      title: "company",
+      title: "Company",
       dataIndex: "company",
       key: "company",
-
       render: (_, record) => <>{record.company.name}</>,
     },
 
@@ -105,6 +104,11 @@ export default function Jobs({ data }: { data: Job[] | undefined }) {
         { text: "Unverified", value: false },
       ],
       onFilter: (value, record) => record.verification?.isVerified === value,
+    },
+    {
+      title: "Applications",
+      key: "numberOfApplicant",
+      dataIndex: "numberOfApplicant",
     },
 
     {

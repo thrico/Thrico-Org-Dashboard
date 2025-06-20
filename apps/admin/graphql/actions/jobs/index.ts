@@ -7,7 +7,7 @@ import {
   QueryResult,
   useQuery,
 } from "@apollo/client";
-import { ADD_JOB, GET_JOBS } from "../../quries/jobs";
+import { ADD_JOB, GET_JOB_STATS, GET_JOBS } from "../../quries/jobs";
 
 // --- GraphQL Mutation Document ---
 
@@ -88,4 +88,26 @@ export function useJobs(
   options?: QueryHookOptions<{ getJob: Job[] }, { input?: GetJobInput }>
 ): QueryResult<{ getJob: Job[] }, { input?: GetJobInput }> {
   return useQuery(GET_JOBS, options);
+}
+
+export type JobStats = {
+  totalJobs: number;
+  activeJobs: number;
+  totalApplications: number;
+  totalViews: number;
+  avgApplications: number;
+  applicationsThisWeek: number;
+  applicationsLastWeek: number;
+  applicationsWeeklyChange: number;
+  viewsThisWeek: number;
+  viewsLastWeek: number;
+  viewsWeeklyChange: number;
+};
+
+// --- Apollo Client Hook ---
+
+export function useJobStats(
+  options?: QueryHookOptions<{ getJobStats: JobStats }>
+): QueryResult<{ getJobStats: JobStats }> {
+  return useQuery(GET_JOB_STATS, options);
 }

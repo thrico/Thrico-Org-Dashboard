@@ -62,3 +62,21 @@ export const GET_JOBS = gql`
     }
   }
 `;
+
+export const GET_JOB_STATS = gql`
+  query GetJobStats {
+    getJobStats {
+      totalJobs
+      activeJobs
+      totalApplications
+      totalViews
+      avgApplications
+      applicationsThisWeek
+      applicationsLastWeek
+      applicationsWeeklyChange
+      viewsThisWeek
+      viewsLastWeek
+      viewsWeeklyChange
+    }
+  }
+`;

@@ -171,7 +171,7 @@ export const items: MenuItem[] = [
 
   {
     key: "jobs",
-    label: menuLink("/job", "Job"),
+    label: menuLink("/jobs", "Jobs"),
     icon: <GrUserWorker />,
     children: [
       {

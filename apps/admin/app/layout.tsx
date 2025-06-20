@@ -41,7 +41,7 @@ export default function RootLayout({
                     titleFontSize: 20,
                   },
                   Table: {
-                    cellFontSizeSM: 13,
+                    cellFontSizeSM: 12,
                   },
 
                   // Button: {
