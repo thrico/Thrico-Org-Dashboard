@@ -7,7 +7,7 @@ import debounce from "lodash/debounce";
 import type { SelectProps } from "antd";
 
 import { useAllPages } from "../../../graphql/actions/commany";
-import PageForm from "../../page/Pageform";
+import PageForm from "../../page/PageForm";
 
 // Define Page type if not imported from elsewhere
 type Page = {

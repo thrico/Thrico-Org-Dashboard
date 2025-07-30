@@ -8,7 +8,24 @@ import { GetCurrency } from "../../../screen/Currency";
 
 const { Title, Text, Paragraph } = Typography;
 
-const Preview = ({ values, fileList }) => {
+interface PreviewProps {
+  values: {
+    title?: string;
+    price?: number | string;
+    description?: string;
+    location?: {
+      name?: string;
+    };
+    // Add other fields as needed
+  };
+  fileList: Array<{
+    uid: string;
+    thumbUrl: string;
+    // Add other fields as needed
+  }>;
+}
+
+const Preview: React.FC<PreviewProps> = ({ values, fileList }) => {
   return (
     <Card title="Preview" style={{ maxWidth: 700, margin: "0 auto" }}>
       <Text type="secondary">See how your listing will appear to buyers</Text>
@@ -17,7 +34,7 @@ const Preview = ({ values, fileList }) => {
       <div style={{ marginTop: 24, borderRadius: 8, overflow: "hidden" }}>
         {fileList?.length > 0 ? (
           <img
-            src={fileList[0].thumbUrl}
+            src={fileList[0]?.thumbUrl}
             alt="Preview"
             style={{
               width: "100%",
@@ -70,7 +87,7 @@ const Preview = ({ values, fileList }) => {
       {/* Listing details */}
       <Title level={4}>{values?.title}</Title>
       <Title level={3} style={{ color: "#2ECC71" }}>
-        ${GetCurrency} {values?.price || "Price not set"}
+        ${GetCurrency()} {values?.price || "Price not set"}
       </Title>
 
       <Tag icon={<ExclamationCircleOutlined />} color="default">
@@ -86,7 +103,8 @@ const Preview = ({ values, fileList }) => {
 
       <Title level={5}>Location</Title>
       <Text type="danger">
-        <EnvironmentOutlined /> {values?.location || "Location not specified"}
+        <EnvironmentOutlined />{" "}
+        {values?.location?.name || "Location not specified"}
       </Text>
 
       <Divider />

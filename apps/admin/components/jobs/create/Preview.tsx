@@ -86,7 +86,8 @@ const Preview = ({ values, fileList }) => {
 
       <Title level={5}>Location</Title>
       <Text type="danger">
-        <EnvironmentOutlined /> {values?.location || "Location not specified"}
+        <EnvironmentOutlined />{" "}
+        {values?.location?.name || "Location not specified"}
       </Text>
 
       <Divider />

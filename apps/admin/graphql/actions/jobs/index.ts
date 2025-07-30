@@ -7,7 +7,13 @@ import {
   QueryResult,
   useQuery,
 } from "@apollo/client";
-import { ADD_JOB, GET_JOB_STATS, GET_JOBS } from "../../quries/jobs";
+import {
+  ADD_JOB,
+  CHANGE_JOB_STATUS,
+  CHANGE_JOB_VERIFICATION,
+  GET_JOB_STATS,
+  GET_JOBS,
+} from "../../quries/jobs";
 
 // --- GraphQL Mutation Document ---
 
@@ -40,7 +46,14 @@ export type Job = {
   numberOfApplicant: number;
   numberOfViews: number;
   createdAt: string;
+  updatedAt: string;
   status: string;
+  verification: {
+    id: string;
+    isVerifiedAt: string | null;
+    isVerified: boolean;
+    verificationReason: string | null;
+  };
 };
 
 export type PostJobInput = {
@@ -64,8 +77,62 @@ export type PostJobInput = {
 
 export function useAddJob(
   options?: MutationHookOptions<{ addJob: Job }, { input: PostJobInput }>
-): MutationTuple<{ addJob: Job }, { input: PostJobInput }> {
-  return useMutation(ADD_JOB, options);
+) {
+  return useMutation(ADD_JOB, {
+    ...options,
+    update(cache, { data }) {
+      try {
+        const addJob = data?.addJob;
+        if (addJob && addJob.status === "APPROVED") {
+          // Update for status: "APPROVED"
+          const approvedData: any = cache.readQuery({
+            query: GET_JOBS,
+            variables: {
+              input: {
+                status: "APPROVED",
+              },
+            },
+          });
+
+          cache.writeQuery({
+            query: GET_JOBS,
+            data: {
+              getJob: [addJob, ...(approvedData?.getJob || [])],
+            },
+            variables: {
+              input: {
+                status: "APPROVED",
+              },
+            },
+          });
+
+          // Update for status: "ALL"
+          const allData: any = cache.readQuery({
+            query: GET_JOBS,
+            variables: {
+              input: {
+                status: "ALL",
+              },
+            },
+          });
+
+          cache.writeQuery({
+            query: GET_JOBS,
+            data: {
+              getJob: [addJob, ...(allData?.getJob || [])],
+            },
+            variables: {
+              input: {
+                status: "ALL",
+              },
+            },
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 }
 
 export enum JobStatus {
@@ -110,4 +177,74 @@ export function useJobStats(
   options?: QueryHookOptions<{ getJobStats: JobStats }>
 ): QueryResult<{ getJobStats: JobStats }> {
   return useQuery(GET_JOB_STATS, options);
+}
+
+export function useChangeJobStatus(options?: MutationHookOptions<any, any>) {
+  return useMutation(CHANGE_JOB_STATUS, {
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "ALL",
+          },
+        },
+      },
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "PENDING",
+          },
+        },
+      },
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "DISABLED",
+          },
+        },
+      },
+
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "APPROVED",
+          },
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+}
+
+export function useChangeJobVerification(
+  options?: MutationHookOptions<any, any>
+) {
+  return useMutation(CHANGE_JOB_VERIFICATION, {
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "ALL",
+          },
+        },
+      },
+
+      {
+        query: GET_JOBS,
+        variables: {
+          input: {
+            status: "APPROVED",
+          },
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
 }

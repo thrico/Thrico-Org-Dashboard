@@ -18,6 +18,8 @@ import {
   PlusOutlined,
   MinusCircleOutlined,
   SaveOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
 } from "@ant-design/icons";
 
 import { useRouter } from "next/navigation";
@@ -175,18 +177,18 @@ export default function NavigationManager() {
                           </Title>
                           <Space>
                             <Button
-                              type="text"
+                              type="dashed"
                               disabled={index === 0}
                               onClick={() => move(index, index - 1)}
                             >
-                              Move Up
+                              <ArrowUpOutlined /> Move Up
                             </Button>
                             <Button
-                              type="text"
+                              type="dashed"
                               disabled={index === fields.length - 1}
                               onClick={() => move(index, index + 1)}
                             >
-                              Move Down
+                              <ArrowDownOutlined /> Move Down
                             </Button>
                             <Button
                               type="text"

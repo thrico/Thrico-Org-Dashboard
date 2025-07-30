@@ -75,7 +75,7 @@ const Create = ({}) => {
         height={"100vh"}
         placement="bottom"
         style={{ height: "100vh" }}
-        title="Create Listing"
+        title="Create Job"
         onClose={onClose}
         open={open}
         extra={
@@ -85,7 +85,7 @@ const Create = ({}) => {
               type="primary"
               loading={loading}
             >
-              Creates
+              Create
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </Space>

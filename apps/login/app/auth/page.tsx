@@ -21,7 +21,7 @@ const Auth = () => {
   React.useEffect(() => {
     if (token !== null) {
       search();
-      // router.push(`${host}/auth/callback?code=${token}&path=${path}`);
+      router.push(`${host}/auth/callback?code=${token}&path=${path}`);
     } else {
       window.location.href = `/login/?path=${path}&&host=${host}`;
     }

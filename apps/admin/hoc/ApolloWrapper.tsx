@@ -29,9 +29,9 @@ export function ApolloWrapper({ children, host }: props) {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, extensions }) => {
           if (extensions?.code === "INTERNAL_SERVER_ERROR") {
-            toast.error("Something went wrong", {
-              id: "12",
-            });
+            // toast.error("Something went wrong", {
+            //   id: "12",
+            // });
           } else {
             toast.error(message, {
               id: "12",

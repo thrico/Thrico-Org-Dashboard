@@ -34,6 +34,11 @@ export type Subscription = {
     | "suspended";
   subscriptionType: string;
   graceUntil?: string;
+  modules?: {
+    id: string;
+    name: string;
+    icon: string;
+  }[];
 };
 
 export type Entity = {
@@ -102,6 +107,11 @@ export interface SubscriptionDetails {
     | "suspended";
   subscriptionType: "trial" | "paid";
   graceUntil: string | null;
+  modules?: {
+    id: string;
+    name: string;
+    icon: string;
+  }[];
 }
 export interface CheckEntitySubscriptionQuery {
   checkEntitySubscription: SubscriptionDetails | null;

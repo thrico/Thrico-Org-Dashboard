@@ -1,8 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const ADD_JOB = gql`
-  mutation AddJob($input: PostJobInput!) {
-    addJob(input: $input) {
+const jobs = `
       id
       title
       description
@@ -19,6 +17,12 @@ export const ADD_JOB = gql`
       isFeatured
       entity
       status
+      verification {
+        id
+        isVerifiedAt
+        isVerified
+        verificationReason
+      }
 
       company {
         id
@@ -28,6 +32,11 @@ export const ADD_JOB = gql`
       numberOfApplicant
       numberOfViews
       createdAt
+`;
+export const ADD_JOB = gql`
+  mutation AddJob($input: PostJobInput!) {
+    addJob(input: $input) {
+${jobs}
     }
   }
 `;
@@ -35,33 +44,24 @@ export const ADD_JOB = gql`
 export const GET_JOBS = gql`
   query GetJob($input: GetJobInput) {
     getJob(input: $input) {
-      id
-      title
-      description
-      location
-      jobType
-      salary
-      experienceLevel
-      workplaceType
-      applicationDeadline
-      requirements
-      responsibilities
-      benefits
-      skills
-      isFeatured
-      entity
-      company {
-        id
-        name
-        logo
-      }
-      status
-      numberOfApplicant
-      numberOfViews
-      createdAt
+      ${jobs}
     }
   }
 `;
+
+export const CHANGE_JOB_STATUS = gql`
+mutation ChangeJobStatus($input: ChangeJobStatusInput!) {
+  changeJobStatus(input: $input) {
+      ${jobs}
+  }
+}`;
+
+export const CHANGE_JOB_VERIFICATION = gql`
+mutation ChangeJobVerification($input: ChangeJobStatusInput!) {
+  changeJobVerification(input: $input) {
+      ${jobs}
+  }
+}`;
 
 export const GET_JOB_STATS = gql`
   query GetJobStats {

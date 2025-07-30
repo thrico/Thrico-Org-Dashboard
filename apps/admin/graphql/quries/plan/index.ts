@@ -13,6 +13,10 @@ export const GET_COUNTRY_PACKAGES = gql`
       benefits
       packageId
       currency
+      modules {
+        name
+        icon
+      }
     }
   }
 `;

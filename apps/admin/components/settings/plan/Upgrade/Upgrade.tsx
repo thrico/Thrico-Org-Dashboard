@@ -20,8 +20,12 @@ import {
 } from "antd";
 import { CountryPackage, UpgradePlanSummary } from "../ts-types";
 import { cardStyle } from "../stye";
-import { allPlanPercentage, formatPrice } from "../utils";
-import { CheckOutlined, UserOutlined } from "@ant-design/icons";
+import { allPlanPercentage, formatPrice, renderModuleIcon } from "../utils";
+import {
+  CheckCircleFilled,
+  CheckOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import {
   ArrowUp01Icon,
   ArrowUpIcon,
@@ -180,6 +184,19 @@ const Upgrade = () => {
                               <Text>{benefit}</Text>
                             </Space>
                           ))}
+                      </Space>
+
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        {pkg.modules.map((module, index) => (
+                          <Space key={index} align="start">
+                            {renderModuleIcon(module.icon)}
+                            <Text>{module.name}</Text>
+                          </Space>
+                        ))}
                       </Space>
                     </Space>
 

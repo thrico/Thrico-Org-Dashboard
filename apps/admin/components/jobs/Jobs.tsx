@@ -15,27 +15,14 @@ import {
 import type { TableProps } from "antd";
 
 import moment from "moment";
-// import { getVerificationTag } from "../../../screen/user/utils";
 
 import { getStatusTag } from "../../screen/comman/utils";
 
-// import Actions from "./Actions";
 import { getVerificationTag } from "../discussion-forum/utils";
-import { GlobalOutlined, LockOutlined } from "@ant-design/icons";
 
-import { getCurrencySymbol } from "../../screen/Currency";
 import { Job } from "../../graphql/actions/jobs";
-
-// import Actions from "./Action";
-// import Actions from "./Actions";
-// import { getStatusTag } from "../utils";
-
-// import Actions from "./drawer/Actions";
-// import { getStatusTag, getVerificationTag } from "./utils";
-
-const { Header, Content } = Layout;
-const { Title, Text, Paragraph } = Typography;
-const { TabPane } = Tabs;
+import Actions from "./Action";
+const { Content } = Layout;
 
 // Mock data for users
 
@@ -126,13 +113,13 @@ export default function Jobs({ data }: { data: Job[] | undefined }) {
       render: (_, record) => <>{moment(record?.updatedAt).fromNow()}</>,
     },
 
-    // {
-    //   title: "Actions",
-    //   key: "actions",
-    //   render: (_, record) => {
-    //     return <Actions {...record} />;
-    //   },
-    // },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => {
+        return <Actions {...record} />;
+      },
+    },
   ];
 
   return (

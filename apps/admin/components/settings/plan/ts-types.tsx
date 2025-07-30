@@ -10,6 +10,10 @@ export interface CountryPackage {
   adminUsers: number;
   benefits: string[];
   currency: string;
+  modules: {
+    icon: string;
+    name: string;
+  }[];
 }
 
 export interface UpgradePlanSummary {

@@ -62,9 +62,7 @@ const Create = ({}) => {
     }
     const data = {
       ...values,
-      media: fileList.map((file) => file.originFileObj),
-      lat,
-      lng,
+      media: fileList.map((file) => file?.originFileObj),
     };
 
     add({

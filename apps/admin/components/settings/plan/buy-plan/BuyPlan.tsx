@@ -25,7 +25,12 @@ import { checkEntitySubscription } from "../../../../graphql/actions";
 import { on } from "events";
 import { CountryPackage } from "../ts-types";
 import { cardStyle } from "../stye";
-import { allPlanPercentage, formatPrice, getYearlySavings } from "../utils";
+import {
+  allPlanPercentage,
+  formatPrice,
+  getYearlySavings,
+  renderModuleIcon,
+} from "../utils";
 import {
   ShieldAlertIcon,
   ShieldEllipsis,
@@ -154,6 +159,19 @@ const BuyPlan = () => {
                               <Text>{benefit}</Text>
                             </Space>
                           ))}
+                      </Space>
+
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        {pkg.modules.map((module, index) => (
+                          <Space key={index} align="start">
+                            {renderModuleIcon(module.icon)}
+                            <Text>{module.name}</Text>
+                          </Space>
+                        ))}
                       </Space>
                     </Space>
 

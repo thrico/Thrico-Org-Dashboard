@@ -1,21 +1,19 @@
-"use client";
-import React from "react";
+import Jobs from "../../../../../components/jobs/Jobs";
 import TableLoading from "../../../../../components/skeleton/TableLoading";
-import Listing from "../../../../../components/listing/Listing";
-import { useListings } from "../../../../../graphql/actions/listing";
+import { JobStatus, useJobs } from "../../../../../graphql/actions/jobs";
 
 const page = () => {
-  const { data, error, loading } = useListings({
+  const { data, error, loading } = useJobs({
     variables: {
       input: {
-        status: "PENDING",
+        status: JobStatus.PENDING,
       },
     },
   });
   return (
     <>
       {loading && <TableLoading />}
-      <Listing data={data?.getListing} />
+      <Jobs data={data?.getJob} />
     </>
   );
 };

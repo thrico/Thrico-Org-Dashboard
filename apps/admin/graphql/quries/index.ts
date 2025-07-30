@@ -143,6 +143,11 @@ export const CHECK_ENTITY_SUBSCRIPTIONS = gql`
       status
       subscriptionType
       graceUntil
+      modules {
+        id
+        name
+        icon
+      }
     }
   }
 `;

@@ -144,6 +144,7 @@ function PageDetails({
             label="Location"
           >
             <GooglePlacesInput
+              placeholder="Add your organization's location"
               onChange={(value) => form.setFieldsValue({ location: value })}
             />
           </Form.Item>

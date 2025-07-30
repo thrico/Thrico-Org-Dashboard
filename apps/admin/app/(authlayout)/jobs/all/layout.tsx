@@ -46,11 +46,11 @@ function RootLayout({ children }: { children: React.ReactNode }) {
   ];
   const router = useRouter();
   const onChange = (key: string) => {
-    if (key === "all") router.push(`/listing/all`);
-    else router.push(`/listing/all/${key}`);
+    if (key === "all") router.push(`/jobs/all`);
+    else router.push(`/jobs/all/${key}`);
   };
   const pathname = usePathname();
-  const activeTab = pathname.replace("/listing/all", "");
+  const activeTab = pathname.replace("/jobs/all", "");
   return (
     <>
       <Stats />

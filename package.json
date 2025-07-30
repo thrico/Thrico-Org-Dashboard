@@ -12,6 +12,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/lodash": "^4.17.20",
     "@types/react-beautiful-dnd": "^13.1.8",
     "prettier": "^3.1.1",
     "turbo": "latest"
@@ -37,6 +38,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@faker-js/faker": "^9.3.0",
+    "@googlemaps/js-api-loader": "^1.16.10",
     "@lexical/code": "^0.31.1",
     "@lexical/link": "^0.31.1",
     "@lexical/list": "^0.31.1",
@@ -49,6 +51,7 @@
     "@react-page/plugins-image": "^5.4.4",
     "@react-page/plugins-slate": "^5.4.4",
     "@redux-devtools/extension": "^3.3.0",
+    "@thrico/ui-components": "^0.2.1",
     "@tiptap/extension-bold": "^2.6.6",
     "@tiptap/extension-character-count": "^2.10.4",
     "@tiptap/extension-code": "^2.6.6",

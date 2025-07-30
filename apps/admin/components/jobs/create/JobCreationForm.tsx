@@ -1,61 +1,28 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import Image from "next/image";
 import {
   Input,
   Button,
   Card,
-  Radio,
-  Upload,
   Typography,
   Row,
   Col,
   Divider,
   Space,
-  message,
   Select,
   DatePicker,
   Tag,
   Form,
 } from "antd";
-import {
-  CameraOutlined,
-  DeleteOutlined,
-  EnvironmentOutlined,
-  InfoCircleOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
-import type { UploadProps } from "antd";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+
 import { CompanyAutocompleteSelect } from "./CommanyAutoComplete";
-import { GooglePlacesAutoComplete } from "./Location";
+
 import GooglePlacesInput from "../../comman/location/Google-places-autocomplete";
 // import { CommunityPreview } from "./community-preview";
 
-const { TextArea } = Input;
-const { Title, Text, Paragraph } = Typography;
-const categories = [
-  "Electronics & Appliances",
-  "Vehicles",
-  "Real Estate",
-  "Home & Furniture",
-  "Fashion & Beauty",
-  "Sports, Hobbies & Books",
-  "Pets",
-  "Jobs",
-  "Services",
-  "Education & Classes",
-  "Events",
-  "Matrimonial",
-  "Health & Fitness",
-  "Travel & Tourism",
-  "Community",
-  "Tools & Equipment",
-  "Baby & Kids",
-  "Art & Antiques",
-  "Industrial Goods",
-  "Agriculture",
-];
+const { Title, Paragraph } = Typography;
+
 interface ListingCreationFormProps {
   initialValues?: Record<string, any>;
   loading?: boolean;
@@ -63,9 +30,6 @@ interface ListingCreationFormProps {
   form: any;
   cover: any;
   setCover: (cover: any) => void;
-
-  setLat: Dispatch<SetStateAction<number | null>>;
-  setLng: Dispatch<SetStateAction<number | null>>;
 }
 
 export function JobCreationForm({
@@ -75,8 +39,6 @@ export function JobCreationForm({
   form,
   cover,
   setCover,
-  setLat,
-  setLng,
 }: ListingCreationFormProps) {
   const formData = form?.getFieldsValue();
   const values = Form.useWatch([], form);

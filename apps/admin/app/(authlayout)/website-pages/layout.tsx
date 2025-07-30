@@ -1,14 +1,17 @@
 "use client";
-import React from "react";
-import MainBreadcrumb from "../../../screen/comman/BreadCrumb";
+import * as React from "react";
+import { Card, TabsProps } from "antd";
 
-function Layout({ children }: { children: React.ReactNode }) {
+import PagesItemsLayout from "../../../screen/comman/layout/PagesLayout";
+
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <MainBreadcrumb />
-      {children}
+      <PagesItemsLayout>
+        <Card>{children}</Card>
+      </PagesItemsLayout>
     </>
   );
 }
 
-export default Layout;
+export default RootLayout;

@@ -20,7 +20,7 @@ export const getYearlySavings = (
   const savings = monthlyTotal - yearly;
   if (savings < 0) return "";
   const percentage = Math.round((savings / monthlyTotal) * 100);
-  return `${currency }${savings.toFixed(2)} (${percentage}%)`;
+  return `${currency}${savings.toFixed(2)} (${percentage}%)`;
 };
 
 export const allPlanPercentage = (
@@ -39,4 +39,18 @@ export const allPlanPercentage = (
       return match ? Number(match[1]) : 0;
     })
   );
+};
+import * as Icons from "lucide-react";
+
+export const renderModuleIcon = (icon: string) => {
+  // Priority: imageUrl > icon > default Settings icon
+
+  if (icon) {
+    const IconComponent = (Icons as any)[icon];
+    if (IconComponent) {
+      return <IconComponent className="w-4 h-4" />;
+    }
+  }
+
+  return <Icons.Settings className="w-4 h-4" />;
 };
