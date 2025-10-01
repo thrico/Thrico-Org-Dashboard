@@ -1,17 +1,4 @@
-import {
-  Button,
-  Card,
-  Checkbox,
-  Divider,
-  Drawer,
-  Flex,
-  Form,
-  Input,
-  Radio,
-  Segmented,
-  Space,
-  theme,
-} from "antd";
+import { Button, Card, Checkbox, Divider, Drawer, Form, Space } from "antd";
 import React, { useState } from "react";
 // import Container from "../../Layout/Container";
 
@@ -21,18 +8,8 @@ import React, { useState } from "react";
 // } from "../../../graphql/actions/communities";
 import { useRouter } from "next/navigation";
 
-import Preview from "./Preview";
-import { MdOutlineEventSeat } from "react-icons/md";
-import { GiVideoConference } from "react-icons/gi";
-import { RiLiveLine } from "react-icons/ri";
-import {
-  CloseCircleTwoTone,
-  GlobalOutlined,
-  LockOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
-import Cover from "../Cover";
-import TextArea from "antd/es/input/TextArea";
+import { CloseCircleTwoTone } from "@ant-design/icons";
+
 import { FormValues } from "../ts-types";
 import { addCommunity } from "../../../graphql/actions/group";
 import { CommunityCreationForm } from "./community-creation-form";

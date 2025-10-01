@@ -10,8 +10,9 @@ import {
   StopOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-import Create from "../../../../components/communities/add/Create";
+
 import Stats from "../../../../components/listing/Stats";
+import Create from "../../../../components/listing/create/Create";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   const items: TabsProps["items"] = [
@@ -41,11 +42,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       key: "rejected",
       label: "Rejected",
       icon: <CloseCircleOutlined />,
-    },
-    {
-      key: "paused",
-      label: "Paused",
-      icon: <StopOutlined />,
     },
   ];
   const router = useRouter();

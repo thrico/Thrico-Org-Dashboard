@@ -1,27 +1,26 @@
-import { MenuProps, Typography } from "antd";
+import { Avatar, MenuProps, Progress, Typography } from "antd";
 import {
+  BellOutlined,
+  BgColorsOutlined,
   CalendarOutlined,
+  HomeOutlined,
   LogoutOutlined,
+  MoneyCollectOutlined,
+  PullRequestOutlined,
+  RocketOutlined,
   SettingOutlined,
   UnorderedListOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {
-  MdDashboardCustomize,
-  MdGroup,
-  MdLocalOffer,
-  MdOutlineFeed,
-} from "react-icons/md";
+import { MdGroup, MdLocalOffer, MdOutlineFeed } from "react-icons/md";
 import { SiCodementor } from "react-icons/si";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { GrUserWorker } from "react-icons/gr";
 import { BsPersonWorkspace } from "react-icons/bs";
 import Link from "next/link";
-import { LuMessagesSquare } from "react-icons/lu";
-import { LiaPollSolid } from "react-icons/lia";
-import { Gamepad2, Wallpaper } from "lucide-react";
 
-type MenuItem = Required<MenuProps>["items"][number];
+import { LiaPollSolid } from "react-icons/lia";
+import { Gamepad2, User, Wallpaper } from "lucide-react";
 
 const menuLink = (href: string, text: string) => (
   <Link href={href}>
@@ -29,59 +28,46 @@ const menuLink = (href: string, text: string) => (
   </Link>
 );
 
-export const items: MenuItem[] = [
+export const main = [
   {
-    key: "dashboard",
-    label: menuLink("/", "Dashboard"),
-    icon: <MdDashboardCustomize />,
-  },
-  {
-    key: "members",
-    label: menuLink("/members", "Memberships"),
-    icon: <UserOutlined />,
+    key: "g1",
+    label: "Main",
+    type: "group",
     children: [
       {
-        key: "members-approval",
-        type: "group",
-        label: menuLink("/members/all", "Manage Approval"),
+        key: "Home",
+        label: menuLink("/", "Home"),
+        icon: <HomeOutlined />,
       },
       {
-        key: "members-settings",
-        type: "group",
-        label: menuLink("/members/settings", "Settings"),
+        key: "feed",
+        label: menuLink("/feed", "Feed"),
+        icon: <MdOutlineFeed />,
+      },
+      {
+        key: "members",
+        label: menuLink("/members", "Memberships"),
+        icon: <UserOutlined />,
       },
     ],
   },
+];
+export const settings = [
   {
-    key: "feed",
-    label: menuLink("/feed", "Feed"),
-    icon: <MdOutlineFeed size={18} />,
+    key: "g2",
+    label: "Management",
+    type: "group",
     children: [
       {
-        key: "feed-all",
-        label: menuLink("/feed/all", "Feed"),
-      },
-      {
-        key: "feed-settings",
-        label: menuLink("/feed/settings", "Settings"),
+        key: "cms",
+        label: menuLink("/website-pages", "Manage Website"),
+        icon: <UnorderedListOutlined />,
       },
     ],
   },
-  {
-    key: "discussion-forum",
-    label: menuLink("/discussion-forum", "Forum"),
-    icon: <LuMessagesSquare size={18} />,
-    children: [
-      {
-        key: "discussion-forum-all",
-        label: menuLink("/discussion-forum/all", "Discussion Forum"),
-      },
-      {
-        key: "discussion-forum-settings",
-        label: menuLink("/discussion-forum/settings", "Settings"),
-      },
-    ],
-  },
+];
+
+export const extendedItems = [
   {
     key: "feedback",
     label: menuLink("#", "Polls & Surveys"),
@@ -119,6 +105,28 @@ export const items: MenuItem[] = [
     ],
   },
   {
+    key: "listing",
+    label: menuLink("/listing", "Listing"),
+    icon: <HiOutlineShoppingBag />,
+    children: [
+      {
+        key: "listing-approval",
+        type: "group",
+        label: menuLink("/listing/", "Manage Approvals"),
+      },
+      {
+        key: "listing-customization",
+        type: "group",
+        label: menuLink("/listing/customization", "Customization"),
+      },
+      {
+        key: "listing-settings",
+        type: "group",
+        label: menuLink("/listing/settings", "Setting"),
+      },
+    ],
+  },
+  {
     key: "mentorship",
     label: menuLink("/mentorship", "Mentorship"),
     icon: <SiCodementor />,
@@ -146,46 +154,24 @@ export const items: MenuItem[] = [
     icon: <CalendarOutlined />,
   },
   {
-    key: "listing",
-    label: menuLink("/listing", "Listing"),
-    icon: <HiOutlineShoppingBag />,
-    children: [
-      {
-        key: "listing-approval",
-        type: "group",
-        label: menuLink("/listing/", "Manage Approvals"),
-      },
-      {
-        key: "listing-customization",
-        type: "group",
-        label: menuLink("/listing/customization", "Customization"),
-      },
-      {
-        key: "listing-settings",
-        type: "group",
-        label: menuLink("/listing/settings", "Setting"),
-      },
-    ],
-  },
-  {
-    key: "job",
-    label: menuLink("/job", "Job"),
+    key: "jobs",
+    label: menuLink("/jobs", "Jobs"),
     icon: <GrUserWorker />,
     children: [
       {
         key: "job-approval",
         type: "group",
-        label: menuLink("/job/", "Manage Approvals"),
+        label: menuLink("/jobs/", "Manage Approvals"),
       },
       {
         key: "job-customization",
         type: "group",
-        label: menuLink("/job/customization", "Customization"),
+        label: menuLink("/jobs/customization", "Customization"),
       },
       {
         key: "job-settings",
         type: "group",
-        label: menuLink("/job/settings", "Setting"),
+        label: menuLink("/jobs/settings", "Setting"),
       },
     ],
   },
@@ -248,26 +234,102 @@ export const items: MenuItem[] = [
     label: menuLink("/gamification", "Gamification"),
     icon: <Gamepad2 size={14} />,
   },
+];
+
+import React from "react";
+import { getGetUser } from "../../../graphql/actions";
+
+export const UserDetails = () => {
+  const { data: { getUser } = {}, error } = getGetUser();
+
+  return getUser.firstName + " " + getUser.lastName;
+};
+
+const UserAvatar = () => {
+  const { data: { getUser } = {}, error } = getGetUser();
+
+  return (
+    <Avatar
+      size={15}
+      shape="square"
+      style={{ backgroundColor: "#87d068", marginRight: 10 }}
+    >
+      {getUser.firstName}
+    </Avatar>
+  );
+};
+
+export const profile = [
   {
-    key: "settings",
-    label: menuLink("/settings", "Settings"),
+    key: "sub1",
     icon: <SettingOutlined />,
+    label: "Admin Settings",
     children: [
       {
-        key: "settings-appearance",
-        type: "group",
-        label: menuLink("/settings/appearance", "Appearance"),
+        key: "system-activity",
+        label: "System Activity",
+        icon: <PullRequestOutlined />,
+      },
+      {
+        key: "plan",
+        label: menuLink("/settings/plan", "Plan Overview"),
+
+        icon: <MoneyCollectOutlined />,
+      },
+      {
+        type: "divider",
+      },
+
+      {
+        key: "settings",
+
+        label: menuLink("/settings", "All Settings"),
+        icon: <SettingOutlined />,
       },
     ],
   },
   {
-    key: "cms",
-    label: menuLink("/website", "Manage Website"),
-    icon: <UnorderedListOutlined />,
-  },
-  {
-    key: "logout",
-    label: <Typography.Text>Logout</Typography.Text>,
-    icon: <LogoutOutlined />,
+    key: "Pankaj Verma",
+    icon: <UserAvatar />,
+    label: <UserDetails />,
+    children: [
+      {
+        key: "profile",
+        icon: <UserOutlined />,
+        label: menuLink("/settings", "Your profile"),
+      },
+      {
+        key: "notifications",
+        icon: <BellOutlined />,
+        label: "Activity & notifications",
+      },
+      {
+        type: "divider",
+      },
+      {
+        key: "theme",
+        icon: <BgColorsOutlined />,
+
+        label: menuLink("/theme", "Theme"),
+      },
+      {
+        type: "divider",
+      },
+
+      {
+        key: "upgrade",
+        icon: <RocketOutlined />,
+        label: menuLink("/settings/plan", "Upgrade Plan"),
+      },
+
+      {
+        type: "divider",
+      },
+      {
+        key: "logout",
+        icon: <LogoutOutlined />,
+        label: menuLink("/announcements", "Announcements & Highlights"),
+      },
+    ],
   },
 ];

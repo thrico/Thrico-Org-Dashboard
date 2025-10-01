@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { SaveOutlined } from "@ant-design/icons";
 import { Button, Drawer, Form, Space } from "antd";
-import { addPoll } from "../../graphql/actions/polls";
+
 import NewFormPage from "../comman/form/Create";
 import { AddCustomForm } from "../../graphql/actions/customForm";
 import { useFormStore } from "../../store/useFormStore";

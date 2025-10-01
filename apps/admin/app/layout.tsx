@@ -22,7 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <ApolloWrapper host={process.env.NEXT_PUBLIC_API_URL}>
+      <ApolloWrapper host={"https://admin.thrico.app/graphql"}>
         <body className={workSans.className}>
           <AntdRegistry>
             <ConfigProvider
@@ -34,13 +34,16 @@ export default function RootLayout({
                   },
                   Menu: {
                     colorItemBgSelected: "#eeeeee",
+                    itemHeight: 34,
+                    fontSize: 13,
                   },
                   Modal: {
                     titleFontSize: 20,
                   },
                   Table: {
-                    cellFontSizeSM: 13,
+                    cellFontSizeSM: 12,
                   },
+
                   // Button: {
                   //   ...Button,
                   // },

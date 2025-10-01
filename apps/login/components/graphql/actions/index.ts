@@ -19,7 +19,7 @@ export const otpLogin = (onCompleted: any) =>
 
 export const getUser = () => useQuery(GET_USER);
 
-export const userProfile = () => useQuery(GET_PROFILE);
+export const userProfile = () => useQuery(GET_PROFILE, {});
 
 export const logoutUser = (onCompleted: any) =>
   useMutation(LOGOUT, onCompleted);

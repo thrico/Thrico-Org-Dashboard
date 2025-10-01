@@ -46,6 +46,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { uesGetUserAnalytics } from "../../../graphql/actions/user";
+import { stat } from "fs";
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -194,23 +196,14 @@ function getActivityColor(percentage: number) {
 const COLORS = ["#1890ff", "#52c41a", "#faad14", "#eb2f96", "#722ed1"];
 
 export default function Membership() {
+  const { data, loading } = uesGetUserAnalytics();
   const [dateRange, setDateRange] = useState<string>("7days");
 
   const handleDateRangeChange = (value: string) => {
     setDateRange(value);
   };
 
-  const dateRangeMenu = (
-    <Menu
-      selectedKeys={[dateRange]}
-      onClick={({ key }) => handleDateRangeChange(key as string)}
-    >
-      <Menu.Item key="today">Today</Menu.Item>
-      <Menu.Item key="7days">Last 7 Days</Menu.Item>
-      <Menu.Item key="30days">Last 30 Days</Menu.Item>
-      <Menu.Item key="custom">Custom Range</Menu.Item>
-    </Menu>
-  );
+  const stats = data?.getUserAnalytics;
 
   return (
     <div
@@ -220,43 +213,12 @@ export default function Membership() {
       }}
     >
       {/* Top Navigation Bar */}
-      <Card
-        style={{
-          marginBottom: "24px",
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
-          borderRadius: "8px",
-        }}
-      >
-        <Row justify="space-between" align="middle">
-          <Col>
-            <Title level={3} style={{ margin: 0 }}>
-              Membership
-            </Title>
-          </Col>
-          <Col>
-            <Space size="large">
-              <Dropdown overlay={dateRangeMenu} trigger={["click"]}>
-                <Button icon={<CalendarOutlined />}>
-                  {dateRange === "today"
-                    ? "Today"
-                    : dateRange === "7days"
-                      ? "Last 7 Days"
-                      : dateRange === "30days"
-                        ? "Last 30 Days"
-                        : "Custom Range"}{" "}
-                  <DownOutlined />
-                </Button>
-              </Dropdown>
-              <Button icon={<DownloadOutlined />}>Download CSV</Button>
-            </Space>
-          </Col>
-        </Row>
-      </Card>
 
       {/* Metric Cards */}
       <Row gutter={[24, 24]} style={{ marginBottom: "24px" }}>
         <Col xs={24} sm={12} lg={6}>
           <Card
+            loading={loading}
             style={{
               boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
               borderRadius: "8px",
@@ -266,7 +228,7 @@ export default function Membership() {
           >
             <Statistic
               title="Total Members"
-              value={248756}
+              value={stats?.totalMembers || 0}
               prefix={<TeamOutlined style={{ color: "#52c41a" }} />}
               valueStyle={{ color: "#52c41a" }}
             />
@@ -274,7 +236,7 @@ export default function Membership() {
               type="secondary"
               style={{ display: "block", marginTop: "8px" }}
             >
-              +1,248 this week
+              +{stats?.totalMembers}
             </Text>
           </Card>
         </Col>
@@ -289,7 +251,7 @@ export default function Membership() {
           >
             <Statistic
               title="Verified Members"
-              value={142587}
+              value={stats?.verifiedMembers || 0}
               prefix={
                 <SafetyCertificateOutlined style={{ color: "#faad14" }} />
               }
@@ -299,7 +261,7 @@ export default function Membership() {
               type="secondary"
               style={{ display: "block", marginTop: "8px" }}
             >
-              57.3% of total
+              {stats?.activePercent}% of total
             </Text>
           </Card>
         </Col>
@@ -314,7 +276,7 @@ export default function Membership() {
           >
             <Statistic
               title="Active Members"
-              value={198000}
+              value={stats?.activeMembers || 0}
               prefix={<UserSwitchOutlined style={{ color: "#1890ff" }} />}
               valueStyle={{ color: "#1890ff" }}
             />
@@ -322,7 +284,7 @@ export default function Membership() {
               type="secondary"
               style={{ display: "block", marginTop: "8px" }}
             >
-              79.6% of total
+              {stats?.activePercent}% of total
             </Text>
           </Card>
         </Col>
@@ -337,7 +299,7 @@ export default function Membership() {
           >
             <Statistic
               title="New Members (This Month)"
-              value={5240}
+              value={stats?.newMembersThisMonth || 0}
               prefix={<UserOutlined style={{ color: "#eb2f96" }} />}
               valueStyle={{ color: "#eb2f96" }}
             />
@@ -345,7 +307,7 @@ export default function Membership() {
               type="secondary"
               style={{ display: "block", marginTop: "8px" }}
             >
-              +5240 this month
+              +${stats?.newMembersThisMonth} this month
             </Text>
           </Card>
         </Col>

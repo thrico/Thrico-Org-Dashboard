@@ -39,7 +39,7 @@ const details = `
             phoneNumber
           }
           timeZone
-          DOB
+          
           gender
 
           headline
@@ -140,7 +140,7 @@ export const GET_USER_DETIALS = gql`
             phoneNumber
           }
           timeZone
-          DOB
+
           gender
           pronouns
           headline
@@ -166,6 +166,19 @@ export const GET_MEMBERS_TERMS_AND_CONDITIONS = gql`
     getMembersTermsAndConditions {
       termAndConditionsMembers
       termAndConditionsCommunities
+    }
+  }
+`;
+
+export const GET_USER_ANALYTICS = gql`
+  query GetUserAnalytics {
+    getUserAnalytics {
+      totalMembers
+      verifiedMembers
+      verifiedPercent
+      activeMembers
+      activePercent
+      newMembersThisMonth
     }
   }
 `;

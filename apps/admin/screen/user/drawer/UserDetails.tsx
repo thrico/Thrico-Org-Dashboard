@@ -260,18 +260,18 @@ const UserDetails = ({
           <Descriptions column={1}>
             <Descriptions.Item label="Skills">
               <Space wrap>
-                {selectedUser?.user?.profile?.skills.map((skill, index) => (
+                {/* {selectedUser?.user?.profile?.skills.map((skill, index) => (
                   <Tag key={index} color="blue">
                     {skill}
                   </Tag>
-                ))}
+                ))} */}
               </Space>
             </Descriptions.Item>
             <Descriptions.Item label="Interests">
               <Space wrap>
-                {selectedUser?.user?.profile?.categories.map(
+                {/* {selectedUser?.user?.profile?.categories.map(
                   (interest, index) => <Tag key={index}>{interest}</Tag>
-                )}
+                )} */}
               </Space>
             </Descriptions.Item>
           </Descriptions>

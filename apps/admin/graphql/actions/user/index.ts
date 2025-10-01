@@ -4,6 +4,7 @@ import {
   CHANGE_USER_STATUS,
   CHANGE_USER_VERIFICATION,
   GET_ALL_USER,
+  GET_USER_ANALYTICS,
   GET_USER_DETIALS,
   UPDATE_MEMBERS_TERMS_AND_CONDITIONS,
 } from "../../quries/user";
@@ -106,3 +107,15 @@ export const changeUserVerification = (options: any) =>
 
 export const updateMemberTermsAndConditions = (options: any) =>
   useMutation(UPDATE_MEMBERS_TERMS_AND_CONDITIONS, {});
+
+export type getUserAnalytics = {
+  totalMembers: number;
+  verifiedMembers: number;
+  verifiedPercent: number;
+  activeMembers: number;
+  activePercent: number;
+  newMembersThisMonth: number;
+};
+
+export const uesGetUserAnalytics = (options?: any) =>
+  useQuery<{ getUserAnalytics: getUserAnalytics }>(GET_USER_ANALYTICS, options);

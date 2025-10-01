@@ -6,7 +6,7 @@ on:
       - prod # Trigger on push to the prod branch
   pull_request:
     branches:
-      - pord # Trigger on PR creation against main branch
+      - prod # Trigger on PR creation against main branch
 
 jobs:
   build-and-test:

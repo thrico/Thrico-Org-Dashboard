@@ -5,7 +5,10 @@ import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
 import LogoutModal from "@thrico/ui/Logout";
-import { items } from "./MenuItems";
+import { extendedItems, main, profile, settings } from "./MenuItems";
+import { checkEntitySubscription, getEntity } from "../../../graphql/actions";
+import Logo from "@thrico/ui/Logo";
+import Visit from "../Visit";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -13,6 +16,18 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
+  const normalizeKey = (name: string) =>
+    name.toLowerCase().replace(/\s+/g, "-");
+
+  const getEnabledModuleKeys = (modules: any[]) => {
+    return modules.map((mod: any) => normalizeKey(mod.name));
+  };
+
+  const getFilteredExtendedItems = (modules: any[]) => {
+    const keys = getEnabledModuleKeys(modules);
+    return extendedItems.filter((item) => keys.includes(item.key));
+  };
+  const { data } = checkEntitySubscription();
   const [open, setOpen] = useState(false);
   const handleOk = () => {
     setOpen(false);
@@ -23,6 +38,12 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
   };
 
   const pathName = usePathname();
+
+  const moduleList = data?.checkEntitySubscription?.modules ?? [];
+  const filteredExtendedItems = getFilteredExtendedItems(moduleList);
+  const finalMenuItems = [...main, ...filteredExtendedItems, ...settings];
+  const { data: entity, loading } = getEntity();
+
   return (
     <>
       <Sider
@@ -30,8 +51,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
         theme="light"
         style={{
           overflow: "auto",
-          height: "100vh",
+
           position: "fixed",
+          height: "100%",
           left: 0,
           top: 0,
           bottom: 0,
@@ -43,23 +65,32 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
         <div
           style={{
             position: "absolute",
-            top: 20,
+            top: 2,
             width: "100%",
-
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: 10,
           }}
         >
-          <Button
-            icon={
-              collapsed ? (
-                <MenuUnfoldOutlined size={40} />
-              ) : (
-                <MenuFoldOutlined size={40} />
-              )
-            }
+          <div
+            style={{ cursor: "pointer" }}
             onClick={() => setCollapsed(!collapsed)}
-          />
+          >
+            <Logo
+              name={entity?.getEntity?.name}
+              logo={entity?.getEntity?.logo}
+            />
+          </div>
+          {!collapsed && (
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              {" "}
+              <MenuFoldOutlined />{" "}
+            </div>
+          )}
         </div>
         <Menu
           selectedKeys={[pathName]}
@@ -67,13 +98,31 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, setCollapsed }) => {
           mode="inline"
           theme="light"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={finalMenuItems}
         />
+
         <LogoutModal
           open={open}
           handleOk={handleOk}
           handleCancel={handleCancel}
         />
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            width: "100%",
+          }}
+        >
+          <Menu
+            selectedKeys={[pathName]}
+            style={{ marginTop: "5rem" }}
+            mode="vertical"
+            theme="light"
+            defaultSelectedKeys={["4"]}
+            items={profile}
+          />
+        </div>
       </Sider>
     </>
   );

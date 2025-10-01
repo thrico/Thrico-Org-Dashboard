@@ -20,10 +20,11 @@ import {
 } from "@ant-design/icons";
 
 import Sider from "antd/es/layout/Sider";
-import { Button, Layout, Menu, MenuProps } from "antd";
+import { Button, Drawer, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { FaFont } from "react-icons/fa";
 import { MdOutlineViewModule } from "react-icons/md";
+
 function SettingsLayout({ children }: { children: React.ReactNode }) {
   const menuItems = [
     { key: "/settings", icon: <HomeOutlined />, label: "General" },
@@ -68,7 +69,7 @@ function SettingsLayout({ children }: { children: React.ReactNode }) {
 
   const [collapsed, setCollapsed] = useState(true);
   return (
-    <Layout style={{ minHeight: "100vh", width: "100%" }}>
+    <Layout style={{ height: "100%", width: "100%" }}>
       <Sider
         style={{ position: "sticky", top: 10 }}
         theme="light"

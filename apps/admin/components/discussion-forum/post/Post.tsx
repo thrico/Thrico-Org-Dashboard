@@ -44,6 +44,7 @@ export default function Post() {
   });
   const onCompleted = () => {
     onClose();
+    form.resetFields();
   };
   const [add, { loading: loadBtn }] = addDiscussionForum({
     onCompleted,

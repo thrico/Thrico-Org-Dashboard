@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Redirect } from "../redirect/Redirect";
 import { getGetUser } from "../graphql/actions";
+import AppLoading from "../components/loading/Loading";
 
 export default (WrappedComponent: any, options = { ssr: false }) => {
   function WithAuth(props: any) {
@@ -17,7 +18,7 @@ export default (WrappedComponent: any, options = { ssr: false }) => {
     const { data: { getUser } = {}, loading, error } = getGetUser();
 
     if (loading) {
-      return <></>;
+      return <AppLoading />;
     }
     if (!loading && (!getUser || error) && typeof window !== "undefined") {
       localStorage.removeItem("key");

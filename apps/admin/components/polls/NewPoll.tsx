@@ -4,19 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpOutlined,
-  CopyOutlined,
   DeleteOutlined,
-  EyeOutlined,
-  MinusCircleOutlined,
   PlusOutlined,
   SaveOutlined,
-  ShareAltOutlined,
 } from "@ant-design/icons";
 import {
   Button,
   Card,
   DatePicker,
-  Divider,
   Drawer,
   Form,
   Input,
@@ -30,8 +25,8 @@ import {
 } from "antd";
 import { addPoll } from "../../graphql/actions/polls";
 
-const { Header, Content } = Layout;
-const { Title, Text, Paragraph } = Typography;
+const { Content } = Layout;
+const { Title } = Typography;
 const { TabPane } = Tabs;
 
 export default function NewPoll() {

@@ -91,6 +91,7 @@ const LoginForm = () => {
         label="Password"
         rules={[
           {
+            min: 6,
             required: true,
             message: "Please input your password!",
           },

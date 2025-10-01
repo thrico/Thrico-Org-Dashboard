@@ -13,10 +13,8 @@ import { Header } from "antd/es/layout/layout";
 import React from "react";
 import Logo from "@thrico/ui/Logo";
 import { getEntity, getGetUser } from "../../graphql/actions";
-import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
+import { SettingOutlined } from "@ant-design/icons";
 
-import GlobalSearch from "./Search";
-import MenuNavigation from "./MenuPop";
 import Visit from "./Visit";
 export const Navbar = () => {
   const {
@@ -66,12 +64,12 @@ export const Navbar = () => {
           <Logo name={data?.getEntity?.name} logo={data?.getEntity?.logo} />
           <Divider type="vertical" />
 
-          <Flex gap={20} style={{ width: "70%" }}>
+          {/* <Flex gap={20} style={{ width: "70%" }}>
             <Popover content={<MenuNavigation />} title="Title" trigger="click">
               <Button icon={<AppstoreOutlined />}>Modules</Button>
             </Popover>
             <GlobalSearch />
-          </Flex>
+          </Flex> */}
         </Flex>
         <div style={{ margin: 20 }}>
           <Visit />
