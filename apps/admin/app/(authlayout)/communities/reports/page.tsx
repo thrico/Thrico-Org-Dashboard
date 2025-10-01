@@ -9,15 +9,15 @@
 // export default page;
 
 // import React, { useState } from "react";
-import { DndContext, closestCenter } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { List, Card } from "antd";
+// import { DndContext, closestCenter } from "@dnd-kit/core";
+// import {
+//   arrayMove,
+//   SortableContext,
+//   useSortable,
+//   verticalListSortingStrategy,
+// } from "@dnd-kit/sortable";
+// import { CSS } from "@dnd-kit/utilities";
+// import { List, Card } from "antd";
 
 // const DraggableItem = ({ id, item }) => {
 //   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -67,3 +67,11 @@ import { List, Card } from "antd";
 // };
 
 // export default DndAntdList;
+
+import React from "react";
+
+const page = () => {
+  return <div>page</div>;
+};
+
+export default page;
