@@ -55,7 +55,7 @@ interface Profile {
   id: string;
   country: string;
   language: string;
-  DOB: string;
+
   userId: string;
   experience: Experience[];
   education: Education[];

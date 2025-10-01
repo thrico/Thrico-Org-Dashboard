@@ -39,7 +39,7 @@ const details = `
             phoneNumber
           }
           timeZone
-          DOB
+          
           gender
 
           headline
@@ -140,7 +140,7 @@ export const GET_USER_DETIALS = gql`
             phoneNumber
           }
           timeZone
-          DOB
+
           gender
           pronouns
           headline
