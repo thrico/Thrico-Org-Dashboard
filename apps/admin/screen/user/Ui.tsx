@@ -79,7 +79,7 @@ export default function UsersPage({ users }: { users: userStatus[] }) {
       dataIndex: "location",
       key: "location",
       render: (_, record) => (
-        <Text type="secondary">{record?.user?.location.address}</Text>
+        <Text type="secondary">{record?.user?.location?.name}</Text>
       ),
     },
     {
