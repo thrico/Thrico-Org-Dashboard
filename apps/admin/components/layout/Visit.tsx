@@ -21,7 +21,7 @@ const Visit = () => {
                 target="_blank"
                 href={`https://${data?.getThricoDomain?.domain}.${NEXT_PUBLIC_SITE_URL}`}
               >
-                http://{data?.getThricoDomain?.domain}.{NEXT_PUBLIC_SITE_URL}
+                https://{data?.getThricoDomain?.domain}.{NEXT_PUBLIC_SITE_URL}
               </a>
             ),
 
