@@ -328,7 +328,7 @@ export const profile = [
       {
         key: "logout",
         icon: <LogoutOutlined />,
-        label: menuLink("/announcements", "Announcements & Highlights"),
+        label: menuLink("/logout", "logout"),
       },
     ],
   },

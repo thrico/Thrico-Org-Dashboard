@@ -31,7 +31,7 @@ function SettingsLayout({ children }: { children: React.ReactNode }) {
     {
       key: "/settings/appearance",
       icon: <CustomerServiceTwoTone />,
-      label: "appearance",
+      label: "Appearance",
     },
     { key: "/settings/domains", icon: <LinkOutlined />, label: "Domains" },
     { key: "/settings/font", icon: <FaFont />, label: "Fonts" },
