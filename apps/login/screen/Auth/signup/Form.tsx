@@ -4,14 +4,14 @@ import { registerAsAdmin } from "../../../components/graphql/actions";
 import toast from "react-hot-toast";
 import { Redirect } from "../../../components/Redirect/Redirect";
 import { useRouter } from "next/navigation";
-const tempEmailDomains = [
-  "mailinator.com",
-  "duck.com",
-  "gmail.com",
-  "outlook.com",
-  "yahoo.com",
-  // add more temp email domains here
-];
+// const tempEmailDomains = [
+//   "mailinator.com",
+//   "duck.com",
+//   "gmail.com",
+//   "outlook.com",
+//   "yahoo.com",
+//   // add more temp email domains here
+// ];
 const LoginForm = () => {
   const router = useRouter();
   const [register, { data, loading }] = registerAsAdmin({
@@ -57,8 +57,7 @@ const LoginForm = () => {
             validator(_, value) {
               const email = getFieldValue("email").split("@")[1];
 
-              const check = tempEmailDomains.includes(email.toLowerCase());
-              if (!value || !check) {
+              if (!value) {
                 return Promise.resolve();
               }
               return Promise.reject(

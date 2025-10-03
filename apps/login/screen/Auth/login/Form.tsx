@@ -4,14 +4,6 @@ import { useRouter } from "next/navigation";
 import { loginAsAdmin } from "../../../components/graphql/actions";
 import toast from "react-hot-toast";
 import { Redirect } from "../../../components/Redirect/Redirect";
-const tempEmailDomains = [
-  "mailinator.com",
-  "duck.com",
-  "gmail.com",
-  "outlook.com",
-  "yahoo.com",
-  // add more temp email domains here
-];
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
@@ -70,8 +62,7 @@ const LoginForm = () => {
             validator(_, value) {
               const email = getFieldValue("email").split("@")[1];
 
-              const check = tempEmailDomains.includes(email);
-              if (!value || !check) {
+              if (!value) {
                 return Promise.resolve();
               }
               return Promise.reject(
