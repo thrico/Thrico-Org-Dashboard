@@ -67,6 +67,9 @@ const Entity = ({
           {
             title: "Professional",
           },
+          {
+            title: "other",
+          },
         ];
   const industry =
     data?.getIndustryType.length > 0
@@ -90,6 +93,9 @@ const Entity = ({
           },
           {
             title: "Telecommunications",
+          },
+          {
+            title: "other",
           },
         ];
 
