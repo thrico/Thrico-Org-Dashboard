@@ -19,7 +19,7 @@ const Visit = () => {
             label: (
               <a
                 target="_blank"
-                href={`http://${data?.getThricoDomain?.domain}.${NEXT_PUBLIC_SITE_URL}`}
+                href={`https://${data?.getThricoDomain?.domain}.${NEXT_PUBLIC_SITE_URL}`}
               >
                 http://{data?.getThricoDomain?.domain}.{NEXT_PUBLIC_SITE_URL}
               </a>
