@@ -28,7 +28,7 @@ export const AddDomain = ({}) => {
   };
 
   const plainDomainRegex =
-    /^(?!https?:\/\/)(?!www\.)[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
+    /^(?!https?:\/\/)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})+$/;
 
   const [add, { loading, data }]: [
     (options: { variables: { input: { domain: string } } }) => void,
@@ -92,11 +92,11 @@ export const AddDomain = ({}) => {
                 {
                   pattern: plainDomainRegex,
                   message:
-                    "Enter a domain like example.com without https:// or www.",
+                    "Enter a domain like example.com or subdomain like api.example.com without https://",
                 },
               ]}
             >
-              <Input placeholder="example.com" />
+              <Input placeholder="example.com or api.example.com" />
             </Form.Item>
           </div>
         </Modal>
