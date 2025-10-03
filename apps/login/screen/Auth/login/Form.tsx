@@ -58,20 +58,6 @@ const LoginForm = () => {
             type: "email",
             message: "The input is not valid E-mail!",
           },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              const email = getFieldValue("email").split("@")[1];
-
-              if (!value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error(
-                  "Kindly provide your official email address; avoid using email services such as Gmail, Outlook, or Yahoo."
-                )
-              );
-            },
-          }),
         ]}
         hasFeedback
       >
