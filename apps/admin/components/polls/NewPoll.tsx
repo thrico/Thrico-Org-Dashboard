@@ -267,14 +267,6 @@ export default function NewPoll() {
                       size="large"
                       style={{ width: "100%" }}
                     >
-                      <Form.Item
-                        label="End Date (Optional)"
-                        extra="Set an end date for your poll"
-                        name="lastDate"
-                      >
-                        <DatePicker style={{ width: "100%" }} />
-                      </Form.Item>
-
                       <Form.Item label="Results Visibility">
                         <Select
                           style={{ width: "100%" }}
