@@ -41,12 +41,6 @@ const MenuItemsLayout = ({
     ...items,
 
     {
-      key: "customization",
-      label: "Customization",
-      icon: <EditOutlined />,
-    },
-
-    {
       key: "reports",
       label: "Reports",
       icon: <WarningOutlined />,
