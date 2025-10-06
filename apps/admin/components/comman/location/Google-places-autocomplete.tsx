@@ -5,21 +5,10 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { Input } from "antd";
 import type { InputRef } from "antd";
 
-// Declare google types
+// Declare Google Maps types
 declare global {
   interface Window {
-    google: typeof google;
-  }
-  namespace google {
-    namespace maps {
-      namespace places {
-        class Autocomplete {
-          constructor(inputField: HTMLInputElement, opts?: any);
-          getPlace(): any;
-          addListener(event: string, handler: () => void): void;
-        }
-      }
-    }
+    google: any;
   }
 }
 
@@ -33,14 +22,16 @@ export interface Location {
 interface GooglePlacesInputProps {
   onChange: (location: Location) => void;
   initialValue?: Location | null;
+  placeholder?: string;
 }
 
 export default function GooglePlacesInput({
   onChange,
   initialValue,
+  placeholder = "Enter a location",
 }: GooglePlacesInputProps) {
   const inputRef = useRef<InputRef>(null);
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  const autocompleteRef = useRef<any>(null);
   const [value, setValue] = useState(initialValue?.name || "");
 
   useEffect(() => {
@@ -49,44 +40,72 @@ export default function GooglePlacesInput({
 
   useEffect(() => {
     const loadGoogleMaps = async () => {
-      const loader = new Loader({
-        apiKey: "AIzaSyCJ2V6iHaVtyMC0zl0cBF6mktw3sdJblX4", // Replace with your key
-        version: "weekly",
-        libraries: ["places"],
-      });
+      try {
+        const loader = new Loader({
+          apiKey:
+            process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
+            "AIzaSyCJ2V6iHaVtyMC0zl0cBF6mktw3sdJblX4",
+          version: "weekly",
+          libraries: ["places"],
+        });
 
-      await loader.load();
+        await loader.load();
 
-      if (!inputRef.current?.input) return;
-
-      const autocomplete = new google.maps.places.Autocomplete(
-        inputRef.current.input,
-        {
-          fields: ["name", "formatted_address", "geometry"],
-          types: ["geocode"],
+        if (!inputRef.current?.input) {
+          console.warn("Input ref not available");
+          return;
         }
-      );
 
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
+        // Destroy existing autocomplete instance if it exists
+        if (autocompleteRef.current && window.google?.maps?.event) {
+          window.google.maps.event.clearInstanceListeners(
+            autocompleteRef.current
+          );
+        }
 
-        if (!place.geometry || !place.geometry.location) return;
+        const autocomplete = new window.google.maps.places.Autocomplete(
+          inputRef.current.input,
+          {
+            fields: ["name", "formatted_address", "geometry", "place_id"],
+            types: ["geocode"],
+          }
+        );
 
-        const location: Location = {
-          name: place.name || place.formatted_address || "",
-          latitude: place.geometry.location.lat(),
-          longitude: place.geometry.location.lng(),
-          address: place.formatted_address || "",
-        };
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
 
-        setValue(`${location.name}, ${location.address}`); // update visible value in input
-        onChange(location);
-      });
+          if (!place.geometry?.location) {
+            console.warn("No geometry data available for place");
+            return;
+          }
 
-      autocompleteRef.current = autocomplete;
+          const location: Location = {
+            name: place.name || place.formatted_address || "",
+            latitude: place.geometry.location.lat(),
+            longitude: place.geometry.location.lng(),
+            address: place.formatted_address || "",
+          };
+
+          setValue(place.formatted_address || place.name || "");
+          onChange(location);
+        });
+
+        autocompleteRef.current = autocomplete;
+      } catch (error) {
+        console.error("Error loading Google Maps:", error);
+      }
     };
 
     loadGoogleMaps();
+
+    // Cleanup function
+    return () => {
+      if (autocompleteRef.current && window.google?.maps?.event) {
+        window.google.maps.event.clearInstanceListeners(
+          autocompleteRef.current
+        );
+      }
+    };
   }, [onChange]);
 
   return (
@@ -95,7 +114,7 @@ export default function GooglePlacesInput({
       ref={inputRef}
       value={value}
       onChange={(e) => setValue(e.target.value)} // allow typing
-      placeholder="Enter a location"
+      placeholder={placeholder}
       className="w-full px-4 py-2 border rounded shadow"
     />
   );

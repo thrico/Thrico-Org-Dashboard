@@ -13,6 +13,7 @@ import {
   Typography,
   Upload,
   UploadProps,
+  Radio,
 } from "antd";
 import { Option } from "antd/es/mentions";
 import {
@@ -44,6 +45,9 @@ function PageDetails({
   const tagline = Form.useWatch("tagline", form);
   const logo = Form.useWatch("logo", form);
   const location = Form.useWatch("location", form);
+  const [locationInputType, setLocationInputType] = useState<
+    "google" | "manual"
+  >("google");
   const beforeUpload = (file: FileType) => {
     const isJpgOrPng =
       file.type === "image/jpeg" ||
@@ -137,17 +141,6 @@ function PageDetails({
               Learn more about the Page Public URL
             </a>
           </div>
-
-          <Form.Item
-            name="location"
-            rules={[{ required: true, message: "Please enter Location" }]}
-            label="Location"
-          >
-            <GooglePlacesInput
-              placeholder="Add your organization's location"
-              onChange={(value) => form.setFieldsValue({ location: value })}
-            />
-          </Form.Item>
 
           <Form.Item label="Website" name="website">
             <Input placeholder="Begin with http://, https:// or www." />

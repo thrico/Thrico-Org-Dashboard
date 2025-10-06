@@ -101,6 +101,9 @@ export default function PageForm({ onCompleted, value }: PageFormProps) {
       variables: {
         input: {
           ...restFormData,
+          location: {
+            name: "India",
+          },
           logo: logo.file ?? undefined,
           pageType: pageType ?? undefined,
         },
