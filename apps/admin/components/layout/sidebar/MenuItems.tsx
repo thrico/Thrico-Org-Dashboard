@@ -81,6 +81,25 @@ export const settings = [
         ],
       },
       {
+        key: "feedback",
+        label: menuLink("#", "Polls & Surveys"),
+        icon: <LiaPollSolid size={18} />,
+        children: [
+          {
+            key: "feedback-surveys",
+            label: menuLink("/forms/feedback", "Surveys"),
+          },
+          {
+            key: "feedback-polls",
+            label: menuLink("/forms/polls", "Polls"),
+          },
+          {
+            key: "feedback-settings",
+            label: menuLink("/feedback/settings", "Settings"),
+          },
+        ],
+      },
+      {
         key: "cms",
         label: menuLink("/website-pages", "Manage Website"),
         icon: <UnorderedListOutlined />,
