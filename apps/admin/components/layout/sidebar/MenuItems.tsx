@@ -68,11 +68,7 @@ export const settings = [
             type: "group",
             label: menuLink("/discussion-forum/", "View Forum"),
           },
-          {
-            key: "forum-customization",
-            type: "group",
-            label: menuLink("/discussion-forum/customization", "Customization"),
-          },
+
           {
             key: "forum-settings",
             type: "group",
@@ -155,11 +151,7 @@ export const extendedItems = [
         type: "group",
         label: menuLink("/listing/", "Manage Approvals"),
       },
-      {
-        key: "listing-customization",
-        type: "group",
-        label: menuLink("/listing/customization", "Customization"),
-      },
+
       {
         key: "listing-settings",
         type: "group",
@@ -177,11 +169,7 @@ export const extendedItems = [
         type: "group",
         label: menuLink("/mentorship/", "Manage Approvals"),
       },
-      {
-        key: "mentorship-customization",
-        type: "group",
-        label: menuLink("/mentorship/customization", "Customization"),
-      },
+
       {
         key: "mentorship-settings",
         type: "group",
@@ -204,11 +192,7 @@ export const extendedItems = [
         type: "group",
         label: menuLink("/jobs/", "Manage Approvals"),
       },
-      {
-        key: "job-customization",
-        type: "group",
-        label: menuLink("/jobs/customization", "Customization"),
-      },
+
       {
         key: "job-settings",
         type: "group",
@@ -226,11 +210,7 @@ export const extendedItems = [
         type: "group",
         label: menuLink("/offers/", "View Offers"),
       },
-      {
-        key: "offers-customization",
-        type: "group",
-        label: menuLink("/offers/customization", "Customization"),
-      },
+
       {
         key: "offers-settings",
         type: "group",
@@ -249,11 +229,7 @@ export const extendedItems = [
         type: "group",
         label: menuLink("/career-centre/", "View Career Centre"),
       },
-      {
-        key: "career-centre-customization",
-        type: "group",
-        label: menuLink("/career-centre/customization", "Customization"),
-      },
+
       {
         key: "career-centre-settings",
         type: "group",
