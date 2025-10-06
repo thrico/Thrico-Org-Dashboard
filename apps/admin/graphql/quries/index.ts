@@ -157,3 +157,27 @@ export const GET_CURRENCY = gql`
     getEntityCurrency
   }
 `;
+
+export const UPLOAD_ENTITY_LOGO = gql`
+  mutation UploadEntityLogo($file: Upload!) {
+    uploadEntityLogo(file: $file) {
+      id
+      name
+      logo
+      success
+      message
+    }
+  }
+`;
+
+export const UPDATE_ENTITY_PROFILE = gql`
+  mutation UpdateEntityProfile($input: UpdateEntityInput!) {
+    updateEntityProfile(input: $input) {
+      id
+      name
+      logo
+      success
+      message
+    }
+  }
+`;

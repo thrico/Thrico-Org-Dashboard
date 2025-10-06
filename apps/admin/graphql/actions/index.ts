@@ -11,6 +11,8 @@ import {
   GET_USER,
   REGISTER_ORGANIZATION,
   UPDATE_ENTITY_SETTINGS,
+  UPLOAD_ENTITY_LOGO,
+  UPDATE_ENTITY_PROFILE,
 } from "../quries";
 import { GET_MEMBERS_TERMS_AND_CONDITIONS } from "../quries/user";
 
@@ -118,3 +120,25 @@ export interface CheckEntitySubscriptionQuery {
 }
 
 export const getEntityCurrency = () => useQuery(GET_CURRENCY);
+
+export const uploadEntityLogo = (options: any) =>
+  useMutation(UPLOAD_ENTITY_LOGO, {
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_ORGANIZATION,
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+export const updateEntityProfile = (options: any) =>
+  useMutation(UPDATE_ENTITY_PROFILE, {
+    ...options,
+    refetchQueries: [
+      {
+        query: GET_ORGANIZATION,
+      },
+    ],
+    awaitRefetchQueries: true,
+  });

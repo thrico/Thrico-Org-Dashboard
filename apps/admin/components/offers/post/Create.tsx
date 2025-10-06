@@ -78,9 +78,13 @@ export default function CreateOffer({
       });
     }
   };
+
+  console.log("initialValues", initialValues);
   const { RangePicker } = DatePicker;
   const [imageUrl, setImageUrl] = useState<string | null>(
-    `https://cdn.thrico.network/${initialValues?.cover}` || null
+    initialValues
+      ? `https://cdn.thrico.network/${initialValues?.cover}`
+      : "https://cdn.thrico.network/defaultEventCover.png"
   );
   const [cropModalVisible, setCropModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -144,11 +148,8 @@ export default function CreateOffer({
                   }}
                 >
                   <Image
-                    src={
-                      imageUrl ||
-                      "https://cdn.thrico.network/defaultEventCover.png"
-                    }
-                    alt="Community cover"
+                    src={imageUrl}
+                    alt="Offer cover"
                     width={650}
                     height={200}
                     style={{

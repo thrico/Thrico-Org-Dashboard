@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import type { EntityTheme } from "../../../store/ts-types";
 import { editEntityTheme } from "../../../graphql/actions/theme";
 import { useThemeStore } from "../../../store/themeStore";
+import { ThemePreview } from "./components";
 
 const Settings = ({ theme }: { theme: EntityTheme | null }) => {
   useEffect(() => {
@@ -106,8 +107,10 @@ const Settings = ({ theme }: { theme: EntityTheme | null }) => {
 
   console.log(formSettings);
   const { Title, Text } = Typography;
+
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <ThemePreview theme={formSettings} />
       <Card
         title="Form Appearance"
         extra={

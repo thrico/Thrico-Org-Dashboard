@@ -20,7 +20,7 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import Link from "next/link";
 
 import { LiaPollSolid } from "react-icons/lia";
-import { Gamepad2, User, Wallpaper } from "lucide-react";
+import { FormInput, Gamepad2, User, Wallpaper } from "lucide-react";
 
 const menuLink = (href: string, text: string) => (
   <Link href={href}>
@@ -58,6 +58,28 @@ export const settings = [
     label: "Management",
     type: "group",
     children: [
+      {
+        key: "discussion-forum",
+        label: menuLink("/discussion-forum", "Discussion Forum"),
+        icon: <FormInput />,
+        children: [
+          {
+            key: "forum-view",
+            type: "group",
+            label: menuLink("/discussion-forum/", "View Forum"),
+          },
+          {
+            key: "forum-customization",
+            type: "group",
+            label: menuLink("/discussion-forum/customization", "Customization"),
+          },
+          {
+            key: "forum-settings",
+            type: "group",
+            label: menuLink("/discussion-forum/settings", "Setting"),
+          },
+        ],
+      },
       {
         key: "cms",
         label: menuLink("/website-pages", "Manage Website"),
@@ -197,6 +219,7 @@ export const extendedItems = [
       },
     ],
   },
+
   {
     key: "career-centre",
     label: menuLink("/career-centre", "Career Centre"),
@@ -238,6 +261,7 @@ export const extendedItems = [
 
 import React from "react";
 import { getGetUser } from "../../../graphql/actions";
+import { CgGitCommit } from "react-icons/cg";
 
 export const UserDetails = () => {
   const { data: { getUser } = {}, error } = getGetUser();
