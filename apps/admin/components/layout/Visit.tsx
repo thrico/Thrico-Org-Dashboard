@@ -142,7 +142,7 @@ const Visit = () => {
     >
       <Tooltip title="Visit your website">
         <Button
-          type="primary"
+          type="text"
           icon={<LinkOutlined />}
           className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 border-none hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-200"
         >

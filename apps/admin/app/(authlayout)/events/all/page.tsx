@@ -13,8 +13,20 @@ import {
 
 import Stats from "../../../../components/jobs/Stats";
 import Create from "../../../../components/events/create/Create";
+import AllEvents from "../../../../components/events/all-events";
+import { useAllEvents, EventStatus } from "../../../../graphql/actions/events";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
+  const {
+    data: eventsData,
+    loading,
+    error,
+  } = useAllEvents({
+    variables: {
+      input: {},
+    },
+  });
+
   const items: TabsProps["items"] = [
     {
       key: "all",
@@ -45,15 +57,11 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     },
   ];
   const router = useRouter();
-  const onChange = (key: string) => {
-    if (key === "all") router.push(`/jobs/all`);
-    else router.push(`/jobs/all/${key}`);
-  };
+  const onChange = (key: string) => {};
   const pathname = usePathname();
-  const activeTab = pathname.replace("/jobs/all", "");
+  const activeTab = pathname.replace("/events/all", "");
   return (
     <>
-      <Stats />
       <Card extra="">
         <Tabs
           tabBarExtraContent={<Create />}
@@ -61,7 +69,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
           items={items}
           onChange={onChange}
         />
-        {children}
+        <AllEvents data={eventsData?.getAllEvents} loading={loading} />
       </Card>
     </>
   );

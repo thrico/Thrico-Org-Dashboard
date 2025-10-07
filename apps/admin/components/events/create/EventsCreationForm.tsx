@@ -32,7 +32,7 @@ import type { UploadProps } from "antd";
 
 import GooglePlacesInput from "../../comman/location/Google-places-autocomplete";
 import { ImageCropper } from "../../communities/add/image-cropper";
-// import { CommunityPreview } from "./community-preview";
+import { EventPreview } from "./EventPreview";
 
 const { TextArea } = Input;
 const { Title, Text, Paragraph } = Typography;
@@ -58,13 +58,14 @@ const categories = [
   "Industrial Goods",
   "Agriculture",
 ];
-interface ListingCreationFormProps {
+interface EventsCreationFormProps {
   initialValues?: Record<string, any>;
   loading?: boolean;
   onFinish: (values: any) => void;
   form: any;
   cover: any;
   setCover: (cover: any) => void;
+  showPreview?: boolean;
 }
 
 export function EventsCreationForm({
@@ -74,7 +75,8 @@ export function EventsCreationForm({
   form,
   cover,
   setCover,
-}: ListingCreationFormProps) {
+  showPreview = true,
+}: EventsCreationFormProps) {
   const formData = form?.getFieldsValue();
   const values = Form.useWatch([], form);
   const { TextArea } = Input;
@@ -109,66 +111,70 @@ export function EventsCreationForm({
   };
   return (
     <>
-      <Row gutter={24}>
-        <Card style={{ marginBottom: 24 }}>
-          <Space direction="vertical" size="large" style={{ width: "100%" }}>
-            {/* Cover Image Section */}
-            <div>
-              <div style={{ position: "relative", marginBottom: 0 }}>
-                <div
-                  style={{
-                    aspectRatio: "3/1",
-                    overflow: "hidden",
-                    borderRadius: 8,
-                    backgroundColor: "#f5f5f5",
-                    border: "2px dashed #d9d9d9",
-                  }}
-                >
-                  <Image
-                    src={
-                      imageUrl ||
-                      "https://cdn.thrico.network/defaultEventCover.png"
-                    }
-                    alt="Community cover"
-                    width={650}
-                    height={200}
+      <Row gutter={16}>
+        <Col span={showPreview ? 15 : 24}>
+          <Card style={{ marginBottom: 24 }}>
+            <Space direction="vertical" size="large" style={{ width: "100%" }}>
+              {/* Cover Image Section */}
+              <div>
+                <div style={{ position: "relative", marginBottom: 0 }}>
+                  <div
                     style={{
-                      objectFit: "cover",
+                      overflow: "hidden",
+                      borderRadius: 8,
+                      backgroundColor: "#f5f5f5",
+                      border: "2px dashed #d9d9d9",
                       width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                </div>
-                <Upload {...uploadProps}>
-                  <Button
-                    icon={<CameraOutlined />}
-                    style={{
-                      position: "absolute",
-                      bottom: 27,
-                      right: 16,
+                      height: 200,
                     }}
                   >
-                    Update Cover
-                  </Button>
-                </Upload>
+                    <Image
+                      src={
+                        imageUrl ||
+                        "https://cdn.thrico.network/defaultEventCover.png"
+                      }
+                      alt="Community cover"
+                      fill
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </div>
+                  <Upload {...uploadProps}>
+                    <Button
+                      icon={<CameraOutlined />}
+                      style={{
+                        position: "absolute",
+                        bottom: 27,
+                        right: 16,
+                      }}
+                    >
+                      Update Cover
+                    </Button>
+                  </Upload>
+                </div>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Recommended size: 1200 x 400px. Max file size: 5MB. Click to
+                  crop after upload.
+                </Text>
               </div>
-              <Text type="secondary" style={{ fontSize: 12 }}>
-                Recommended size: 1200 x 400px. Max file size: 5MB. Click to
-                crop after upload.
-              </Text>
-            </div>
-          </Space>
-        </Card>
-        <Col span={14}>
+            </Space>
+          </Card>
           <Form
             onFinish={onFinish}
             form={form}
             layout="vertical"
             initialValues={{
-              requirements: [""],
-              responsibilities: [""],
-              benefits: [""],
-              skills: [""],
+              title: "",
+              location: { name: "" },
+              description: "",
+              startDate: "",
+              endDate: "",
+              startTime: "",
+              type: "IN_PERSON",
+              lastDateOfRegistration: "",
               ...initialValues,
             }}
           >
@@ -177,9 +183,9 @@ export function EventsCreationForm({
                 <Col span={12}>
                   <Form.Item
                     name="title"
-                    label="Title"
+                    label="Event Title"
                     rules={[
-                      { required: true, message: "Please enter job title" },
+                      { required: true, message: "Please enter event title" },
                     ]}
                   >
                     <Input placeholder="Enter event title" />
@@ -188,9 +194,9 @@ export function EventsCreationForm({
                 <Col span={12}>
                   <Form.Item
                     name="location"
-                    label="location"
+                    label="Location"
                     rules={[
-                      { required: true, message: "Please enter Location" },
+                      { required: true, message: "Please enter location" },
                     ]}
                   >
                     <GooglePlacesInput
@@ -204,44 +210,52 @@ export function EventsCreationForm({
 
               <Form.Item
                 name="description"
-                label="Description"
-                rules={[{ required: true, message: "Please enter  title" }]}
+                label="Event Description"
+                rules={[
+                  { required: true, message: "Please enter event description" },
+                ]}
               >
                 <TextArea
                   rows={4}
-                  placeholder="Describe the role, company culture, and what makes this opportunity exciting..."
+                  placeholder="Describe the event, what attendees can expect, and what makes it exciting..."
                 />
               </Form.Item>
 
               <Row gutter={16}>
-                <Col span={12}>
+                <Col span={8}>
                   <Form.Item
-                    name="date"
-                    label="Event Date"
+                    name="startDate"
+                    label="Start Date"
                     rules={[
-                      { required: true, message: "Please add Description" },
+                      { required: true, message: "Please select start date" },
                     ]}
-                    getValueProps={(value) => ({
-                      value: value,
-                      // This ensures the value is a dayjs object if needed
-                    })}
                   >
-                    <RangePicker
-                      showTime
+                    <DatePicker
                       format="DD MMMM YYYY"
-                      placeholder={["Start date", "End date"]}
+                      placeholder="Start date"
                     />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={8}>
+                  <Form.Item
+                    name="endDate"
+                    label="End Date"
+                    rules={[
+                      { required: true, message: "Please select end date" },
+                    ]}
+                  >
+                    <DatePicker format="DD MMMM YYYY" placeholder="End date" />
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
                   <Form.Item
                     name="startTime"
                     label="Start Time"
                     rules={[
-                      { required: true, message: "Please select Start Time" },
+                      { required: true, message: "Please select start time" },
                     ]}
                   >
-                    <TimePicker />
+                    <TimePicker format="HH:mm" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -249,36 +263,59 @@ export function EventsCreationForm({
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
-                    name="Type"
+                    name="type"
                     label="Event Type"
                     rules={[
-                      { required: true, message: "Please select Event Type" },
+                      { required: true, message: "Please select event type" },
                     ]}
                   >
                     <Select placeholder="Select event type">
-                      <Option value="PHYSICAL">Physical</Option>
-                      <Option value="HYBRID">Hybrid</Option>
+                      <Option value="IN_PERSON">In Person</Option>
                       <Option value="ONLINE">Online</Option>
+                      <Option value="HYBRID">Hybrid</Option>
                     </Select>
                   </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item
                     name="lastDateOfRegistration"
-                    label="Last Date Of Registration"
+                    label="Registration Deadline"
                     rules={[
                       {
                         required: true,
+                        message: "Please select registration deadline",
                       },
                     ]}
                   >
-                    <DatePicker />
+                    <DatePicker
+                      format="DD MMMM YYYY"
+                      placeholder="Registration deadline"
+                    />
                   </Form.Item>
                 </Col>
               </Row>
             </Card>
           </Form>
         </Col>
+        {showPreview && (
+          <Col span={9}>
+            <div style={{ position: "sticky", top: 24 }}>
+              <div style={{ marginBottom: 16 }}>
+                <Text strong style={{ fontSize: 16 }}>
+                  Event Preview
+                </Text>
+                <br />
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  See how your event will appear to attendees
+                </Text>
+              </div>
+              <EventPreview
+                eventData={values || {}}
+                coverImage={imageUrl || undefined}
+              />
+            </div>
+          </Col>
+        )}
       </Row>
 
       {selectedImage && (

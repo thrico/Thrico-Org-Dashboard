@@ -24,20 +24,22 @@ import { useRouter } from "next/navigation";
 
 import { CloseCircleTwoTone } from "@ant-design/icons";
 
-import { useAddJob } from "../../../graphql/actions/jobs";
+import { useAddEvent } from "../../../graphql/actions/events";
 import { EventsCreationForm } from "./EventsCreationForm";
 
 const Create = ({}) => {
   const [form] = Form.useForm();
   const router = useRouter();
 
-  const [add, { loading }] = useAddJob({
+  const [add, { loading }] = useAddEvent({
     onCompleted: (data) => {
       onClose();
+      window.location.reload();
     },
   });
 
   const [open, setOpen] = useState(false);
+  const [showPreview, setShowPreview] = useState(true);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -47,14 +49,30 @@ const Create = ({}) => {
   };
   const [cover, setCover] = useState<string>();
   const onCompleted = () => {
-    onClose();
-    form.resetFields();
+    // onClose();
+    // form.resetFields();
   };
 
   const onFinish = (values: any) => {
+    // Transform form values to match the event input structure
+    const eventInput = {
+      title: values.title,
+      location: values.location,
+      description: values.description,
+      startDate: values.startDate?.toISOString(),
+      endDate: values.endDate?.toISOString(),
+      startTime: values.startTime?.format("HH:mm"),
+      type: values.type,
+      lastDateOfRegistration: values.lastDateOfRegistration?.toISOString(),
+      coverImage: cover,
+      // You can replace this with actual entity logic
+    };
+
+    console.log("Creating event with data:", eventInput);
+
     add({
       variables: {
-        input: values,
+        input: eventInput,
       },
     });
   };
@@ -72,17 +90,20 @@ const Create = ({}) => {
         height={"100vh"}
         placement="bottom"
         style={{ height: "100vh" }}
-        title="Create Listing"
+        title="Create Event"
         onClose={onClose}
         open={open}
         extra={
           <Space>
+            <Button onClick={() => setShowPreview(!showPreview)} type="default">
+              {showPreview ? "Hide Preview" : "Show Preview"}
+            </Button>
             <Button
               onClick={() => form.submit()}
               type="primary"
               loading={loading}
             >
-              Creates
+              Create Event
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </Space>
@@ -95,6 +116,7 @@ const Create = ({}) => {
           onFinish={onFinish}
           cover={cover}
           setCover={setCover}
+          showPreview={showPreview}
         />
       </Drawer>
     </>
