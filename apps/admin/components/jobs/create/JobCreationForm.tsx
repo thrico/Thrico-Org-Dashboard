@@ -203,7 +203,16 @@ export function JobCreationForm({
                   </Form.Item>
                 </Col>
                 <Col span={8}>
-                  <Form.Item name="experienceLevel" label="Experience Level">
+                  <Form.Item
+                    name="experienceLevel"
+                    label="Experience Level"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please select experience level",
+                      },
+                    ]}
+                  >
                     <Select placeholder="Select experience level">
                       <Option value="ENTRY-LEVEL">Entry-Level</Option>
                       <Option value="MID-LEVEL">Mid-Level</Option>
