@@ -51,7 +51,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                     <NoSubscription status="pending" />
                   )}
 
-                  {data?.getEntity?.subscription?.status === "true" && (
+                  {data?.getEntity?.subscription?.status && (
                     <Content
                       style={{
                         minHeight: 280,
