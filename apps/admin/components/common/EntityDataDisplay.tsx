@@ -391,8 +391,7 @@ const EntityDataDisplay: React.FC = () => {
                 <Descriptions.Item label="Status">
                   <Tag
                     color={
-                      subscriptionData.checkEntitySubscription.status ===
-                      "active"
+                      subscriptionData.checkEntitySubscription
                         ? "green"
                         : "orange"
                     }
