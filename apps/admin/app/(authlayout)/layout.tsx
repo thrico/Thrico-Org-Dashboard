@@ -50,7 +50,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
                   {!data?.getEntity?.subscription?.status && (
                     <NoSubscription status="pending" />
                   )}
-                  <Button onClick={() => refetch()}>Refetch</Button>
+
                   {data?.getEntity?.subscription?.status && (
                     <Content
                       style={{
