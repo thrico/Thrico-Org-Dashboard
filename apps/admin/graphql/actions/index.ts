@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   CHANGE_THEME_COLOR,
   CHECK_DOMAIN,
@@ -113,6 +113,11 @@ export interface SubscriptionDetails {
     id: string;
     name: string;
     icon: string;
+    showInMobileNavigation: boolean;
+    showInMobileNavigationSortNumber?: number;
+    showInWebNavigation: boolean;
+    enabled: boolean;
+    isPopular: boolean;
   }[];
 }
 export interface CheckEntitySubscriptionQuery {
@@ -142,3 +147,40 @@ export const updateEntityProfile = (options: any) =>
     ],
     awaitRefetchQueries: true,
   });
+
+export interface InputUpdateEntityModule {
+  icon: string | null;
+  id: string | null;
+  name: string | null;
+  isEnabled: boolean;
+  showInMobileNavigation: boolean;
+  showInMobileNavigationSortNumber?: number;
+  showInWebNavigation: boolean;
+  isPopular: boolean;
+}
+
+export interface UpdateEntityModuleResponse {
+  updateEntityModule: {
+    success: boolean;
+  };
+}
+
+export const UPDATE_ENTITY_MODULE = gql`
+  mutation UpdateEntityModule($input: [inputUpdateEntityModule]) {
+    updateEntityModule(input: $input) {
+      success
+    }
+  }
+`;
+
+export function useUpdateEntityModule() {
+  return useMutation<
+    UpdateEntityModuleResponse,
+    { input: InputUpdateEntityModule[] }
+  >(UPDATE_ENTITY_MODULE);
+}
+// Action for GetAllEntityInvoice
+import { GET_ALL_ENTITY_INVOICE, GetAllEntityInvoiceResponse } from "../quries";
+
+export const useGetAllEntityInvoice = () =>
+  useQuery<GetAllEntityInvoiceResponse>(GET_ALL_ENTITY_INVOICE);

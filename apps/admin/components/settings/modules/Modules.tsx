@@ -8,7 +8,6 @@ import {
   Switch,
   Tag,
   Input,
-  Select,
   Button,
   Tabs,
   Tooltip,
@@ -16,352 +15,238 @@ import {
   Card,
   Space,
   Badge,
+  Spin,
+  notification,
+  Avatar,
 } from "antd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
+
 import {
   SearchOutlined,
   CheckOutlined,
   HomeOutlined,
   UserOutlined,
-  CalendarOutlined,
-  TeamOutlined,
-  AppstoreOutlined,
-  BankOutlined,
-  ShopOutlined,
 } from "@ant-design/icons";
 import type { TableProps } from "antd";
+import {
+  checkEntitySubscription,
+  InputUpdateEntityModule,
+} from "../../../graphql/actions";
+import { gql, useMutation } from "@apollo/client";
+import MobileNavigation from "./MobileNavigation";
 
+// TypeScript types for mutation
+
+interface UpdateEntityModuleResponse {
+  updateEntityModule: {
+    success: boolean;
+  };
+}
+
+const UPDATE_ENTITY_MODULE = gql`
+  mutation UpdateEntityModule($input: [inputUpdateEntityModule]) {
+    updateEntityModule(input: $input) {
+      success
+    }
+  }
+`;
+import * as LucideIcons from "lucide-react";
 // Sample data for modules
 const moduleData = [
   {
-    id: 1,
+    id: "1",
     name: "Directory",
     enabled: true,
     required: true,
     category: "Core",
-    showInNavigation: true,
+    showInMobileNavigation: true,
+    showInWebNavigation: true,
+    icon: null,
+    isPopular: false,
   },
   {
-    id: 2,
+    id: "2",
     name: "Communities",
     enabled: true,
     required: false,
     category: "Social",
-    showInNavigation: true,
+    showInMobileNavigation: true,
+    showInWebNavigation: true,
+    icon: null,
+    isPopular: true,
   },
-  {
-    id: 3,
-    name: "Events",
-    enabled: true,
-    required: false,
-    category: "Social",
-    showInNavigation: true,
-  },
-  {
-    id: 4,
-    name: "Jobs",
-    enabled: true,
-    required: false,
-    category: "Career",
-    showInNavigation: false,
-  },
-  {
-    id: 5,
-    name: "Marketplace",
-    enabled: true,
-    required: false,
-    category: "Commerce",
-    showInNavigation: false,
-  },
-  {
-    id: 6,
-    name: "Mentorship",
-    enabled: true,
-    required: false,
-    category: "Career",
-    showInNavigation: false,
-  },
-  {
-    id: 7,
-    name: "Stories",
-    enabled: true,
-    required: false,
-    category: "Social",
-    showInNavigation: false,
-  },
-  {
-    id: 8,
-    name: "Giving",
-    enabled: false,
-    required: false,
-    category: "Community",
-    showInNavigation: false,
-  },
-  {
-    id: 9,
-    name: "Projects",
-    enabled: true,
-    required: false,
-    category: "Collaboration",
-    showInNavigation: false,
-  },
-  {
-    id: 10,
-    name: "Wall of Fame",
-    enabled: false,
-    required: false,
-    category: "Recognition",
-    showInNavigation: false,
-  },
-  {
-    id: 11,
-    name: "Shop",
-    enabled: false,
-    required: false,
-    category: "Commerce",
-    showInNavigation: false,
-  },
-  {
-    id: 12,
-    name: "Unlock Rewards",
-    enabled: true,
-    required: false,
-    category: "Engagement",
-    showInNavigation: false,
-  },
-  {
-    id: 13,
-    name: "Offers",
-    enabled: false,
-    required: false,
-    category: "Commerce",
-    showInNavigation: false,
-  },
-  {
-    id: 14,
-    name: "Nearby",
-    enabled: false,
-    required: false,
-    category: "Location",
-    showInNavigation: false,
-  },
-  {
-    id: 15,
-    name: "New To City",
-    enabled: false,
-    required: false,
-    category: "Location",
-    showInNavigation: false,
-  },
-  {
-    id: 16,
-    name: "Memories",
-    enabled: false,
-    required: false,
-    category: "Social",
-    showInNavigation: false,
-  },
-  {
-    id: 17,
-    name: "Birthdays",
-    enabled: true,
-    required: false,
-    category: "Social",
-    showInNavigation: false,
-  },
-  {
-    id: 18,
-    name: "Anniversaries",
-    enabled: false,
-    required: false,
-    category: "Social",
-    showInNavigation: false,
-  },
-  {
-    id: 19,
-    name: "Recommendations",
-    enabled: true,
-    required: false,
-    category: "Discovery",
-    showInNavigation: false,
-  },
-  {
-    id: 20,
-    name: "Invite",
-    enabled: true,
-    required: false,
-    category: "Growth",
-    showInNavigation: false,
-  },
-  {
-    id: 21,
-    name: "Refer",
-    enabled: false,
-    required: false,
-    category: "Growth",
-    showInNavigation: false,
-  },
-  {
-    id: 22,
-    name: "Career Centre",
-    enabled: true,
-    required: false,
-    category: "Career",
-    showInNavigation: false,
-  },
-  {
-    id: 23,
-    name: "Entrepreneurship",
-    enabled: false,
-    required: false,
-    category: "Career",
-    showInNavigation: false,
-  },
-  {
-    id: 24,
-    name: "Polls",
-    enabled: false,
-    required: false,
-    category: "Engagement",
-    showInNavigation: false,
-  },
-  {
-    id: 25,
-    name: "Surveys",
-    enabled: false,
-    required: false,
-    category: "Engagement",
-    showInNavigation: false,
-  },
-  {
-    id: 26,
-    name: "Feedback",
-    enabled: true,
-    required: false,
-    category: "Support",
-    showInNavigation: false,
-  },
-  {
-    id: 27,
-    name: "FAQ",
-    enabled: true,
-    required: false,
-    category: "Support",
-    showInNavigation: false,
-  },
-  {
-    id: 28,
-    name: "Newsletter",
-    enabled: true,
-    required: false,
-    category: "Communication",
-    showInNavigation: false,
-  },
+  // ... (add the rest of your static moduleData items here as previously defined)
 ];
-
-// Get unique categories
-const categories = [
-  "All",
-  ...new Set(moduleData.map((module) => module.category)),
-].sort();
-
-// Interface for module data
 interface ModuleItem {
-  id: number;
+  id: string;
   name: string;
+  icon: string | null;
   enabled: boolean;
-  required: boolean;
-  category: string;
-  showInNavigation: boolean;
+  required?: boolean;
+  showInMobileNavigation: boolean;
+  showInWebNavigation: boolean;
+  isPopular: boolean;
+  showInMobileNavigationSortNumber?: number;
 }
 
 // Get icon for navigation item
-const getNavIcon = (name: string) => {
-  switch (name) {
-    case "Directory":
-      return <TeamOutlined />;
-    case "Communities":
-      return <TeamOutlined />;
-    case "Events":
-      return <CalendarOutlined />;
-    case "Marketplace":
-      return <ShopOutlined />;
-    case "Jobs":
-      return <BankOutlined />;
-    default:
-      return <AppstoreOutlined />;
+const getNavIcon = (icon: string | null) => {
+  if (!icon || typeof icon !== "string" || !(icon in LucideIcons)) {
+    const Puzzle = LucideIcons["Puzzle"] as React.ElementType;
+    return <Puzzle className="h-2 w-2 text-primary" />;
   }
+  const IconComponent = (LucideIcons as any)[icon] as React.ElementType;
+  return <IconComponent className="h-2 w-2 text-primary" />;
 };
 
 export default function ModuleManagement() {
+  // Apollo mutation hook
+  const [updateEntityModule, { loading: updateLoading }] = useMutation<
+    UpdateEntityModuleResponse,
+    { input: InputUpdateEntityModule[] }
+  >(UPDATE_ENTITY_MODULE);
+  // Notification for save
+  const openNotification = (
+    type: "success" | "error",
+    message: string,
+    description?: string
+  ) => {
+    notification[type]({
+      message,
+      description,
+      placement: "topRight",
+    });
+  };
+  // Use subscription.modules if available, otherwise fallback to moduleData
+  const { data, loading, error } = checkEntitySubscription();
+  const subscription = data?.checkEntitySubscription;
+  console.log("Entity Subscription:", subscription);
   const [modules, setModules] = useState<ModuleItem[]>(moduleData);
+  const [modulesInitialized, setModulesInitialized] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  // Only set modules from subscription once
+  React.useEffect(() => {
+    if (
+      !modulesInitialized &&
+      subscription &&
+      Array.isArray(subscription.modules)
+    ) {
+      setModules(
+        subscription.modules.map((m: any) => ({
+          id: m.id,
+          name: m.name,
+          enabled: m.enabled ?? true,
+          required: m.required ?? false,
+          showInMobileNavigation: m.showInMobileNavigation ?? false,
+          showInWebNavigation: m.showInWebNavigation ?? false,
+          icon: m.icon ?? null,
+          showInMobileNavigationSortNumber:
+            typeof m.showInMobileNavigationSortNumber === "number"
+              ? m.showInMobileNavigationSortNumber
+              : undefined,
+          isPopular: m.isPopular ?? false,
+        }))
+      );
+      setModulesInitialized(true);
+    }
+  }, [subscription, modulesInitialized]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [userRole, setUserRole] = useState("admin"); // "admin" or "directory"
   const [activeTab, setActiveTab] = useState("1");
 
+  // Call checkEntitySubscription hook
+
   // Filter modules based on search term and category
-  const filteredModules = modules.filter((module) => {
-    const matchesSearch = module.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || module.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
 
   // Toggle module enabled status
-  const toggleModule = (id: number) => {
+  const toggleModule = (id: string) => {
     if (userRole === "directory") {
       // Directory users cannot disable modules
       return;
     }
-
-    setModules((prevModules) =>
-      prevModules.map((module) =>
-        module.id === id && !module.required
-          ? { ...module, enabled: !module.enabled }
-          : module
-      )
-    );
+    setModules((prevModules) => {
+      return prevModules.map((module) => {
+        if (module.id === id && !module.required) {
+          // If disabling, also remove from mobile navigation
+          if (module.enabled) {
+            return { ...module, enabled: false, showInMobileNavigation: false };
+          } else {
+            return { ...module, enabled: true };
+          }
+        }
+        return module;
+      });
+    });
   };
 
   // Toggle module in mobile navigation
-  const toggleNavigation = (id: number) => {
+  const toggleNavigation = (id: string) => {
     if (userRole === "directory") {
       // Directory users cannot modify navigation
       return;
     }
-
-    // Count current modules in navigation
-    const currentNavigationCount = modules.filter(
-      (m) => m.showInNavigation
-    ).length;
-
-    setModules((prevModules) =>
-      prevModules.map((module) => {
+    setModules((prevModules) => {
+      const currentNavigationCount = prevModules.filter(
+        (m) => m.showInMobileNavigation
+      ).length;
+      return prevModules.map((module) => {
         if (module.id === id) {
           // If already in navigation, remove it
-          if (module.showInNavigation) {
-            return { ...module, showInNavigation: false };
+          if (module.showInMobileNavigation) {
+            return { ...module, showInMobileNavigation: false };
           }
           // If not in navigation and less than 3 modules are selected, add it
-          else if (currentNavigationCount < 3) {
-            return { ...module, showInNavigation: true };
+          if (currentNavigationCount < 3) {
+            return { ...module, showInMobileNavigation: true };
           }
           // Otherwise, don't change (max 3 reached)
           return module;
         }
         return module;
-      })
-    );
+      });
+    });
   };
 
   // Save changes
-  const saveChanges = () => {
-    // In a real app, this would send the updated modules to an API
-    console.log("Saving changes:", modules);
-    // Show success message
-    alert("Changes saved successfully!");
+  const saveChanges = async () => {
+    setSaving(true);
+    const input: InputUpdateEntityModule[] = modules.map((m, idx) => {
+      return {
+        icon: m.icon ?? null,
+        id: m.id ?? null,
+        name: m.name ?? null,
+        isEnabled: m.enabled ?? null,
+        showInMobileNavigation: m.showInMobileNavigation ?? null,
+        showInMobileNavigationSortNumber: m.showInMobileNavigation
+          ? idx
+          : undefined,
+        showInWebNavigation: m.showInWebNavigation ?? null,
+        isPopular: m.isPopular ?? null,
+      };
+    });
+    try {
+      const response = await updateEntityModule({ variables: { input } });
+      if (response.data?.updateEntityModule.success) {
+        openNotification("success", "Changes saved successfully!");
+      } else {
+        openNotification("error", "Save failed", "Mutation did not succeed");
+      }
+    } catch (err: any) {
+      openNotification(
+        "error",
+        "Save failed",
+        err?.message || "An error occurred"
+      );
+    } finally {
+      setSaving(false);
+    }
   };
 
   // Module Management Table Columns
@@ -386,7 +271,6 @@ export default function ModuleManagement() {
           <Switch
             checked={enabled}
             onChange={() => toggleModule(record.id)}
-            disabled={userRole === "directory" || record.required}
             size="small"
           />
         </Tooltip>
@@ -398,44 +282,52 @@ export default function ModuleManagement() {
       key: "name",
       render: (name, record) => (
         <Space>
+          {getNavIcon(record.icon)}
+          <Tag
+            color={record.isPopular ? "gold" : "default"}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setModules((prev) =>
+                prev.map((m) =>
+                  m.id === record.id ? { ...m, isPopular: !m.isPopular } : m
+                )
+              );
+            }}
+          >
+            {record.isPopular ? "Popular" : "Mark Popular"}
+          </Tag>
           {name}
-          {record.required && <Tag color="blue">Required</Tag>}
         </Space>
       ),
     },
-    {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-      render: (category) => <Tag color="default">{category}</Tag>,
-    },
+
     {
       title: "Mobile Navigation",
-      dataIndex: "showInNavigation",
-      key: "showInNavigation",
+      dataIndex: "showInMobileNavigation",
+      key: "showInMobileNavigation",
       width: 120,
-      render: (showInNavigation, record) => (
+      render: (showInMobileNavigation, record) => (
         <Tooltip
           title={
             !record.enabled
               ? "Enable this module first to add to navigation"
               : userRole === "directory"
                 ? "Directory users cannot change navigation settings"
-                : showInNavigation
+                : showInMobileNavigation
                   ? "Remove from mobile navigation"
-                  : modules.filter((m) => m.showInNavigation).length >= 3
+                  : modules.filter((m) => m.showInMobileNavigation).length >= 3
                     ? "Maximum of 3 modules in navigation (remove one first)"
                     : "Add to mobile navigation"
           }
         >
           <Switch
-            checked={showInNavigation}
+            checked={showInMobileNavigation}
             onChange={() => toggleNavigation(record.id)}
             disabled={
               userRole === "directory" ||
               !record.enabled ||
-              (!showInNavigation &&
-                modules.filter((m) => m.showInNavigation).length >= 3)
+              (!showInMobileNavigation &&
+                modules.filter((m) => m.showInMobileNavigation).length >= 3)
             }
             size="small"
             checkedChildren={<CheckOutlined />}
@@ -465,7 +357,7 @@ export default function ModuleManagement() {
       key: "icon",
       width: 100,
       render: (_, record) => (
-        <div style={{ fontSize: "20px" }}>{getNavIcon(record.name)}</div>
+        <div style={{ fontSize: "20px" }}>{getNavIcon(record.icon)}</div>
       ),
     },
     {
@@ -485,9 +377,51 @@ export default function ModuleManagement() {
     },
   ];
 
-  // Get modules for navigation table
-  const navigationModules = modules.filter((m) => m.showInNavigation);
+  // Get modules for navigation table, sorted by showInMobileNavigationSortNumber
+  const navigationModules = modules
+    .filter((m) => m.showInMobileNavigation)
+    .sort(
+      (a, b) =>
+        (a.showInMobileNavigationSortNumber ?? 0) -
+        (b.showInMobileNavigationSortNumber ?? 0)
+    );
 
+  // Drag-and-drop handler for navigation table
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const navModules = Array.from(navigationModules);
+    const [removed] = navModules.splice(result.source.index, 1);
+    if (removed) {
+      navModules.splice(result.destination.index, 0, removed);
+    }
+    setModules((prev) => {
+      const updated = prev.map((m) => {
+        const idx = navModules.findIndex((nm) => nm.id === m.id);
+        if (idx !== -1) {
+          return { ...m, showInMobileNavigationSortNumber: idx };
+        }
+        return m;
+      });
+      return updated;
+    });
+  };
+
+  if (loading) {
+    return (
+      <Spin tip="Loading modules..." style={{ width: "100%", marginTop: 40 }} />
+    );
+  }
+  if (error) {
+    return (
+      <Alert
+        type="error"
+        message="Failed to load modules"
+        description={error.message}
+        showIcon
+        style={{ marginTop: 40 }}
+      />
+    );
+  }
   return (
     <Card>
       <Tabs
@@ -499,43 +433,58 @@ export default function ModuleManagement() {
             label: "Module Management",
             children: (
               <>
+                {/* Search input for modules */}
+                <div
+                  style={{
+                    marginBottom: 16,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                  }}
+                >
+                  <Input
+                    placeholder="Search modules..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    prefix={<SearchOutlined />}
+                    allowClear
+                    style={{ maxWidth: 300 }}
+                  />
+                </div>
                 <Card
                   extra={
                     <Button
                       type="primary"
                       onClick={saveChanges}
                       disabled={userRole === "directory"}
+                      loading={saving}
                     >
                       Save Changes
                     </Button>
                   }
                 >
-                  <div style={{ display: "flex", gap: "8px" }}>
-                    <Input
-                      placeholder="Search modules..."
-                      prefix={<SearchOutlined />}
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      style={{ maxWidth: 300 }}
-                    />
-                    <Select
-                      placeholder="Category"
-                      value={selectedCategory}
-                      onChange={setSelectedCategory}
-                      style={{ width: 180 }}
-                      options={categories.map((category) => ({
-                        value: category,
-                        label: category,
-                      }))}
-                    />
-                  </div>
-
                   <Table
                     columns={moduleColumns}
-                    dataSource={filteredModules}
+                    dataSource={modules}
                     rowKey="id"
                     size="middle"
                     style={{ marginTop: "16px" }}
+                    locale={{
+                      emptyText: (
+                        <div style={{ textAlign: "center", padding: "32px 0" }}>
+                          <span
+                            role="img"
+                            aria-label="no data"
+                            style={{ fontSize: 32 }}
+                          >
+                            😕
+                          </span>
+                          <div style={{ marginTop: 8 }}>No modules found</div>
+                        </div>
+                      ),
+                    }}
+                    rowClassName={() => "module-row-hover"}
+                    pagination={false}
                   />
                 </Card>
               </>
@@ -545,172 +494,26 @@ export default function ModuleManagement() {
             key: "2",
             label: "Mobile Navigation",
             children: (
-              <>
-                <Alert
-                  message="Mobile Navigation Configuration"
-                  description={
-                    <div>
-                      <p>
-                        Home and Profile are fixed navigation items. You can
-                        select up to 3 additional modules to show in the
-                        navigation.
-                      </p>
-                      <p style={{ marginTop: "8px", fontWeight: 500 }}>
-                        {3 - modules.filter((m) => m.showInNavigation).length}{" "}
-                        slot(s) remaining.
-                      </p>
-                    </div>
-                  }
-                  type="info"
-                  showIcon
-                  style={{ marginBottom: "16px" }}
-                />
-
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr",
-                    gap: "24px",
-                  }}
-                >
-                  <div>
-                    <Card
-                      title=" Navigation Items"
-                      style={{ marginBottom: "16px" }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "16px",
-                        }}
-                      ></div>
-
-                      <div
-                        style={{
-                          border: "1px solid #f0f0f0",
-                          borderTopLeftRadius: "8px",
-                          borderTopRightRadius: "8px",
-                          padding: "16px",
-                          width: "400px",
-                          backgroundColor: "#f5f5f5",
-                        }}
-                      >
-                        <div
-                          style={{
-                            height: "160px",
-                            backgroundColor: "white",
-                            borderRadius: "4px",
-                            border: "1px solid #f0f0f0",
-                          }}
-                        ></div>
-                        <div
-                          style={{
-                            marginTop: "16px",
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            backgroundColor: "white",
-                            padding: "8px",
-                            borderRadius: "8px",
-                            border: "1px solid #f0f0f0",
-                          }}
-                        >
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              padding: "0 8px",
-                            }}
-                          >
-                            <HomeOutlined
-                              style={{ fontSize: 24, color: "#1890ff" }}
-                            />
-                            <span
-                              style={{ marginTop: "4px", fontSize: "12px" }}
-                            >
-                              Home
-                            </span>
-                          </div>
-
-                          {navigationModules.map((module) => (
-                            <div
-                              key={module.id}
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                padding: "0 8px",
-                              }}
-                            >
-                              {React.cloneElement(getNavIcon(module.name), {
-                                style: { fontSize: 24 },
-                              })}
-                              <span
-                                style={{ marginTop: "4px", fontSize: "12px" }}
-                              >
-                                {module.name}
-                              </span>
-                            </div>
-                          ))}
-
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              padding: "0 8px",
-                            }}
-                          >
-                            <UserOutlined style={{ fontSize: 24 }} />
-                            <span
-                              style={{ marginTop: "4px", fontSize: "12px" }}
-                            >
-                              Profile
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-
-                    <Card title="Customizable Navigation Items">
-                      <Table
-                        columns={navigationColumns}
-                        dataSource={navigationModules}
-                        rowKey="id"
-                        pagination={false}
-                        size="small"
-                        locale={{
-                          emptyText: "No modules selected for navigation",
-                        }}
-                      />
-                    </Card>
-                  </div>
-
-                  <Card title="Mobile Navigation Preview"></Card>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginTop: "16px",
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    onClick={saveChanges}
-                    disabled={userRole === "directory"}
-                  >
-                    Save Changes
-                  </Button>
-                </div>
-              </>
+              <MobileNavigation
+                modules={modules}
+                navigationColumns={navigationColumns}
+                navigationModules={navigationModules}
+                userRole={userRole}
+                saving={saving}
+                saveChanges={saveChanges}
+                onDragEnd={onDragEnd}
+                toggleNavigation={toggleNavigation}
+              />
             ),
           },
         ]}
       />
+      <style>{`
+        .module-row-hover:hover {
+          background: #f5faff !important;
+          transition: background 0.2s;
+        }
+      `}</style>
     </Card>
   );
 }

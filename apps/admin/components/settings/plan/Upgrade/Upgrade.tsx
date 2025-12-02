@@ -45,6 +45,7 @@ const Upgrade = () => {
     null
   );
   const { data: myPlan } = getPlanOverview();
+  console.log(data);
   const planOverview = myPlan?.getPlanOverview;
   const [isYearly, setIsYearly] = useState<boolean>(false);
   const getYearlySavings = (monthly: number, yearly: number) => {

@@ -147,6 +147,11 @@ export const CHECK_ENTITY_SUBSCRIPTIONS = gql`
         id
         name
         icon
+        showInMobileNavigation
+        showInWebNavigation
+        enabled
+        showInMobileNavigationSortNumber
+        isPopular
       }
     }
   }
@@ -181,3 +186,75 @@ export const UPDATE_ENTITY_PROFILE = gql`
     }
   }
 `;
+
+// GetAllEntityInvoice Query
+
+export const GET_ALL_ENTITY_INVOICE = gql`
+  query GetAllEntityInvoice {
+    getAllEntityInvoice {
+      amount
+      billingCycle
+      billingId
+      updatedAt
+      totalAmount
+      taxAmount
+      subscriptionId
+      status
+      prorationDetails {
+        oldpackageId
+        oldPlanName
+        oldPlanProratedCost
+        newpackageId
+        newPlanName
+        newPlanProratedCost
+        creditApplied
+        chargeAmount
+      }
+      planName
+      paidAt
+      packageId
+      notes
+      invoiceUrl
+      entityId
+      currency
+      createdAt
+    }
+  }
+`;
+
+// TypeScript types for GetAllEntityInvoice
+
+export interface ProrationDetails {
+  oldpackageId: string;
+  oldPlanName: string;
+  oldPlanProratedCost: number;
+  newpackageId: string;
+  newPlanName: string;
+  newPlanProratedCost: number;
+  creditApplied: number;
+  chargeAmount: number;
+}
+
+export interface EntityInvoice {
+  amount: number;
+  billingCycle: string;
+  billingId: string;
+  updatedAt: string;
+  totalAmount: number;
+  taxAmount: number;
+  subscriptionId: string;
+  status: string;
+  prorationDetails: ProrationDetails;
+  planName: string;
+  paidAt: string;
+  packageId: string;
+  notes: string;
+  invoiceUrl: string;
+  entityId: string;
+  currency: string;
+  createdAt: string;
+}
+
+export interface GetAllEntityInvoiceResponse {
+  getAllEntityInvoice: EntityInvoice[];
+}

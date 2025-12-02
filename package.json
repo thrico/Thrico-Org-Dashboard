@@ -39,6 +39,7 @@
     "@emotion/styled": "^11.11.5",
     "@faker-js/faker": "^9.3.0",
     "@googlemaps/js-api-loader": "^1.16.10",
+    "@hello-pangea/dnd": "^18.0.1",
     "@lexical/code": "^0.31.1",
     "@lexical/link": "^0.31.1",
     "@lexical/list": "^0.31.1",
