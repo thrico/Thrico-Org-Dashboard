@@ -59,43 +59,6 @@ export const settings = [
     type: "group",
     children: [
       {
-        key: "discussion-forum",
-        label: menuLink("/discussion-forum", "Discussion Forum"),
-        icon: <FormInput />,
-        children: [
-          {
-            key: "forum-view",
-            type: "group",
-            label: menuLink("/discussion-forum/", "View Forum"),
-          },
-
-          {
-            key: "forum-settings",
-            type: "group",
-            label: menuLink("/discussion-forum/settings", "Setting"),
-          },
-        ],
-      },
-      {
-        key: "feedback",
-        label: menuLink("#", "Polls & Surveys"),
-        icon: <LiaPollSolid size={18} />,
-        children: [
-          {
-            key: "feedback-surveys",
-            label: menuLink("/forms/feedback", "Surveys"),
-          },
-          {
-            key: "feedback-polls",
-            label: menuLink("/forms/polls", "Polls"),
-          },
-          {
-            key: "feedback-settings",
-            label: menuLink("/feedback/settings", "Settings"),
-          },
-        ],
-      },
-      {
         key: "cms",
         label: menuLink("/website-pages", "Manage Website"),
         icon: <UnorderedListOutlined />,
