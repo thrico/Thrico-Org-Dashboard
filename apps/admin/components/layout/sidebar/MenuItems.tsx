@@ -69,17 +69,35 @@ export const settings = [
 
 export const extendedItems = [
   {
-    key: "feedback",
-    label: menuLink("#", "Polls & Surveys"),
+    key: "polls",
+    label: menuLink("/forms/polls", "Polls"),
     icon: <LiaPollSolid size={18} />,
     children: [
       {
-        key: "feedback-surveys",
-        label: menuLink("/forms/feedback", "Surveys"),
+        key: "polls-settings",
+        label: menuLink("/polls/settings", "Settings"),
       },
+    ],
+  },
+  {
+    key: "surveys",
+    label: menuLink("/forms/feedback", "Surveys"),
+    icon: <FormInput size={18} />,
+    children: [
       {
-        key: "feedback-polls",
-        label: menuLink("/forms/polls", "Polls"),
+        key: "surveys-settings",
+        label: menuLink("/surveys/settings", "Settings"),
+      },
+    ],
+  },
+  {
+    key: "feedback",
+    label: menuLink("/feedback", "Feedback"),
+    icon: <FormInput size={18} />,
+    children: [
+      {
+        key: "feedback-list",
+        label: menuLink("/feedback/list", "All Feedback"),
       },
       {
         key: "feedback-settings",
