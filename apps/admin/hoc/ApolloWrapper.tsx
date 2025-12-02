@@ -42,7 +42,7 @@ export function ApolloWrapper({ children, host }: props) {
     });
 
     const uploadLink = createUploadLink({
-      uri: host ? host : "http://localhost:1111/graphql",
+      uri: host ? host : "https://admin.thrico.app/graphql",
     });
 
     const link = errorControl.concat(uploadLink);

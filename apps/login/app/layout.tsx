@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.className}>
         <Providers>
-          <ApolloWrapper host={"http://localhost:1111/graphql"}>
+          <ApolloWrapper host={"https://admin.thrico.app/graphql"}>
             {children}
           </ApolloWrapper>
         </Providers>

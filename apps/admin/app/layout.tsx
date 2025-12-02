@@ -22,7 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <ApolloWrapper host={"http://localhost:1111/graphql"}>
+      <ApolloWrapper host={"https://admin.thrico.app/graphql"}>
         <body className={workSans.className}>
           <AntdRegistry>
             <ConfigProvider
