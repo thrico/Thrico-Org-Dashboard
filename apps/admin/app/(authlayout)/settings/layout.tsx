@@ -24,41 +24,57 @@ import { Button, Drawer, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { FaFont } from "react-icons/fa";
 import { MdOutlineViewModule } from "react-icons/md";
+import {
+  BanknoteArrowUpIcon,
+  Bell,
+  Earth,
+  FileStack,
+  HandCoins,
+  Home,
+  LanguagesIcon,
+  ListTodo,
+  Lock,
+  PaintBucketIcon,
+  Receipt,
+  UserCheckIcon,
+} from "lucide-react";
 
 function SettingsLayout({ children }: { children: React.ReactNode }) {
   const menuItems = [
-    { key: "/settings", icon: <HomeOutlined />, label: "General" },
+    { key: "/settings", icon: <Home size={16} />, label: "General" },
     {
       key: "/settings/appearance",
-      icon: <CustomerServiceTwoTone />,
+      icon: <PaintBucketIcon size={16} />,
       label: "Appearance",
     },
-    { key: "/settings/domains", icon: <LinkOutlined />, label: "Domains" },
-    { key: "/settings/font", icon: <FaFont />, label: "Fonts" },
-    { key: "/settings/plan", icon: <DollarOutlined />, label: "Plan" },
+    { key: "/settings/domains", icon: <Earth size={16} />, label: "Domains" },
+
+    {
+      key: "/settings/plan",
+      icon: <BanknoteArrowUpIcon size={16} />,
+      label: "Plan",
+    },
     {
       key: "/settings/modules",
-      icon: <MdOutlineViewModule />,
+      icon: <ListTodo size={16} />,
       label: "Module",
     },
     {
       key: "/settings/billing",
-      icon: <CreditCardOutlined />,
+      icon: <Receipt size={16} />,
       label: "Billing",
     },
-    { key: "users", icon: <TeamOutlined />, label: "Users and permissions" },
-    { key: "payments", icon: <CreditCardOutlined />, label: "Payments" },
-    { key: "checkout", icon: <ShoppingCartOutlined />, label: "Checkout" },
+    {
+      key: "users",
+      icon: <UserCheckIcon size={16} />,
+      label: "Users and permissions",
+    },
 
-    { key: "taxes", icon: <CalculatorOutlined />, label: "Taxes and duties" },
-    { key: "locations", icon: <EnvironmentOutlined />, label: "Locations" },
-    { key: "markets", icon: <></>, label: "Markets" },
-
-    { key: "notifications", icon: <BellOutlined />, label: "Notifications" },
-    { key: "data", icon: <DatabaseOutlined />, label: "Custom data" },
-    { key: "languages", icon: <TranslationOutlined />, label: "Languages" },
-    { key: "privacy", icon: <LockOutlined />, label: "Customer privacy" },
-    { key: "policies", icon: <FileTextOutlined />, label: "Policies" },
+    { key: "taxes", icon: <HandCoins size={16} />, label: "Taxes and duties" },
+    { key: "notifications", icon: <Bell size={16} />, label: "Notifications" },
+    { key: "languages", icon: <LanguagesIcon size={16} />, label: "Languages" },
+    { key: "privacy", icon: <Lock size={16} />, label: "Customer privacy" },
+    { key: "policies", icon: <FileStack size={16} />, label: "Policies" },
   ];
 
   const router = useRouter();

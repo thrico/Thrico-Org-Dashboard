@@ -1,5 +1,7 @@
 "use client";
 
+import { useGetFooterConfig } from "../../graphql/website/website-quiries";
+import { useSaveFooterConfig } from "../../graphql/website/website-quiries";
 import { useState, useEffect } from "react";
 import {
   Layout,
@@ -33,11 +35,13 @@ const { Title, Paragraph, Text } = Typography;
 const { Option } = Select;
 
 export default function FooterManager() {
+  const [saveFooterConfig] = useSaveFooterConfig();
+
   const router = useRouter();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [customPages, setCustomPages] = useState([]);
+  const { data, loading: queryLoading } = useGetFooterConfig();
 
   const socialMediaOptions = [
     { label: "Facebook", value: "facebook", icon: "FacebookOutlined" },
@@ -52,102 +56,27 @@ export default function FooterManager() {
     { label: "GitHub", value: "github", icon: "GithubOutlined" },
   ];
 
-  const iconOptions = [
-    { label: "Home", value: "HomeOutlined" },
-    { label: "Info", value: "InfoCircleOutlined" },
-    { label: "Phone", value: "PhoneOutlined" },
-    { label: "Mail", value: "MailOutlined" },
-    { label: "Environment", value: "EnvironmentOutlined" },
-    { label: "Customer Service", value: "CustomerServiceOutlined" },
-    { label: "Question", value: "QuestionCircleOutlined" },
-    { label: "File", value: "FileTextOutlined" },
-    { label: "Safety", value: "SafetyOutlined" },
-    { label: "Team", value: "TeamOutlined" },
-  ];
-
   useEffect(() => {
-    // Simulate API call to get footer data
-    setTimeout(() => {
-      const savedFooterData = localStorage.getItem("thrico-footer-data");
-      const savedPages = JSON.parse(
-        localStorage.getItem("thrico-custom-pages") || "[]"
-      );
-      setCustomPages(savedPages);
+    if (data?.getFooterConfig) {
+      form.setFieldsValue(data.getFooterConfig);
+    }
+  }, [data, form]);
 
-      if (savedFooterData) {
-        form.setFieldsValue(JSON.parse(savedFooterData));
-      } else {
-        // Default footer data
-        form.setFieldsValue({
-          companyInfo: {
-            name: "Your Company Name",
-            description:
-              "Brief description about your company and what you do.",
-            logo: "",
-          },
-          contactInfo: {
-            address: "123 Main Street, City, State 12345",
-            phone: "+1 (555) 123-4567",
-            email: "info@yourcompany.com",
-          },
-          socialMedia: [
-            { platform: "facebook", url: "https://facebook.com/yourcompany" },
-            { platform: "twitter", url: "https://twitter.com/yourcompany" },
-            { platform: "instagram", url: "https://instagram.com/yourcompany" },
-          ],
-          footerSections: [
-            {
-              title: "Quick Links",
-              links: [
-                { label: "Home", href: "/" },
-                { label: "About Us", href: "/about" },
-                { label: "Services", href: "/services" },
-                { label: "Contact", href: "/contact" },
-              ],
-            },
-            {
-              title: "Support",
-              links: [
-                { label: "Help Center", href: "/help" },
-                { label: "FAQ", href: "/faq" },
-                { label: "Contact Support", href: "/support" },
-              ],
-            },
-            {
-              title: "Legal",
-              links: [
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Service", href: "/terms" },
-                { label: "Cookie Policy", href: "/cookies" },
-              ],
-            },
-          ],
-          copyright: {
-            text: "© 2024 Your Company Name. All rights reserved.",
-            showYear: true,
-          },
-          newsletter: {
-            enabled: true,
-            title: "Subscribe to our Newsletter",
-            description:
-              "Get the latest updates and news delivered to your inbox.",
-          },
-        });
-      }
-      setIsLoading(false);
-    }, 1000);
-  }, [form]);
-
-  const onFinish = (values) => {
+  const onFinish = (values: any) => {
     setLoading(true);
-    setTimeout(() => {
-      localStorage.setItem("thrico-footer-data", JSON.stringify(values));
-      message.success("Footer updated successfully!");
-      setLoading(false);
-    }, 1000);
+    saveFooterConfig({ variables: { input: values } })
+      .then(() => {
+        message.success("Footer updated successfully!");
+      })
+      .catch(() => {
+        message.error("Failed to update footer.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  if (isLoading) {
+  if (queryLoading) {
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Content style={{ width: "100%" }}>
@@ -553,58 +482,6 @@ export default function FooterManager() {
                 </Col>
               </Row>
             </Card>
-
-            <Divider />
-
-            <Title level={4}>Quick Links Reference</Title>
-            <Paragraph>
-              Here are links to your pages that you can use in the footer
-              sections:
-            </Paragraph>
-            <div style={{ marginBottom: 24 }}>
-              <Text strong>Standard Pages:</Text>
-              <ul style={{ marginTop: 8 }}>
-                <li>
-                  <Text copyable>/ (Home)</Text>
-                </li>
-                <li>
-                  <Text copyable>/about (About Us)</Text>
-                </li>
-                <li>
-                  <Text copyable>/contact (Contact Us)</Text>
-                </li>
-                <li>
-                  <Text copyable>/privacy (Privacy Policy)</Text>
-                </li>
-                <li>
-                  <Text copyable>/terms (Terms of Service)</Text>
-                </li>
-                <li>
-                  <Text copyable>/services (Services)</Text>
-                </li>
-                <li>
-                  <Text copyable>/help (Help Center)</Text>
-                </li>
-                <li>
-                  <Text copyable>/faq (FAQ)</Text>
-                </li>
-              </ul>
-            </div>
-
-            {customPages.length > 0 && (
-              <div style={{ marginBottom: 24 }}>
-                <Text strong>Custom Pages:</Text>
-                <ul style={{ marginTop: 8 }}>
-                  {customPages.map((page, index) => (
-                    <li key={index}>
-                      <Text
-                        copyable
-                      >{`/pages/${page.slug} (${page.title})`}</Text>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
           </Form>
         </Card>
       </Content>

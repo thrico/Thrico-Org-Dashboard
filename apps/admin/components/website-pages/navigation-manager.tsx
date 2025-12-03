@@ -2,6 +2,11 @@
 
 import { useState, useEffect } from "react";
 import {
+  useGetNavigationMenus,
+  useSaveNavigationMenus,
+} from "../../graphql/website/website-quiries";
+import * as LucideIcons from "lucide-react";
+import {
   Layout,
   Typography,
   Card,
@@ -21,14 +26,12 @@ import {
   ArrowUpOutlined,
   ArrowDownOutlined,
 } from "@ant-design/icons";
-
 import { useRouter } from "next/navigation";
-
 import { Footer } from "antd/es/layout/layout";
 import Navbar from "./variations/navbar";
 
-const { Content } = Layout;
 const { Title, Paragraph, Text } = Typography;
+const { Content } = Layout;
 const { Option } = Select;
 
 export default function NavigationManager() {
@@ -36,116 +39,195 @@ export default function NavigationManager() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [customPages, setCustomPages] = useState([]);
+  // Remove customPages state if not needed
 
+  // Call the GraphQL query hook
+  const [saveNavigationMenus, { loading: saveLoading }] =
+    useSaveNavigationMenus();
+  const { data, loading: navLoading, error } = useGetNavigationMenus();
+
+  // Lucide icon names for the form dropdown
   const iconOptions = [
-    { label: "Home", value: "HomeOutlined" },
-    { label: "Calendar", value: "CalendarOutlined" },
-    { label: "Team", value: "TeamOutlined" },
-    { label: "Shopping", value: "ShoppingOutlined" },
-    { label: "Read", value: "ReadOutlined" },
-    { label: "Picture", value: "PictureOutlined" },
-    { label: "Comment", value: "CommentOutlined" },
-    { label: "Phone", value: "PhoneOutlined" },
-    { label: "Info", value: "InfoCircleOutlined" },
-    { label: "File", value: "FileTextOutlined" },
+    { label: "Home", value: "home" },
+    { label: "Calendar", value: "calendar" },
+    { label: "Users", value: "users" },
+    { label: "Shopping Cart", value: "shopping-cart" },
+    { label: "Book", value: "book" },
+    { label: "Image", value: "image" },
+    { label: "Message Circle", value: "message-circle" },
+    { label: "Phone", value: "phone" },
+    { label: "Info", value: "info" },
+    { label: "File Text", value: "file-text" },
+    { label: "Settings", value: "settings" },
+    { label: "Star", value: "star" },
+    { label: "Bell", value: "bell" },
+    { label: "Check", value: "check" },
+    { label: "X", value: "x" },
+    { label: "Search", value: "search" },
+    { label: "Chevron Down", value: "chevron-down" },
+    { label: "Chevron Up", value: "chevron-up" },
+    { label: "Chevron Left", value: "chevron-left" },
+    { label: "Chevron Right", value: "chevron-right" },
   ];
 
   useEffect(() => {
-    // Simulate API call to get navigation data
-    setTimeout(() => {
-      const savedNavItems = localStorage.getItem("thrico-navbar-items");
-      const savedPages = JSON.parse(
-        localStorage.getItem("thrico-custom-pages") || "[]"
-      );
-
-      setCustomPages(savedPages);
-
-      if (savedNavItems) {
-        form.setFieldsValue({ items: JSON.parse(savedNavItems) });
-      } else {
-        // Default navigation items
-        form.setFieldsValue({
-          items: [
-            { key: "home", label: "Home", icon: "HomeOutlined", href: "/" },
-            {
-              key: "events",
-              label: "Events",
-              icon: "CalendarOutlined",
-              href: "/events",
-            },
-            {
-              key: "groups",
-              label: "Groups",
-              icon: "TeamOutlined",
-              href: "/groups",
-            },
-            {
-              key: "jobs",
-              label: "Jobs",
-              icon: "ShoppingOutlined",
-              href: "/jobs",
-            },
-            { key: "news", label: "News", icon: "ReadOutlined", href: "/news" },
-            {
-              key: "gallery",
-              label: "Gallery",
-              icon: "PictureOutlined",
-              href: "/gallery",
-            },
-            {
-              key: "testimonials",
-              label: "Testimonials",
-              icon: "CommentOutlined",
-              href: "/testimonials",
-            },
-            {
-              key: "about",
-              label: "About",
-              icon: "InfoCircleOutlined",
-              children: [
-                { key: "about-us", label: "About Us", href: "/about" },
-                { key: "contact-us", label: "Contact Us", href: "/contact" },
-                { key: "privacy", label: "Privacy Policy", href: "/privacy" },
-              ],
-            },
-          ],
-        });
-      }
-
+    if (data?.getNavigationMenus) {
+      form.setFieldsValue({ items: data.getNavigationMenus });
       setIsLoading(false);
-    }, 1000);
-  }, [form]);
+    }
+  }, [data, form]);
+  // Utility to recursively remove __typename from menu items
+  const cleanMenuItems = (items: any[]): any[] => {
+    return items.map(({ __typename, children, ...rest }) => ({
+      ...rest,
+      ...(children ? { children: cleanMenuItems(children) } : {}),
+    }));
+  };
 
-  const onFinish = (values) => {
+  const onFinish = async (values: { items: any[] }) => {
     setLoading(true);
-
-    setTimeout(() => {
-      localStorage.setItem("thrico-navbar-items", JSON.stringify(values.items));
-
+    try {
+      const cleanedItems = cleanMenuItems(values.items);
+      await saveNavigationMenus({ variables: { input: cleanedItems } });
       message.success("Navigation updated successfully!");
-      setLoading(false);
-    }, 1000);
+    } catch (err) {
+      message.error("Failed to save navigation menu");
+    }
+    setLoading(false);
+  };
+
+  const renderNavbarPreview = () => {
+    const items = Form.useWatch("items", form);
+    if (navLoading) return <Skeleton active paragraph={{ rows: 1 }} />;
+    if (error) return <div>Error loading navigation menu</div>;
+    if (!items?.length) return <div>No navigation menu data</div>;
+
+    return (
+      <nav
+        style={{
+          background: "#fafafa",
+          padding: "16px",
+          borderRadius: "8px",
+          marginBottom: "24px",
+        }}
+      >
+        <Text strong style={{ marginBottom: 8, display: "block" }}>
+          Navbar Preview:
+        </Text>
+        <ul
+          style={{
+            display: "flex",
+            gap: "24px",
+            listStyle: "none",
+            padding: 0,
+          }}
+        >
+          {items.map((menu: any) => {
+            // Convert icon name to Lucide component name (e.g., "home" -> "HomeIcon")
+            const Icon = menu.icon
+              ? LucideIcons[
+                  menu.icon
+                    .split("-")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join("") + "Icon"
+                ]
+              : null;
+            return (
+              <li key={menu.key} style={{ position: "relative" }}>
+                <a
+                  href={menu.href || "#"}
+                  style={{
+                    fontWeight: 500,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  {Icon && <Icon size={18} style={{ marginRight: 4 }} />}
+                  {menu.label}
+                </a>
+                {menu.children && menu.children.length > 0 && (
+                  <ul
+                    style={{
+                      position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      background: "#fff",
+                      boxShadow: "0 2px 8px #eee",
+                      padding: "8px",
+                      borderRadius: "4px",
+                      minWidth: "120px",
+                      zIndex: 1,
+                    }}
+                  >
+                    {menu.children.map((child: any) => {
+                      const ChildIcon = child.icon
+                        ? LucideIcons[
+                            child.icon
+                              .split("-")
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1)
+                              )
+                              .join("") + "Icon"
+                          ]
+                        : null;
+                      return (
+                        <li key={child.key} style={{ marginBottom: 4 }}>
+                          <a
+                            href={child.href || "#"}
+                            style={{
+                              fontWeight: 400,
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 6,
+                            }}
+                          >
+                            {ChildIcon && (
+                              <ChildIcon size={16} style={{ marginRight: 4 }} />
+                            )}
+                            {child.label}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    );
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Content style={{ width: "100%" }}>
-        <Card
-          extra={
-            <Button
-              type="primary"
-              htmlType="submit"
-              icon={<SaveOutlined />}
-              loading={loading}
-            >
-              Save Navigation
-            </Button>
-          }
-          title="Navigation Manager"
-        >
-          <Card>
-            <Form form={form} layout="vertical" onFinish={onFinish}>
+    <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Content style={{ width: "100%" }}>
+          <Card
+            extra={
+              <Button
+                type="primary"
+                htmlType="submit"
+                icon={<SaveOutlined />}
+                loading={loading || saveLoading}
+              >
+                Save Navigation
+              </Button>
+            }
+            title="Navigation Manager"
+          >
+            <Card>
+              {/* Navbar Preview Section */}
+              {renderNavbarPreview()}
+              <Title level={4}>Quick Links</Title>
+              <Paragraph>
+                Here are links to your pages that you can use in the navigation:
+              </Paragraph>
+
+              {/* Custom Pages section removed since localStorage logic is gone. Add your own logic if needed. */}
+
               <Paragraph>
                 Customize your website's navigation menu. You can add, remove,
                 and reorder menu items, create dropdowns, and link to pages.
@@ -410,51 +492,11 @@ export default function NavigationManager() {
               </Form.List>
 
               <Divider />
-
-              <Title level={4}>Quick Links</Title>
-              <Paragraph>
-                Here are links to your pages that you can use in the navigation:
-              </Paragraph>
-
-              <div style={{ marginBottom: 24 }}>
-                <Text strong>Standard Pages:</Text>
-                <ul style={{ marginTop: 8 }}>
-                  <li>
-                    <Text copyable>/ (Home)</Text>
-                  </li>
-                  <li>
-                    <Text copyable>/about (About Us)</Text>
-                  </li>
-                  <li>
-                    <Text copyable>/contact (Contact Us)</Text>
-                  </li>
-                  <li>
-                    <Text copyable>/privacy (Privacy Policy)</Text>
-                  </li>
-                </ul>
-              </div>
-
-              {customPages.length > 0 && (
-                <div style={{ marginBottom: 24 }}>
-                  <Text strong>Custom Pages:</Text>
-                  <ul style={{ marginTop: 8 }}>
-                    {customPages.map((page, index) => (
-                      <li key={index}>
-                        <Text
-                          copyable
-                        >{`/pages/${page.slug} (${page.title})`}</Text>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <Form.Item></Form.Item>
-            </Form>
+            </Card>
           </Card>
-        </Card>
-      </Content>
-      <Footer />
-    </Layout>
+        </Content>
+        <Footer />
+      </Layout>
+    </Form>
   );
 }

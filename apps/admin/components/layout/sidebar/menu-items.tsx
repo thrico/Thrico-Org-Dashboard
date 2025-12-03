@@ -1,26 +1,25 @@
 import { Avatar, MenuProps, Progress, Typography } from "antd";
-import {
-  BellOutlined,
-  BgColorsOutlined,
-  CalendarOutlined,
-  HomeOutlined,
-  LogoutOutlined,
-  MoneyCollectOutlined,
-  PullRequestOutlined,
-  RocketOutlined,
-  SettingOutlined,
-  UnorderedListOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { MdGroup, MdLocalOffer, MdOutlineFeed } from "react-icons/md";
-import { SiCodementor } from "react-icons/si";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { GrUserWorker } from "react-icons/gr";
-import { BsPersonWorkspace } from "react-icons/bs";
+
 import Link from "next/link";
 
-import { LiaPollSolid } from "react-icons/lia";
-import { FormInput, Gamepad2, User, Wallpaper } from "lucide-react";
+import {
+  BellDotIcon,
+  ChartBarIcon,
+  CreditCard,
+  FormInput,
+  Gamepad2,
+  GitPullRequest,
+  Home,
+  LogOutIcon,
+  PaintbrushVerticalIcon,
+  PaintBucketIcon,
+  Rocket,
+  Settings,
+  User,
+  User2,
+  Users,
+  Wallpaper,
+} from "lucide-react";
 
 const menuLink = (href: string, text: string) => (
   <Link href={href}>
@@ -37,17 +36,17 @@ export const main = [
       {
         key: "Home",
         label: menuLink("/", "Home"),
-        icon: <HomeOutlined />,
+        icon: <Home size={18} />,
       },
       {
         key: "feed",
         label: menuLink("/feed", "Feed"),
-        icon: <MdOutlineFeed />,
+        icon: <ChartBarIcon size={18} />,
       },
       {
         key: "members",
         label: menuLink("/members", "Memberships"),
-        icon: <UserOutlined />,
+        icon: <Users size={18} />,
       },
     ],
   },
@@ -59,9 +58,9 @@ export const settings = [
     type: "group",
     children: [
       {
+        icon: <PaintbrushVerticalIcon />,
         key: "cms",
         label: menuLink("/website-pages", "Manage Website"),
-        icon: <UnorderedListOutlined />,
       },
     ],
   },
@@ -71,7 +70,7 @@ export const extendedItems = [
   {
     key: "polls",
     label: menuLink("/forms/polls", "Polls"),
-    icon: <LiaPollSolid size={18} />,
+
     children: [
       {
         key: "polls-settings",
@@ -82,7 +81,7 @@ export const extendedItems = [
   {
     key: "surveys",
     label: menuLink("/forms/feedback", "Surveys"),
-    icon: <FormInput size={18} />,
+
     children: [
       {
         key: "surveys-settings",
@@ -93,7 +92,7 @@ export const extendedItems = [
   {
     key: "feedback",
     label: menuLink("/feedback", "Feedback"),
-    icon: <FormInput size={18} />,
+
     children: [
       {
         key: "feedback-list",
@@ -108,7 +107,7 @@ export const extendedItems = [
   {
     key: "communities",
     label: menuLink("/communities", "Communities"),
-    icon: <MdGroup />,
+
     children: [
       {
         key: "communities-approval",
@@ -125,7 +124,7 @@ export const extendedItems = [
   {
     key: "listing",
     label: menuLink("/listing", "Listing"),
-    icon: <HiOutlineShoppingBag />,
+
     children: [
       {
         key: "listing-approval",
@@ -143,7 +142,7 @@ export const extendedItems = [
   {
     key: "mentorship",
     label: menuLink("/mentorship", "Mentorship"),
-    icon: <SiCodementor />,
+
     children: [
       {
         key: "mentorship-approval",
@@ -161,12 +160,11 @@ export const extendedItems = [
   {
     key: "events",
     label: menuLink("/events", "Events"),
-    icon: <CalendarOutlined />,
   },
   {
     key: "jobs",
     label: menuLink("/jobs", "Jobs"),
-    icon: <GrUserWorker />,
+
     children: [
       {
         key: "job-approval",
@@ -184,7 +182,7 @@ export const extendedItems = [
   {
     key: "offers",
     label: menuLink("/offers", "Offers"),
-    icon: <MdLocalOffer />,
+
     children: [
       {
         key: "offers-view",
@@ -203,7 +201,7 @@ export const extendedItems = [
   {
     key: "career-centre",
     label: menuLink("/career-centre", "Career Centre"),
-    icon: <BsPersonWorkspace />,
+
     children: [
       {
         key: "career-centre-view",
@@ -221,17 +219,14 @@ export const extendedItems = [
   {
     key: "announcements",
     label: menuLink("/announcements", "Announcements & Highlights"),
-    icon: <CalendarOutlined />,
   },
   {
     key: "wall-of-fame",
     label: menuLink("/wall-of-fame", "Wall of Fame"),
-    icon: <Wallpaper />,
   },
   {
     key: "gamification",
     label: menuLink("/gamification", "Gamification"),
-    icon: <Gamepad2 size={14} />,
   },
 ];
 
@@ -262,19 +257,19 @@ const UserAvatar = () => {
 export const profile = [
   {
     key: "sub1",
-    icon: <SettingOutlined />,
+    icon: <Settings size={18} />,
     label: "Admin Settings",
     children: [
       {
         key: "system-activity",
         label: "System Activity",
-        icon: <PullRequestOutlined />,
+        icon: <GitPullRequest size={18} />,
       },
       {
         key: "plan",
         label: menuLink("/settings/plan", "Plan Overview"),
 
-        icon: <MoneyCollectOutlined />,
+        icon: <CreditCard size={18} />,
       },
       {
         type: "divider",
@@ -284,7 +279,7 @@ export const profile = [
         key: "settings",
 
         label: menuLink("/settings", "All Settings"),
-        icon: <SettingOutlined />,
+        icon: <Settings size={18} />,
       },
     ],
   },
@@ -295,12 +290,12 @@ export const profile = [
     children: [
       {
         key: "profile",
-        icon: <UserOutlined />,
+        icon: <User2 size={18} />,
         label: menuLink("/settings", "Your profile"),
       },
       {
         key: "notifications",
-        icon: <BellOutlined />,
+        icon: <BellDotIcon size={18} />,
         label: "Activity & notifications",
       },
       {
@@ -308,7 +303,7 @@ export const profile = [
       },
       {
         key: "theme",
-        icon: <BgColorsOutlined />,
+        icon: <PaintBucketIcon size={18} />,
 
         label: menuLink("/theme", "Theme"),
       },
@@ -318,7 +313,7 @@ export const profile = [
 
       {
         key: "upgrade",
-        icon: <RocketOutlined />,
+        icon: <Rocket size={18} />,
         label: menuLink("/settings/plan", "Upgrade Plan"),
       },
 
@@ -327,7 +322,7 @@ export const profile = [
       },
       {
         key: "logout",
-        icon: <LogoutOutlined />,
+        icon: <LogOutIcon size={18} />,
         label: menuLink("/logout", "logout"),
       },
     ],

@@ -1,5 +1,5 @@
 import React from "react";
-import FooterManager from "../../../../components/website-pages/FooterManager";
+import FooterManager from "../../../../components/website-pages/footer-manager";
 
 const page = () => {
   return <FooterManager />;

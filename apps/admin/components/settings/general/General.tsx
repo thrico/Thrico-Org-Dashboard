@@ -14,11 +14,11 @@ import {
   ShopOutlined,
   EnvironmentOutlined,
   EditOutlined,
-  EllipsisOutlined,
   UploadOutlined,
   CameraOutlined,
 } from "@ant-design/icons";
 import { useState, useRef, useEffect } from "react";
+import BillingAddress from "./BillingAddress";
 import {
   uploadEntityLogo,
   updateEntityProfile,
@@ -424,30 +424,7 @@ export default function General() {
 
           <Divider style={{ margin: "0" }} />
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "16px 0",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "flex-start" }}>
-              <EnvironmentOutlined
-                style={{
-                  fontSize: "20px",
-                  marginRight: "16px",
-                  marginTop: "4px",
-                  color: "#666",
-                }}
-              />
-              <div>
-                <div style={{ fontWeight: 500 }}>Billing address</div>
-                <div>India</div>
-              </div>
-            </div>
-            <Button type="text" icon={<EditOutlined />} />
-          </div>
+          <BillingAddress />
         </Card>
       </Card>
 

@@ -5,7 +5,7 @@ import type React from "react";
 import MyPlan from "./MyPlan";
 
 import BuyPlan from "./buy-plan/BuyPlan";
-import PlanOverview from "./PlanOverview";
+import PlanOverview from "./plan-overview";
 
 const Trail = () => {
   const headerStyle: React.CSSProperties = {

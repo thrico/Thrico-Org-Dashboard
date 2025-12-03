@@ -35,7 +35,9 @@ export default function RootLayout({
                   Menu: {
                     colorItemBgSelected: "#eeeeee",
                     itemHeight: 34,
-                    fontSize: 13,
+                    fontSize: 12,
+                    itemMarginInline: 1,
+                    itemPaddingInline: 8,
                   },
                   Modal: {
                     titleFontSize: 20,

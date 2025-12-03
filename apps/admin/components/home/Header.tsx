@@ -3,7 +3,7 @@
 import { theme, Typography } from "antd";
 import Title from "antd/es/skeleton/Title";
 import React from "react";
-import { UserDetails } from "../layout/sidebar/MenuItems";
+import { UserDetails } from "../layout/sidebar/menu-items";
 import Visit from "../layout/Visit";
 
 const HomeHeader = () => {

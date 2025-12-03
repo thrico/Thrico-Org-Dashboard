@@ -11,7 +11,7 @@ import { getEntity, getGetUser } from "../../graphql/actions";
 import KycForm from "../../screen/Kyc/Form";
 import TrialBanner from "../../components/trail-banner/TrialBanner";
 import NoSubscription from "../../screen/subscription/NoSubscription";
-import { Button } from "@thrico/ui-components";
+
 const { Header, Sider, Content } = Layout;
 
 function RootLayout({ children }: { children: React.ReactNode }) {
