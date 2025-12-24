@@ -1,29 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import {
-  HomeOutlined,
-  DollarOutlined,
-  TeamOutlined,
-  CreditCardOutlined,
-  ShoppingCartOutlined,
-  CalculatorOutlined,
-  EnvironmentOutlined,
-  LinkOutlined,
-  BellOutlined,
-  DatabaseOutlined,
-  TranslationOutlined,
-  LockOutlined,
-  FileTextOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  CustomerServiceTwoTone,
-} from "@ant-design/icons";
+
 
 import Sider from "antd/es/layout/Sider";
 import { Button, Drawer, Layout, Menu, MenuProps } from "antd";
 import { usePathname, useRouter } from "next/navigation";
-import { FaFont } from "react-icons/fa";
-import { MdOutlineViewModule } from "react-icons/md";
+
 import {
   BanknoteArrowUpIcon,
   Bell,

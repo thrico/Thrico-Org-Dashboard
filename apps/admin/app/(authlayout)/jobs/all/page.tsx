@@ -17,6 +17,7 @@ const page = () => {
   });
   return (
     <>
+    
       {loading && <TableLoading />}
       <Jobs data={data?.getJob} />
     </>

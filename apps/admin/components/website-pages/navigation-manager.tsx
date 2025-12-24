@@ -28,7 +28,7 @@ import {
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { Footer } from "antd/es/layout/layout";
-import Navbar from "./variations/navbar";
+
 
 const { Title, Paragraph, Text } = Typography;
 const { Content } = Layout;

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Layout, Menu, theme } from "antd";
 import { Navbar } from "../../components/layout/Header";
-import Sidebar from "../../components/layout/sidebar/Sidebar";
+import Sidebar from "../../components/layout/sidebar/sidebar";
 
 import withAuth from "../../utils/withAuth";
 import { getEntity, getGetUser } from "../../graphql/actions";

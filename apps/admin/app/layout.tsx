@@ -8,7 +8,7 @@ import "./global.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { ConfigProvider } from "antd";
-import { workSans } from "./font";
+import { spaceGrotesk, workSans } from "./font";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "antd/dist/reset.css";
 import { useThemeStore } from "../store/themeStore";
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ApolloWrapper host={"https://admin.thrico.app/graphql"}>
-        <body className={workSans.className}>
+        <body className={spaceGrotesk.className}>
           <AntdRegistry>
             <ConfigProvider
               theme={{

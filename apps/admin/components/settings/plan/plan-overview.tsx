@@ -14,7 +14,7 @@ import {
 import { getPlanOverview } from "../../../graphql/actions/plan";
 import { Crown } from "lucide-react";
 import moment from "moment";
-import { getYearlySavings } from "./utils";
+
 import YearlyUpgrade from "./upgradeYearly/YearlyUpgrade";
 
 const { Title, Text } = Typography;

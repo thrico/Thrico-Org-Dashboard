@@ -3,7 +3,6 @@ import { persist, devtools } from "zustand/middleware";
 import type {} from "@redux-devtools/extension";
 interface AuthState {
   isAuthenticated: boolean;
-
   token: null | string;
   storeToken: (token: string | null) => Promise<void>;
   removeToken: () => void;
